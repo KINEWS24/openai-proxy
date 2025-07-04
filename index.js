@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 const { OpenAI } = require("openai");
 
 const app = express();
-app.use(express.json({ limit: '10mb' })); // Wichtig: Limit für Base64-Daten erhöhen
+app.use(express.json({ limit: '10mb' }));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -14,9 +14,12 @@ app.use((req, res, next) => {
     next();
 });
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+const openai = new OpenAI({ 
+    apiKey: process.env.OPENAI_API_KEY,
+    timeout: 60 * 1000, // NEU: 60 Sekunden Timeout für alle KI-Anfragen
+});
 
-app.get("/", (req, res) => res.json({ message: "ThinkAI Nexus Proxy v1.1" }));
+app.get("/", (req, res) => res.json({ message: "ThinkAI Nexus Proxy v1.2" }));
 
 app.post("/openai", async (req, res) => {
     try {
@@ -32,8 +35,13 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
     if (!url) return res.status(400).json({ error: "No URL provided" });
     try {
-        const response = await fetch(url);
+        const controller = new AbortController();
+        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s Timeout für Webseiten
+        const response = await fetch(url, { signal: controller.signal });
+        clearTimeout(timeoutId);
+
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        
         const html = await response.text();
         const $ = cheerio.load(html);
         const title = $("title").text().trim() || "Kein Titel gefunden";
@@ -46,11 +54,12 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         
         res.json({ success: true, title: title, analysis: analysis });
     } catch (error) {
-        res.status(500).json({ error: "Fehler beim Verarbeiten des Links", details: error.message });
+        let errorMessage = "Fehler beim Verarbeiten des Links";
+        if (error.name === 'AbortError') errorMessage = "Timeout beim Laden der Webseite";
+        res.status(500).json({ error: errorMessage, details: error.message });
     }
 });
 
-// NEUER ENDPUNKT für Base64-Bilddaten
 app.post("/analyze-image-data", async (req, res) => {
     const { imageData, originalUrl } = req.body;
     if (!imageData) return res.status(400).json({ error: "No image data provided" });
@@ -65,7 +74,7 @@ app.post("/analyze-image-data", async (req, res) => {
                 role: "user",
                 content: [
                     { type: "text", text: prompt },
-                    { type: "image_url", image_url: { "url": imageData } }, // Sende Base64-Daten
+                    { type: "image_url", image_url: { "url": imageData } },
                 ],
             }],
             max_tokens: 1500,
@@ -77,7 +86,6 @@ app.post("/analyze-image-data", async (req, res) => {
 
         res.json({ title: title, analysis: analysis });
     } catch (error) {
-        console.error("Fehler bei der Bild-Analyse:", error);
         res.status(500).json({ error: "Fehler bei der OpenAI Vision-Anfrage" });
     }
 });
