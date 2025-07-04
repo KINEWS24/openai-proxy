@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 const { OpenAI } = require("openai");
 
 const app = express();
-app.use(express.json({ limit: '10mb' })); // Wichtig: Limit für Base64-Daten erhöhen
+app.use(express.json({ limit: '10mb' }));
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
@@ -16,9 +16,8 @@ app.use((req, res, next) => {
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-app.get("/", (req, res) => res.json({ message: "ThinkAI Nexus Proxy v1.3" }));
+app.get("/", (req, res) => res.json({ message: "ThinkAI Nexus Proxy v1.4" }));
 
-// Endpunkt für reine Text-Analyse (wird vom background-script direkt aufgerufen)
 app.post("/openai", async (req, res) => {
     try {
         if (!process.env.OPENAI_API_KEY) return res.status(500).json({ error: "OpenAI API Key nicht konfiguriert" });
@@ -29,7 +28,6 @@ app.post("/openai", async (req, res) => {
     }
 });
 
-// Endpunkt für Scraping und Link-Analyse
 app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
     if (!url) return res.status(400).json({ error: "No URL provided" });
@@ -40,7 +38,14 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         const html = await response.text();
         const $ = cheerio.load(html);
         const title = $("title").text().trim() || "Kein Titel gefunden";
-        const article = ($("article").text() || $("main").text() || $("body").text()).substring(0, 8000); // Mehr Text für besseren Kontext
+        
+        // INTELLIGENTERES SCRAPING
+        let article = $("article").text() || $("main").text();
+        if (!article || article.length < 200) {
+            article = $("body").text(); // Fallback
+        }
+        article = article.replace(/\s\s+/g, ' ').trim().substring(0, 8000);
+
         if (article.length < 100) return res.status(400).json({ error: "Zu wenig Text auf der Seite gefunden" });
         
         const prompt = getNexusPrompt("Text", article, { sourceUrl: url, title: title });
@@ -53,7 +58,6 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
     }
 });
 
-// Endpunkt für Base64-Bilddaten
 app.post("/analyze-image-data", async (req, res) => {
     const { imageData, originalUrl } = req.body;
     if (!imageData) return res.status(400).json({ error: "No image data provided" });
