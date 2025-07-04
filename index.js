@@ -14,13 +14,11 @@ app.use((req, res, next) => {
     next();
 });
 
-const openai = new OpenAI({ 
-    apiKey: process.env.OPENAI_API_KEY,
-    timeout: 60 * 1000, // NEU: 60 Sekunden Timeout für alle KI-Anfragen
-});
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-app.get("/", (req, res) => res.json({ message: "ThinkAI Nexus Proxy v1.2" }));
+app.get("/", (req, res) => res.json({ message: "ThinkAI Nexus Proxy v1.3" }));
 
+// Endpunkt für reine Text-Analyse (wird vom background-script direkt aufgerufen)
 app.post("/openai", async (req, res) => {
     try {
         if (!process.env.OPENAI_API_KEY) return res.status(500).json({ error: "OpenAI API Key nicht konfiguriert" });
@@ -31,21 +29,18 @@ app.post("/openai", async (req, res) => {
     }
 });
 
+// Endpunkt für Scraping und Link-Analyse
 app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
     if (!url) return res.status(400).json({ error: "No URL provided" });
     try {
-        const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 15000); // 15s Timeout für Webseiten
-        const response = await fetch(url, { signal: controller.signal });
-        clearTimeout(timeoutId);
-
+        const response = await fetch(url);
         if (!response.ok) throw new Error(`HTTP ${response.status}`);
         
         const html = await response.text();
         const $ = cheerio.load(html);
         const title = $("title").text().trim() || "Kein Titel gefunden";
-        const article = ($("article").text() || $("main").text() || $("body").text()).substring(0, 4000);
+        const article = ($("article").text() || $("main").text() || $("body").text()).substring(0, 8000); // Mehr Text für besseren Kontext
         if (article.length < 100) return res.status(400).json({ error: "Zu wenig Text auf der Seite gefunden" });
         
         const prompt = getNexusPrompt("Text", article, { sourceUrl: url, title: title });
@@ -54,12 +49,11 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         
         res.json({ success: true, title: title, analysis: analysis });
     } catch (error) {
-        let errorMessage = "Fehler beim Verarbeiten des Links";
-        if (error.name === 'AbortError') errorMessage = "Timeout beim Laden der Webseite";
-        res.status(500).json({ error: errorMessage, details: error.message });
+        res.status(500).json({ error: "Fehler beim Verarbeiten des Links", details: error.message });
     }
 });
 
+// Endpunkt für Base64-Bilddaten
 app.post("/analyze-image-data", async (req, res) => {
     const { imageData, originalUrl } = req.body;
     if (!imageData) return res.status(400).json({ error: "No image data provided" });
