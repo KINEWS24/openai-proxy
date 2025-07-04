@@ -1,5 +1,3 @@
-# Dockerfile für einfachen Node.js Express Proxy
-
 FROM node:20-alpine
 
 WORKDIR /usr/src/app
