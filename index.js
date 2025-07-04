@@ -1,20 +1,20 @@
 const express = require("express");
 const fetch = require("node-fetch");
 const cheerio = require("cheerio");
-const { Configuration, OpenAIApi } = require("openai");
+const { OpenAI } = require("openai");
 
 const app = express();
 app.use(express.json());
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
-});
-const openai = new OpenAIApi(configuration);
+// OpenAI-API initialisieren
+const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// Bestehender Proxy-Endpunkt (z. B. POST /openai ...)
-// ...dein existierender Code...
+// --- Beispiel-Endpunkt: Standard-Proxy für OpenAI (nur falls benötigt) ---
+// app.post("/openai", async (req, res) => {
+//     // Dein Standard-Proxy-Handling, falls gebraucht
+// });
 
-// NEUER ENDPOINT:
+// --- NEUER ENDPOINT: scrape-and-analyze-url ---
 app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
     if (!url) return res.status(400).json({ error: "No URL provided" });
@@ -24,7 +24,7 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         const html = await response.text();
         const $ = cheerio.load(html);
         const title = $("title").text() || "";
-        // Ganz einfachen Artikeltext-Extractor:
+        // Einfacher Artikeltext-Extractor:
         const article = $("article").text() || $("body").text();
         const shortText = article.substring(0, 3000); // OpenAI-Input begrenzen
 
@@ -36,15 +36,15 @@ Text: ${shortText}
 Original-URL: ${url}
 `;
 
-        const completion = await openai.createChatCompletion({
-            model: "gpt-4o", // oder dein Modell
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o",
             messages: [
                 { role: "system", content: "Du bist ein deutschsprachiger Webartikel-Analyst." },
                 { role: "user", content: prompt }
             ]
         });
 
-        const result = completion.data.choices[0].message.content;
+        const result = completion.choices[0].message.content;
         res.json({
             url,
             title,
