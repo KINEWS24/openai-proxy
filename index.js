@@ -33,7 +33,8 @@ app.get("/", (req, res) => {
         endpoints: {
             "GET /": "Server Status",
             "POST /openai": "Reine Text-Analyse mit OpenAI",
-            "POST /scrape-and-analyze-url": "URL Analyse mit OpenAI"
+            "POST /scrape-and-analyze-url": "URL-Analyse mit OpenAI",
+            "POST /analyze-image-url": "Bild-Analyse mit OpenAI"
         }
     });
 });
@@ -47,9 +48,7 @@ app.get("/health", (req, res) => {
     });
 });
 
-
-// === HIER IST DER FEHLENDE TEIL ===
-// Endpunkt für reine Text-Analyse wieder hinzufügen
+// Endpunkt für reine Text-Analyse
 app.post("/openai", async (req, res) => {
     try {
         if (!process.env.OPENAI_API_KEY) {
@@ -68,42 +67,28 @@ app.post("/openai", async (req, res) => {
         res.status(500).json({ error: "Fehler bei der OpenAI-Anfrage" });
     }
 });
-// === ENDE DES FEHLENDEN TEILS ===
 
-
-// Haupt-Endpoint für Scraping und Analyse
+// Endpunkt für Scraping und Link-Analyse
 app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
     
-    console.log(`Neue Anfrage erhalten für URL: ${url}`);
-    
     if (!url) {
-        return res.status(400).json({ 
-            error: "No URL provided",
-            example: { "url": "https://example.com" }
-        });
+        return res.status(400).json({ error: "No URL provided" });
     }
     
     try {
         new URL(url);
     } catch (e) {
-        return res.status(400).json({ 
-            error: "Invalid URL format",
-            provided: url
-        });
+        return res.status(400).json({ error: "Invalid URL format", provided: url });
     }
     
     try {
-        console.log(`Scraping URL: ${url}`);
-        
         const controller = new AbortController();
         const timeoutId = setTimeout(() => controller.abort(), 10000);
         
         const response = await fetch(url, {
             signal: controller.signal,
-            headers: {
-                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
-            }
+            headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' }
         });
         
         clearTimeout(timeoutId);
@@ -113,29 +98,19 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         }
         
         const html = await response.text();
-        
         const $ = cheerio.load(html);
         const title = $("title").text().trim() || "Kein Titel gefunden";
         const article = $("article").text() || $("main").text() || $("body").text();
-        const shortText = article.substring(0, 3000);
-        
-        console.log(`Titel gefunden: ${title}`);
+        const shortText = article.substring(0, 4000);
         
         if (shortText.length < 100) {
-            return res.status(400).json({
-                error: "Zu wenig Text auf der Seite gefunden",
-                title: title,
-                textLength: shortText.length
-            });
+            return res.status(400).json({ error: "Zu wenig Text auf der Seite gefunden" });
         }
         
         if (!process.env.OPENAI_API_KEY) {
-            return res.status(500).json({
-                error: "OpenAI API Key nicht konfiguriert"
-            });
+            return res.status(500).json({ error: "OpenAI API Key nicht konfiguriert" });
         }
         
-        console.log("Starte OpenAI Analyse...");
         const prompt = `
 Analysiere diesen Webartikel und fasse ihn als strukturierte Bulletpoints zusammen.
 
@@ -162,40 +137,64 @@ Format: Markdown mit Überschriften und Bulletpoints.
         });
         
         const result = completion.choices[0].message.content;
-        console.log("OpenAI Analyse abgeschlossen");
         
         res.json({
             success: true,
-            url,
             title,
-            textLength: shortText.length,
             summary: result,
-            timestamp: new Date().toISOString()
         });
         
     } catch (error) {
-        console.error("Fehler:", error);
-        
+        console.error("Fehler bei Link-Analyse:", error);
         let errorMessage = "Unbekannter Fehler";
-        let statusCode = 500;
+        if (error.name === 'AbortError') errorMessage = "Timeout: Website antwortet nicht";
+        else if (error.message.includes('fetch')) errorMessage = "Website nicht erreichbar";
         
-        if (error.name === 'AbortError') {
-            errorMessage = "Timeout: Website antwortet nicht";
-            statusCode = 408;
-        } else if (error.message.includes('fetch')) {
-            errorMessage = "Website nicht erreichbar";
-            statusCode = 502;
-        } else if (error.message.includes('OpenAI')) {
-            errorMessage = "OpenAI API Fehler";
-            statusCode = 503;
+        res.status(500).json({ error: errorMessage, details: error.message });
+    }
+});
+
+// NEU: Endpunkt für die Bild-Analyse
+app.post("/analyze-image-url", async (req, res) => {
+    const { url } = req.body;
+
+    if (!url) {
+        return res.status(400).json({ error: "No image URL provided" });
+    }
+
+    try {
+        if (!process.env.OPENAI_API_KEY) {
+            throw new Error("OpenAI API Key nicht konfiguriert");
         }
-        
-        res.status(statusCode).json({ 
-            error: errorMessage,
-            details: error.message,
-            url: url,
-            timestamp: new Date().toISOString()
+
+        console.log(`Analysiere Bild von URL: ${url}`);
+
+        const completion = await openai.chat.completions.create({
+            model: "gpt-4o",
+            messages: [
+                {
+                    role: "user",
+                    content: [
+                        { 
+                            type: "text", 
+                            text: "Beschreibe dieses Bild detailliert auf Deutsch. Was ist zu sehen? Was ist der Kontext? Welche Stimmung vermittelt es? Erstelle eine prägnante Bildunterschrift und eine Liste von relevanten Tags." 
+                        },
+                        {
+                            type: "image_url",
+                            image_url: { "url": url },
+                        },
+                    ],
+                },
+            ],
+            max_tokens: 500,
         });
+
+        const description = completion.choices[0].message.content;
+        res.json({ description: description });
+
+    } catch (error) {
+        console.error("Fehler bei der Bild-Analyse:", error);
+        res.status(500).json({ error: "Fehler bei der OpenAI Vision-Anfrage" });
     }
 });
 
@@ -207,7 +206,8 @@ app.use('*', (req, res) => {
             "GET /",
             "GET /health",
             "POST /openai",
-            "POST /scrape-and-analyze-url"
+            "POST /scrape-and-analyze-url",
+            "POST /analyze-image-url"
         ]
     });
 });
