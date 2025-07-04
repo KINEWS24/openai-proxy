@@ -4,7 +4,7 @@ const cheerio = require("cheerio");
 const { OpenAI } = require("openai");
 
 const app = express();
-app.use(express.json({ limit: '10mb' }));
+app.use(express.json({ limit: '10mb' })); // Wichtig: Limit für Base64-Daten erhöhen
 
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
