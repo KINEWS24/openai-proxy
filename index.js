@@ -6,15 +6,9 @@ const { OpenAI } = require("openai");
 const app = express();
 app.use(express.json());
 
-// OpenAI-API initialisieren
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
-// --- Beispiel-Endpunkt: Standard-Proxy für OpenAI (nur falls benötigt) ---
-// app.post("/openai", async (req, res) => {
-//     // Dein Standard-Proxy-Handling, falls gebraucht
-// });
-
-// --- NEUER ENDPOINT: scrape-and-analyze-url ---
+// NEUER ENDPOINT:
 app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
     if (!url) return res.status(400).json({ error: "No URL provided" });
@@ -24,11 +18,9 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         const html = await response.text();
         const $ = cheerio.load(html);
         const title = $("title").text() || "";
-        // Einfacher Artikeltext-Extractor:
         const article = $("article").text() || $("body").text();
-        const shortText = article.substring(0, 3000); // OpenAI-Input begrenzen
+        const shortText = article.substring(0, 3000);
 
-        // Prompt an OpenAI
         const prompt = `
 Analysiere diesen Webartikel und fasse ihn als Bulletpoints zusammen. Gib eine Überschrift und die wichtigsten Punkte (3-7) an.
 Titel: ${title}
@@ -56,7 +48,6 @@ Original-URL: ${url}
     }
 });
 
-// Start
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
     console.log(`Proxy läuft auf Port ${PORT}`);
