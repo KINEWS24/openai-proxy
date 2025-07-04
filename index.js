@@ -5,13 +5,12 @@ const { OpenAI } = require("openai");
 
 const app = express();
 
-// CORS Middleware - WICHTIG für externe Clients wie Hoppscotch!
+// CORS Middleware
 app.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', '*');
     res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
     res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
     
-    // Handle preflight requests
     if (req.method === 'OPTIONS') {
         res.sendStatus(200);
     } else {
@@ -26,13 +25,14 @@ const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY 
 });
 
-// Test-Endpoint um zu sehen ob der Server läuft
+// Test-Endpoint
 app.get("/", (req, res) => {
     res.json({ 
         message: "OpenAI Proxy Server läuft!",
         timestamp: new Date().toISOString(),
         endpoints: {
             "GET /": "Server Status",
+            "POST /openai": "Reine Text-Analyse mit OpenAI",
             "POST /scrape-and-analyze-url": "URL Analyse mit OpenAI"
         }
     });
@@ -47,6 +47,30 @@ app.get("/health", (req, res) => {
     });
 });
 
+
+// === HIER IST DER FEHLENDE TEIL ===
+// Endpunkt für reine Text-Analyse wieder hinzufügen
+app.post("/openai", async (req, res) => {
+    try {
+        if (!process.env.OPENAI_API_KEY) {
+            return res.status(500).json({ error: "OpenAI API Key nicht konfiguriert" });
+        }
+        
+        const completion = await openai.chat.completions.create({
+            model: req.body.model || "gpt-4o",
+            messages: req.body.messages,
+        });
+        
+        res.json(completion);
+
+    } catch (error) {
+        console.error("Fehler im /openai Endpunkt:", error);
+        res.status(500).json({ error: "Fehler bei der OpenAI-Anfrage" });
+    }
+});
+// === ENDE DES FEHLENDEN TEILS ===
+
+
 // Haupt-Endpoint für Scraping und Analyse
 app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
@@ -60,7 +84,6 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         });
     }
     
-    // URL Validierung
     try {
         new URL(url);
     } catch (e) {
@@ -73,9 +96,8 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
     try {
         console.log(`Scraping URL: ${url}`);
         
-        // Website laden mit Timeout
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 Sekunden Timeout
+        const timeoutId = setTimeout(() => controller.abort(), 10000);
         
         const response = await fetch(url, {
             signal: controller.signal,
@@ -92,14 +114,12 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         
         const html = await response.text();
         
-        // HTML parsen
         const $ = cheerio.load(html);
         const title = $("title").text().trim() || "Kein Titel gefunden";
         const article = $("article").text() || $("main").text() || $("body").text();
         const shortText = article.substring(0, 3000);
         
         console.log(`Titel gefunden: ${title}`);
-        console.log(`Text-Länge: ${shortText.length} Zeichen`);
         
         if (shortText.length < 100) {
             return res.status(400).json({
@@ -109,14 +129,12 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
             });
         }
         
-        // OpenAI API Key prüfen
         if (!process.env.OPENAI_API_KEY) {
             return res.status(500).json({
                 error: "OpenAI API Key nicht konfiguriert"
             });
         }
         
-        // OpenAI Analyse
         console.log("Starte OpenAI Analyse...");
         const prompt = `
 Analysiere diesen Webartikel und fasse ihn als strukturierte Bulletpoints zusammen.
@@ -136,10 +154,7 @@ Format: Markdown mit Überschriften und Bulletpoints.
         const completion = await openai.chat.completions.create({
             model: "gpt-4o",
             messages: [
-                { 
-                    role: "system", 
-                    content: "Du bist ein deutschsprachiger Webartikel-Analyst. Antworte strukturiert und präzise auf Deutsch." 
-                },
+                { role: "system", content: "Du bist ein deutschsprachiger Webartikel-Analyst. Antworte strukturiert und präzise auf Deutsch." },
                 { role: "user", content: prompt }
             ],
             max_tokens: 1000,
@@ -191,6 +206,7 @@ app.use('*', (req, res) => {
         availableEndpoints: [
             "GET /",
             "GET /health",
+            "POST /openai",
             "POST /scrape-and-analyze-url"
         ]
     });
