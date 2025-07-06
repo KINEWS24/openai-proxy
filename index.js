@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus Herzstück-Server (Finale Version 2.0)
+// index.js – ThinkAI Nexus Herzstück-Server (Version 2.1 - Final)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -14,7 +14,7 @@ app.use(bodyParser.json({ limit: "15mb" }));
 const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
 const OPENAI_API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const MAX_CONTENT_LENGTH = 8000; // NEU: Maximale Zeichenlänge für die Analyse
+const MAX_CONTENT_LENGTH = 8000; // Maximale Zeichenlänge für die Analyse
 // ===================================================================
 
 // --- Hilfsfunktionen ---
@@ -142,7 +142,6 @@ app.post("/analyze-text", (req, res) => {
     const htmlContent = req.body.content;
     const $ = cheerio.load(htmlContent || '');
     const cleanText = $.text().replace(/\s\s+/g, ' ').trim();
-    // NEU: Kürzen des Inhalts
     const truncatedText = cleanText.substring(0, MAX_CONTENT_LENGTH);
     
     handleAnalysisRequest(req, res, "text", truncatedText, req.body.source_url, "html");
@@ -166,7 +165,6 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         console.error(`Fehler beim Scrapen der URL ${url}:`, err.message);
     }
     
-    // NEU: Kürzen des Inhalts
     const truncatedText = cleanText.substring(0, MAX_CONTENT_LENGTH);
     await handleAnalysisRequest(req, res, "link", truncatedText, url, "html");
 });
