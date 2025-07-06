@@ -12,7 +12,8 @@ app.use(bodyParser.json({ limit: "15mb" }));
 // === KONFIGURATION ==================
 const STORAGE_BASE = path.join(__dirname, "storage"); // Output-Ordner für alle Dateien
 const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.2.txt"); // Prompt-Textdatei
-const OPENAI_PROXY = "https://openai-proxy-qd96.onrender.com/openai";
+const OPENAI_PROXY = "https://openai-proxy-qd96.onrender.com/analyze-text"; // NEU: Text/Prompt Endpunkt
+const OPENAI_IMAGE_PROXY = "https://openai-proxy-qd96.onrender.com/analyze-image"; // Bildanalyse (Vision!)
 // =====================================
 
 // --- Hilfsfunktionen -----------------------------------------
@@ -24,8 +25,6 @@ function slugify(str) {
         .replace(/[^a-z0-9]+/g, "_")
         .replace(/^_+|_+$/g, "");
 }
-
-// --- Prompt einlesen ----------------------------------------
 
 async function loadPrompt() {
     return fs.readFile(PROMPT_PATH, "utf8");
@@ -40,14 +39,14 @@ async function saveNexusObject({
     sourceUrl,       // Quelle, falls vorhanden
     extension,       // .txt, .html, .url, .jpg etc.
     promptOverride,  // Optional: Prompt als String (sonst .txt)
+    useImageModel = false // Falls Vision für Bild gewünscht
 }) {
     // 1. UUID v7
     const uuid = uuidv7();
-
-    // 2. ISO8601 Timestamp (z. B. 2025-07-06T14:32:13Z)
+    // 2. ISO8601 Timestamp
     const timestamp = new Date().toISOString();
 
-    // 3. Prompt laden und Variablen einsetzen
+    // 3. Prompt laden/einsetzen
     let gptPrompt;
     if (promptOverride) {
         gptPrompt = promptOverride;
@@ -61,13 +60,28 @@ async function saveNexusObject({
     }
 
     // 4. GPT-Analyse (Proxy)
-    const gptResponse = await axios.post(OPENAI_PROXY, {
-        model: "gpt-4o",
-        messages: [{ role: "user", content: gptPrompt }]
-    });
-    const resultText = gptResponse.data.choices[0].message.content;
+    let gptResponse;
+    if (useImageModel) {
+        // Bildanalyse (Vision-Modell erwartet URL oder base64)
+        gptResponse = await axios.post(OPENAI_IMAGE_PROXY, {
+            image_url: contentRaw,
+            context: gptPrompt
+        });
+    } else {
+        gptResponse = await axios.post(OPENAI_PROXY, {
+            content: gptPrompt,
+            context_uuid: contextUUID || "default-nexus-context",
+            source_url: sourceUrl || ""
+        });
+    }
+    // Analyse-Text extrahieren
+    const resultText =
+        (gptResponse.data.choices && gptResponse.data.choices[0]?.message?.content)
+        || gptResponse.data.result
+        || gptResponse.data.summary
+        || JSON.stringify(gptResponse.data);
 
-    // 5. Tags extrahieren (aus JSON-Block!)
+    // 5. Tags extrahieren (aus JSON oder Markdown)
     const tagMatch = resultText.match(/"Tags":\s*\[(.*?)\]/s);
     let tags = [];
     if (tagMatch) {
@@ -87,8 +101,6 @@ async function saveNexusObject({
     contextUUID = contextUUID || "default-nexus-context";
 
     // 8. Dateinamen-Logik
-    //   kontextuuid_uuid_archetyp_timestamp_tag1_tag2_tag3.*
-    //   Timestamp für Dateiname: ISO8601 ohne Doppelpunkte/Punkte
     const tsForName = timestamp.replace(/[:.]/g, "").replace(/T/, "T").replace(/Z/, "Z");
     const baseName = [
         contextUUID,
@@ -116,14 +128,13 @@ async function saveNexusObject({
         contextUUID,
         archetype,
         timestamp,
-        top3Tags: tags.slice(0,3),
+        top3Tags: tags.slice(0, 3),
         title,
         allTags: tags,
         sourceUrl: sourceUrl || null
     };
     await fs.writeFile(tagsJsonPath, JSON.stringify(tagsJson, null, 2), "utf8");
 
-    // Logging/Debug
     return { baseName, originalPath, mdPath, tagsJsonPath };
 }
 
@@ -150,7 +161,6 @@ app.post("/analyze-text", async (req, res) => {
 app.post("/scrape-and-analyze-url", async (req, res) => {
     try {
         const { url, context_uuid } = req.body;
-        // Fetch Website
         const response = await axios.get(url);
         const html = response.data;
         const output = await saveNexusObject({
@@ -166,7 +176,23 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
     }
 });
 
-// Analog für weitere Formate (z.B. /analyze-image, /analyze-pdf, /analyze-audio...)
+app.post("/analyze-image", async (req, res) => {
+    try {
+        const { image_url, context_uuid, source_url } = req.body;
+        // image_url kann z.B. ein Link zu JPG/PNG oder ein base64 sein (je nach Frontend)
+        const output = await saveNexusObject({
+            archetype: "image",
+            contextUUID: context_uuid || "default-nexus-context",
+            contentRaw: image_url,
+            sourceUrl: source_url || image_url,
+            extension: "url",
+            useImageModel: true // Hier: Vision-Analyse aktiv!
+        });
+        res.json({ success: true, ...output });
+    } catch (err) {
+        res.status(500).json({ success: false, error: err.message });
+    }
+});
 
 // Root: Health-Check
 app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat" }));
