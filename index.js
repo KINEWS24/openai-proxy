@@ -1,7 +1,7 @@
-// index.js – ThinkAI Nexus Herzstück-Server (Architektur nach Plan v3)
+// index.js – ThinkAI Nexus Herzstück-Server (Finale Version mit Input-Validierung)
 const express = require("express");
 const bodyParser = require("body-parser");
-const fs = require("fs").promises; // Nur noch zum Lesen des Prompts
+const fs = require("fs").promises;
 const path = require("path");
 const { uuidv7 } = require("uuidv7");
 const axios = require("axios");
@@ -15,8 +15,7 @@ const OPENAI_API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY; 
 // ===================================================================
 
-
-// --- Hilfsfunktionen -----------------------------------------------
+// --- Hilfsfunktionen ---
 function slugify(str) {
     if (!str) return '';
     return str
@@ -35,37 +34,31 @@ async function loadPrompt() {
     }
 }
 
-// --- Herzstück: Objekt generieren ----------------------------------
+// --- Herzstück: Objekt generieren ---
 async function generateNexusObject({
     archetype,
     contextUUID,
     contentRaw,
     sourceUrl
 }) {
-    // 1. Logische Werte im Code erzeugen (NEUE ARBEITSTEILUNG)
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
 
-    // 2. Prompt laden und mit ALLEN Werten (logisch & inhaltlich) befüllen
     let promptTemplate = await loadPrompt();
     const finalPrompt = promptTemplate
         .replace("{ARCHETYPE}", archetype)
         .replace("{CONTENT}", contentRaw)
         .replace("{SOURCEURL}", sourceUrl || "N/A")
-        .replace("{UUID}", uuid) // NEU
-        .replace("{TIMESTAMP_ISO}", timestamp); // NEU
+        .replace("{UUID}", uuid)
+        .replace("{TIMESTAMP_ISO}", timestamp);
 
-    // 3. GPT-Analyse durchführen
     if (!OPENAI_API_KEY) {
         throw new Error("OpenAI API Key ist nicht konfiguriert auf dem Server.");
     }
 
     const gptResponse = await axios.post(OPENAI_API_ENDPOINT, {
         model: "gpt-4o",
-        messages: [{
-            role: "user",
-            content: finalPrompt,
-        }, ],
+        messages: [{ role: "user", content: finalPrompt }],
     }, {
         headers: {
             'Authorization': `Bearer ${OPENAI_API_KEY}`,
@@ -78,14 +71,12 @@ async function generateNexusObject({
         throw new Error("Keine valide Antwort vom OpenAI API erhalten.");
     }
     
-    // 4. Tags aus der KI-Antwort extrahieren für den Dateinamen
     const tagsHeaderMatch = analysisResultText.match(/Schlagwörter: (.*)/);
     let top3Tags = [];
     if (tagsHeaderMatch && tagsHeaderMatch[1]) {
         top3Tags = tagsHeaderMatch[1].split(',').slice(0, 3).map(tag => slugify(tag.replace(/#/g, '')));
     }
     
-    // 5. Finalen Dateinamen-Stamm konstruieren (mit den in Schritt 1 erzeugten Werten)
     const tsForName = timestamp.replace(/[:.]/g, "").substring(0, 15) + "Z";
     const baseName = [
         contextUUID,
@@ -95,11 +86,9 @@ async function generateNexusObject({
         ...top3Tags
     ].filter(Boolean).join("_");
     
-    // 6. JSON-Block aus der KI-Antwort extrahieren
     const jsonBlockMatch = analysisResultText.match(/{\s*"OwnerUserID":[\s\S]*?}/);
     const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Konnte JSON-Block nicht extrahieren." });
 
-    // 7. Das finale Objekt für die Rückgabe an die Extension zusammenbauen
     return {
         nexusMd: {
             filename: `${baseName}.nexus.md`,
@@ -122,6 +111,15 @@ app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat v3
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
      try {
+        // --- NEU: Strikte Eingabe-Validierung ---
+        if (!contentRaw || typeof contentRaw !== 'string' || contentRaw.trim() === '') {
+            return res.status(400).json({ // 400 Bad Request ist hier passender als 500
+                success: false,
+                error: "Fehlender oder leerer Inhalt für die Analyse."
+            });
+        }
+        // --- Ende der Validierung ---
+        
         const { context_uuid } = req.body;
         
         const output = await generateNexusObject({
@@ -146,22 +144,24 @@ app.post("/analyze-text", (req, res) => {
 });
 
 app.post("/scrape-and-analyze-url", async (req, res) => {
-    const { url, context_uuid } = req.body;
+    const { url } = req.body;
+    let htmlContent = '';
     try {
-        // NEU: Robusterer Request mit User-Agent
         const response = await axios.get(url, {
             timeout: 15000,
             headers: {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
             }
         });
-        const htmlContent = response.data;
-        // Rufe die Standard-Behandlung auf, nachdem der Inhalt erfolgreich geholt wurde
-        await handleAnalysisRequest(req, res, "link", htmlContent, url, "html");
+        htmlContent = response.data;
     } catch(err) {
         console.error(`Fehler beim Scrapen der URL ${url}:`, err.message);
-        res.status(500).json({ success: false, error: "URL-Inhalt konnte nicht abgerufen oder verarbeitet werden." });
+        // Nicht abbrechen, sondern mit leerem Inhalt weitergeben,
+        // damit die `handleAnalysisRequest` Validierung greift.
     }
+    // Die Standard-Behandlung wird immer aufgerufen.
+    // Wenn htmlContent leer ist, wird die Validierung einen 400er Fehler zurückgeben.
+    await handleAnalysisRequest(req, res, "link", htmlContent, url, "html");
 });
 
 app.post("/analyze-image", (req, res) => {
@@ -171,7 +171,7 @@ app.post("/analyze-image", (req, res) => {
 // Start
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v3 läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v3 (final) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt. API-Aufrufe werden fehlschlagen.");
     }
