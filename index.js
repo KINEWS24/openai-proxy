@@ -1,10 +1,11 @@
-// index.js – ThinkAI Nexus Herzstück-Server (Finale Version mit Input-Validierung)
+// index.js – ThinkAI Nexus Herzstück-Server (Finale Version mit Cheerio-Text-Extraktion)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
 const path = require("path");
 const { uuidv7 } = require("uuidv7");
 const axios = require("axios");
+const cheerio = require("cheerio"); // NEU: Import für die HTML-Verarbeitung
 
 const app = express();
 app.use(bodyParser.json({ limit: "15mb" }));
@@ -107,25 +108,23 @@ async function generateNexusObject({
 // API Endpunkte
 // ===============================
 
-app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat v3" }));
+app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat v4" }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
      try {
-        // --- NEU: Strikte Eingabe-Validierung ---
         if (!contentRaw || typeof contentRaw !== 'string' || contentRaw.trim() === '') {
-            return res.status(400).json({ // 400 Bad Request ist hier passender als 500
+            return res.status(400).json({
                 success: false,
                 error: "Fehlender oder leerer Inhalt für die Analyse."
             });
         }
-        // --- Ende der Validierung ---
         
         const { context_uuid } = req.body;
         
         const output = await generateNexusObject({
             archetype: archetype,
             contextUUID: context_uuid || "default-nexus-context",
-            contentRaw: contentRaw,
+            contentRaw: contentRaw, // Hier kommt jetzt der saubere Text an
             sourceUrl: sourceUrl
         });
 
@@ -140,12 +139,20 @@ async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl,
 }
 
 app.post("/analyze-text", (req, res) => {
-    handleAnalysisRequest(req, res, "text", req.body.content, req.body.source_url, "html");
+    const htmlContent = req.body.content;
+    
+    // NEU: Nur den reinen Text aus dem markierten HTML extrahieren
+    const $ = cheerio.load(htmlContent || '');
+    const cleanText = $.text().replace(/\s\s+/g, ' ').trim();
+
+    // Wir übergeben den sauberen Text an die Hauptfunktion
+    handleAnalysisRequest(req, res, "text", cleanText, req.body.source_url, "html");
 });
 
 app.post("/scrape-and-analyze-url", async (req, res) => {
     const { url } = req.body;
-    let htmlContent = '';
+    let cleanText = '';
+    
     try {
         const response = await axios.get(url, {
             timeout: 15000,
@@ -153,25 +160,30 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
                 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
             }
         });
-        htmlContent = response.data;
+        const htmlContent = response.data;
+
+        // NEU: Nur den reinen Text aus dem Body der Webseite extrahieren
+        const $ = cheerio.load(htmlContent);
+        cleanText = $('body').text().replace(/\s\s+/g, ' ').trim();
+
     } catch(err) {
         console.error(`Fehler beim Scrapen der URL ${url}:`, err.message);
-        // Nicht abbrechen, sondern mit leerem Inhalt weitergeben,
-        // damit die `handleAnalysisRequest` Validierung greift.
+        // Fehler wird durch leeren `cleanText` an `handleAnalysisRequest` weitergegeben
+        // und dort mit einem 400er-Fehler sauber behandelt.
     }
-    // Die Standard-Behandlung wird immer aufgerufen.
-    // Wenn htmlContent leer ist, wird die Validierung einen 400er Fehler zurückgeben.
-    await handleAnalysisRequest(req, res, "link", htmlContent, url, "html");
+    
+    await handleAnalysisRequest(req, res, "link", cleanText, url, "html");
 });
 
 app.post("/analyze-image", (req, res) => {
+    // Die Bild-URL wird direkt weitergegeben, hier ist keine Text-Extraktion nötig.
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
 // Start
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v3 (final) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v4 (final mit Cheerio) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt. API-Aufrufe werden fehlschlagen.");
     }
