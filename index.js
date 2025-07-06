@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus Herzstück-Server (Architektur nach Plan)
+// index.js – ThinkAI Nexus Herzstück-Server (Architektur nach Plan v3)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises; // Nur noch zum Lesen des Prompts
@@ -10,15 +10,8 @@ const app = express();
 app.use(bodyParser.json({ limit: "15mb" }));
 
 // === KONFIGURATION =================================================
-// Der Pfad zur Prompt-Datei, die sicher auf dem Server liegt.
-const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.2.txt");
-
-// Der Endpunkt der ECHTEN OpenAI API.
+const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
 const OPENAI_API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
-
-// WICHTIG: Dein geheimer OpenAI API Key.
-// Lade diesen aus einer .env-Datei oder den Umgebungsvariablen deines Hosters!
-// Gib ihn NIEMALS direkt in den Code ein.
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY; 
 // ===================================================================
 
@@ -38,42 +31,41 @@ async function loadPrompt() {
         return await fs.readFile(PROMPT_PATH, "utf8");
     } catch (error) {
         console.error("FATAL: Konnte Prompt-Datei nicht laden!", error);
-        // Im Fehlerfall wird ein einfacher Standard-Prompt verwendet, um einen Totalausfall zu verhindern.
-        return "Analysiere den folgenden Inhalt und gib eine Zusammenfassung und drei relevante Hashtags im JSON-Format zurück: {CONTENT}";
+        return "Analysiere den folgenden Inhalt und gib eine Zusammenfassung zurück: {CONTENT}";
     }
 }
 
-// --- Herzstück: Objekt generieren (speichert nichts mehr!) ----------
+// --- Herzstück: Objekt generieren ----------------------------------
 async function generateNexusObject({
     archetype,
     contextUUID,
     contentRaw,
     sourceUrl
 }) {
-    // 1. UUID v7 und ISO8601 Timestamp generieren
+    // 1. Logische Werte im Code erzeugen (NEUE ARBEITSTEILUNG)
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
 
-    // 2. Prompt laden und mit den Rohdaten befüllen
+    // 2. Prompt laden und mit ALLEN Werten (logisch & inhaltlich) befüllen
     let promptTemplate = await loadPrompt();
     const finalPrompt = promptTemplate
-        .replace("{ARCTYPE}", archetype)
+        .replace("{ARCHETYPE}", archetype)
         .replace("{CONTENT}", contentRaw)
-        .replace("{SOURCEURL}", sourceUrl || "N/A");
+        .replace("{SOURCEURL}", sourceUrl || "N/A")
+        .replace("{UUID}", uuid) // NEU
+        .replace("{TIMESTAMP_ISO}", timestamp); // NEU
 
-    // 3. ECHTE GPT-Analyse durchführen
+    // 3. GPT-Analyse durchführen
     if (!OPENAI_API_KEY) {
         throw new Error("OpenAI API Key ist nicht konfiguriert auf dem Server.");
     }
 
     const gptResponse = await axios.post(OPENAI_API_ENDPOINT, {
-        // Wähle das passende Modell. Für den komplexen Prompt ist gpt-4o oder gpt-4-turbo empfohlen.
-        model: "gpt-4o", 
+        model: "gpt-4o",
         messages: [{
             role: "user",
             content: finalPrompt,
         }, ],
-        // Ggf. weitere Parameter wie temperature, max_tokens etc. hier anpassen.
     }, {
         headers: {
             'Authorization': `Bearer ${OPENAI_API_KEY}`,
@@ -86,18 +78,15 @@ async function generateNexusObject({
         throw new Error("Keine valide Antwort vom OpenAI API erhalten.");
     }
     
-    // 4. Tags und Titel aus dem Analyseergebnis extrahieren für den Dateinamen
-    const titleMatch = analysisResultText.match(/\*\*([^*]+)\*\*/);
-    const title = titleMatch ? titleMatch[1] : 'Unbenanntes-Objekt';
-
-    const tagsHeaderMatch = analysisResultText.match(/Tags:(#\w+,?)+/);
+    // 4. Tags aus der KI-Antwort extrahieren für den Dateinamen
+    const tagsHeaderMatch = analysisResultText.match(/Schlagwörter: (.*)/);
     let top3Tags = [];
-    if (tagsHeaderMatch) {
-        top3Tags = tagsHeaderMatch[0].replace('Tags:', '').split(',').slice(0, 3).map(slugify);
+    if (tagsHeaderMatch && tagsHeaderMatch[1]) {
+        top3Tags = tagsHeaderMatch[1].split(',').slice(0, 3).map(tag => slugify(tag.replace(/#/g, '')));
     }
     
-    // 5. Finalen Dateinamen-Stamm konstruieren
-    const tsForName = timestamp.replace(/[:.]/g, "").replace("T", "T");
+    // 5. Finalen Dateinamen-Stamm konstruieren (mit den in Schritt 1 erzeugten Werten)
+    const tsForName = timestamp.replace(/[:.]/g, "").substring(0, 15) + "Z";
     const baseName = [
         contextUUID,
         uuid,
@@ -106,8 +95,7 @@ async function generateNexusObject({
         ...top3Tags
     ].filter(Boolean).join("_");
     
-    // 6. Finales JSON-Objekt für die .tags.json Datei erstellen
-    // Dieses JSON wird direkt aus der Analyse extrahiert, um Konsistenz zu gewährleisten.
+    // 6. JSON-Block aus der KI-Antwort extrahieren
     const jsonBlockMatch = analysisResultText.match(/{\s*"OwnerUserID":[\s\S]*?}/);
     const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Konnte JSON-Block nicht extrahieren." });
 
@@ -121,8 +109,6 @@ async function generateNexusObject({
             filename: `${baseName}.tags.json`,
             content: tagsJsonContent
         },
-        // Der Dateiname für die Original-Datei wird hier ebenfalls generiert,
-        // damit die Extension einen konsistenten Namen verwenden kann.
         originalFilenameBase: baseName
     };
 }
@@ -132,8 +118,7 @@ async function generateNexusObject({
 // API Endpunkte
 // ===============================
 
-// Health-Check für den Server
-app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat v2" }));
+app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat v3" }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
      try {
@@ -146,44 +131,47 @@ async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl,
             sourceUrl: sourceUrl
         });
 
-        // Hängt die Dateiendung für die Originaldatei an den Basisnamen an
         output.originalFilename = `${output.originalFilenameBase}.original.${extension}`;
-        delete output.originalFilenameBase; // Aufräumen
+        delete output.originalFilenameBase;
 
         res.json({ success: true, ...output });
     } catch (err) {
-        console.error(`Fehler bei /analyze-${archetype}:`, err.message);
-        res.status(500).json({ success: false, error: err.message, details: err.stack });
+        console.error(`Fehler bei /analyze-${archetype}:`, err);
+        res.status(500).json({ success: false, error: err.message });
     }
 }
 
 app.post("/analyze-text", (req, res) => {
-    handleAnalysisRequest(req, res, "text", req.body.content, req.body.source_url, "html"); // Annahme: Textauswahl ist HTML
+    handleAnalysisRequest(req, res, "text", req.body.content, req.body.source_url, "html");
 });
 
 app.post("/scrape-and-analyze-url", async (req, res) => {
+    const { url, context_uuid } = req.body;
     try {
-        const { url } = req.body;
-        // Scrapen der URL für den Inhalt
-        const response = await axios.get(url, { timeout: 15000 });
+        // NEU: Robusterer Request mit User-Agent
+        const response = await axios.get(url, {
+            timeout: 15000,
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+            }
+        });
         const htmlContent = response.data;
+        // Rufe die Standard-Behandlung auf, nachdem der Inhalt erfolgreich geholt wurde
         await handleAnalysisRequest(req, res, "link", htmlContent, url, "html");
     } catch(err) {
-        console.error(`Fehler beim Scrapen der URL ${req.body.url}:`, err.message);
-        res.status(500).json({ success: false, error: "URL konnte nicht abgerufen oder verarbeitet werden.", details: err.message });
+        console.error(`Fehler beim Scrapen der URL ${url}:`, err.message);
+        res.status(500).json({ success: false, error: "URL-Inhalt konnte nicht abgerufen oder verarbeitet werden." });
     }
 });
 
 app.post("/analyze-image", (req, res) => {
-    // Für die Bildanalyse wird die Bild-URL als "contentRaw" direkt weitergegeben.
-    // GPT-4o/Vision kann die URL direkt verarbeiten.
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
 // Start
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v2 (stateless) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v3 läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt. API-Aufrufe werden fehlschlagen.");
     }
