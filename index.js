@@ -1,11 +1,11 @@
-// index.js – ThinkAI Nexus Herzstück-Server (Finale Version mit Cheerio-Text-Extraktion)
+// index.js – ThinkAI Nexus Herzstück-Server (Finale Version 2.0)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
 const path = require("path");
 const { uuidv7 } = require("uuidv7");
 const axios = require("axios");
-const cheerio = require("cheerio"); // NEU: Import für die HTML-Verarbeitung
+const cheerio = require("cheerio");
 
 const app = express();
 app.use(bodyParser.json({ limit: "15mb" }));
@@ -13,7 +13,8 @@ app.use(bodyParser.json({ limit: "15mb" }));
 // === KONFIGURATION =================================================
 const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
 const OPENAI_API_ENDPOINT = "https://api.openai.com/v1/chat/completions";
-const OPENAI_API_KEY = process.env.OPENAI_API_KEY; 
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const MAX_CONTENT_LENGTH = 8000; // NEU: Maximale Zeichenlänge für die Analyse
 // ===================================================================
 
 // --- Hilfsfunktionen ---
@@ -103,12 +104,11 @@ async function generateNexusObject({
     };
 }
 
-
 // ===============================
 // API Endpunkte
 // ===============================
 
-app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat v4" }));
+app.get("/", (req, res) => res.json({ status: "OK", message: "Nexus Heartbeat v5 (final)" }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
      try {
@@ -124,7 +124,7 @@ async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl,
         const output = await generateNexusObject({
             archetype: archetype,
             contextUUID: context_uuid || "default-nexus-context",
-            contentRaw: contentRaw, // Hier kommt jetzt der saubere Text an
+            contentRaw: contentRaw,
             sourceUrl: sourceUrl
         });
 
@@ -140,13 +140,12 @@ async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl,
 
 app.post("/analyze-text", (req, res) => {
     const htmlContent = req.body.content;
-    
-    // NEU: Nur den reinen Text aus dem markierten HTML extrahieren
     const $ = cheerio.load(htmlContent || '');
     const cleanText = $.text().replace(/\s\s+/g, ' ').trim();
-
-    // Wir übergeben den sauberen Text an die Hauptfunktion
-    handleAnalysisRequest(req, res, "text", cleanText, req.body.source_url, "html");
+    // NEU: Kürzen des Inhalts
+    const truncatedText = cleanText.substring(0, MAX_CONTENT_LENGTH);
+    
+    handleAnalysisRequest(req, res, "text", truncatedText, req.body.source_url, "html");
 });
 
 app.post("/scrape-and-analyze-url", async (req, res) => {
@@ -161,29 +160,25 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
             }
         });
         const htmlContent = response.data;
-
-        // NEU: Nur den reinen Text aus dem Body der Webseite extrahieren
         const $ = cheerio.load(htmlContent);
         cleanText = $('body').text().replace(/\s\s+/g, ' ').trim();
-
     } catch(err) {
         console.error(`Fehler beim Scrapen der URL ${url}:`, err.message);
-        // Fehler wird durch leeren `cleanText` an `handleAnalysisRequest` weitergegeben
-        // und dort mit einem 400er-Fehler sauber behandelt.
     }
     
-    await handleAnalysisRequest(req, res, "link", cleanText, url, "html");
+    // NEU: Kürzen des Inhalts
+    const truncatedText = cleanText.substring(0, MAX_CONTENT_LENGTH);
+    await handleAnalysisRequest(req, res, "link", truncatedText, url, "html");
 });
 
 app.post("/analyze-image", (req, res) => {
-    // Die Bild-URL wird direkt weitergegeben, hier ist keine Text-Extraktion nötig.
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
 // Start
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v4 (final mit Cheerio) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v5 (final) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt. API-Aufrufe werden fehlschlagen.");
     }
