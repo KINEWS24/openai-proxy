@@ -3,7 +3,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises; // Nur noch zum Lesen des Prompts
 const path = require("path");
-const { v7: uuidv7 } = require("uuidv7");
+const { uuidv7 } = require("uuidv7");
 const axios = require("axios");
 
 const app = express();
