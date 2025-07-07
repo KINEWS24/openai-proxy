@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit intelligenter Indexierung & Einzel-Analysen)
+// index.js – ThinkAI Nexus (Finale Version mit Qualitätsfilter bei der Suche)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -10,12 +10,13 @@ const { OpenAI } = require("openai");
 const { HierarchicalNSW } = require("hnswlib-node");
 
 // === KONFIGURATION =================================================
-const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
+const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.4.txt"); // NEU: Verweist auf den neuen Prompt
 const KNOWLEDGE_PATH = path.join(__dirname, "knowledge");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const MAX_CONTENT_LENGTH = 8000;
 const EMBEDDING_MODEL = "text-embedding-3-small";
 const COMPLETION_MODEL = "gpt-4o";
+const SIMILARITY_THRESHOLD = 0.5; // NEU: Der Qualitätsfilter (0.0 = exakt, 1.0 = sehr unähnlich)
 // ===================================================================
 
 const app = express();
@@ -24,7 +25,7 @@ let knowledgeIndex = null;
 let knowledgeData = [];
 let isIndexReady = false;
 
-// --- Überarbeitete Funktion zum Initialisieren des Wissens-Index ---
+// --- Initialisierung des Wissens-Index ---
 async function initializeIndex() {
     console.log("Initialisiere Wissens-Index im Hintergrund...");
     try {
@@ -44,13 +45,10 @@ async function initializeIndex() {
             
             const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
             const title = titleMatch ? titleMatch[1] : '';
-
             const summaryMatch = fileContent.match(/"Summary":\s*"(.*?)"/);
             const summary = summaryMatch ? summaryMatch[1] : '';
-            
             const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
             const tagsText = tagsMatch ? tagsMatch[1] : '';
-
             const urlMatch = fileContent.match(/Quelle: (https?:\/\/[^\s]+)/);
             const url = urlMatch ? urlMatch[1] : null;
 
@@ -80,26 +78,20 @@ async function initializeIndex() {
         const documentsForEmbedding = knowledgeData.map(d => d.contentForEmbedding);
 
         console.log(`Erstelle Vektor-Embeddings für ${knowledgeData.length} valide Dokumente...`);
-        const embeddingsResponse = await openai.embeddings.create({
-            model: EMBEDDING_MODEL,
-            input: documentsForEmbedding,
-        });
+        const embeddingsResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: documentsForEmbedding });
 
         const numDimensions = embeddingsResponse.data[0].embedding.length;
         knowledgeIndex = new HierarchicalNSW('l2', numDimensions);
         knowledgeIndex.initIndex(knowledgeData.length);
-
-        embeddingsResponse.data.forEach((embeddingObj, i) => {
-            knowledgeIndex.addPoint(embeddingObj.embedding, i);
-        });
+        embeddingsResponse.data.forEach((embeddingObj, i) => { knowledgeIndex.addPoint(embeddingObj.embedding, i); });
 
         isIndexReady = true;
         console.log(`✅ Wissens-Index mit ${knowledgeData.length} Dokumenten erfolgreich initialisiert!`);
-
     } catch (error) {
         console.error("Fehler bei der Initialisierung des Wissens-Index:", error);
     }
 }
+
 
 // --- Analyse-Funktion für neue Objekte ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
@@ -125,7 +117,7 @@ async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceU
 
 // --- Middleware und Routen-Definition ---
 app.use(bodyParser.json({ limit: "15mb" }));
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v10. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v11. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
     try {
@@ -173,7 +165,7 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
-// --- CHAT-ENDPUNKT (Komplett überarbeitet für Einzel-Analysen) ---
+// --- CHAT-ENDPUNKT (mit Qualitätsfilter) ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
     if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
@@ -183,22 +175,33 @@ app.post("/chat", async (req, res) => {
         const normalizedQuery = query.toLowerCase();
         const queryEmbeddingResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: normalizedQuery });
         const queryVector = queryEmbeddingResponse.data[0].embedding;
-        const searchResults = knowledgeIndex.searchKnn(queryVector, 3);
-        const uniqueIndices = [...new Set(searchResults.neighbors)];
+        
+        const searchResults = knowledgeIndex.searchKnn(queryVector, 5); // Suche etwas breiter, z.B. Top 5
 
-        if (uniqueIndices.length === 0 || !searchResults.neighbors.length) {
+        // NEU: Der Qualitätsfilter
+        let qualifiedIndices = [];
+        for (let i = 0; i < searchResults.neighbors.length; i++) {
+            if (searchResults.distances[i] < SIMILARITY_THRESHOLD) {
+                qualifiedIndices.push(searchResults.neighbors[i]);
+            }
+        }
+        
+        const uniqueIndices = [...new Set(qualifiedIndices)];
+
+        if (uniqueIndices.length === 0) {
             return res.json({ success: true, summaries: [] });
         }
 
-        const analysisPromises = uniqueIndices.map(async (index) => {
+        const analysisPromises = uniqueIndices.slice(0, 3).map(async (index) => { // Nimm die besten 3 qualifizierten Treffer
             const document = knowledgeData[index];
-            const analysisPrompt = `Du bist ein Analyse-Assistent. Fasse den folgenden Text zusammen und gib ein kurzes, prägnantes Thema an. Antworte ausschließlich im Format: "Thema: [Dein gefundenes Thema]\nZusammenfassung: [Deine Zusammenfassung]".\n\nText:\n---\n${document.fullContent}`;
+            const analysisPrompt = `Du bist ein Analyse-Assistent... (wie im Prompt V5.4 definiert)\n\nText:\n---\n${document.fullContent}`;
             
             const completionResponse = await openai.chat.completions.create({
                 model: COMPLETION_MODEL,
                 messages: [{ role: "user", content: analysisPrompt }],
                 temperature: 0.1,
             });
+
             let rawAnswer = completionResponse.choices[0].message.content || "";
             let topic = "Unbekanntes Thema";
             let summaryText = "Konnte keine Zusammenfassung erstellen.";
@@ -222,7 +225,7 @@ app.post("/chat", async (req, res) => {
 // --- Server-Start ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v11 (final) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v12 (mit Qualitätsfilter) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
     }
