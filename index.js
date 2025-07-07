@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit Qualitätsfilter bei der Suche)
+// index.js – ThinkAI Nexus (Finale Version mit korrekter Prompt-Zuweisung)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -10,13 +10,14 @@ const { OpenAI } = require("openai");
 const { HierarchicalNSW } = require("hnswlib-node");
 
 // === KONFIGURATION =================================================
-const PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.4.txt"); // NEU: Verweist auf den neuen Prompt
+const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt"); // Der "Architekt" für die Erfassung
+const CHAT_PROMPT_PATH = path.join(__dirname, "chat_summary_prompt.txt");   // Der "Blitz-Analyst" für den Chat
 const KNOWLEDGE_PATH = path.join(__dirname, "knowledge");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const MAX_CONTENT_LENGTH = 8000;
 const EMBEDDING_MODEL = "text-embedding-3-small";
 const COMPLETION_MODEL = "gpt-4o";
-const SIMILARITY_THRESHOLD = 0.5; // NEU: Der Qualitätsfilter (0.0 = exakt, 1.0 = sehr unähnlich)
+const SIMILARITY_THRESHOLD = 0.5;
 // ===================================================================
 
 const app = express();
@@ -42,7 +43,6 @@ async function initializeIndex() {
 
         for (const file of mdFiles) {
             const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
-            
             const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
             const title = titleMatch ? titleMatch[1] : '';
             const summaryMatch = fileContent.match(/"Summary":\s*"(.*?)"/);
@@ -92,32 +92,38 @@ async function initializeIndex() {
     }
 }
 
-
 // --- Analyse-Funktion für neue Objekte ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
-    let promptTemplate = await loadPrompt();
+    // NEU: Lädt jetzt explizit den langen "Architekten"-Prompt
+    const promptTemplate = await fs.readFile(CAPTURE_PROMPT_PATH, "utf8");
     const finalPrompt = promptTemplate.replace("{ARCHETYPE}", archetype).replace("{CONTENT}", contentRaw).replace("{SOURCEURL}", sourceUrl || "N/A").replace("{UUID}", uuid).replace("{TIMESTAMP_ISO}", timestamp);
+    
     if (!OPENAI_API_KEY) { throw new Error("OpenAI API Key ist nicht konfiguriert."); }
+    
     const gptResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: finalPrompt }] });
     const analysisResultText = gptResponse.choices[0]?.message?.content;
+    
     if (!analysisResultText) { throw new Error("Keine valide Antwort vom OpenAI API erhalten."); }
+    
     const tagsHeaderMatch = analysisResultText.match(/Schlagwörter: (.*)/);
     let top3Tags = [];
     if (tagsHeaderMatch && tagsHeaderMatch[1]) {
         top3Tags = tagsHeaderMatch[1].split(',').slice(0, 3).map(tag => slugify(tag.replace(/#/g, '')));
     }
+    
     const tsForName = timestamp.replace(/[:.]/g, "").substring(0, 15) + "Z";
     const baseName = [contextUUID, uuid, archetype.toLowerCase(), tsForName, ...top3Tags].filter(Boolean).join("_");
     const jsonBlockMatch = analysisResultText.match(/{\s*"OwnerUserID":[\s\S]*?}/);
     const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Konnte JSON-Block nicht extrahieren." });
+    
     return { nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText }, tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent }, originalFilenameBase: baseName };
 }
 
 // --- Middleware und Routen-Definition ---
 app.use(bodyParser.json({ limit: "15mb" }));
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v11. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v12. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
     try {
@@ -165,7 +171,7 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
-// --- CHAT-ENDPUNKT (mit Qualitätsfilter) ---
+// --- CHAT-ENDPUNKT ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
     if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
@@ -175,10 +181,8 @@ app.post("/chat", async (req, res) => {
         const normalizedQuery = query.toLowerCase();
         const queryEmbeddingResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: normalizedQuery });
         const queryVector = queryEmbeddingResponse.data[0].embedding;
-        
-        const searchResults = knowledgeIndex.searchKnn(queryVector, 5); // Suche etwas breiter, z.B. Top 5
+        const searchResults = knowledgeIndex.searchKnn(queryVector, 5);
 
-        // NEU: Der Qualitätsfilter
         let qualifiedIndices = [];
         for (let i = 0; i < searchResults.neighbors.length; i++) {
             if (searchResults.distances[i] < SIMILARITY_THRESHOLD) {
@@ -187,21 +191,15 @@ app.post("/chat", async (req, res) => {
         }
         
         const uniqueIndices = [...new Set(qualifiedIndices)];
+        if (uniqueIndices.length === 0) { return res.json({ success: true, summaries: [] }); }
 
-        if (uniqueIndices.length === 0) {
-            return res.json({ success: true, summaries: [] });
-        }
+        const chatPromptTemplate = await fs.readFile(CHAT_PROMPT_PATH, "utf8");
 
-        const analysisPromises = uniqueIndices.slice(0, 3).map(async (index) => { // Nimm die besten 3 qualifizierten Treffer
+        const analysisPromises = uniqueIndices.slice(0, 3).map(async (index) => {
             const document = knowledgeData[index];
-            const analysisPrompt = `Du bist ein Analyse-Assistent... (wie im Prompt V5.4 definiert)\n\nText:\n---\n${document.fullContent}`;
+            const analysisPrompt = chatPromptTemplate.replace("{fullContent}", document.fullContent);
             
-            const completionResponse = await openai.chat.completions.create({
-                model: COMPLETION_MODEL,
-                messages: [{ role: "user", content: analysisPrompt }],
-                temperature: 0.1,
-            });
-
+            const completionResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: analysisPrompt }], temperature: 0.1 });
             let rawAnswer = completionResponse.choices[0].message.content || "";
             let topic = "Unbekanntes Thema";
             let summaryText = "Konnte keine Zusammenfassung erstellen.";
@@ -215,17 +213,17 @@ app.post("/chat", async (req, res) => {
 
         const summaries = await Promise.all(analysisPromises);
         res.json({ success: true, summaries: summaries });
-
     } catch (error) {
         console.error("Fehler im Chat-Endpunkt:", error);
         res.status(500).json({ success: false, summaries: [], error: "Ein Fehler ist aufgetreten." });
     }
 });
 
+
 // --- Server-Start ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v12 (mit Qualitätsfilter) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v12 (Finale Logik) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
     }
