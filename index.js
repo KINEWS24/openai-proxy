@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit korrekter Prompt-Zuweisung)
+// index.js – ThinkAI Nexus (Final Version with Correct Prompt Assignment)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -9,9 +9,9 @@ const cheerio = require("cheerio");
 const { OpenAI } = require("openai");
 const { HierarchicalNSW } = require("hnswlib-node");
 
-// === KONFIGURATION =================================================
-const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt"); // Der "Architekt" für die Erfassung
-const CHAT_PROMPT_PATH = path.join(__dirname, "chat_summary_prompt.txt");   // Der "Blitz-Analyst" für den Chat
+// === CONFIGURATION =================================================
+const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt"); // The "Architect" for capturing
+const CHAT_PROMPT_PATH = path.join(__dirname, "chat_summary_prompt.txt");   // The "Analyst" for chat
 const KNOWLEDGE_PATH = path.join(__dirname, "knowledge");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const MAX_CONTENT_LENGTH = 8000;
@@ -26,23 +26,24 @@ let knowledgeIndex = null;
 let knowledgeData = [];
 let isIndexReady = false;
 
-// --- Initialisierung des Wissens-Index ---
+// --- Knowledge Index Initialization ---
 async function initializeIndex() {
-    console.log("Initialisiere Wissens-Index im Hintergrund...");
+    console.log("Initializing knowledge index in the background...");
     try {
         const files = await fs.readdir(KNOWLEDGE_PATH);
         const mdFiles = files.filter(file => file.endsWith('.nexus.md'));
         if (mdFiles.length === 0) {
-            console.log("Keine .nexus.md Dateien gefunden.");
+            console.log("No .nexus.md files found in 'knowledge' folder.");
             isIndexReady = true;
             return;
         }
 
-        console.log(`Lese und parse ${mdFiles.length} Wissens-Dateien...`);
+        console.log(`Reading and parsing ${mdFiles.length} knowledge files...`);
         let validDocuments = [];
 
         for (const file of mdFiles) {
             const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
+            
             const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
             const title = titleMatch ? titleMatch[1] : '';
             const summaryMatch = fileContent.match(/"Summary":\s*"(.*?)"/);
@@ -64,12 +65,12 @@ async function initializeIndex() {
                     tags: tagsText ? tagsText.split(',').map(t => t.trim()) : []
                 });
             } else {
-                console.warn(`Datei ${file} hat keinen extrahierbaren Inhalt und wird ignoriert.`);
+                console.warn(`File ${file} has no extractable content and will be ignored.`);
             }
         }
 
         if (validDocuments.length === 0) {
-            console.log("Keine validen Dokumente zum Indexieren gefunden.");
+            console.log("No valid documents found to index.");
             isIndexReady = true;
             return;
         }
@@ -77,7 +78,7 @@ async function initializeIndex() {
         knowledgeData = validDocuments;
         const documentsForEmbedding = knowledgeData.map(d => d.contentForEmbedding);
 
-        console.log(`Erstelle Vektor-Embeddings für ${knowledgeData.length} valide Dokumente...`);
+        console.log(`Creating vector embeddings for ${knowledgeData.length} valid documents...`);
         const embeddingsResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: documentsForEmbedding });
 
         const numDimensions = embeddingsResponse.data[0].embedding.length;
@@ -86,26 +87,25 @@ async function initializeIndex() {
         embeddingsResponse.data.forEach((embeddingObj, i) => { knowledgeIndex.addPoint(embeddingObj.embedding, i); });
 
         isIndexReady = true;
-        console.log(`✅ Wissens-Index mit ${knowledgeData.length} Dokumenten erfolgreich initialisiert!`);
+        console.log(`✅ Knowledge index with ${knowledgeData.length} documents successfully initialized!`);
     } catch (error) {
-        console.error("Fehler bei der Initialisierung des Wissens-Index:", error);
+        console.error("Error during knowledge index initialization:", error);
     }
 }
 
-// --- Analyse-Funktion für neue Objekte ---
+// --- Analysis function for new objects ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
-    // NEU: Lädt jetzt explizit den langen "Architekten"-Prompt
     const promptTemplate = await fs.readFile(CAPTURE_PROMPT_PATH, "utf8");
-    const finalPrompt = promptTemplate.replace("{ARCHETYPE}", archetype).replace("{CONTENT}", contentRaw).replace("{SOURCEURL}", sourceUrl || "N/A").replace("{UUID}", uuid).replace("{TIMESTAMP_ISO}", timestamp);
+    const finalPrompt = promptTemplate.replace("{CONTENT}", contentRaw).replace("{SOURCEURL}", sourceUrl || "N/A").replace("{UUID}", uuid).replace("{TIMESTAMP_ISO}", timestamp);
     
-    if (!OPENAI_API_KEY) { throw new Error("OpenAI API Key ist nicht konfiguriert."); }
+    if (!OPENAI_API_KEY) { throw new Error("OpenAI API Key is not configured."); }
     
     const gptResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: finalPrompt }] });
     const analysisResultText = gptResponse.choices[0]?.message?.content;
     
-    if (!analysisResultText) { throw new Error("Keine valide Antwort vom OpenAI API erhalten."); }
+    if (!analysisResultText) { throw new Error("Invalid response from OpenAI API."); }
     
     const tagsHeaderMatch = analysisResultText.match(/Schlagwörter: (.*)/);
     let top3Tags = [];
@@ -116,19 +116,20 @@ async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceU
     const tsForName = timestamp.replace(/[:.]/g, "").substring(0, 15) + "Z";
     const baseName = [contextUUID, uuid, archetype.toLowerCase(), tsForName, ...top3Tags].filter(Boolean).join("_");
     const jsonBlockMatch = analysisResultText.match(/{\s*"OwnerUserID":[\s\S]*?}/);
-    const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Konnte JSON-Block nicht extrahieren." });
+    const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Could not extract JSON block." });
     
     return { nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText }, tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent }, originalFilenameBase: baseName };
 }
 
-// --- Middleware und Routen-Definition ---
+// --- Middleware and API Endpoints ---
 app.use(bodyParser.json({ limit: "15mb" }));
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v12. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
+
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v13. Index Status: ${isIndexReady ? 'Ready' : 'Initializing...'}` }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
     try {
         if (!contentRaw || typeof contentRaw !== 'string' || contentRaw.trim() === '') {
-            return res.status(400).json({ success: false, error: "Fehlender oder leerer Inhalt für die Analyse." });
+            return res.status(400).json({ success: false, error: "Missing or empty content for analysis." });
         }
         const { context_uuid } = req.body;
         const output = await generateNexusObject({ archetype, contextUUID: context_uuid || "default-nexus-context", contentRaw, sourceUrl });
@@ -136,7 +137,7 @@ async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl,
         delete output.originalFilenameBase;
         res.json({ success: true, ...output });
     } catch (err) {
-        console.error(`Fehler bei /analyze-${archetype}:`, err);
+        console.error(`Error in /analyze-${archetype}:`, err);
         res.status(500).json({ success: false, error: err.message });
     }
 }
@@ -161,7 +162,7 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         const $ = cheerio.load(htmlContent);
         cleanText = $('body').text().replace(/\s\s+/g, ' ').trim();
     } catch (err) {
-        console.error(`Fehler beim Scrapen der URL ${url}:`, err.message);
+        console.error(`Error scraping URL ${url}:`, err.message);
     }
     const truncatedText = cleanText.substring(0, MAX_CONTENT_LENGTH);
     await handleAnalysisRequest(req, res, "link", truncatedText, url, "html");
@@ -171,16 +172,16 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
-// --- CHAT-ENDPUNKT ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
-    if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
+    if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Knowledge base is still initializing." }); }
     if (!query) { return res.status(400).json({ success: false, summaries: [] }); }
 
     try {
         const normalizedQuery = query.toLowerCase();
         const queryEmbeddingResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: normalizedQuery });
         const queryVector = queryEmbeddingResponse.data[0].embedding;
+        
         const searchResults = knowledgeIndex.searchKnn(queryVector, 5);
 
         let qualifiedIndices = [];
@@ -191,8 +192,10 @@ app.post("/chat", async (req, res) => {
         }
         
         const uniqueIndices = [...new Set(qualifiedIndices)];
-        if (uniqueIndices.length === 0) { return res.json({ success: true, summaries: [] }); }
-
+        if (uniqueIndices.length === 0) {
+            return res.json({ success: true, summaries: [] });
+        }
+        
         const chatPromptTemplate = await fs.readFile(CHAT_PROMPT_PATH, "utf8");
 
         const analysisPromises = uniqueIndices.slice(0, 3).map(async (index) => {
@@ -201,8 +204,8 @@ app.post("/chat", async (req, res) => {
             
             const completionResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: analysisPrompt }], temperature: 0.1 });
             let rawAnswer = completionResponse.choices[0].message.content || "";
-            let topic = "Unbekanntes Thema";
-            let summaryText = "Konnte keine Zusammenfassung erstellen.";
+            let topic = "Unknown Topic";
+            let summaryText = "Could not generate summary.";
             const topicMatch = rawAnswer.match(/^Thema: (.*)/im);
             if (topicMatch && topicMatch[1]) {
                 topic = topicMatch[1].trim();
@@ -214,18 +217,18 @@ app.post("/chat", async (req, res) => {
         const summaries = await Promise.all(analysisPromises);
         res.json({ success: true, summaries: summaries });
     } catch (error) {
-        console.error("Fehler im Chat-Endpunkt:", error);
-        res.status(500).json({ success: false, summaries: [], error: "Ein Fehler ist aufgetreten." });
+        console.error("Error in /chat endpoint:", error);
+        res.status(500).json({ success: false, summaries: [], error: "An error occurred." });
     }
 });
 
 
-// --- Server-Start ---
+// --- Server Start ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v12 (Finale Logik) läuft auf Port ${PORT}`);
+    console.log(`Nexus Server v13 (final logic) is running on Port ${PORT}`);
     if (!OPENAI_API_KEY) {
-        console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
+        console.warn("WARNING: OPENAI_API_KEY is not set.");
     }
     initializeIndex();
 });
