@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit korrigiertem Prompt-Pfad)
+// index.js – ThinkAI Nexus (Finale Version mit robuster Volltext-Indexierung)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -10,8 +10,7 @@ const { OpenAI } = require("openai");
 const { HierarchicalNSW } = require("hnswlib-node");
 
 // === KONFIGURATION =================================================
-// KORREKTUR: Der Pfad zum detaillierten "Architekten"-Prompt ist jetzt korrekt.
-const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt"); 
+const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
 const CHAT_PROMPT_PATH = path.join(__dirname, "chat_summary_prompt.txt");
 const KNOWLEDGE_PATH = path.join(__dirname, "knowledge");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
@@ -27,54 +26,78 @@ let knowledgeIndex = null;
 let knowledgeData = [];
 let isIndexReady = false;
 
+// --- Überarbeitete Funktion zum Initialisieren des Wissens-Index ---
 async function initializeIndex() {
     console.log("Initialisiere Wissens-Index im Hintergrund...");
     try {
         const files = await fs.readdir(KNOWLEDGE_PATH);
         const mdFiles = files.filter(file => file.endsWith('.nexus.md'));
-        if (mdFiles.length === 0) { console.log("Keine .nexus.md Dateien gefunden."); isIndexReady = true; return; }
+        if (mdFiles.length === 0) {
+            console.log("Keine .nexus.md Dateien gefunden.");
+            isIndexReady = true;
+            return;
+        }
 
         console.log(`Lese und parse ${mdFiles.length} Wissens-Dateien...`);
         let validDocuments = [];
+
         for (const file of mdFiles) {
             const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
-            const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
-            const title = titleMatch ? titleMatch[1] : '';
-            const summaryMatch = fileContent.match(/"Summary":\s*"(.*?)"/s);
-            const summary = summaryMatch ? summaryMatch[1] : '';
-            const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
-            const tagsText = tagsMatch ? tagsMatch[1] : '';
-            const urlMatch = fileContent.match(/Quelle: (https?:\/\/[^\s]+)/);
-            const url = urlMatch ? urlMatch[1] : null;
+            
+            // NEU: Robuste Extraktion - nimmt allen Text außer dem JSON-Block
+            const cleanTextForIndexing = fileContent
+                .replace(/{\s*"OwnerUserID":[\s\S]*?}/, '') // Entfernt den JSON-Block
+                .replace(/\s\s+/g, ' ') // Entfernt überflüssige Leerzeichen
+                .trim();
 
-            const cleanTextForIndexing = [title, summary, tagsText].join(' ').trim();
             if (cleanTextForIndexing) {
+                // Metadaten werden weiterhin für die Anzeige extrahiert
+                const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
+                const title = titleMatch ? titleMatch[1] : file;
+                const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
+                const tags = tagsMatch ? tagsMatch[1].split(',').map(t => t.trim()) : [];
+                const urlMatch = fileContent.match(/Quelle: (https?:\/\/[^\s]+)/);
+                const url = urlMatch ? urlMatch[1] : null;
+
                 validDocuments.push({ 
                     sourceFile: file, 
                     contentForEmbedding: cleanTextForIndexing.toLowerCase(),
                     fullContent: fileContent,
-                    title: title || file,
+                    title: title,
                     url: url,
-                    tags: tagsText ? tagsText.split(',').map(t => t.trim()) : []
+                    tags: tags
                 });
-            } else { console.warn(`Datei ${file} hat keinen extrahierbaren Inhalt und wird ignoriert.`); }
+            } else {
+                console.warn(`Datei ${file} hat keinen extrahierbaren Inhalt und wird ignoriert.`);
+            }
         }
 
-        if (validDocuments.length === 0) { console.log("Keine validen Dokumente zum Indexieren gefunden."); isIndexReady = true; return; }
+        if (validDocuments.length === 0) {
+            console.log("Keine validen Dokumente zum Indexieren gefunden.");
+            isIndexReady = true;
+            return;
+        }
         
         knowledgeData = validDocuments;
         const documentsForEmbedding = knowledgeData.map(d => d.contentForEmbedding);
+
         console.log(`Erstelle Vektor-Embeddings für ${knowledgeData.length} valide Dokumente...`);
         const embeddingsResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: documentsForEmbedding });
+
         const numDimensions = embeddingsResponse.data[0].embedding.length;
         knowledgeIndex = new HierarchicalNSW('l2', numDimensions);
         knowledgeIndex.initIndex(knowledgeData.length);
         embeddingsResponse.data.forEach((embeddingObj, i) => { knowledgeIndex.addPoint(embeddingObj.embedding, i); });
+
         isIndexReady = true;
         console.log(`✅ Wissens-Index mit ${knowledgeData.length} Dokumenten erfolgreich initialisiert!`);
-    } catch (error) { console.error("Fehler bei der Initialisierung des Wissens-Index:", error); }
+    } catch (error) {
+        console.error("Fehler bei der Initialisierung des Wissens-Index:", error);
+    }
 }
 
+
+// --- Analyse-Funktion für neue Objekte ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
@@ -96,8 +119,9 @@ async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceU
     return { nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText }, tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent }, originalFilenameBase: baseName };
 }
 
+// --- Middleware und Routen-Definition ---
 app.use(bodyParser.json({ limit: "15mb" }));
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v13. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v14. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
     try {
@@ -145,6 +169,7 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
+// --- CHAT-ENDPUNKT (mit Qualitätsfilter) ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
     if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
@@ -162,9 +187,8 @@ app.post("/chat", async (req, res) => {
             }
         }
         const uniqueIndices = [...new Set(qualifiedIndices)];
-        if (uniqueIndices.length === 0) {
-            return res.json({ success: true, summaries: [] });
-        }
+        if (uniqueIndices.length === 0) { return res.json({ success: true, summaries: [] }); }
+        
         const chatPromptTemplate = await fs.readFile(CHAT_PROMPT_PATH, "utf8");
         const analysisPromises = uniqueIndices.slice(0, 3).map(async (index) => {
             const document = knowledgeData[index];
@@ -180,6 +204,7 @@ app.post("/chat", async (req, res) => {
             }
             return { topic, summary: summaryText, source: { title: document.title, url: document.url, tags: document.tags } };
         });
+
         const summaries = await Promise.all(analysisPromises);
         res.json({ success: true, summaries: summaries });
     } catch (error) {
@@ -188,9 +213,11 @@ app.post("/chat", async (req, res) => {
     }
 });
 
+
+// --- Server-Start ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v13 (final) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v14 (robuster Index) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
     }
