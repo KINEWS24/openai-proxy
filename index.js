@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit formatiertem Chat & "Fuzzy Search")
+// index.js – ThinkAI Nexus (Finale Version mit Themen-Extraktion im Chat)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -23,10 +23,9 @@ const COMPLETION_MODEL = "gpt-4o";
 
 const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 let knowledgeIndex = null;
-let knowledgeData = []; // Wird jetzt mehr als nur Text enthalten
+let knowledgeData = [];
 let isIndexReady = false;
 
-// --- Funktion zum Initialisieren des Wissens-Index ---
 async function initializeIndex() {
     console.log("Initialisiere Wissens-Index im Hintergrund...");
     try {
@@ -41,20 +40,16 @@ async function initializeIndex() {
         console.log(`Lese und parse ${mdFiles.length} Wissens-Dateien...`);
         for (const file of mdFiles) {
             const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
-            
-            // NEU: Extrahiere Metadaten direkt beim Einlesen
             const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
             const title = titleMatch ? titleMatch[1] : file;
-
             const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
             const tags = tagsMatch ? tagsMatch[1].split(',').map(t => t.trim()) : [];
-            
             const urlMatch = fileContent.match(/Quelle: (https?:\/\/[^\s]+)/);
             const url = urlMatch ? urlMatch[1] : null;
 
             knowledgeData.push({ 
                 sourceFile: file, 
-                content: fileContent.toLowerCase(), // NEU: Normalisierung für Fuzzy Search
+                content: fileContent.toLowerCase(),
                 title: title,
                 url: url,
                 tags: tags
@@ -64,7 +59,7 @@ async function initializeIndex() {
         console.log("Erstelle Vektor-Embeddings für das Wissen...");
         const embeddingsResponse = await openai.embeddings.create({
             model: EMBEDDING_MODEL,
-            input: knowledgeData.map(d => d.content), // Embeddings basieren auf dem normalisierten Inhalt
+            input: knowledgeData.map(d => d.content),
         });
 
         const numDimensions = embeddingsResponse.data[0].embedding.length;
@@ -83,10 +78,10 @@ async function initializeIndex() {
     }
 }
 
-// (Die Analyse-Funktionen für neue Objekte bleiben unverändert)
+// (Die Analyse-Funktionen bleiben unverändert)
 // ...
 
-// --- CHAT-ENDPUNKT (Überarbeitet für strukturierte Antwort) ---
+// --- CHAT-ENDPUNKT (Überarbeitet für strukturierte Antwort mit Thema) ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
 
@@ -96,15 +91,11 @@ app.post("/chat", async (req, res) => {
     if (!query) { return res.status(400).json({ answer: "Bitte gib eine Frage ein." }); }
 
     try {
-        // 1. Frage normalisieren (Kleinschreibung) für Fuzzy Search
         const normalizedQuery = query.toLowerCase();
         const queryEmbeddingResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: normalizedQuery });
         const queryVector = queryEmbeddingResponse.data[0].embedding;
         
-        // 2. Ähnlichste Dokumente finden
         const searchResults = knowledgeIndex.searchKnn(queryVector, 3);
-        
-        // 3. Kontext und Quellen-Metadaten zusammenstellen
         const contextSnippets = searchResults.neighbors.map(index => knowledgeData[index].content);
         const sourceMetadata = searchResults.neighbors.map(index => ({
             filename: knowledgeData[index].sourceFile,
@@ -113,14 +104,37 @@ app.post("/chat", async (req, res) => {
             tags: knowledgeData[index].tags
         }));
 
-        // 4. Prompt für die finale Antwort zusammenbauen
-        const chatPrompt = `Beantworte die Frage des Nutzers präzise und ausschließlich basierend auf dem bereitgestellten Kontext. Formuliere eine hilfreiche, zusammenfassende Antwort in ganzen Sätzen. Gib keine Dateinamen oder URLs in deiner Antwort an, fasse nur den Inhalt zusammen. Wenn die Antwort nicht im Kontext enthalten ist, sage, dass du keine Informationen dazu hast.\n\nKontext:\n---\n${contextSnippets.join("\n---\n")}\n---\n\nFrage des Nutzers:\n${query}\n\nAntwort:`;
+        // NEU: Erweiterter Prompt, der explizit nach einem Thema fragt
+        const chatPrompt = `Du bist ein hilfreicher Assistent. Beantworte die Frage des Nutzers präzise und ausschließlich basierend auf dem bereitgestellten Kontext.
+1. Fasse den Kern der Antwort in einem kurzen, prägnanten Thema zusammen und schreibe es in die erste Zeile im Format "Thema: [Dein gefundenes Thema]".
+2. Formuliere darunter eine hilfreiche, zusammenfassende Antwort in ganzen Sätzen.
+3. Gib keine Dateinamen oder URLs in deiner Fließtext-Antwort an, fasse nur den Inhalt zusammen.
+4. Wenn die Antwort nicht im Kontext enthalten ist, sage, dass du keine Informationen dazu hast und gib kein Thema an.
+
+Kontext:
+---
+${contextSnippets.join("\n---\n")}
+---
+
+Frage des Nutzers:
+${query}
+
+Antwort:`;
 
         const completionResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: chatPrompt }], temperature: 0.2 });
-        const answer = completionResponse.choices[0].message.content;
+        let rawAnswer = completionResponse.choices[0].message.content;
         
-        // 5. NEU: Strukturierte Antwort an das Frontend senden
-        res.json({ success: true, answer: answer, sources: sourceMetadata });
+        // NEU: Extrahiere Thema und reine Antwort aus dem KI-Output
+        let topic = null;
+        let finalAnswer = rawAnswer;
+
+        const topicMatch = rawAnswer.match(/^Thema: (.*)/i);
+        if (topicMatch && topicMatch[1]) {
+            topic = topicMatch[1].trim();
+            finalAnswer = rawAnswer.substring(topicMatch[0].length).trim(); // Der Rest ist die Antwort
+        }
+        
+        res.json({ success: true, topic: topic, answer: finalAnswer, sources: sourceMetadata });
 
     } catch (error) {
         console.error("Fehler im Chat-Endpunkt:", error);
@@ -128,13 +142,12 @@ app.post("/chat", async (req, res) => {
     }
 });
 
-
 // (Restliche Endpunkte und Server-Start bleiben gleich)
 // ...
 // Start
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, async () => {
-    console.log(`Nexus-Server v6 (asynchroner Start) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v7 (Chat mit Thema) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
     }
