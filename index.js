@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit robuster Volltext-Indexierung)
+// index.js – ThinkAI Nexus (Finale Version mit korrigiertem Platzhalter)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -26,7 +26,6 @@ let knowledgeIndex = null;
 let knowledgeData = [];
 let isIndexReady = false;
 
-// --- Überarbeitete Funktion zum Initialisieren des Wissens-Index ---
 async function initializeIndex() {
     console.log("Initialisiere Wissens-Index im Hintergrund...");
     try {
@@ -44,14 +43,11 @@ async function initializeIndex() {
         for (const file of mdFiles) {
             const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
             
-            // NEU: Robuste Extraktion - nimmt allen Text außer dem JSON-Block
             const cleanTextForIndexing = fileContent
-                .replace(/{\s*"OwnerUserID":[\s\S]*?}/, '') // Entfernt den JSON-Block
-                .replace(/\s\s+/g, ' ') // Entfernt überflüssige Leerzeichen
-                .trim();
+                .replace(/{\s*"OwnerUserID":[\s\S]*?}/, '')
+                .replace(/\s\s+/g, ' ').trim();
 
             if (cleanTextForIndexing) {
-                // Metadaten werden weiterhin für die Anzeige extrahiert
                 const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
                 const title = titleMatch ? titleMatch[1] : file;
                 const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
@@ -97,29 +93,35 @@ async function initializeIndex() {
 }
 
 
-// --- Analyse-Funktion für neue Objekte ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
     const promptTemplate = await fs.readFile(CAPTURE_PROMPT_PATH, "utf8");
+    
+    // FINALE KORREKTUR: Der Platzhalter muss zum Prompt V5.3 passen
     const finalPrompt = promptTemplate.replace("{CONTENT}", contentRaw).replace("{SOURCEURL}", sourceUrl || "N/A").replace("{UUID}", uuid).replace("{TIMESTAMP_ISO}", timestamp);
+    
     if (!OPENAI_API_KEY) { throw new Error("OpenAI API Key ist nicht konfiguriert."); }
+    
     const gptResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: finalPrompt }] });
     const analysisResultText = gptResponse.choices[0]?.message?.content;
+    
     if (!analysisResultText) { throw new Error("Keine valide Antwort vom OpenAI API erhalten."); }
+    
     const tagsHeaderMatch = analysisResultText.match(/Schlagwörter: (.*)/);
     let top3Tags = [];
     if (tagsHeaderMatch && tagsHeaderMatch[1]) {
         top3Tags = tagsHeaderMatch[1].split(',').slice(0, 3).map(tag => slugify(tag.replace(/#/g, '')));
     }
+    
     const tsForName = timestamp.replace(/[:.]/g, "").substring(0, 15) + "Z";
     const baseName = [contextUUID, uuid, archetype.toLowerCase(), tsForName, ...top3Tags].filter(Boolean).join("_");
     const jsonBlockMatch = analysisResultText.match(/{\s*"OwnerUserID":[\s\S]*?}/);
     const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Konnte JSON-Block nicht extrahieren." });
+    
     return { nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText }, tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent }, originalFilenameBase: baseName };
 }
 
-// --- Middleware und Routen-Definition ---
 app.use(bodyParser.json({ limit: "15mb" }));
 app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v14. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
 
@@ -169,7 +171,6 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
-// --- CHAT-ENDPUNKT (mit Qualitätsfilter) ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
     if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
@@ -213,11 +214,9 @@ app.post("/chat", async (req, res) => {
     }
 });
 
-
-// --- Server-Start ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v14 (robuster Index) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v14 (final) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
     }
