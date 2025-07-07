@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit intelligenter Indexierung & Qualitätsfilter)
+// index.js – ThinkAI Nexus (Finale Version mit korrigiertem Prompt-Pfad)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -10,14 +10,15 @@ const { OpenAI } = require("openai");
 const { HierarchicalNSW } = require("hnswlib-node");
 
 // === KONFIGURATION =================================================
-const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
+// KORREKTUR: Der Pfad zum detaillierten "Architekten"-Prompt ist jetzt korrekt.
+const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt"); 
 const CHAT_PROMPT_PATH = path.join(__dirname, "chat_summary_prompt.txt");
 const KNOWLEDGE_PATH = path.join(__dirname, "knowledge");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const MAX_CONTENT_LENGTH = 8000;
 const EMBEDDING_MODEL = "text-embedding-3-small";
 const COMPLETION_MODEL = "gpt-4o";
-const SIMILARITY_THRESHOLD = 0.5; // Qualitätsfilter (0.0 = perfekt, 2.0 = unähnlich)
+const SIMILARITY_THRESHOLD = 0.5;
 // ===================================================================
 
 const app = express();
@@ -26,28 +27,20 @@ let knowledgeIndex = null;
 let knowledgeData = [];
 let isIndexReady = false;
 
-// --- Überarbeitete Funktion zum Initialisieren des Wissens-Index ---
 async function initializeIndex() {
     console.log("Initialisiere Wissens-Index im Hintergrund...");
     try {
         const files = await fs.readdir(KNOWLEDGE_PATH);
         const mdFiles = files.filter(file => file.endsWith('.nexus.md'));
-        if (mdFiles.length === 0) {
-            console.log("Keine .nexus.md Dateien gefunden.");
-            isIndexReady = true;
-            return;
-        }
+        if (mdFiles.length === 0) { console.log("Keine .nexus.md Dateien gefunden."); isIndexReady = true; return; }
 
         console.log(`Lese und parse ${mdFiles.length} Wissens-Dateien...`);
         let validDocuments = [];
-
         for (const file of mdFiles) {
             const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
-            
-            // NEU: Intelligente Extraktion aus dem .md-Inhalt
             const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
             const title = titleMatch ? titleMatch[1] : '';
-            const summaryMatch = fileContent.match(/"Summary":\s*"(.*?)"/s); // s-Flag für mehrzeilige Summaries
+            const summaryMatch = fileContent.match(/"Summary":\s*"(.*?)"/s);
             const summary = summaryMatch ? summaryMatch[1] : '';
             const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
             const tagsText = tagsMatch ? tagsMatch[1] : '';
@@ -55,7 +48,6 @@ async function initializeIndex() {
             const url = urlMatch ? urlMatch[1] : null;
 
             const cleanTextForIndexing = [title, summary, tagsText].join(' ').trim();
-            
             if (cleanTextForIndexing) {
                 validDocuments.push({ 
                     sourceFile: file, 
@@ -65,36 +57,24 @@ async function initializeIndex() {
                     url: url,
                     tags: tagsText ? tagsText.split(',').map(t => t.trim()) : []
                 });
-            } else {
-                console.warn(`Datei ${file} hat keinen extrahierbaren Inhalt und wird ignoriert.`);
-            }
+            } else { console.warn(`Datei ${file} hat keinen extrahierbaren Inhalt und wird ignoriert.`); }
         }
 
-        if (validDocuments.length === 0) {
-            console.log("Keine validen Dokumente zum Indexieren gefunden.");
-            isIndexReady = true;
-            return;
-        }
+        if (validDocuments.length === 0) { console.log("Keine validen Dokumente zum Indexieren gefunden."); isIndexReady = true; return; }
         
         knowledgeData = validDocuments;
         const documentsForEmbedding = knowledgeData.map(d => d.contentForEmbedding);
-
         console.log(`Erstelle Vektor-Embeddings für ${knowledgeData.length} valide Dokumente...`);
         const embeddingsResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: documentsForEmbedding });
-
         const numDimensions = embeddingsResponse.data[0].embedding.length;
         knowledgeIndex = new HierarchicalNSW('l2', numDimensions);
         knowledgeIndex.initIndex(knowledgeData.length);
         embeddingsResponse.data.forEach((embeddingObj, i) => { knowledgeIndex.addPoint(embeddingObj.embedding, i); });
-
         isIndexReady = true;
         console.log(`✅ Wissens-Index mit ${knowledgeData.length} Dokumenten erfolgreich initialisiert!`);
-    } catch (error) {
-        console.error("Fehler bei der Initialisierung des Wissens-Index:", error);
-    }
+    } catch (error) { console.error("Fehler bei der Initialisierung des Wissens-Index:", error); }
 }
 
-// --- Analyse-Funktion für neue Objekte ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
@@ -116,7 +96,6 @@ async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceU
     return { nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText }, tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent }, originalFilenameBase: baseName };
 }
 
-// --- Middleware und Routen-Definition ---
 app.use(bodyParser.json({ limit: "15mb" }));
 app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v13. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
 
@@ -166,7 +145,6 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
-// --- CHAT-ENDPUNKT (mit Qualitätsfilter) ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
     if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
@@ -176,28 +154,21 @@ app.post("/chat", async (req, res) => {
         const normalizedQuery = query.toLowerCase();
         const queryEmbeddingResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: normalizedQuery });
         const queryVector = queryEmbeddingResponse.data[0].embedding;
-        
         const searchResults = knowledgeIndex.searchKnn(queryVector, 5);
-
-        // NEU: Der Qualitätsfilter in Aktion
         let qualifiedIndices = [];
         for (let i = 0; i < searchResults.neighbors.length; i++) {
             if (searchResults.distances[i] < SIMILARITY_THRESHOLD) {
                 qualifiedIndices.push(searchResults.neighbors[i]);
             }
         }
-        
         const uniqueIndices = [...new Set(qualifiedIndices)];
         if (uniqueIndices.length === 0) {
             return res.json({ success: true, summaries: [] });
         }
-
         const chatPromptTemplate = await fs.readFile(CHAT_PROMPT_PATH, "utf8");
-
         const analysisPromises = uniqueIndices.slice(0, 3).map(async (index) => {
             const document = knowledgeData[index];
             const analysisPrompt = chatPromptTemplate.replace("{fullContent}", document.fullContent);
-            
             const completionResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: analysisPrompt }], temperature: 0.1 });
             let rawAnswer = completionResponse.choices[0].message.content || "";
             let topic = "Unbekanntes Thema";
@@ -209,7 +180,6 @@ app.post("/chat", async (req, res) => {
             }
             return { topic, summary: summaryText, source: { title: document.title, url: document.url, tags: document.tags } };
         });
-
         const summaries = await Promise.all(analysisPromises);
         res.json({ success: true, summaries: summaries });
     } catch (error) {
@@ -218,8 +188,6 @@ app.post("/chat", async (req, res) => {
     }
 });
 
-
-// --- Server-Start ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`Nexus-Server v13 (final) läuft auf Port ${PORT}`);
