@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Finale Version mit robuster, "kugelsicherer" Indexierung)
+// index.js – ThinkAI Nexus (Finale Version mit intelligenter Indexierung & Einzel-Analysen)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -37,24 +37,27 @@ async function initializeIndex() {
         }
 
         console.log(`Lese und parse ${mdFiles.length} Wissens-Dateien...`);
-        let parsedDocuments = [];
+        let validDocuments = [];
 
         for (const file of mdFiles) {
             const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
+            
             const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
             const title = titleMatch ? titleMatch[1] : '';
+
             const summaryMatch = fileContent.match(/"Summary":\s*"(.*?)"/);
             const summary = summaryMatch ? summaryMatch[1] : '';
+            
             const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
             const tagsText = tagsMatch ? tagsMatch[1] : '';
+
             const urlMatch = fileContent.match(/Quelle: (https?:\/\/[^\s]+)/);
             const url = urlMatch ? urlMatch[1] : null;
 
             const cleanTextForIndexing = [title, summary, tagsText].join(' ').trim();
             
-            // Füge nur Dokumente hinzu, die auch Textinhalt haben
             if (cleanTextForIndexing) {
-                parsedDocuments.push({ 
+                validDocuments.push({ 
                     sourceFile: file, 
                     contentForEmbedding: cleanTextForIndexing.toLowerCase(),
                     fullContent: fileContent,
@@ -67,14 +70,13 @@ async function initializeIndex() {
             }
         }
 
-        // NEU: Nur fortfahren, wenn es valide Dokumente zum Indexieren gibt
-        if (parsedDocuments.length === 0) {
+        if (validDocuments.length === 0) {
             console.log("Keine validen Dokumente zum Indexieren gefunden.");
             isIndexReady = true;
             return;
         }
-
-        knowledgeData = parsedDocuments;
+        
+        knowledgeData = validDocuments;
         const documentsForEmbedding = knowledgeData.map(d => d.contentForEmbedding);
 
         console.log(`Erstelle Vektor-Embeddings für ${knowledgeData.length} valide Dokumente...`);
@@ -98,7 +100,6 @@ async function initializeIndex() {
         console.error("Fehler bei der Initialisierung des Wissens-Index:", error);
     }
 }
-
 
 // --- Analyse-Funktion für neue Objekte ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
@@ -124,7 +125,7 @@ async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceU
 
 // --- Middleware und Routen-Definition ---
 app.use(bodyParser.json({ limit: "15mb" }));
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v9. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v10. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
     try {
@@ -172,9 +173,10 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
+// --- CHAT-ENDPUNKT (Komplett überarbeitet für Einzel-Analysen) ---
 app.post("/chat", async (req, res) => {
     const { query } = req.body;
-    if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert. Bitte versuche es in einem Moment erneut." }); }
+    if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
     if (!query) { return res.status(400).json({ success: false, summaries: [] }); }
 
     try {
@@ -184,14 +186,19 @@ app.post("/chat", async (req, res) => {
         const searchResults = knowledgeIndex.searchKnn(queryVector, 3);
         const uniqueIndices = [...new Set(searchResults.neighbors)];
 
-        if (uniqueIndices.length === 0) {
-            return res.json({ success: true, summaries: [] }); // Frühzeitiger Abbruch, wenn nichts gefunden wird
+        if (uniqueIndices.length === 0 || !searchResults.neighbors.length) {
+            return res.json({ success: true, summaries: [] });
         }
 
         const analysisPromises = uniqueIndices.map(async (index) => {
             const document = knowledgeData[index];
             const analysisPrompt = `Du bist ein Analyse-Assistent. Fasse den folgenden Text zusammen und gib ein kurzes, prägnantes Thema an. Antworte ausschließlich im Format: "Thema: [Dein gefundenes Thema]\nZusammenfassung: [Deine Zusammenfassung]".\n\nText:\n---\n${document.fullContent}`;
-            const completionResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: analysisPrompt }], temperature: 0.1 });
+            
+            const completionResponse = await openai.chat.completions.create({
+                model: COMPLETION_MODEL,
+                messages: [{ role: "user", content: analysisPrompt }],
+                temperature: 0.1,
+            });
             let rawAnswer = completionResponse.choices[0].message.content || "";
             let topic = "Unbekanntes Thema";
             let summaryText = "Konnte keine Zusammenfassung erstellen.";
@@ -205,17 +212,17 @@ app.post("/chat", async (req, res) => {
 
         const summaries = await Promise.all(analysisPromises);
         res.json({ success: true, summaries: summaries });
+
     } catch (error) {
         console.error("Fehler im Chat-Endpunkt:", error);
         res.status(500).json({ success: false, summaries: [], error: "Ein Fehler ist aufgetreten." });
     }
 });
 
-
 // --- Server-Start ---
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`Nexus-Server v9 (kugelsicherer Index) läuft auf Port ${PORT}`);
+    console.log(`Nexus-Server v11 (final) läuft auf Port ${PORT}`);
     if (!OPENAI_API_KEY) {
         console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
     }
