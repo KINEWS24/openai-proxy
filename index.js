@@ -22,9 +22,9 @@ const {
 const nexusRouter = require("./modules/nexus");
 
 // Globale Konfiguration
-const SCRAPER_API_KEY = process.env.SCRAPER_API_KEY;
-const MAX_CONTENT_LENGTH = 8000;
-const PORT = process.env.PORT || 10000;
+const SCRAPER_API_KEY     = process.env.SCRAPER_API_KEY;
+const MAX_CONTENT_LENGTH  = 8000;
+const PORT                = process.env.PORT || 10000;
 
 // Express-App initialisieren
 const app = express();
@@ -51,7 +51,13 @@ app.post("/analyze-text", (req, res) => {
 
 // Bild-Analyse
 app.post("/analyze-image", (req, res) => {
-  handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
+  handleAnalysisRequest(
+    req, res,
+    "image",
+    req.body.image_url,
+    req.body.source_url || req.body.image_url,
+    "url"
+  );
 });
 
 // Link-Analyse
@@ -61,11 +67,11 @@ app.post("/analyze-link", async (req, res) => {
 
   if (SCRAPER_API_KEY) {
     try {
-      const apiUrl = `http://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&url=${encodeURIComponent(url)}`;
+      const apiUrl   = `http://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&url=${encodeURIComponent(url)}`;
       const response = await fetch(apiUrl, { timeout: 45000 });
       if (!response.ok) throw new Error(`Status ${response.status}`);
       const html = await response.text();
-      const $ = cheerio.load(html);
+      const $    = cheerio.load(html);
       $("script, style, noscript, iframe, footer, header, nav, aside, form").remove();
       const text = $("body").text().replace(/\s\s+/g, ' ').trim().substring(0, MAX_CONTENT_LENGTH);
       return handleAnalysisRequest(req, res, "link", text, url, "url");
@@ -82,7 +88,7 @@ app.post("/analyze-link", async (req, res) => {
     const page = await browser.newPage();
     await page.goto(url, { waitUntil: 'networkidle2', timeout: 25000 });
     const html = await page.content();
-    const $ = cheerio.load(html);
+    const $    = cheerio.load(html);
     $("script, style, noscript, iframe, footer, header, nav, aside, form").remove();
     const text = $("body").text().replace(/\s\s+/g, ' ').trim().substring(0, MAX_CONTENT_LENGTH);
     return handleAnalysisRequest(req, res, "link", text, url, "url");
@@ -99,11 +105,12 @@ app.post("/analyze-link", async (req, res) => {
 app.post("/classify", async (req, res) => {
   const { content, source_url } = req.body;
   if (!content) return res.status(400).json({ success: false, error: "Kein Content zum Klassifizieren." });
+
   try {
-    const meta = await classifyContent(content, source_url);
-    const uid = meta.UID;
-    const outPath = path.join(__dirname, 'classifier-output', `classification_${uid}.txt`);
-    await fs.writeFile(outPath, JSON.stringify(meta, null, 2), 'utf8');
+    const meta  = await classifyContent(content, source_url);
+    const uid   = meta.UID;
+    const outPath = path.join(__dirname, "classifier-output", `classification_${uid}.txt`);
+    await fs.writeFile(outPath, JSON.stringify(meta, null, 2), "utf8");
     res.json({ success: true, meta });
   } catch (err) {
     console.error("Fehler im Klassifizierer:", err);
