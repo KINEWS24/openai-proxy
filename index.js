@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (v20 - Finale Architektur mit persistenter Browser-Instanz)
+// index.js – ThinkAI Nexus (v21 - Architektur mit ScraperAPI & Puppeteer-Fallback)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -8,17 +8,19 @@ const { OpenAI } = require("openai");
 const { google } = require("googleapis");
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
+const fetch = require('node-fetch'); // Wichtig: Wir brauchen node-fetch für ScraperAPI
 
 // === KONFIGURATION =================================================
 const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+const SCRAPER_API_KEY = process.env.SCRAPER_API_KEY; // NEU: API Key für den Scraping-Dienst
 const MAX_CONTENT_LENGTH = 8000;
 const COMPLETION_MODEL = "gpt-4o";
 // ===================================================================
 
 const app = express();
 let openai;
-let browserInstance; // Globale Variable für die eine, persistente Browser-Instanz
+let browserInstance; // Wird nur noch für den Fallback-Mechanismus benötigt
 
 // --- Initialisierungs- & Hilfsfunktionen ---
 
@@ -27,6 +29,13 @@ if (!OPENAI_API_KEY) {
     process.exit(1);
 }
 openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+
+// NEU: Wir geben nur noch eine Warnung aus, wenn der ScraperAPI Key fehlt.
+if (!SCRAPER_API_KEY) {
+    console.warn("WARNUNG: SCRAPER_API_KEY ist nicht gesetzt. Link-Analyse wird auf die alte, unzuverlässige Puppeteer-Methode zurückfallen.");
+} else {
+    console.log("✅ ScraperAPI Key erfolgreich gefunden und wird für die Link-Analyse verwendet.");
+}
 
 async function checkPromptFile() {
     try {
@@ -39,7 +48,7 @@ async function checkPromptFile() {
 }
 
 async function initializeBrowser() {
-    console.log("🔄 Initialisiere persistenten Puppeteer-Browser...");
+    console.log("🔄 Initialisiere persistenten Puppeteer-Browser für den Fallback-Modus...");
     try {
         browserInstance = await puppeteer.launch({
             args: ['--no-sandbox', '--disable-setuid-sandbox']
@@ -100,7 +109,7 @@ async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl,
 
 // --- API Endpunkte ---
 
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v20 (Persistent Browser)` }));
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v21 (ScraperAPI Ready)` }));
 
 app.post("/analyze-text", (req, res) => {
     const htmlContent = req.body.content || '';
@@ -111,10 +120,51 @@ app.post("/analyze-text", (req, res) => {
     handleAnalysisRequest(req, res, "text", truncatedText, req.body.source_url, "html");
 });
 
+
+// ==============================================================================
+// === NEUER, ROBuster /analyze-link Endpunkt ====================================
+// ==============================================================================
 app.post("/analyze-link", async (req, res) => {
     const { url } = req.body;
-    if (!url) { return res.status(400).json({ success: false, error: "Keine URL angegeben." }); }
+    if (!url) {
+        return res.status(400).json({ success: false, error: "Keine URL angegeben." });
+    }
 
+    // PRIMÄRE METHODE: ScraperAPI
+    if (SCRAPER_API_KEY) {
+        try {
+            console.log(`Versuche Scraping für ${url} über ScraperAPI...`);
+            const scraperUrl = `http://api.scraperapi.com?api_key=${SCRAPER_API_KEY}&url=${encodeURIComponent(url)}`;
+            
+            const response = await fetch(scraperUrl, { timeout: 45000 }); // 45s Timeout
+            if (!response.ok) {
+                throw new Error(`ScraperAPI hat mit Status ${response.status} geantwortet.`);
+            }
+            const htmlContent = await response.text();
+            console.log(`Scraping mit ScraperAPI erfolgreich für ${url}.`);
+
+            const $ = cheerio.load(htmlContent);
+            $('script, style, noscript, iframe, footer, header, nav, aside, form').remove();
+            let scrapedText = $('body').text().replace(/\s\s+/g, ' ').trim();
+
+            if (!scrapedText) {
+                 throw new Error("Kein sinnvoller Text auf der Seite gefunden nach dem Scraping.");
+            }
+            
+            const truncatedText = scrapedText.substring(0, MAX_CONTENT_LENGTH);
+            await handleAnalysisRequest(req, res, "link", truncatedText, url, "url");
+            return; // Wichtig: Beendet die Funktion hier
+
+        } catch (err) {
+            console.warn(`ScraperAPI-Analyse für ${url} fehlgeschlagen: ${err.message}. Erstelle Fallback-Link-Objekt.`);
+            const fallbackContent = `Link: ${url}\n\nHinweis: Der Inhalt dieser Webseite konnte nicht automatisch analysiert werden. Der Link wurde stattdessen als Referenz gespeichert.`;
+            await handleAnalysisRequest(req, res, "link-fallback", fallbackContent, url, "url");
+            return;
+        }
+    }
+
+    // FALLBACK-METHODE: Lokales Puppeteer (wird nur genutzt, wenn SCRAPER_API_KEY fehlt)
+    console.warn("Kein ScraperAPI Key gefunden, nutze die unzuverlässige Puppeteer-Methode.");
     if (!browserInstance) {
         console.error("Anfrage für /analyze-link erhalten, aber der Browser ist nicht initialisiert.");
         return res.status(503).json({ success: false, error: "Browser-Service ist nicht bereit. Bitte versuchen Sie es in einem Moment erneut." });
@@ -132,7 +182,7 @@ app.post("/analyze-link", async (req, res) => {
         console.log(`Scraping mit Puppeteer erfolgreich für ${url}.`);
 
         const $ = cheerio.load(htmlContent);
-        $('script, style, noscript, iframe, footer, header, nav').remove();
+        $('script, style, noscript, iframe, footer, header, nav, aside, form').remove();
         let scrapedText = $('body').text().replace(/\s\s+/g, ' ').trim();
 
         if (!scrapedText) throw new Error("Kein sinnvoller Text auf der Seite gefunden.");
@@ -151,6 +201,7 @@ app.post("/analyze-link", async (req, res) => {
         }
     }
 });
+
 
 app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
@@ -215,8 +266,8 @@ app.post("/chat", async (req, res) => {
 const PORT = process.env.PORT || 10000;
 app.listen(PORT, async () => {
     await checkPromptFile();
-    await initializeBrowser();
-    console.log(`Nexus-Server v20 (Persistent Browser) läuft auf Port ${PORT}`);
+    await initializeBrowser(); // Wir initialisieren Puppeteer weiterhin für den Fallback
+    console.log(`Nexus-Server v21 (ScraperAPI Ready) läuft auf Port ${PORT}`);
 });
 
 const cleanup = async () => {
