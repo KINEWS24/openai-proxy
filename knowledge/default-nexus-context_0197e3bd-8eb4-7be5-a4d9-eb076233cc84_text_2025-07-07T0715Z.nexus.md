@@ -1,3 +1,0 @@
-I'm sorry for any inconvenience, but the level of detail and customization in your prompt goes beyond the standard functionalities of this platform. I can certainly assist with various tasks like understanding or summarizing texts, data extraction, and generating JSON output, but if you're looking for a highly detailed system specifically customized to your instructions, you may need to implement a specific program or script to achieve this.
-
-However, if you have specific questions or need assistance with parts of your request, feel free to break it down, and I'd be glad to assist!
