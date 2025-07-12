@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (Version mit Puppeteer für robustes Link-Scraping)
+// index.js – ThinkAI Nexus (v20 - Finale Architektur mit persistenter Browser-Instanz)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
@@ -7,17 +7,20 @@ const { uuidv7 } = require("uuidv7");
 const { OpenAI } = require("openai");
 const { google } = require("googleapis");
 const cheerio = require("cheerio");
-const puppeteer = require("puppeteer"); 
+const puppeteer = require("puppeteer");
 
 // === KONFIGURATION =================================================
 const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
-const MAX_CONTENT_LENGTH = 8000; // Maximale Zeichenlänge für die Analyse
+const MAX_CONTENT_LENGTH = 8000;
 const COMPLETION_MODEL = "gpt-4o";
 // ===================================================================
 
 const app = express();
 let openai;
+let browserInstance; // Globale Variable für die eine, persistente Browser-Instanz
+
+// --- Initialisierungs- & Hilfsfunktionen ---
 
 if (!OPENAI_API_KEY) {
     console.error("FATALER FEHLER: OPENAI_API_KEY ist in der Umgebung nicht gesetzt.");
@@ -28,29 +31,34 @@ openai = new OpenAI({ apiKey: OPENAI_API_KEY });
 async function checkPromptFile() {
     try {
         await fs.access(CAPTURE_PROMPT_PATH);
-        console.log("Prompt-Datei 'nexus_prompt_v5.3.txt' erfolgreich gefunden.");
+        console.log("✅ Prompt-Datei 'nexus_prompt_v5.3.txt' erfolgreich gefunden.");
     } catch (error) {
         console.error("FATALER FEHLER: Die Prompt-Datei 'nexus_prompt_v5.3.txt' konnte nicht gefunden werden.");
         process.exit(1);
     }
 }
 
+async function initializeBrowser() {
+    console.log("🔄 Initialisiere persistenten Puppeteer-Browser...");
+    try {
+        browserInstance = await puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+        console.log("✅ Puppeteer-Browser erfolgreich initialisiert und bereit.");
+    } catch (error) {
+        console.error("FATALER FEHLER: Konnte den Puppeteer-Browser nicht starten.", error);
+        process.exit(1);
+    }
+}
+
 app.use(bodyParser.json({ limit: "15mb" }));
 
-// --- Analyse-Funktion für die Ersterfassung ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
-    
-    // Prompt-Template laden
     const promptTemplate = await fs.readFile(CAPTURE_PROMPT_PATH, "utf8");
-    const finalPrompt = promptTemplate
-        .replace("{CONTENT}", contentRaw)
-        .replace("{SOURCEURL}", sourceUrl || "N/A")
-        .replace("{UUID}", uuid)
-        .replace("{TIMESTAMP_ISO}", timestamp);
+    const finalPrompt = promptTemplate.replace("{CONTENT}", contentRaw).replace("{SOURCEURL}", sourceUrl || "N/A").replace("{UUID}", uuid).replace("{TIMESTAMP_ISO}", timestamp);
     
-    // OpenAI API-Aufruf
     let gptResponse;
     try {
         gptResponse = await openai.chat.completions.create({
@@ -66,52 +74,33 @@ async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceU
         throw new Error("Keine valide Antwort vom OpenAI API erhalten.");
     }
     
-    // Extrahieren der Tags für den Dateinamen
     const tagsHeaderMatch = analysisResultText.match(/Schlagwörter: (.*)/);
-    let top3Tags = [];
-    if (tagsHeaderMatch && tagsHeaderMatch[1]) {
-        top3Tags = tagsHeaderMatch[1].split(',').slice(0, 3).map(tag => tag.replace(/#/g, '').toLowerCase().trim());
-    }
-    
-    // Generieren des Dateinamens
+    const top3Tags = tagsHeaderMatch?.[1]?.split(',').slice(0, 3).map(tag => tag.replace(/#/g, '').toLowerCase().trim()) || [];
     const tsForName = timestamp.replace(/[:.]/g, "").substring(0, 15) + "Z";
     const baseName = [contextUUID, uuid, archetype.toLowerCase(), tsForName, ...top3Tags].filter(Boolean).join("_");
-    
-    // Extrahieren des JSON-Blocks aus der Antwort
     const jsonBlockMatch = analysisResultText.match(/{\s*"OwnerUserID":[\s\S]*?}/);
     const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Konnte JSON-Block nicht extrahieren." });
     
-    return {
-        nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText },
-        tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent },
-        originalFilenameBase: baseName
-    };
+    return { nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText }, tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent }, originalFilenameBase: baseName };
 }
-
-// --- API Endpunkte ---
-
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v19 (Puppeteer Scraping)` }));
 
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
     try {
         const { context_uuid } = req.body;
-        const output = await generateNexusObject({
-            archetype,
-            contextUUID: context_uuid || "default-nexus-context",
-            contentRaw,
-            sourceUrl
-        });
-        
-        output.originalContent = contentRaw; // Wichtig für den Upload in background.js
+        const output = await generateNexusObject({ archetype, contextUUID: context_uuid || "default-nexus-context", contentRaw, sourceUrl });
+        output.originalContent = contentRaw;
         output.originalFilename = `${output.originalFilenameBase}.original.${extension}`;
         delete output.originalFilenameBase;
-
         res.json({ success: true, ...output });
     } catch (err) {
         console.error(`Fehler bei /analyze-${archetype}:`, err.message);
         res.status(500).json({ success: false, error: err.message });
     }
 }
+
+// --- API Endpunkte ---
+
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v20 (Persistent Browser)` }));
 
 app.post("/analyze-text", (req, res) => {
     const htmlContent = req.body.content || '';
@@ -126,13 +115,18 @@ app.post("/analyze-link", async (req, res) => {
     const { url } = req.body;
     if (!url) { return res.status(400).json({ success: false, error: "Keine URL angegeben." }); }
 
-    let browser = null;
+    if (!browserInstance) {
+        console.error("Anfrage für /analyze-link erhalten, aber der Browser ist nicht initialisiert.");
+        return res.status(503).json({ success: false, error: "Browser-Service ist nicht bereit. Bitte versuchen Sie es in einem Moment erneut." });
+    }
+
+    let page = null;
     try {
-        console.log(`Starte Puppeteer für ${url}...`);
-        browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
-        const page = await browser.newPage();
+        console.log(`Öffne neuen Tab für ${url}...`);
+        page = await browserInstance.newPage();
+        
         await page.setUserAgent('Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36');
-        await page.goto(url, { waitUntil: 'networkidle2', timeout: 20000 });
+        await page.goto(url, { waitUntil: 'networkidle2', timeout: 25000 });
         const htmlContent = await page.content();
         
         console.log(`Scraping mit Puppeteer erfolgreich für ${url}.`);
@@ -151,9 +145,9 @@ app.post("/analyze-link", async (req, res) => {
         const fallbackContent = `Link: ${url}\n\nHinweis: Der Inhalt dieser Webseite konnte nicht automatisch analysiert werden. Der Link wurde stattdessen als Referenz gespeichert.`;
         await handleAnalysisRequest(req, res, "link-fallback", fallbackContent, url, "url");
     } finally {
-        if (browser) {
-            await browser.close();
-            console.log("Puppeteer-Browser geschlossen.");
+        if (page) {
+            await page.close();
+            console.log(`Tab für ${url} geschlossen.`);
         }
     }
 });
@@ -162,7 +156,6 @@ app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
-// Chat-Endpunkt mit RAG-Logik
 app.post("/chat", async (req, res) => {
     const { query, token, folderId } = req.body;
     if (!token || !query || !folderId) { return res.status(400).json({ success: false, answer: "Fehlende Anfrage-Parameter." }); }
@@ -218,9 +211,22 @@ app.post("/chat", async (req, res) => {
     }
 });
 
-// --- Server-Start ---
-const PORT = process.env.PORT || 8080;
+// --- Server-Start & Shutdown ---
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, async () => {
     await checkPromptFile();
-    console.log(`Nexus-Server v19 (Puppeteer Scraping) läuft auf Port ${PORT}`);
+    await initializeBrowser();
+    console.log(`Nexus-Server v20 (Persistent Browser) läuft auf Port ${PORT}`);
 });
+
+const cleanup = async () => {
+    if (browserInstance) {
+        console.log("Schließe persistenten Puppeteer-Browser...");
+        await browserInstance.close();
+        console.log("Browser erfolgreich geschlossen.");
+    }
+    process.exit(0);
+};
+
+process.on('SIGINT', cleanup);
+process.on('SIGTERM', cleanup);
