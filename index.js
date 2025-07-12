@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (v26 - ohne Zirkularität)
+// index.js – ThinkAI Nexus (v27 – mit ICS-Export)
 
 // --- SCHRITT 1: IMPORTS & KONSTANTEN ---
 const express = require("express");
@@ -11,22 +11,23 @@ const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 const fetch = require("node-fetch");
 
-// Nexus-Helpers (verlagert aus index.js)
+// Nexus-Helpers
 const {
   classifyContent,
   generateNexusObject,
   handleAnalysisRequest
 } = require("./utils/nexusHelpers");
 
-// Nexus-Router
-const nexusRouter = require("./modules/nexus");
+// Router
+const nexusRouter    = require("./modules/nexus");
+const exportIcsRouter= require("./modules/exportIcs");
 
-// Globale Konfiguration
-const SCRAPER_API_KEY     = process.env.SCRAPER_API_KEY;
-const MAX_CONTENT_LENGTH  = 8000;
-const PORT                = process.env.PORT || 10000;
+// --- SCHRITT 2: GLOBALE KONFIGURATION ---
+const SCRAPER_API_KEY    = process.env.SCRAPER_API_KEY;
+const MAX_CONTENT_LENGTH = 8000;
+const PORT               = process.env.PORT || 10000;
 
-// Express-App initialisieren
+// --- SCHRITT 3: EXPRESS APP INITIALISIEREN ---
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: "15mb" }));
@@ -35,17 +36,26 @@ app.use((req, res, next) => {
   next();
 });
 
-// Health Check
+// --- SCHRITT 4: ICS-EXPORT ROUTER EINBINDEN ---
+// exportIcsRouter definiert POST /export-ics
+app.use("/", exportIcsRouter);
+
+// --- SCHRITT 5: HEALTH CHECK ---
 app.get("/", (req, res) => {
-  res.json({ status: "OK", message: "Nexus Heartbeat v26" });
+  res.json({ status: "OK", message: "Nexus Heartbeat v27" });
 });
+
+// --- SCHRITT 6: ANALYSE-ENDPUNKTE ---
 
 // Text-Analyse
 app.post("/analyze-text", (req, res) => {
   const html = req.body.content || "";
   const $ = cheerio.load(html);
   $("script, style, noscript, iframe, footer, header, nav").remove();
-  const text = $.text().replace(/\s\s+/g, ' ').trim().substring(0, MAX_CONTENT_LENGTH);
+  const text = $.text()
+                .replace(/\s\s+/g, ' ')
+                .trim()
+                .substring(0, MAX_CONTENT_LENGTH);
   handleAnalysisRequest(req, res, "text", text, req.body.source_url, "html");
 });
 
@@ -73,7 +83,10 @@ app.post("/analyze-link", async (req, res) => {
       const html = await response.text();
       const $    = cheerio.load(html);
       $("script, style, noscript, iframe, footer, header, nav, aside, form").remove();
-      const text = $("body").text().replace(/\s\s+/g, ' ').trim().substring(0, MAX_CONTENT_LENGTH);
+      const text = $("body").text()
+                    .replace(/\s\s+/g, ' ')
+                    .trim()
+                    .substring(0, MAX_CONTENT_LENGTH);
       return handleAnalysisRequest(req, res, "link", text, url, "url");
     } catch (err) {
       console.warn("ScraperAPI fehlgeschlagen, Fallback-Link.", err);
@@ -90,7 +103,10 @@ app.post("/analyze-link", async (req, res) => {
     const html = await page.content();
     const $    = cheerio.load(html);
     $("script, style, noscript, iframe, footer, header, nav, aside, form").remove();
-    const text = $("body").text().replace(/\s\s+/g, ' ').trim().substring(0, MAX_CONTENT_LENGTH);
+    const text = $("body").text()
+                  .replace(/\s\s+/g, ' ')
+                  .trim()
+                  .substring(0, MAX_CONTENT_LENGTH);
     return handleAnalysisRequest(req, res, "link", text, url, "url");
   } catch (err) {
     console.warn("Puppeteer-Fallback fehlgeschlagen, Fallback-Link.", err);
@@ -107,9 +123,11 @@ app.post("/classify", async (req, res) => {
   if (!content) return res.status(400).json({ success: false, error: "Kein Content zum Klassifizieren." });
 
   try {
-    const meta  = await classifyContent(content, source_url);
-    const uid   = meta.UID;
-    const outPath = path.join(__dirname, "classifier-output", `classification_${uid}.txt`);
+    const meta   = await classifyContent(content, source_url);
+    const uid    = meta.UID;
+    const outDir = path.join(__dirname, "classifier-output");
+    const outPath= path.join(outDir, `classification_${uid}.txt`);
+    await fs.mkdir(outDir, { recursive: true });
     await fs.writeFile(outPath, JSON.stringify(meta, null, 2), "utf8");
     res.json({ success: true, meta });
   } catch (err) {
@@ -121,7 +139,7 @@ app.post("/classify", async (req, res) => {
 // Nexus-All-in-One-Endpoint
 app.use("/nexus", nexusRouter);
 
-// --- SCHRITT 5: SERVER START ---
+// --- SCHRITT 7: SERVER STARTEN ---
 app.listen(PORT, () => {
-  console.log(`Nexus v26 running on port ${PORT}`);
+  console.log(`Nexus v27 running on port ${PORT}`);
 });
