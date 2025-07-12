@@ -1,0 +1,22 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "02030b35-8c8a-7f40-9c00-123456789abc",
+  "UZT_ISO8601": "2023-07-19T00:00:00+02:00",
+  "Archetype": "Text",
+  "ObjectType": "Einladung",
+  "Subject": "Erinnerung an das Abendessen bei Familie Müller am 19. Juli, mit Bitte, einen Salat mitzubringen.",
+  "Tags": ["#Text", "#FamilieMüller", "#Abendessen", "#Salat", "#Erinnerung"],
+  "Title": "Einladung zum Abendessen bei Familie Müller",
+  "Summary": "Erinnerung an ein Abendessen bei Familie Müller am 19. Juli. Bitte bringe einen Salat mit und sei pünktlich.",
+  "KeyPoints": [
+    "Einladung zu einem Abendessen am 19. Juli bei der Familie Müller.",
+    "Erinnerung, einen Salat mitzubringen.",
+    "Hinweis, pünktlich zu erscheinen."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "ContentReference": "https://gemini.google.com/u/1/app/505ceb836669ae1f?utm_source=app_launcher&utm_medium=owned&utm_campaign=base_all",
+  "Properties": {
+    "ExtractedContacts": [],
+    "SourceMetadata": {}

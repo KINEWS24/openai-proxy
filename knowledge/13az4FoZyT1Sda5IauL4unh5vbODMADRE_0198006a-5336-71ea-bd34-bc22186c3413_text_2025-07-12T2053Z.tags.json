@@ -1,0 +1,23 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "[UUID v7]",
+  "UZT_ISO8601": "2023-07-22T00:00:00+02:00",
+  "Archetype": "Text",
+  "ObjectType": "Workshops",
+  "Subject": "Entwicklung innovativer Strategien zur Kundengewinnung",
+  "Tags": ["#Text","#Kundenakquise","#Workshop","#InnovativeWege","#Akquisitionsstrategien"],
+  "Title": "Kundenakquise Workshop am 22. Juli",
+  "Summary": "Ein Workshop zur Entwicklung innovativer Wege und Strategien zur Kundengewinnung.",
+  "KeyPoints": [
+    "Vorstellung neuer Ideen zur Kundenakquise.",
+    "Zusammenarbeit zur Verbesserung bestehender Strategien.",
+    "Fokus auf innovative Akquisitionswege.",
+    "Erfahrungsaustausch und Best Practices.",
+    "Synergien zur Optimierung von Akquisitionsprozessen."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "ContentReference": "https://gemini.google.com/u/1/app/505ceb836669ae1f?utm_source=app_launcher&utm_medium=owned&utm_campaign=base_all",
+  "Properties": {
+    "SourceMetadata": { "WorkshopDate": "22. Juli" }

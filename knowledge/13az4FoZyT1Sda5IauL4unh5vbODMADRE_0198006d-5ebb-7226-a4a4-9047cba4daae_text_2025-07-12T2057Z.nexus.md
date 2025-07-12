@@ -1,0 +1,58 @@
+UserID:USERID_DEFAULT_SINGLE_USER | UZT:2023-07-21T00:00:00+02:00 | UID:018f0f1f-a896-7bce-b8c0-0b3ef1fd5c5d | Tags:#Text,#Zahnarzt,#Erinnerung,#Routinecheck
+
+**Zahnarzttermin Erinnerung**
+
+Thema: Erinnerung an einen Zahnarzttermin für einen Routinecheck.
+
+**Inhalts-Kernpunkte:**
+- Der Zahnarzttermin für den Routinecheck findet am 21. Juli statt.
+- Der Patient soll an den Termin in der Praxis von Dr. Schmidt erinnert werden.
+- Pünktlichkeit ist wichtig für den Termin.
+- Die Kommunikation erfolgt via digitale Benachrichtigung.
+  
+Schlagwörter: #Text,#Zahnarzt,#Erinnerung,#Routinecheck
+
+```json
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "018f0f1f-a896-7bce-b8c0-0b3ef1fd5c5d",
+  "UZT_ISO8601": "2023-07-21T00:00:00+02:00",
+  "Archetype": "Text",
+  "ObjectType": "Erinnerung",
+  "Subject": "Erinnerung an einen Zahnarzttermin für einen Routinecheck.",
+  "Tags": ["#Text","#Zahnarzt","#Erinnerung","#Routinecheck"],
+  "Title": "Zahnarzttermin Erinnerung",
+  "Summary": "Erinnerung an den Zahnarzttermin für einen Routinecheck, welcher am 21. Juli in der Praxis von Dr. Schmidt stattfinden soll.",
+  "KeyPoints": [
+    "Der Zahnarzttermin für den Routinecheck findet am 21. Juli statt.",
+    "Der Patient soll an den Termin in der Praxis von Dr. Schmidt erinnert werden.",
+    "Pünktlichkeit ist wichtig für den Termin.",
+    "Die Kommunikation erfolgt via digitale Benachrichtigung."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "ContentReference": "https://gemini.google.com/u/1/app/505ceb836669ae1f?utm_source=app_launcher&utm_medium=owned&utm_campaign=base_all",
+  "Properties": {
+    "ExtractedContacts": [],
+    "SourceMetadata": {},
+    "SuggestedCollections": []
+  },
+  "RawExtractedData": null
+}
+```
+
+**Extrahierte Kontaktdaten:** Dr. Schmidt's Praxis
+
+---
+
+**Objekt-Metadaten**
+
+- Typ: Text
+- Größe: Unbestimmt
+
+Quelle: https://gemini.google.com/u/1/app/505ceb836669ae1f?utm_source=app_launcher&utm_medium=owned&utm_campaign=base_all
+
+Name: Zahnarzttermin_Erinnerung.txt
+
+Verification: OK
