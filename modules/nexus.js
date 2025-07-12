@@ -1,37 +1,41 @@
 // modules/nexus.js
-// All-in-One Nexus Router
+// All-in-One Nexus Router (v26)
 
 const express = require('express');
 const router = express.Router();
 
-// Import helper functions from index.js
+// Nexus-Helpers (müssen in utils/nexusHelpers.js liegen)
 const {
   classifyContent,
   generateNexusObject,
   handleAnalysisRequest
-} = require('../index');
+} = require('../utils/nexusHelpers');
 
 /**
  * POST /nexus
- * Classify content, then route to the appropriate analyzer
+ * 1) Klassifizieren mittels classifyContent
+ * 2) Je nach meta.NextPrompt Text-, Bild- oder Link‐Analyse aufrufen
+ * 3) nexusMd + tagsJson gemeinsam mit meta zurückliefern
  */
 router.post('/', async (req, res) => {
   const { content, source_url, context_uuid } = req.body;
-
   if (!content) {
-    return res.status(400).json({ success: false, error: 'Kein Content zum Verarbeiten übermittelt.' });
+    return res.status(400).json({
+      success: false,
+      error: 'Kein Content zum Verarbeiten übermittelt.'
+    });
   }
 
   try {
-    // 1. Klassifizieren
+    // 1) Klassifikation
     const meta = await classifyContent(content, source_url);
-    const next = meta.NextPrompt; // e.g. 'nexus_prompt_text_v1.0'
+    const nextPrompt = meta.NextPrompt;
 
-    // 2. Analysieren je nach NextPrompt
     let result;
-    switch (next) {
+
+    // 2) Je nach NextPrompt die richtige Analyse ausführen
+    switch (nextPrompt) {
       case 'nexus_prompt_text_v1.0':
-        // Text analysieren
         result = await generateNexusObject({
           archetype: 'text',
           contextUUID: context_uuid || 'default-nexus-context',
@@ -41,16 +45,13 @@ router.post('/', async (req, res) => {
         break;
 
       case 'nexus_prompt_image_v1.0':
-        // Bild analysieren
         result = await new Promise(resolve => {
-          // reuse handleAnalysisRequest logic by faking res.json
           const fakeRes = { json: resolve, status: () => fakeRes };
           handleAnalysisRequest(req, fakeRes, 'image', content, source_url || content, 'url');
         });
         break;
 
       case 'nexus_prompt_link_v1.0':
-        // Link analysieren
         result = await new Promise(resolve => {
           const fakeRes = { json: resolve, status: () => fakeRes };
           handleAnalysisRequest(req, fakeRes, 'link', content, source_url || content, 'url');
@@ -58,11 +59,15 @@ router.post('/', async (req, res) => {
         break;
 
       default:
-        return res.status(400).json({ success: false, error: `Unbekannter NextPrompt: ${next}` });
+        return res.status(400).json({
+          success: false,
+          error: `Unbekannter NextPrompt: ${nextPrompt}`
+        });
     }
 
-    // 3. Rückgabe
+    // 3) Ergebnis zurückgeben
     return res.json({ success: true, meta, ...result });
+
   } catch (err) {
     console.error('Fehler im /nexus-Endpoint:', err);
     return res.status(500).json({ success: false, error: err.message });
