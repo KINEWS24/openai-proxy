@@ -5,8 +5,9 @@ FROM node:20-slim
 # Stufe 2: Arbeitsverzeichnis setzen
 WORKDIR /usr/src/app
 
-# Stufe 3: System-Abhängigkeiten und Google Chrome nach modernem Standard installieren
-RUN apt-get update && apt-get install -y curl gnupg --no-install-recommends \
+# Stufe 3: System-Abhängigkeiten und Google Chrome nach modernem, sicherem Standard installieren
+RUN apt-get update \
+    && apt-get install -y curl gnupg --no-install-recommends \
     # Google Chrome GPG-Schlüssel mit der neuen, sicheren Methode hinzufügen
     && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
     # Google Chrome Repository zur Source-Liste hinzufügen und auf den neuen Schlüssel verweisen
@@ -16,7 +17,8 @@ RUN apt-get update && apt-get install -y curl gnupg --no-install-recommends \
     # Jetzt den Browser installieren; alle Abhängigkeiten werden automatisch mitgezogen
     && apt-get install -y google-chrome-stable --no-install-recommends \
     # Temporäre Dateien und Caches aufräumen, um das Image klein zu halten
-    && rm -rf /var/lib/apt/lists/*
+    && rm -rf /var/lib/apt/lists/* \
+    && apt-get purge -y --auto-remove curl gnupg
 
 # Stufe 4: Paket-Dateien kopieren und NPM-Abhängigkeiten installieren
 COPY package*.json ./
