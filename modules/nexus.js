@@ -1,10 +1,11 @@
 // modules/nexus.js
-// All-in-One Nexus Router (v26)
+// All-in-One Nexus Router (v26) – lädt die Hilfsfunktionen aus utils/nexusHelpers
 
 const express = require('express');
 const router = express.Router();
 
-// Nexus-Helpers
+// Richtiger Import – keine zirkuläre Abhängigkeit mehr auf index.js!
+// utils/nexusHelpers exportiert classifyContent, generateNexusObject und handleAnalysisRequest
 const {
   classifyContent,
   generateNexusObject,
@@ -13,9 +14,9 @@ const {
 
 /**
  * POST /nexus
- * 1) Klassifizieren mittels classifyContent
- * 2) Nach meta.NextPrompt den entsprechenden Analyzer aufrufen
- * 3) Resultate (nexusMd + tagsJson) zusammen mit meta zurückliefern
+ * 1) Klassifizieren mit classifyContent
+ * 2) Je nach meta.NextPrompt den passenden Analyzer aufrufen
+ * 3) Ergebnis (nexusMd + tagsJson) zusammen mit meta zurückliefern
  */
 router.post('/', async (req, res) => {
   const { content, source_url, context_uuid } = req.body;
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
     const nextPrompt = meta.NextPrompt;
 
     let result;
-    // 2) Branching
+    // 2) Branching auf Basis des NextPrompts
     switch (nextPrompt) {
       case 'nexus_prompt_text_v1.0':
         result = await generateNexusObject({
@@ -41,7 +42,9 @@ router.post('/', async (req, res) => {
         break;
 
       case 'nexus_prompt_image_v1.0':
+        // Bild-Analyse über handleAnalysisRequest (liefert nexusMd + tagsJson)
         result = await new Promise(resolve => {
+          // fakeRes sammelt das JSON-Ergebnis
           const fakeRes = { json: resolve, status: () => fakeRes };
           handleAnalysisRequest(req, fakeRes, 'image', content, source_url || content, 'url');
         });
@@ -58,7 +61,7 @@ router.post('/', async (req, res) => {
         return res.status(400).json({ success: false, error: `Unbekannter NextPrompt: ${nextPrompt}` });
     }
 
-    // 3) Zusammenführen und zurückgeben
+    // 3) Alles zurückgeben
     return res.json({ success: true, meta, ...result });
   } catch (err) {
     console.error('Fehler im /nexus-Endpoint:', err);
