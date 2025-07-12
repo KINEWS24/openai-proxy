@@ -7,9 +7,11 @@ WORKDIR /usr/src/app
 
 # Stufe 3: Installation der System-Abhängigkeiten
 # Die Reihenfolge ist jetzt korrekt:
-# 1. Google's Paket-Quellen hinzufügen
-# 2. Paketliste aktualisieren, damit das System die neue Quelle kennt
-# 3. Das vollständige Browser-Paket installieren
+# 1. Temporäre Werkzeuge installieren
+# 2. Google's Paket-Quellen und Schlüssel hinzufügen
+# 3. Paketliste aktualisieren, damit das System die neue Quelle kennt
+# 4. Das vollständige Browser-Paket und alle anderen Abhängigkeiten installieren
+# 5. Temporäre Werkzeuge wieder entfernen
 RUN apt-get update \
     && apt-get install -y \
     wget \
@@ -56,7 +58,6 @@ RUN apt-get update \
     libxtst6 \
     lsb-release \
     --no-install-recommends \
-    # Bereinigung, um das Image klein zu halten
     && apt-get purge -y --auto-remove wget gnupg \
     && rm -rf /var/lib/apt/lists/*
 
