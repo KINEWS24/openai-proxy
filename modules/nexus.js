@@ -4,7 +4,7 @@
 const express = require('express');
 const router = express.Router();
 
-// Nexus-Helpers (müssen in utils/nexusHelpers.js liegen)
+// Nexus-Helpers
 const {
   classifyContent,
   generateNexusObject,
@@ -14,16 +14,13 @@ const {
 /**
  * POST /nexus
  * 1) Klassifizieren mittels classifyContent
- * 2) Je nach meta.NextPrompt Text-, Bild- oder Link‐Analyse aufrufen
- * 3) nexusMd + tagsJson gemeinsam mit meta zurückliefern
+ * 2) Nach meta.NextPrompt den entsprechenden Analyzer aufrufen
+ * 3) Resultate (nexusMd + tagsJson) zusammen mit meta zurückliefern
  */
 router.post('/', async (req, res) => {
   const { content, source_url, context_uuid } = req.body;
   if (!content) {
-    return res.status(400).json({
-      success: false,
-      error: 'Kein Content zum Verarbeiten übermittelt.'
-    });
+    return res.status(400).json({ success: false, error: 'Kein Content zum Verarbeiten übermittelt.' });
   }
 
   try {
@@ -32,8 +29,7 @@ router.post('/', async (req, res) => {
     const nextPrompt = meta.NextPrompt;
 
     let result;
-
-    // 2) Je nach NextPrompt die richtige Analyse ausführen
+    // 2) Branching
     switch (nextPrompt) {
       case 'nexus_prompt_text_v1.0':
         result = await generateNexusObject({
@@ -59,15 +55,11 @@ router.post('/', async (req, res) => {
         break;
 
       default:
-        return res.status(400).json({
-          success: false,
-          error: `Unbekannter NextPrompt: ${nextPrompt}`
-        });
+        return res.status(400).json({ success: false, error: `Unbekannter NextPrompt: ${nextPrompt}` });
     }
 
-    // 3) Ergebnis zurückgeben
+    // 3) Zusammenführen und zurückgeben
     return res.json({ success: true, meta, ...result });
-
   } catch (err) {
     console.error('Fehler im /nexus-Endpoint:', err);
     return res.status(500).json({ success: false, error: err.message });
