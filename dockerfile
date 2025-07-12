@@ -6,57 +6,31 @@ FROM node:20-slim
 WORKDIR /usr/src/app
 
 # Stufe 3: Installation der System-Abhängigkeiten
-# Dies ist der entscheidende Block, der die fehlenden Bibliotheken für Puppeteer/Chromium installiert.
-# 'wget' und 'gnupg' werden nur temporär für die Installation benötigt und danach wieder entfernt, um das Image klein zu halten.
+# Dies ist der entscheidende Block. Wir installieren das komplette "google-chrome-stable"-Paket.
+# Der 'apt-get install' Befehl wird automatisch ALLE notwendigen Bibliotheken (wie libnss3, libgtk-3-0 etc.) mitziehen.
+# '--no-install-recommends' verhindert unnötige Pakete.
 RUN apt-get update \
     && apt-get install -y \
     wget \
     gnupg \
-    # === Essenzielle Chromium Abhängigkeiten ===
-    ca-certificates \
-    fonts-liberation \
-    libasound2 \
-    libatk-bridge2.0-0 \
-    libatk1.0-0 \
-    libc6 \
-    libcairo2 \
-    libcups2 \
-    libdbus-1-3 \
-    libexpat1 \
-    libfontconfig1 \
-    libgbm1 \
-    libgcc1 \
-    libgconf-2-4 \
-    libgdk-pixbuf2.0-0 \
-    libglib2.0-0 \
-    libgtk-3-0 \
-    libnspr4 \
-    libnss3 \
-    libpango-1.0-0 \
-    libpangocairo-1.0-0 \
-    libstdc++6 \
-    libx11-6 \
-    libx11-xcb1 \
-    libxcb1 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxext6 \
-    libxfixes3 \
-    libxi6 \
-    libxrandr2 \
-    libxrender1 \
-    libxss1 \
-    libxtst6 \
-    lsb-release \
-    # =======================================
+    # === Installation des vollständigen Browsers ===
+    google-chrome-stable \
+    # ==========================================
     --no-install-recommends \
+    # Fügt das Google Chrome Repository hinzu
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+    && apt-get update \
+    # Erneute Installation, um sicherzustellen, dass Chrome nach dem Hinzufügen des Repos installiert wird
+    && apt-get install -y google-chrome-stable --no-install-recommends \
+    # Bereinigung, um das Image klein zu halten
     && apt-get purge -y --auto-remove wget gnupg \
     && rm -rf /var/lib/apt/lists/*
 
 # Stufe 4: Paket-Dateien kopieren und Abhängigkeiten installieren
 COPY package*.json ./
-RUN npm install
+# Wir verwenden '--no-optional', da wir den von Puppeteer heruntergeladenen Browser nicht benötigen
+RUN npm install --no-optional
 
 # Stufe 5: Restlichen Anwendungs-Code kopieren
 COPY . .
