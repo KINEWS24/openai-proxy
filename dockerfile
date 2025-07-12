@@ -1,23 +1,69 @@
-# Dockerfile
+# Stufe 1: Basis-Image
+# Wir verwenden weiterhin ein schlankes Node.js Image, aber eine 'slim' Debian-Variante, die eine bessere Kompatibilität für Browser-Abhängigkeiten bietet als Alpine.
+FROM node:20-slim
 
-# Nutze ein minimales Node.js Image als Basis
-FROM node:20-alpine
-
-# Setze das Arbeitsverzeichnis in dem Container
+# Stufe 2: Arbeitsverzeichnis setzen
 WORKDIR /usr/src/app
 
-# NEU: Installiere die Werkzeuge, die für das Kompilieren von 'hnswlib-node' benötigt werden
-RUN apk add --no-cache python3 make g++
+# Stufe 3: Installation der System-Abhängigkeiten
+# Dies ist der entscheidende Block, der die fehlenden Bibliotheken für Puppeteer/Chromium installiert.
+# 'wget' und 'gnupg' werden nur temporär für die Installation benötigt.
+RUN apt-get update \
+    && apt-get install -y \
+    wget \
+    gnupg \
+    # === Chromium Abhängigkeiten ===
+    ca-certificates \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libc6 \
+    libcairo2 \
+    libcups2 \
+    libdbus-1-3 \
+    libexpat1 \
+    libfontconfig1 \
+    libgbm1 \
+    libgcc1 \
+    libgconf-2-4 \
+    libgdk-pixbuf2.0-0 \
+    libglib2.0-0 \
+    libgtk-3-0 \
+    libnspr4 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libstdc++6 \
+    libx11-6 \
+    libx11-xcb1 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxi6 \
+    libxrandr2 \
+    libxrender1 \
+    libxss1 \
+    libxtst6 \
+    lsb-release \
+    # ===============================
+    --no-install-recommends \
+    # Temporäre Installations-Tools nach Gebrauch wieder entfernen, um das Image klein zu halten
+    && apt-get purge -y --auto-remove wget gnupg \
+    && rm -rf /var/lib/apt/lists/*
 
-# Kopiere die Paket-Dateien und installiere die Abhängigkeiten
+# Stufe 4: Paket-Dateien kopieren und Abhängigkeiten installieren
 COPY package*.json ./
 RUN npm install
 
-# Kopiere den Rest des Anwendungs-Codes
+# Stufe 5: Restlichen Anwendungs-Code kopieren
 COPY . .
 
-# Gib den Port frei, auf dem die App läuft
+# Stufe 6: Port freigeben
 EXPOSE 10000
 
-# Der Befehl, um die App zu starten
-CMD ["npm", "start"]
+# Stufe 7: Start-Befehl
+# Wir starten die Anwendung direkt mit Node, da 'npm start' eine unnötige Zwischenschicht sein kann.
+CMD [ "node", "index.js" ]
