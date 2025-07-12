@@ -1,126 +1,87 @@
-// index.js – ThinkAI Nexus (Finale Version mit gelockertem Qualitätsfilter)
+// index.js – ThinkAI Nexus (Finale Version mit Live Google Drive Anbindung & verbessertem Error-Handling)
 const express = require("express");
 const bodyParser = require("body-parser");
 const fs = require("fs").promises;
 const path = require("path");
 const { uuidv7 } = require("uuidv7");
-const axios = require("axios");
-const cheerio = require("cheerio");
 const { OpenAI } = require("openai");
-const { HierarchicalNSW } = require("hnswlib-node");
+const { google } = require("googleapis");
+const cheerio = require("cheerio");
+const axios = require("axios"); // Hinzugefügt für /scrape-and-analyze-url
 
 // === KONFIGURATION =================================================
 const CAPTURE_PROMPT_PATH = path.join(__dirname, "nexus_prompt_v5.3.txt");
-const CHAT_PROMPT_PATH = path.join(__dirname, "chat_summary_prompt.txt");
-const KNOWLEDGE_PATH = path.join(__dirname, "knowledge");
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const MAX_CONTENT_LENGTH = 8000;
-const EMBEDDING_MODEL = "text-embedding-3-small";
 const COMPLETION_MODEL = "gpt-4o";
-// KORREKTUR: Der Schwellenwert wird zum Testen deutlich erhöht (weniger streng)
-const SIMILARITY_THRESHOLD = 1.5; 
 // ===================================================================
 
 const app = express();
-const openai = new OpenAI({ apiKey: OPENAI_API_KEY });
-let knowledgeIndex = null;
-let knowledgeData = [];
-let isIndexReady = false;
+let openai;
 
-// --- Initialisierung des Wissens-Index ---
-async function initializeIndex() {
-    console.log("Initialisiere Wissens-Index im Hintergrund...");
+// NEU: Überprüfung der Konfiguration beim Start
+if (OPENAI_API_KEY) {
+    openai = new OpenAI({ apiKey: OPENAI_API_KEY });
+} else {
+    console.error("FATALER FEHLER: OPENAI_API_KEY ist in der Umgebung nicht gesetzt. Der Server kann nicht starten.");
+    process.exit(1); // Beendet den Prozess, wenn der Schlüssel fehlt
+}
+
+async function checkPromptFile() {
     try {
-        const files = await fs.readdir(KNOWLEDGE_PATH);
-        const mdFiles = files.filter(file => file.endsWith('.nexus.md'));
-        if (mdFiles.length === 0) {
-            console.log("Keine .nexus.md Dateien gefunden.");
-            isIndexReady = true;
-            return;
-        }
-
-        console.log(`Lese und parse ${mdFiles.length} Wissens-Dateien...`);
-        let validDocuments = [];
-
-        for (const file of mdFiles) {
-            const fileContent = await fs.readFile(path.join(KNOWLEDGE_PATH, file), 'utf8');
-            
-            const cleanTextForIndexing = fileContent
-                .replace(/{\s*"OwnerUserID":[\s\S]*?}/, '')
-                .replace(/\s\s+/g, ' ').trim();
-
-            if (cleanTextForIndexing) {
-                const titleMatch = fileContent.match(/\*\*(.*?)\*\*/);
-                const title = titleMatch ? titleMatch[1] : file;
-                const tagsMatch = fileContent.match(/Schlagwörter: (.*)/);
-                const tags = tagsMatch ? tagsMatch[1].split(',').map(t => t.trim()) : [];
-                const urlMatch = fileContent.match(/Quelle: (https?:\/\/[^\s]+)/);
-                const url = urlMatch ? urlMatch[1] : null;
-
-                validDocuments.push({ 
-                    sourceFile: file, 
-                    contentForEmbedding: cleanTextForIndexing.toLowerCase(),
-                    fullContent: fileContent,
-                    title: title,
-                    url: url,
-                    tags: tags
-                });
-            } else {
-                console.warn(`Datei ${file} hat keinen extrahierbaren Inhalt und wird ignoriert.`);
-            }
-        }
-
-        if (validDocuments.length === 0) {
-            console.log("Keine validen Dokumente zum Indexieren gefunden.");
-            isIndexReady = true;
-            return;
-        }
-        
-        knowledgeData = validDocuments;
-        const documentsForEmbedding = knowledgeData.map(d => d.contentForEmbedding);
-
-        console.log(`Erstelle Vektor-Embeddings für ${knowledgeData.length} valide Dokumente...`);
-        const embeddingsResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: documentsForEmbedding });
-
-        const numDimensions = embeddingsResponse.data[0].embedding.length;
-        knowledgeIndex = new HierarchicalNSW('l2', numDimensions);
-        knowledgeIndex.initIndex(knowledgeData.length);
-        embeddingsResponse.data.forEach((embeddingObj, i) => { knowledgeIndex.addPoint(embeddingObj.embedding, i); });
-
-        isIndexReady = true;
-        console.log(`✅ Wissens-Index mit ${knowledgeData.length} Dokumenten erfolgreich initialisiert!`);
+        await fs.access(CAPTURE_PROMPT_PATH);
+        console.log("Prompt-Datei 'nexus_prompt_v5.3.txt' erfolgreich gefunden.");
     } catch (error) {
-        console.error("Fehler bei der Initialisierung des Wissens-Index:", error);
+        console.error("FATALER FEHLER: Die Prompt-Datei 'nexus_prompt_v5.3.txt' konnte nicht gefunden oder gelesen werden.");
+        process.exit(1);
     }
 }
 
+app.use(bodyParser.json({ limit: "15mb" }));
 
-// --- Analyse-Funktion für neue Objekte ---
+
+// --- Analyse-Funktion für die Ersterfassung ---
 async function generateNexusObject({ archetype, contextUUID, contentRaw, sourceUrl }) {
     const uuid = uuidv7();
     const timestamp = new Date().toISOString();
     const promptTemplate = await fs.readFile(CAPTURE_PROMPT_PATH, "utf8");
     const finalPrompt = promptTemplate.replace("{CONTENT}", contentRaw).replace("{SOURCEURL}", sourceUrl || "N/A").replace("{UUID}", uuid).replace("{TIMESTAMP_ISO}", timestamp);
-    if (!OPENAI_API_KEY) { throw new Error("OpenAI API Key ist nicht konfiguriert."); }
-    const gptResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: finalPrompt }] });
+    
+    // NEU: Verbesserte Fehlerbehandlung für den OpenAI-Aufruf
+    let gptResponse;
+    try {
+        gptResponse = await openai.chat.completions.create({
+            model: COMPLETION_MODEL,
+            messages: [{ role: "user", content: finalPrompt }]
+        });
+    } catch (e) {
+        // Wirft einen spezifischeren Fehler, der unten gefangen wird
+        throw new Error(`OpenAI API-Fehler: ${e.message}`);
+    }
+
     const analysisResultText = gptResponse.choices[0]?.message?.content;
+    
     if (!analysisResultText) { throw new Error("Keine valide Antwort vom OpenAI API erhalten."); }
+    
     const tagsHeaderMatch = analysisResultText.match(/Schlagwörter: (.*)/);
     let top3Tags = [];
     if (tagsHeaderMatch && tagsHeaderMatch[1]) {
-        top3Tags = tagsHeaderMatch[1].split(',').slice(0, 3).map(tag => slugify(tag.replace(/#/g, '')));
+        top3Tags = tagsHeaderMatch[1].split(',').slice(0, 3).map(tag => tag.replace(/#/g, '').toLowerCase().trim());
     }
+    
     const tsForName = timestamp.replace(/[:.]/g, "").substring(0, 15) + "Z";
     const baseName = [contextUUID, uuid, archetype.toLowerCase(), tsForName, ...top3Tags].filter(Boolean).join("_");
     const jsonBlockMatch = analysisResultText.match(/{\s*"OwnerUserID":[\s\S]*?}/);
     const tagsJsonContent = jsonBlockMatch ? jsonBlockMatch[0] : JSON.stringify({ error: "Konnte JSON-Block nicht extrahieren." });
+    
     return { nexusMd: { filename: `${baseName}.nexus.md`, content: analysisResultText }, tagsJson: { filename: `${baseName}.tags.json`, content: tagsJsonContent }, originalFilenameBase: baseName };
 }
 
-// --- Middleware und Routen-Definition ---
-app.use(bodyParser.json({ limit: "15mb" }));
-app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v15. Index-Status: ${isIndexReady ? 'Bereit' : 'Initialisiere...'}` }));
+// --- API Endpunkte ---
 
+app.get("/", (req, res) => res.json({ status: "OK", message: `Nexus Heartbeat v17 (Robust Error Handling)` }));
+
+// NEU: Zentralisierte Analyse-Anfrage-Behandlung mit verbessertem Catch-Block
 async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl, extension) {
     try {
         if (!contentRaw || typeof contentRaw !== 'string' || contentRaw.trim() === '') {
@@ -132,7 +93,8 @@ async function handleAnalysisRequest(req, res, archetype, contentRaw, sourceUrl,
         delete output.originalFilenameBase;
         res.json({ success: true, ...output });
     } catch (err) {
-        console.error(`Fehler bei /analyze-${archetype}:`, err);
+        // Sendet eine spezifische Fehlermeldung an den Client, anstatt nur in der Konsole zu loggen
+        console.error(`Fehler bei /analyze-${archetype}:`, err.message);
         res.status(500).json({ success: false, error: err.message });
     }
 }
@@ -145,9 +107,12 @@ app.post("/analyze-text", (req, res) => {
     handleAnalysisRequest(req, res, "text", truncatedText, req.body.source_url, "html");
 });
 
-app.post("/scrape-and-analyze-url", async (req, res) => {
+app.post("/analyze-link", async (req, res) => { // Umbenannt von scrape-and-analyze-url für Konsistenz
     const { url } = req.body;
-    let cleanText = '';
+    if (!url) {
+        return res.status(400).json({ success: false, error: "Keine URL angegeben." });
+    }
+    let cleanText = `Link: ${url}`; // Fallback, falls Scraping fehlschlägt
     try {
         const response = await axios.get(url, {
             timeout: 15000,
@@ -155,77 +120,88 @@ app.post("/scrape-and-analyze-url", async (req, res) => {
         });
         const htmlContent = response.data;
         const $ = cheerio.load(htmlContent);
+        // NEU: Bessere Text-Extraktion
+        $('script, style, noscript, iframe, footer, header, nav').remove();
         cleanText = $('body').text().replace(/\s\s+/g, ' ').trim();
+        if (!cleanText) {
+            cleanText = `Konnte keinen Text von der URL extrahieren. Link: ${url}`;
+        }
     } catch (err) {
         console.error(`Fehler beim Scrapen der URL ${url}:`, err.message);
+        // Fährt mit dem Link als Inhalt fort, anstatt abzubrechen
     }
     const truncatedText = cleanText.substring(0, MAX_CONTENT_LENGTH);
-    await handleAnalysisRequest(req, res, "link", truncatedText, url, "html");
+    await handleAnalysisRequest(req, res, "link", truncatedText, url, "url");
 });
 
 app.post("/analyze-image", (req, res) => {
     handleAnalysisRequest(req, res, "image", req.body.image_url, req.body.source_url || req.body.image_url, "url");
 });
 
-// --- CHAT-ENDPUNKT (mit gelockertem Qualitätsfilter) ---
+// --- Chat-Endpunkt mit verbessertem Error-Handling ---
 app.post("/chat", async (req, res) => {
-    const { query } = req.body;
-    if (!isIndexReady) { return res.status(503).json({ success: false, summaries: [], error: "Die Wissensbasis wird gerade initialisiert." }); }
-    if (!query) { return res.status(400).json({ success: false, summaries: [] }); }
+    const { query, token, folderId } = req.body;
+    if (!token || !query || !folderId) { return res.status(400).json({ success: false, answer: "Fehlende Anfrage-Parameter." }); }
 
     try {
-        const normalizedQuery = query.toLowerCase();
-        const queryEmbeddingResponse = await openai.embeddings.create({ model: EMBEDDING_MODEL, input: normalizedQuery });
-        const queryVector = queryEmbeddingResponse.data[0].embedding;
-        const searchResults = knowledgeIndex.searchKnn(queryVector, 5);
-        
-        let qualifiedIndices = [];
-        for (let i = 0; i < searchResults.neighbors.length; i++) {
-            // Testweise gelockerter Filter:
-            if (searchResults.distances[i] < SIMILARITY_THRESHOLD) {
-                qualifiedIndices.push(searchResults.neighbors[i]);
-            }
-        }
-        
-        const uniqueIndices = [...new Set(qualifiedIndices)];
-        if (uniqueIndices.length === 0) { 
-            console.log("Keine qualifizierten Ergebnisse nach Filterung gefunden.");
-            console.log("Gefundene Distanzen:", searchResults.distances);
-            return res.json({ success: true, summaries: [] }); 
-        }
+        const oauth2Client = new google.auth.OAuth2();
+        oauth2Client.setCredentials({ access_token: token });
+        const drive = google.drive({ version: 'v3', auth: oauth2Client });
 
-        console.log(`Found ${uniqueIndices.length} qualified results. Getting summaries...`);
-        const chatPromptTemplate = await fs.readFile(CHAT_PROMPT_PATH, "utf8");
-        const analysisPromises = uniqueIndices.slice(0, 3).map(async (index) => {
-            const document = knowledgeData[index];
-            const analysisPrompt = chatPromptTemplate.replace("{fullContent}", document.fullContent);
-            const completionResponse = await openai.chat.completions.create({ model: COMPLETION_MODEL, messages: [{ role: "user", content: analysisPrompt }], temperature: 0.1 });
-            let rawAnswer = completionResponse.choices[0].message.content || "";
-            let topic = "Unbekanntes Thema";
-            let summaryText = "Konnte keine Zusammenfassung erstellen.";
-            const topicMatch = rawAnswer.match(/^Thema: (.*)/im);
-            if (topicMatch && topicMatch[1]) {
-                topic = topicMatch[1].trim();
-                summaryText = rawAnswer.substring(topicMatch[0].length).replace(/^Zusammenfassung: /im, '').trim();
-            }
-            return { topic, summary: summaryText, source: { title: document.title, url: document.url, tags: document.tags } };
+        // Phase 1: Dateien in Google Drive finden
+        const listRes = await drive.files.list({
+            q: `'${folderId}' in parents and (mimeType='text/markdown' or name contains '.nexus.md') and trashed=false`, // Sicherere Abfrage
+            fields: 'files(id, name)',
+            pageSize: 200, // Holen Sie sich eine gute Auswahl, um sie lokal zu filtern
+            orderBy: 'createdTime desc'
         });
 
-        const summaries = await Promise.all(analysisPromises);
-        res.json({ success: true, summaries: summaries });
+        const files = listRes.data.files;
+        if (!files || files.length === 0) { return res.json({ success: true, answer: "Ich konnte noch keine Wissens-Dateien in Ihrem Nexus-Ordner finden." }); }
+
+        // Phase 2: Relevante Dateien basierend auf der Abfrage filtern
+        const queryKeywords = query.toLowerCase().split(/\s+/).filter(k => k.length > 2);
+        const relevantFiles = files.filter(file => {
+            const fileNameLower = file.name.toLowerCase();
+            return queryKeywords.some(keyword => fileNameLower.includes(keyword));
+        }).slice(0, 5); // Nehmen Sie die Top 5 relevantesten
+        
+        let filesToRead = relevantFiles.length > 0 ? relevantFiles : files.slice(0, 5);
+        if (filesToRead.length === 0) { return res.json({ success: true, answer: "Ich konnte keine Dokumente finden, die zu Ihrer Frage passen." }); }
+
+        // Phase 3: Inhalte lesen und Kontext für die KI erstellen
+        const contentPromises = filesToRead.map(file => 
+            drive.files.get({ fileId: file.id, alt: 'media' }).then(res => `Quelle: ${file.name}\nInhalt:\n${res.data}`)
+        );
+        const contents = await Promise.all(contentPromises);
+        const context = contents.join("\n\n---\n\n").substring(0, MAX_CONTENT_LENGTH * 2); // Kontext begrenzen
+        
+        const chatPrompt = `Beantworte die Frage des Nutzers präzise und ausschließlich basierend auf dem bereitgestellten Kontext. Fasse die Informationen aus den verschiedenen Quellen zu einer einzigen, gut lesbaren Antwort zusammen. Zitiere deine Quellen nicht direkt, sondern nutze die Informationen, um die Frage zu beantworten.\n\nKontext:\n---\n${context}\n---\n\nFrage des Nutzers:\n${query}\n\nAntwort:`;
+
+        // Phase 4: KI-Anfrage
+        const completionResponse = await openai.chat.completions.create({
+            model: COMPLETION_MODEL,
+            messages: [{ role: "user", content: chatPrompt }],
+            temperature: 0.2, // Etwas reduzierter für mehr Fakten-Treue
+        });
+        
+        const answer = completionResponse.choices[0]?.message?.content;
+        if (!answer) { throw new Error("Die KI hat keine Antwort generiert."); }
+        res.json({ success: true, answer: answer });
+
     } catch (error) {
-        console.error("Fehler im Chat-Endpunkt:", error);
-        res.status(500).json({ success: false, summaries: [], error: "Ein Fehler ist aufgetreten." });
+        console.error("Fehler im /chat Endpunkt:", error.response ? error.response.data : error.message);
+        if (error.code === 401 || (error.response && error.response.status === 401)) {
+             return res.status(401).json({ success: false, answer: "Ihr Google-Zugang ist abgelaufen. Bitte verbinden Sie sich in den Optionen neu." });
+        }
+        // NEU: Spezifischere Fehlermeldung an den Client senden
+        res.status(500).json({ success: false, answer: `Ein interner Serverfehler ist aufgetreten. Details: ${error.message}` });
     }
 });
 
-
 // --- Server-Start ---
 const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`Nexus-Server v15 (robuster Index) läuft auf Port ${PORT}`);
-    if (!OPENAI_API_KEY) {
-        console.warn("WARNUNG: OPENAI_API_KEY ist nicht gesetzt.");
-    }
-    initializeIndex();
+app.listen(PORT, async () => {
+    await checkPromptFile(); // Überprüft die Prompt-Datei beim Start
+    console.log(`Nexus-Server v17 (Robust Error Handling) läuft auf Port ${PORT}`);
 });
