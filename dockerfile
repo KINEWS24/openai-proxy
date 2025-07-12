@@ -3,10 +3,12 @@
 FROM node:20-slim
 
 # Stufe 2: Arbeitsverzeichnis setzen
+# Hier wird unsere Anwendung leben.
 WORKDIR /usr/src/app
 
 # Stufe 3: System-Abhängigkeiten und Google Chrome nach modernem, sicherem Standard installieren
-# Wir trennen die Installation in logische Blöcke für mehr Stabilität.
+# Dies ist der entscheidende Schritt, um sicherzustellen, dass alle für Puppeteer benötigten
+# Systembibliotheken (wie libnss3.so) vorhanden sind.
 RUN apt-get update \
     # SCHRITT A: Installiere ZUERST die Basis-Werkzeuge für sichere Verbindungen.
     && apt-get install -y \
@@ -32,20 +34,24 @@ RUN apt-get update \
     && apt-get purge -y --auto-remove curl gnupg
 
 # Stufe 4: Paket-Dateien kopieren und NPM-Abhängigkeiten installieren
+# Wir kopieren zuerst nur die package.json, um den Docker-Cache zu nutzen.
 COPY package*.json ./
-# Wir überspringen den optionalen Puppeteer-Download, da wir den system-installierten Browser nutzen.
-# Die '--no-optional' Flag wurde entfernt, um Kompatibilitätsprobleme zu vermeiden.
+# Jetzt installieren wir die Node.js-Abhängigkeiten unserer App.
 RUN npm install
 
 # Stufe 5: Einen neuen .puppeteerrc.cjs Konfigurationsfile erstellen,
 # um Puppeteer explizit anzuweisen, den system-installierten Chrome zu verwenden.
+# Das verhindert, dass Puppeteer versucht, eine eigene, inkompatible Version herunterzuladen.
 RUN echo "/** @type {import('puppeteer').Configuration} */ module.exports = { executablePath: '/usr/bin/google-chrome-stable' };" > .puppeteerrc.cjs
 
 # Stufe 6: Restlichen Anwendungs-Code kopieren
+# Erst jetzt kopieren wir unseren eigentlichen Server-Code (index.js etc.).
 COPY . .
 
 # Stufe 7: Port freigeben
+# Wir informieren Docker, dass unser Server auf Port 10000 lauschen wird.
 EXPOSE 10000
 
 # Stufe 8: Start-Befehl
+# Dies ist der Befehl, der ausgeführt wird, wenn der Container startet.
 CMD [ "node", "index.js" ]
