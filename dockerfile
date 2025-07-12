@@ -1,69 +1,26 @@
 # Stufe 1: Basis-Image
-# Wir nutzen eine 'slim' Debian-Variante von Node.js, die eine bessere Kompatibilität für Browser-Abhängigkeiten bietet.
+# Wir nutzen eine 'slim' Debian-Variante von Node.js für beste Kompatibilität.
 FROM node:20-slim
 
 # Stufe 2: Arbeitsverzeichnis setzen
 WORKDIR /usr/src/app
 
-# Stufe 3: Installation der System-Abhängigkeiten
-# Die Reihenfolge ist jetzt korrekt:
-# 1. Temporäre Werkzeuge installieren
-# 2. Google's Paket-Quellen und Schlüssel hinzufügen
-# 3. Paketliste aktualisieren, damit das System die neue Quelle kennt
-# 4. Das vollständige Browser-Paket und alle anderen Abhängigkeiten installieren
-# 5. Temporäre Werkzeuge wieder entfernen
-RUN apt-get update \
-    && apt-get install -y \
-    wget \
-    gnupg \
-    --no-install-recommends \
-    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
-    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+# Stufe 3: System-Abhängigkeiten und Google Chrome nach modernem Standard installieren
+RUN apt-get update && apt-get install -y curl gnupg --no-install-recommends \
+    # Google Chrome GPG-Schlüssel mit der neuen, sicheren Methode hinzufügen
+    && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
+    # Google Chrome Repository zur Source-Liste hinzufügen und auf den neuen Schlüssel verweisen
+    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
+    # Paketliste erneut aktualisieren, damit die neue Quelle bekannt ist
     && apt-get update \
-    && apt-get install -y \
-    google-chrome-stable \
-    fonts-liberation \
-    libasound2 \
-    libatk-bridge2.0-0 \
-    libatk1.0-0 \
-    libc6 \
-    libcairo2 \
-    libcups2 \
-    libdbus-1-3 \
-    libexpat1 \
-    libfontconfig1 \
-    libgbm1 \
-    libgcc1 \
-    libgconf-2-4 \
-    libgdk-pixbuf2.0-0 \
-    libglib2.0-0 \
-    libgtk-3-0 \
-    libnspr4 \
-    libnss3 \
-    libpango-1.0-0 \
-    libpangocairo-1.0-0 \
-    libstdc++6 \
-    libx11-6 \
-    libx11-xcb1 \
-    libxcb1 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxext6 \
-    libxfixes3 \
-    libxi6 \
-    libxrandr2 \
-    libxrender1 \
-    libxss1 \
-    libxtst6 \
-    lsb-release \
-    --no-install-recommends \
-    && apt-get purge -y --auto-remove wget gnupg \
+    # Jetzt den Browser installieren; alle Abhängigkeiten werden automatisch mitgezogen
+    && apt-get install -y google-chrome-stable --no-install-recommends \
+    # Temporäre Dateien und Caches aufräumen, um das Image klein zu halten
     && rm -rf /var/lib/apt/lists/*
 
-# Stufe 4: Paket-Dateien kopieren und Abhängigkeiten installieren
+# Stufe 4: Paket-Dateien kopieren und NPM-Abhängigkeiten installieren
 COPY package*.json ./
-# Wir verwenden '--no-optional', da wir den von Puppeteer heruntergeladenen Browser nicht benötigen, sondern den system-installierten.
+# Wir überspringen den optionalen Puppeteer-Download, da wir den system-installierten Browser nutzen
 RUN npm install --no-optional
 
 # Stufe 5: Restlichen Anwendungs-Code kopieren
