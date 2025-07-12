@@ -1,5 +1,5 @@
 # Stufe 1: Basis-Image
-# Wir verwenden weiterhin ein schlankes Node.js Image, aber eine 'slim' Debian-Variante, die eine bessere Kompatibilität für Browser-Abhängigkeiten bietet als Alpine.
+# Wir nutzen eine 'slim' Debian-Variante von Node.js, die eine bessere Kompatibilität für Browser-Abhängigkeiten bietet.
 FROM node:20-slim
 
 # Stufe 2: Arbeitsverzeichnis setzen
@@ -7,12 +7,12 @@ WORKDIR /usr/src/app
 
 # Stufe 3: Installation der System-Abhängigkeiten
 # Dies ist der entscheidende Block, der die fehlenden Bibliotheken für Puppeteer/Chromium installiert.
-# 'wget' und 'gnupg' werden nur temporär für die Installation benötigt.
+# 'wget' und 'gnupg' werden nur temporär für die Installation benötigt und danach wieder entfernt, um das Image klein zu halten.
 RUN apt-get update \
     && apt-get install -y \
     wget \
     gnupg \
-    # === Chromium Abhängigkeiten ===
+    # === Essenzielle Chromium Abhängigkeiten ===
     ca-certificates \
     fonts-liberation \
     libasound2 \
@@ -31,6 +31,7 @@ RUN apt-get update \
     libglib2.0-0 \
     libgtk-3-0 \
     libnspr4 \
+    libnss3 \
     libpango-1.0-0 \
     libpangocairo-1.0-0 \
     libstdc++6 \
@@ -48,9 +49,8 @@ RUN apt-get update \
     libxss1 \
     libxtst6 \
     lsb-release \
-    # ===============================
+    # =======================================
     --no-install-recommends \
-    # Temporäre Installations-Tools nach Gebrauch wieder entfernen, um das Image klein zu halten
     && apt-get purge -y --auto-remove wget gnupg \
     && rm -rf /var/lib/apt/lists/*
 
@@ -65,5 +65,4 @@ COPY . .
 EXPOSE 10000
 
 # Stufe 7: Start-Befehl
-# Wir starten die Anwendung direkt mit Node, da 'npm start' eine unnötige Zwischenschicht sein kann.
 CMD [ "node", "index.js" ]
