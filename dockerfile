@@ -5,20 +5,59 @@ FROM node:20-slim
 # Stufe 2: Arbeitsverzeichnis setzen
 WORKDIR /usr/src/app
 
-# Stufe 3: System-Abhängigkeiten und Google Chrome nach modernem, sicherem Standard installieren
+# Stufe 3: Installation der System-Abhängigkeiten in der korrekten Reihenfolge
 RUN apt-get update \
-    && apt-get install -y curl gnupg --no-install-recommends \
-    # Google Chrome GPG-Schlüssel mit der neuen, sicheren Methode hinzufügen
-    && curl -fsSL https://dl.google.com/linux/linux_signing_key.pub | gpg --dearmor -o /usr/share/keyrings/google-chrome.gpg \
-    # Google Chrome Repository zur Source-Liste hinzufügen und auf den neuen Schlüssel verweisen
-    && echo "deb [arch=amd64 signed-by=/usr/share/keyrings/google-chrome.gpg] http://dl.google.com/linux/chrome/deb/ stable main" > /etc/apt/sources.list.d/google.list \
-    # Paketliste erneut aktualisieren, damit die neue Quelle bekannt ist
+    # SCHRITT 1: Installiere ZUERST die Basis-Werkzeuge für sichere Verbindungen
+    && apt-get install -y \
+    wget \
+    gnupg \
+    curl \
+    --no-install-recommends \
+    # SCHRITT 2: Füge jetzt die Google-Paketquelle hinzu
+    && wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+    && sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list' \
+    # SCHRITT 3: Aktualisiere die Paketliste erneut, damit die neue Quelle bekannt ist
     && apt-get update \
-    # Jetzt den Browser installieren; alle Abhängigkeiten werden automatisch mitgezogen
-    && apt-get install -y google-chrome-stable --no-install-recommends \
-    # Temporäre Dateien und Caches aufräumen, um das Image klein zu halten
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get purge -y --auto-remove curl gnupg
+    # SCHRITT 4: Installiere jetzt den Browser und alle seine Abhängigkeiten
+    && apt-get install -y \
+    google-chrome-stable \
+    fonts-liberation \
+    libasound2 \
+    libatk-bridge2.0-0 \
+    libatk1.0-0 \
+    libcairo2 \
+    libcups2 \
+    libdbus-1-3 \
+    libexpat1 \
+    libfontconfig1 \
+    libgbm1 \
+    libgconf-2-4 \
+    libgdk-pixbuf2.0-0 \
+    libglib2.0-0 \
+    libgtk-3-0 \
+    libnspr4 \
+    libnss3 \
+    libpango-1.0-0 \
+    libpangocairo-1.0-0 \
+    libstdc++6 \
+    libx11-6 \
+    libx11-xcb1 \
+    libxcb1 \
+    libxcomposite1 \
+    libxcursor1 \
+    libxdamage1 \
+    libxext6 \
+    libxfixes3 \
+    libxi6 \
+    libxrandr2 \
+    libxrender1 \
+    libxss1 \
+    libxtst6 \
+    lsb-release \
+    --no-install-recommends \
+    # SCHRITT 5: Bereinigung, um das Image klein zu halten
+    && apt-get purge -y --auto-remove wget gnupg \
+    && rm -rf /var/lib/apt/lists/*
 
 # Stufe 4: Paket-Dateien kopieren und NPM-Abhängigkeiten installieren
 COPY package*.json ./
