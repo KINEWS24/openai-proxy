@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (v28 inkl. repariertem Chat)
+// index.js – ThinkAI Nexus (v28 inkl. DEBUG Chat)
 
 // --- SCHRITT 1: IMPORTS & KONSTANTEN ---
 const express = require("express");
@@ -176,7 +176,7 @@ app.use((req, res, next) => {
 
 // Health Check
 app.get("/", (req, res) => {
-  res.json({ status: "OK", message: "Nexus Heartbeat v28" });
+  res.json({ status: "OK", message: "Nexus Heartbeat v28 DEBUG" });
 });
 
 // --- ANALYSE-ENDPOINTS ---
@@ -263,7 +263,7 @@ app.post("/classify", async (req, res) => {
   }, req, res);
 });
 
-// --- REPARIERTER CHAT-ENDPOINT ---
+// --- DEBUG CHAT-ENDPOINT ---
 app.post("/chat", async (req, res) => {
   try {
     // 1) Header-Auth prüfen
@@ -283,125 +283,65 @@ app.post("/chat", async (req, res) => {
         error: { code: "INVALID_QUERY", message: "query darf nicht leer sein", details: {} }
       });
     }
-    if (!context || !context.folderId) {
-      return res.status(400).json({
-        success: false,
-        error: { code: "INVALID_CONTEXT", message: "context.folderId ist erforderlich", details: {} }
-      });
-    }
 
-    // 3) Optionen mit Defaults mergen
-    const chatOpts = { ...defaultChatOptions, ...options };
-
-    // 4) Knowledge-Dateien laden
+    // DEBUG: Dateien auflisten
+    console.log("=== CHAT DEBUG START ===");
+    console.log("KNOWLEDGE_DIR:", KNOWLEDGE_DIR);
+    
     const allFiles = await fs.readdir(KNOWLEDGE_DIR);
     const jsonFiles = allFiles.filter(f => f.endsWith(".tags.json"));
-    const docs = [];
     
-    for (const file of jsonFiles) {
+    console.log("Gefundene Dateien:", allFiles.length);
+    console.log("JSON-Dateien:", jsonFiles.length);
+    console.log("Erste 5 JSON-Dateien:", jsonFiles.slice(0, 5));
+    
+    // Erste JSON-Datei testen
+    if (jsonFiles.length > 0) {
       try {
-        const content = await fs.readFile(path.join(KNOWLEDGE_DIR, file), "utf8");
-        const meta = JSON.parse(content);
+        const testFile = jsonFiles[0];
+        const testContent = await fs.readFile(path.join(KNOWLEDGE_DIR, testFile), "utf8");
+        const testMeta = JSON.parse(testContent);
+        console.log("Test-Datei:", testFile);
+        console.log("Test-Inhalt Titel:", testMeta.Title);
+        console.log("Test-Inhalt Tags:", testMeta.Tags);
         
-        // Durchsuchbaren Text zusammenbauen
+        // Suchtext erstellen
         const searchableText = [
-          meta.Title || "",
-          meta.Summary || "",
-          (meta.KeyPoints || []).join(" "),
-          (meta.Tags || []).join(" "),
-          meta.Subject || ""
+          testMeta.Title || "",
+          testMeta.Summary || "",
+          (testMeta.KeyPoints || []).join(" "),
+          (testMeta.Tags || []).join(" "),
+          testMeta.Subject || ""
         ].join(" ").toLowerCase();
         
-        docs.push({
-          id: file.replace(".tags.json", ""),
-          json: meta,
-          searchableText: searchableText,
-          filename: file
-        });
-      } catch (err) {
-        console.warn(`Fehler beim Laden von ${file}:`, err.message);
-        continue;
+        console.log("Suchbarer Text (erste 100 Zeichen):", searchableText.substring(0, 100));
+        console.log("Query:", query.toLowerCase());
+        console.log("Workshop in suchbarem Text?", searchableText.includes("workshop"));
+        
+      } catch (fileErr) {
+        console.log("Fehler beim Testen einer Datei:", fileErr.message);
       }
     }
-
-    // 5) Volltext-Suche & Scoring
-    const queryLower = query.toLowerCase();
-    const queryWords = queryLower.split(/\s+/).filter(w => w.length > 2);
     
-    const scored = docs.map(doc => {
-      let score = 0;
-      
-      // Einfaches Scoring: Anzahl gefundener Query-Wörter
-      for (const word of queryWords) {
-        const matches = (doc.searchableText.match(new RegExp(word, "g")) || []).length;
-        score += matches;
-      }
-      
-      return { ...doc, score };
-    }).filter(d => d.score > 0);
+    console.log("=== CHAT DEBUG END ===");
 
-    // 6) Nach Score sortieren
-    scored.sort((a, b) => b.score - a.score);
-    const totalMatches = scored.length;
-    const topDocs = scored.slice(0, chatOpts.topK);
-
-    // 7) Results für Response aufbereiten
-    const results = topDocs.map(d => ({
-      id: d.id,
-      archetype: d.json.Archetype || "unknown", 
-      excerpt: (d.json.Summary || "").substring(0, 150) + "...",
-      highlights: queryWords, // Einfach: zeige Suchwörter
-      relevanceScore: d.score,
-      tags: d.json.Tags || [],
-      timestamp: d.json.UZT_ISO8601 || null,
-      title: d.json.Title || "Ohne Titel"
-    }));
-
-    // 8) GPT-Antwort generieren
-    const context_for_gpt = results.map(r => 
-      `${r.title}: ${r.excerpt.replace("...", "")} (Tags: ${r.tags.join(", ")})`
-    ).join("\n");
-    
-    const prompt = `Beantworte die Frage basierend auf diesen Dokumenten:
-
-Frage: ${query}
-
-Verfügbare Dokumente:
-${context_for_gpt}
-
-Antwort auf Deutsch:`;
-
-    const gptRes = await openai.chat.completions.create({
-      model: COMPLETION_MODEL,
-      messages: [{ role: "user", content: prompt }],
-      temperature: 0.3,
-      max_tokens: 500
-    });
-    
-    const answerText = gptRes.choices[0]?.message?.content || "Keine Antwort generiert.";
-
-    // 9) Response zusammenstellen
+    // Debug-Antwort
     return res.json({
-      success: true,
-      meta: {
-        query,
-        totalMatches,
-        hasMore: totalMatches > chatOpts.topK,
-        processingTime: "~200ms"
-      },
-      results,
-      answer: {
-        text: answerText.trim(),
-        sources: results.map(r => r.id),
-        confidence: null
-      }
+      debug: true,
+      query: query,
+      knowledgeDir: KNOWLEDGE_DIR,
+      totalFiles: allFiles.length,
+      jsonFiles: jsonFiles.length,
+      firstFiveFiles: jsonFiles.slice(0, 5),
+      message: "Debug-Modus aktiv - siehe Server-Logs für Details"
     });
 
   } catch (err) {
-    console.error("Fehler im /chat-Endpoint:", err);
+    console.error("Debug-Fehler:", err);
     return res.status(500).json({
-      success: false,
-      error: { code: "SERVER_ERROR", message: err.message, details: {} }
+      debug: true,
+      error: err.message,
+      stack: err.stack
     });
   }
 });
@@ -412,7 +352,7 @@ app.use("/nexus", nexusRouter);
 // --- SCHRITT 5: SERVER START ---
 initializeApp()
   .then(() => {
-    app.listen(PORT, () => console.log(`Nexus v28 running on port ${PORT}`));
+    app.listen(PORT, () => console.log(`Nexus v28 DEBUG running on port ${PORT}`));
   })
   .catch(err => {
     console.error(err);
