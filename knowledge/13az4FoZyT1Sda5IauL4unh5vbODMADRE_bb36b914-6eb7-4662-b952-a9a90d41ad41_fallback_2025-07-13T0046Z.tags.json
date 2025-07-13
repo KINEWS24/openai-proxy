@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "bb36b914-6eb7-4662-b952-a9a90d41ad41",
+  "UZT_ISO8601": "2025-07-13T00:46:30.732Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: Digitale Transformation verändert Arbeitsmodelle grundlegend. Remote Work und Cloud-Lösungen ermöglichen flexible Strukturen, erfordern aber neue Führungsansätze für Teams....",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "Digitale Transformation verändert Arbeitsmodelle grundlegend...",
+  "Summary": "Text-Snippet: Digitale Transformation verändert Arbeitsmodelle grundlegend. Remote Work und Cloud-Lösungen ermöglichen flexible Strukturen, erfordern aber neue Führungsansätze für Teams....",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: Unvollständige Server-Antwort",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "Unvollständige Server-Antwort",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}

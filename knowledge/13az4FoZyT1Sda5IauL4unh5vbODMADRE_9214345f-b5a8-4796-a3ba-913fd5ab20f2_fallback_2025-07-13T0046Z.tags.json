@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "9214345f-b5a8-4796-a3ba-913fd5ab20f2",
+  "UZT_ISO8601": "2025-07-13T00:46:52.274Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: Nachhaltigkeit wird zum Wettbewerbsvorteil. Unternehmen mit starker ESG-Strategie ziehen bewusste Kunden an und reduzieren gleichzeitig operative Kosten....",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "Nachhaltigkeit wird zum Wettbewerbsvorteil. Unternehmen mit ...",
+  "Summary": "Text-Snippet: Nachhaltigkeit wird zum Wettbewerbsvorteil. Unternehmen mit starker ESG-Strategie ziehen bewusste Kunden an und reduzieren gleichzeitig operative Kosten....",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: Unvollständige Server-Antwort",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "Unvollständige Server-Antwort",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}

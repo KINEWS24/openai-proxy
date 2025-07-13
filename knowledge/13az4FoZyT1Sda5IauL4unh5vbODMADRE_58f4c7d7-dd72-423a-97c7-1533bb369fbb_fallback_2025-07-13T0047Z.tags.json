@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "58f4c7d7-dd72-423a-97c7-1533bb369fbb",
+  "UZT_ISO8601": "2025-07-13T00:47:49.662Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: Customer Experience wird zum Differenzierungsfaktor. Personalisierte Touchpoints und nahtlose Omnichannel-Strategien erhöhen Kundenloyalität und Lifetime Value signifikant....",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "Customer Experience wird zum Differenzierungsfaktor. Persona...",
+  "Summary": "Text-Snippet: Customer Experience wird zum Differenzierungsfaktor. Personalisierte Touchpoints und nahtlose Omnichannel-Strategien erhöhen Kundenloyalität und Lifetime Value signifikant....",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: Unvollständige Server-Antwort",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "Unvollständige Server-Antwort",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}

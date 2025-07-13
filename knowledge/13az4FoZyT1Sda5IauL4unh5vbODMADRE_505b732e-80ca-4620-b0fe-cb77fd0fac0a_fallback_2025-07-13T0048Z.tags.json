@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "505b732e-80ca-4620-b0fe-cb77fd0fac0a",
+  "UZT_ISO8601": "2025-07-13T00:48:24.734Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: Erinnerung: Für das Abendessen bei Familie Müller einen frischen Salat mitbringen. Vielleicht einen bunten Gemüsesalat oder Caesar Salad?...",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "Erinnerung: Für das Abendessen bei Familie Müller einen...",
+  "Summary": "Text-Snippet: Erinnerung: Für das Abendessen bei Familie Müller einen frischen Salat mitbringen. Vielleicht einen bunten Gemüsesalat oder Caesar Salad?...",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: Unvollständige Server-Antwort",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "Unvollständige Server-Antwort",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}

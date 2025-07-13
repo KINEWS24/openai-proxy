@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "92bcd9ad-5e40-4133-9428-a198ab0accca",
+  "UZT_ISO8601": "2025-07-13T00:47:13.264Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: Effektives Zeitmanagement steigert Produktivität erheblich. Prioritätensetzung, Delegieren und Eliminierung von Zeitfressern sind Schlüssel für beruflichen Erfolg....",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "Effektives Zeitmanagement steigert Produktivität erheblich. ...",
+  "Summary": "Text-Snippet: Effektives Zeitmanagement steigert Produktivität erheblich. Prioritätensetzung, Delegieren und Eliminierung von Zeitfressern sind Schlüssel für beruflichen Erfolg....",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: Unvollständige Server-Antwort",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "Unvollständige Server-Antwort",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}

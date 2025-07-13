@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "ac8079fd-064f-4f36-a0ea-784ef30d1ddc",
+  "UZT_ISO8601": "2025-07-13T00:47:29.839Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: Künstliche Intelligenz revolutioniert Datenanalyse. KI-gesteuerte Insights ermöglichen präzisere Entscheidungen und automatisieren wiederkehrende Geschäftsprozesse effizient....",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "Künstliche Intelligenz revolutioniert Datenanalyse. KI-geste...",
+  "Summary": "Text-Snippet: Künstliche Intelligenz revolutioniert Datenanalyse. KI-gesteuerte Insights ermöglichen präzisere Entscheidungen und automatisieren wiederkehrende Geschäftsprozesse effizient....",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: Unvollständige Server-Antwort",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "Unvollständige Server-Antwort",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}
