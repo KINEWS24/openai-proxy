@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus (v28 inkl. DEBUG Chat)
+// index.js – ThinkAI Nexus (v29 FUNCTIONAL SEARCH - No More Debug!)
 
 // --- SCHRITT 1: IMPORTS & KONSTANTEN ---
 const express = require("express");
@@ -67,7 +67,119 @@ async function initializeApp() {
   }
 }
 
-// --- SCHRITT 3: HILFSFUNKTIONEN ---
+// --- SCHRITT 3: SEARCH-HILFSFUNKTIONEN ---
+
+/**
+ * Berechnet Relevanz-Score für eine Suchanfrage
+ * @param {string} query - Suchanfrage (bereits lowercase)
+ * @param {string} text - Durchsuchbarer Text (bereits lowercase)
+ * @returns {number} Score zwischen 0 und 1
+ */
+function calculateSearchScore(query, text) {
+  // Text normalisieren
+  const normalizeText = (str) => {
+    return str
+      .toLowerCase()
+      .replace(/[äöüß]/g, (match) => ({
+        'ä': 'ae', 'ö': 'oe', 'ü': 'ue', 'ß': 'ss'
+      }[match]))
+      .replace(/[^\w\s]/g, ' ')  // Sonderzeichen entfernen
+      .replace(/\s+/g, ' ')      // Mehrfache Leerzeichen normalisieren
+      .trim();
+  };
+
+  const normalizedQuery = normalizeText(query);
+  const normalizedText = normalizeText(text);
+  
+  // Query in relevante Tokens aufteilen
+  const queryTokens = normalizedQuery
+    .split(/\s+/)
+    .filter(token => token.length > 2); // Nur relevante Wörter (nicht "ist", "der", etc.)
+  
+  if (queryTokens.length === 0) return 0;
+  
+  let totalScore = 0;
+  const foundTokens = [];
+  
+  for (const token of queryTokens) {
+    if (normalizedText.includes(token)) {
+      foundTokens.push(token);
+      totalScore += 1;
+      
+      // Bonus für Wortanfänge (q3 matched "q3meeting" besser)
+      const wordBoundaryRegex = new RegExp(`\\b${token}`, 'i');
+      if (wordBoundaryRegex.test(normalizedText)) {
+        totalScore += 0.5;
+      }
+    }
+  }
+  
+  // Phrase-Matching Bonus
+  if (foundTokens.length > 1) {
+    const queryPhrase = queryTokens.join('.*');
+    const phraseRegex = new RegExp(queryPhrase, 'i');
+    if (phraseRegex.test(normalizedText)) {
+      totalScore += 1; // Starker Bonus für Phrase-Matches
+    }
+  }
+  
+  return Math.min(totalScore / queryTokens.length, 1); // Normalisiert 0-1, aber mit Bonus-Cap
+}
+
+/**
+ * Erstellt Details über gefundene Matches
+ * @param {string} query - Original Query
+ * @param {string} text - Durchsuchter Text
+ * @returns {object} Match-Details
+ */
+function getMatchDetails(query, text) {
+  const queryTokens = query.toLowerCase()
+    .split(/\s+/)
+    .filter(t => t.length > 2);
+    
+  const matches = queryTokens.filter(token => 
+    text.toLowerCase().includes(token.toLowerCase())
+  );
+  
+  return { 
+    queryTokens, 
+    matches, 
+    matchRatio: matches.length / (queryTokens.length || 1),
+    matchedTerms: matches
+  };
+}
+
+/**
+ * Erstellt Kontext-Text für AI aus Search-Ergebnissen
+ * @param {Array} results - Top Search Results
+ * @returns {string} Formatierter Context
+ */
+function createAIContext(results) {
+  return results.map((result, index) => {
+    const metadata = result.metadata;
+    let context = `[${index + 1}] ${metadata.Title || 'Unbekannter Titel'}`;
+    
+    if (metadata.Summary) {
+      context += `\nZusammenfassung: ${metadata.Summary}`;
+    }
+    
+    if (metadata.KeyPoints && metadata.KeyPoints.length > 0) {
+      context += `\nWichtige Punkte: ${metadata.KeyPoints.join(", ")}`;
+    }
+    
+    // Spezielle Felder für Kalender-Events
+    if (metadata.Properties && metadata.Properties.DTSTART) {
+      context += `\nDatum: ${metadata.Properties.DTSTART}`;
+    }
+    if (metadata.Properties && metadata.Properties.LOCATION) {
+      context += `\nOrt: ${metadata.Properties.LOCATION}`;
+    }
+    
+    return context;
+  }).join("\n\n---\n\n");
+}
+
+// --- SCHRITT 4: STANDARD-HILFSFUNKTIONEN ---
 
 // Klassifiziert Content mit OpenAI
 async function classifyContent(content, sourceUrl = null) {
@@ -165,7 +277,7 @@ async function scrapeUrl(url) {
   }
 }
 
-// --- SCHRITT 4: EXPRESS APP & MIDDLEWARE ---
+// --- SCHRITT 5: EXPRESS APP & MIDDLEWARE ---
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: "15mb" }));
@@ -176,7 +288,7 @@ app.use((req, res, next) => {
 
 // Health Check
 app.get("/", (req, res) => {
-  res.json({ status: "OK", message: "Nexus Heartbeat v28 DEBUG" });
+  res.json({ status: "OK", message: "Nexus v29 FUNCTIONAL SEARCH Ready!" });
 });
 
 // --- ANALYSE-ENDPOINTS ---
@@ -263,7 +375,7 @@ app.post("/classify", async (req, res) => {
   }, req, res);
 });
 
-// --- DEBUG CHAT-ENDPOINT ---
+// --- FUNKTIONALER CHAT-ENDPOINT MIT SEARCH + AI ---
 app.post("/chat", async (req, res) => {
   try {
     // 1) Header-Auth prüfen
@@ -284,64 +396,137 @@ app.post("/chat", async (req, res) => {
       });
     }
 
-    // DEBUG: Dateien auflisten
-    console.log("=== CHAT DEBUG START ===");
-    console.log("KNOWLEDGE_DIR:", KNOWLEDGE_DIR);
-    
+    const mergedOptions = { ...defaultChatOptions, ...options };
+    console.log(`[CHAT] Processing query: "${query}"`);
+
+    // 3) ALLE JSON-DATEIEN LADEN UND DURCHSUCHEN
     const allFiles = await fs.readdir(KNOWLEDGE_DIR);
     const jsonFiles = allFiles.filter(f => f.endsWith(".tags.json"));
     
-    console.log("Gefundene Dateien:", allFiles.length);
-    console.log("JSON-Dateien:", jsonFiles.length);
-    console.log("Erste 5 JSON-Dateien:", jsonFiles.slice(0, 5));
+    console.log(`[CHAT] Searching through ${jsonFiles.length} knowledge files...`);
+
+    if (jsonFiles.length === 0) {
+      return res.json({
+        success: true,
+        answer: "Ich habe noch keine Wissensdaten in meiner Datenbank. Bitte fügen Sie zunächst Inhalte hinzu.",
+        sources: [],
+        meta: { totalFiles: 0, searchResults: 0 }
+      });
+    }
+
+    // 4) SEARCH-ALGORITHMUS
+    const searchResults = [];
     
-    // Erste JSON-Datei testen
-    if (jsonFiles.length > 0) {
+    for (const filename of jsonFiles) {
       try {
-        const testFile = jsonFiles[0];
-        const testContent = await fs.readFile(path.join(KNOWLEDGE_DIR, testFile), "utf8");
-        const testMeta = JSON.parse(testContent);
-        console.log("Test-Datei:", testFile);
-        console.log("Test-Inhalt Titel:", testMeta.Title);
-        console.log("Test-Inhalt Tags:", testMeta.Tags);
+        const filePath = path.join(KNOWLEDGE_DIR, filename);
+        const content = await fs.readFile(filePath, "utf8");
+        const metadata = JSON.parse(content);
         
-        // Suchtext erstellen
-        const searchableText = [
-          testMeta.Title || "",
-          testMeta.Summary || "",
-          (testMeta.KeyPoints || []).join(" "),
-          (testMeta.Tags || []).join(" "),
-          testMeta.Subject || ""
-        ].join(" ").toLowerCase();
+        // Suchbarer Text erstellen (alle relevanten Felder)
+        const searchableFields = [
+          metadata.Title || "",
+          metadata.Summary || "",
+          metadata.Subject || "",
+          (metadata.KeyPoints || []).join(" "),
+          (metadata.Tags || []).join(" "),
+          // Zusätzliche Properties für verschiedene Content-Typen
+          ...(metadata.Properties ? Object.values(metadata.Properties).filter(v => typeof v === 'string') : [])
+        ];
         
-        console.log("Suchbarer Text (erste 100 Zeichen):", searchableText.substring(0, 100));
-        console.log("Query:", query.toLowerCase());
-        console.log("Workshop in suchbarem Text?", searchableText.includes("workshop"));
+        const searchableText = searchableFields.join(" ").toLowerCase();
         
-      } catch (fileErr) {
-        console.log("Fehler beim Testen einer Datei:", fileErr.message);
+        // Score berechnen
+        const searchScore = calculateSearchScore(query, searchableText);
+        
+        if (searchScore > 0.2) { // Etwas niedrigere Schwelle für mehr Ergebnisse
+          const matchDetails = getMatchDetails(query, searchableText);
+          
+          searchResults.push({
+            filename,
+            metadata,
+            searchableText,
+            score: searchScore,
+            matchDetails
+          });
+        }
+        
+      } catch (fileError) {
+        console.warn(`[CHAT] Error processing file ${filename}:`, fileError.message);
       }
     }
-    
-    console.log("=== CHAT DEBUG END ===");
 
-    // Debug-Antwort
+    // 5) ERGEBNISSE SORTIEREN UND FILTERN
+    searchResults.sort((a, b) => b.score - a.score);
+    const topResults = searchResults.slice(0, mergedOptions.topK);
+    
+    console.log(`[CHAT] Found ${searchResults.length} relevant results, using top ${topResults.length}`);
+
+    // 6) KEINE ERGEBNISSE
+    if (topResults.length === 0) {
+      return res.json({
+        success: true,
+        answer: `Ich konnte keine relevanten Informationen zu "${query}" in Ihrer Wissensdatenbank finden. Möglicherweise müssen Sie weitere Inhalte hinzufügen oder Ihre Frage anders formulieren.`,
+        sources: [],
+        meta: { 
+          totalFiles: jsonFiles.length, 
+          searchResults: 0,
+          query: query,
+          searchedTerms: query.toLowerCase().split(/\s+/).filter(t => t.length > 2)
+        }
+      });
+    }
+
+    // 7) AI-ANTWORT GENERIEREN
+    const contextText = createAIContext(topResults);
+
+    const aiResponse = await openai.chat.completions.create({
+      model: COMPLETION_MODEL,
+      messages: [
+        {
+          role: "system",
+          content: "Du bist ein hilfsbereiter persönlicher Assistent, der Fragen basierend auf den persönlichen Wissensdaten des Users beantwortet. Antworte präzise, hilfreich und in der passenden Sprache. Nutze die verfügbaren Informationen, um konkrete und nützliche Antworten zu geben."
+        },
+        {
+          role: "user",
+          content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, etc.).`
+        }
+      ],
+      temperature: 0.3,
+      max_tokens: 800
+    });
+
+    const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
+
+    // 8) FINAL RESPONSE
     return res.json({
-      debug: true,
-      query: query,
-      knowledgeDir: KNOWLEDGE_DIR,
-      totalFiles: allFiles.length,
-      jsonFiles: jsonFiles.length,
-      firstFiveFiles: jsonFiles.slice(0, 5),
-      message: "Debug-Modus aktiv - siehe Server-Logs für Details"
+      success: true,
+      answer,
+      sources: topResults.map(r => ({
+        title: r.metadata.Title || "Ohne Titel",
+        summary: r.metadata.Summary || "",
+        score: Math.round(r.score * 100) / 100,
+        matchedTerms: r.matchDetails.matchedTerms,
+        filename: r.filename
+      })),
+      meta: {
+        totalFiles: jsonFiles.length,
+        searchResults: searchResults.length,
+        topResults: topResults.length,
+        query,
+        timestamp: new Date().toISOString()
+      }
     });
 
   } catch (err) {
-    console.error("Debug-Fehler:", err);
+    console.error("[CHAT] Error:", err);
     return res.status(500).json({
-      debug: true,
-      error: err.message,
-      stack: err.stack
+      success: false,
+      error: { 
+        code: "INTERNAL_ERROR", 
+        message: "Ein unerwarteter Fehler ist aufgetreten",
+        details: { message: err.message }
+      }
     });
   }
 });
@@ -349,12 +534,17 @@ app.post("/chat", async (req, res) => {
 // Nexus-All-in-One-Endpoint
 app.use("/nexus", nexusRouter);
 
-// --- SCHRITT 5: SERVER START ---
+// --- SCHRITT 6: SERVER START ---
 initializeApp()
   .then(() => {
-    app.listen(PORT, () => console.log(`Nexus v28 DEBUG running on port ${PORT}`));
+    app.listen(PORT, () => {
+      console.log(`🚀 Nexus v29 FUNCTIONAL SEARCH running on port ${PORT}`);
+      console.log(`📊 Knowledge Directory: ${KNOWLEDGE_DIR}`);
+      console.log(`🧠 AI Model: ${COMPLETION_MODEL}`);
+      console.log(`✨ Ready for intelligent conversations!`);
+    });
   })
   .catch(err => {
-    console.error(err);
+    console.error("Fatal startup error:", err);
     process.exit(1);
   });
