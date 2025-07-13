@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR<br data-start="3209" data-end="3212">
+VERSION:2.0<br data-start="3223" data-end="3226">
+PRODID:-//Cäsar AG//ProjektCäsar//DE<br data-start="3262" data-end="3265">
+BEGIN:VEVENT<br data-start="3277" data-end="3280">
+UID:cesar-evt-2@example.com<br data-start="3307" data-end="3310">
+DTSTAMP:20250713T070000Z<br data-start="3334" data-end="3337">
+DTSTART:20250716T090000Z<br data-start="3361" data-end="3364">
+DTEND:20250716T100000Z<br data-start="3386" data-end="3389">
+SUMMARY:Technisches Kickoff Cäsar<br data-start="3422" data-end="3425">
+END:VEVENT<br data-start="3435" data-end="3438">
+END:VCALENDAR

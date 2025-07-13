@@ -1,0 +1,4 @@
+Kunde: Beta Solutions<br data-start="289" data-end="292">
+Ansprechpartner: Lukas Schmidt<br data-start="322" data-end="325">
+Betreff: Wichtig 1: Status Projekt B<br data-start="361" data-end="364">
+Text: Hi, der Stand bei Projekt B ist 80 % abgeschlossen, wir warten nur noch auf deine Freigabe. Unsere neue API-Doku findest du unter <a data-start="500" data-end="539" rel="noopener" target="_new" class="cursor-pointer">https://beta-solutions.example.com/docs</a>. Ruf mich bei Fragen an: +49 30 12345678.

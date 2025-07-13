@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "ddc4358b-fa08-4e13-9c21-4b337fcc85b7",
+  "UZT_ISO8601": "2025-07-13T19:08:02.186Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: BEGIN:VCALENDAR VERSION:2.0 PRODID:-//Alpha GmbH//ProjektAlpha//DE BEGIN:VEVENT UID:alpha-evt-1@example.com DTSTAMP:20250713T070000Z DTSTART:20250714T090000Z DTEND:20250714T100000Z SUMMARY:Daily Stand-up Projekt Alpha END:VEVENT END:VCALENDAR...",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "BEGIN:VCALENDAR VERSION:2.0 PRODID:-//Alpha GmbH//ProjektAlp...",
+  "Summary": "Text-Snippet: BEGIN:VCALENDAR VERSION:2.0 PRODID:-//Alpha GmbH//ProjektAlpha//DE BEGIN:VEVENT UID:alpha-evt-1@example.com DTSTAMP:20250713T070000Z DTSTART:20250714T090000Z DTEND:20250714T100000Z SUMMARY:Daily Stand-up Projekt Alpha END:VEVENT END:VCALENDAR...",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: 400 Unrecognized request argument supplied: timeout",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "400 Unrecognized request argument supplied: timeout",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}

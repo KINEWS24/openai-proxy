@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR<br data-start="1263" data-end="1266">
+VERSION:2.0<br data-start="1277" data-end="1280">
+PRODID:-//Alpha GmbH//ProjektAlpha//DE<br data-start="1318" data-end="1321">
+BEGIN:VEVENT<br data-start="1333" data-end="1336">
+UID:alpha-evt-1@example.com<br data-start="1363" data-end="1366">
+DTSTAMP:20250713T070000Z<br data-start="1390" data-end="1393">
+DTSTART:20250714T090000Z<br data-start="1417" data-end="1420">
+DTEND:20250714T100000Z<br data-start="1442" data-end="1445">
+SUMMARY:Daily Stand-up Projekt Alpha<br data-start="1481" data-end="1484">
+END:VEVENT<br data-start="1494" data-end="1497">
+END:VCALENDAR

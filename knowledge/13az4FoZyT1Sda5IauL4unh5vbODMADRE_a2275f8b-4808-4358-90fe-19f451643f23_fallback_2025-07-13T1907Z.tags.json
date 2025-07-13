@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "a2275f8b-4808-4358-90fe-19f451643f23",
+  "UZT_ISO8601": "2025-07-13T19:07:27.228Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: Kunde: Beta Solutions Ansprechpartner: Lukas Schmidt Betreff: Wichtig 1: Status Projekt B Text: Hi, der Stand bei Projekt B ist...",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "Kunde: Beta Solutions Ansprechpartner: Lukas Schmidt Betreff...",
+  "Summary": "Text-Snippet: Kunde: Beta Solutions Ansprechpartner: Lukas Schmidt Betreff: Wichtig 1: Status Projekt B Text: Hi, der Stand bei Projekt B ist...",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: 400 Unrecognized request argument supplied: timeout",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "400 Unrecognized request argument supplied: timeout",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}

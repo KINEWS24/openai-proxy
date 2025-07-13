@@ -1,0 +1,11 @@
+BEGIN:VCALENDAR<br data-start="1800" data-end="1803">
+VERSION:2.0<br data-start="1814" data-end="1817">
+PRODID:-//Alpha GmbH//ProjektAlpha//DE<br data-start="1855" data-end="1858">
+BEGIN:VEVENT<br data-start="1870" data-end="1873">
+UID:alpha-evt-3@example.com<br data-start="1900" data-end="1903">
+DTSTAMP:20250713T070000Z<br data-start="1927" data-end="1930">
+DTSTART:20250718T100000Z<br data-start="1954" data-end="1957">
+DTEND:20250718T120000Z<br data-start="1979" data-end="1982">
+SUMMARY:QA-Testplanung Projekt Alpha<br data-start="2018" data-end="2021">
+END:VEVENT<br data-start="2031" data-end="2034">
+END:VCALENDAR

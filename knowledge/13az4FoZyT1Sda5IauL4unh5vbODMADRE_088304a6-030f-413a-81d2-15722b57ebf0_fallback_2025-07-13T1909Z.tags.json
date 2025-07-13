@@ -1,0 +1,28 @@
+{
+  "OwnerUserID": "USERID_DEFAULT_SINGLE_USER",
+  "UID": "088304a6-030f-413a-81d2-15722b57ebf0",
+  "UZT_ISO8601": "2025-07-13T19:09:47.919Z",
+  "Archetype": "Text",
+  "ObjectType": "Fallback",
+  "Subject": "Text-Snippet: BEGIN:VCALENDAR VERSION:2.0 PRODID:-//Cäsar AG//ProjektCäsar//DE BEGIN:VEVENT UID:cesar-evt-3@example.com DTSTAMP:20250713T070000Z DTSTART:20250718T160000Z DTEND:20250718T170000Z SUMMARY:Review Meilensteine Cäsar END:VEVENT END:VCALENDAR...",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Text",
+    "#TextContent"
+  ],
+  "Title": "BEGIN:VCALENDAR VERSION:2.0 PRODID:-//Cäsar AG//ProjektCäsar...",
+  "Summary": "Text-Snippet: BEGIN:VCALENDAR VERSION:2.0 PRODID:-//Cäsar AG//ProjektCäsar//DE BEGIN:VEVENT UID:cesar-evt-3@example.com DTSTAMP:20250713T070000Z DTSTART:20250718T160000Z DTEND:20250718T170000Z SUMMARY:Review Meilensteine Cäsar END:VEVENT END:VCALENDAR...",
+  "KeyPoints": [
+    "Text-Analyse offline durchgeführt",
+    "Lokales Fallback-Objekt erstellt",
+    "Server-Fehler: 400 Unrecognized request argument supplied: timeout",
+    "Inhalt wurde lokal verarbeitet"
+  ],
+  "Properties": {
+    "ErrorMessage": "400 Unrecognized request argument supplied: timeout",
+    "AnalysisType": "text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true
+  }
+}
