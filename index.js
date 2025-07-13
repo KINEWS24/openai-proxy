@@ -18,7 +18,7 @@ const nexusRouter = require("./modules/nexus");
 
 // Globale Konfigurationen
 const KNOWLEDGE_DIR         = path.join(__dirname, "knowledge");
-const CAPTURE_PROMPT_PATH   = path.join(__dirname, "nexus_prompt_v6.1.txt");
+const CAPTURE_PROMPT_PATH   = path.join(__dirname, "nexus_prompt_v5.3.txt");
 const CLASSIFIER_PROMPT_PATH= path.join(__dirname, "nexus_prompt_classifier_v1.0.txt");
 const CLASSIFIER_OUTPUT_DIR = path.join(__dirname, "classifier-output");
 const OPENAI_API_KEY        = process.env.OPENAI_API_KEY;
