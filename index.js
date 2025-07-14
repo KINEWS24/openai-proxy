@@ -30,6 +30,34 @@ const PORT                  = process.env.PORT || 10000;
 // v6.2 Enhanced Constants
 const SIMPLIFIED_PROMPT_ENABLED = true; // Feature flag for gradual rollout
 
+// === v6.2 UUID-FORMAT KONSTANTEN ===
+const NEXUS_V62_OWNER = 'oliver';           // Single-User System
+const NEXUS_V62_ENTRY_POINT = 'pc';         // Browser Extension  
+const NEXUS_V62_CLUSTER = 'clst001';        // Standard Cluster
+
+// Workspace-Abkürzungen für kompakte Dateinamen
+const WORKSPACE_CODES = {
+  'professional': 'work',
+  'personal': 'home', 
+  'social': 'community'
+};
+
+// Vereinheitlichte Archetype-Liste (lowercase für Dateinamen)
+const VALID_ARCHETYPES = {
+  'Calendar': 'calendar',
+  'Contact': 'contact', 
+  'Email': 'email',
+  'Project': 'project',
+  'Link': 'link',
+  'Document': 'document',
+  'Text': 'text',
+  'Image': 'image',
+  'Audio': 'audio',
+  'Video': 'video', 
+  'Data': 'data',
+  'Mixed': 'mixed'
+};
+
 // Default-Optionen für Chat
 const defaultChatOptions = {
   topK: 10,
@@ -940,73 +968,82 @@ function generateHashtagsV62(content, archetype) {
 }
 
 // =====================================
-// v6.2 ENHANCED FILENAME GENERATION
+// v6.2 ENHANCED UUID-FORMAT FILENAME GENERATION
 // =====================================
 
-function generateFilenameV62(archetype, content) {
-    const today = new Date().toISOString().split('T')[0]; // YYYY-MM-DD
-    const contentLower = content.toLowerCase();
+/**
+ * 🆔 v6.2 UUID-Format Filename Generator - Bulletproof für Oliver's Daily Use
+ * Format: nexus-usr-{owner}-{workspace}-{entrypoint}-{archetype}-{timestamp}-{cluster}-{uuid8}
+ * Beispiel: nexus-usr-oliver-work-pc-contact-20250713T1430Z-clst001-a4b8c9d2
+ * 
+ * @param {string} archetype - Detected archetype (Contact, Email, etc.)
+ * @param {string} content - Original content for analysis  
+ * @param {string} workspace - Workspace (professional, personal, social)
+ * @returns {string} UUID-format filename without extension
+ */
+function generateFilenameV62(archetype, content = '', workspace = 'professional') {
+    console.log(`[FILENAME v6.2] Generating UUID-format filename...`);
     
-    // Hauptthema extrahieren - ERWEITERT
-    let topic = 'Content';
-    if (contentLower.includes('projekt-update')) topic = 'ProjektUpdate';
-    else if (contentLower.includes('status')) topic = 'StatusUpdate'; 
-    else if (contentLower.includes('kickoff')) topic = 'KickoffMeeting';
-    else if (contentLower.includes('design review')) topic = 'DesignReview';
-    else if (contentLower.includes('stand-up')) topic = 'StandUp';
-    else if (contentLower.includes('testplanung')) topic = 'Testplanung';
-    else if (contentLower.includes('freigabe')) topic = 'Freigabe';
-    else if (contentLower.includes('daily')) topic = 'DailyStandUp';
-    else if (contentLower.includes('workshop')) topic = 'Workshop';
-    else if (contentLower.includes('telefon') || contentLower.includes('+49')) topic = 'Kontaktdaten';
-    else if (contentLower.includes('api-dok')) topic = 'APIDoc';
-    else if (contentLower.includes('meeting') || contentLower.includes('termin')) topic = 'Meeting';
-    
-    // Kunde/Quelle extrahieren - ERWEITERT für PERSONEN
-    let source = 'Unknown';
-    
-    // PERSONEN haben HÖCHSTE PRIORITÄT für Source
-    if (contentLower.includes('anna müller') || contentLower.includes('anna mueller')) source = 'AnnaMueller';
-    else if (contentLower.includes('lukas schmidt')) source = 'LukasSchmidt';
-    else if (contentLower.includes('claudia becker')) source = 'ClaudiaBecker';
-    else if (contentLower.includes('maria müller') || contentLower.includes('maria mueller')) source = 'MariaMueller';
-    else if (contentLower.includes('stefan')) source = 'Stefan';
-    else if (contentLower.includes('jens')) source = 'Jens';
-    // FIRMEN als Fallback
-    else if (contentLower.includes('alpha')) source = 'AlphaGmbH';
-    else if (contentLower.includes('beta')) source = 'BetaSolutions';
-    else if (contentLower.includes('cäsar') || contentLower.includes('caesar')) source = 'CaesarAG';
-    
-    // Spezielle Filename-Patterns für bessere Auffindbarkeit
-    if (archetype === 'Contact' && (contentLower.includes('telefon') || contentLower.includes('+'))) {
-        topic = 'Telefonnummer';
+    try {
+        // 1. OWNER (fest für Single-User)
+        const owner = NEXUS_V62_OWNER;
+        
+        // 2. WORKSPACE-ABKÜRZUNG
+        const workspaceCode = WORKSPACE_CODES[workspace] || 'work'; // Fallback auf 'work'
+        console.log(`[FILENAME v6.2] Workspace: ${workspace} → ${workspaceCode}`);
+        
+        // 3. ENTRY POINT (fest für Browser Extension)
+        const entryPoint = NEXUS_V62_ENTRY_POINT;
+        
+        // 4. ARCHETYPE MAPPING (lowercase für Dateinamen)
+        const archetypeLower = VALID_ARCHETYPES[archetype] || 'mixed';
+        console.log(`[FILENAME v6.2] Archetype: ${archetype} → ${archetypeLower}`);
+        
+        // 5. TIMESTAMP (ISO-Format, Minuten-Genauigkeit)
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0');
+        const day = String(now.getDate()).padStart(2, '0');
+        const hours = String(now.getHours()).padStart(2, '0');
+        const minutes = String(now.getMinutes()).padStart(2, '0');
+        const timestamp = `${year}${month}${day}T${hours}${minutes}Z`;
+        
+        // 6. CLUSTER (Standard)
+        const cluster = NEXUS_V62_CLUSTER;
+        
+        // 7. UNIQUE ID (8-stellige Hex-ID)
+        const uuid8 = crypto.randomUUID().replace(/-/g, '').substring(0, 8).toLowerCase();
+        
+        // 8. FILENAME ZUSAMMENBAUEN
+        const filename = `nexus-usr-${owner}-${workspaceCode}-${entryPoint}-${archetypeLower}-${timestamp}-${cluster}-${uuid8}`;
+        
+        console.log(`[FILENAME v6.2] ✅ Generated: ${filename}`);
+        
+        // 9. VALIDIERUNG (Sicherheitscheck)
+        if (filename.length > 100) {
+            console.warn(`[FILENAME v6.2] ⚠️ Filename very long: ${filename.length} chars`);
+        }
+        
+        // Ensure filename is filesystem-safe
+        const safeFilename = filename.replace(/[^a-zA-Z0-9_-]/g, '');
+        if (safeFilename !== filename) {
+            console.warn(`[FILENAME v6.2] ⚠️ Filename contained unsafe chars, cleaned: ${safeFilename}`);
+            return safeFilename;
+        }
+        
+        return filename;
+        
+    } catch (error) {
+        console.error('[FILENAME v6.2] ❌ Generation failed:', error.message);
+        
+        // EMERGENCY FALLBACK
+        const fallbackTimestamp = new Date().toISOString().replace(/[:.]/g, '').substring(0, 15);
+        const fallbackUuid = Math.random().toString(36).substring(2, 10);
+        const fallbackFilename = `nexus-usr-oliver-work-pc-mixed-${fallbackTimestamp}Z-clst001-${fallbackUuid}`;
+        
+        console.log(`[FILENAME v6.2] 🛡️ Emergency fallback: ${fallbackFilename}`);
+        return fallbackFilename;
     }
-    
-    if (archetype === 'Calendar') {
-        topic = 'Termin';
-    }
-    
-    if (archetype === 'Email' && contentLower.includes('wichtig')) {
-        const wichtigLevel = contentLower.includes('wichtig 1') ? 'Wichtig1' : 
-                           contentLower.includes('wichtig 2') ? 'Wichtig2' : 
-                           contentLower.includes('wichtig 3') ? 'Wichtig3' : 'Wichtig';
-        topic = `${topic}_${wichtigLevel}`;
-    }
-    
-    // Filename zusammenbauen - PERSON_TOPIC Pattern für bessere Search
-    let filename;
-    if (source !== 'Unknown' && (source.includes('Muller') || source.includes('Schmidt') || source.includes('Becker') || source.includes('Stefan') || source.includes('Jens'))) {
-        // Person zuerst für Namen-Suche
-        filename = `${today}_${archetype}_${source}_${topic}`;
-    } else {
-        // Standard Pattern
-        filename = `${today}_${archetype}_${topic}_${source}`;
-    }
-    
-    // Sonderzeichen entfernen und Länge begrenzen
-    return filename
-        .replace(/[^a-zA-Z0-9_-]/g, '')
-        .substring(0, 60);
 }
 
 // =====================================
@@ -1020,7 +1057,7 @@ async function analyzeContentSimplified(content, sourceUrl = null, contextUuid =
         // 1. Pre-Analysis für bessere Prompts
         const archetype = detectArchetypeV62(content);
         const hashtags = generateHashtagsV62(content, archetype);
-        const filename = generateFilenameV62(archetype, content);
+        const filename = generateFilenameV62(archetype, content, 'professional'); // Default workspace
         
         console.log(`[ANALYSIS v6.2] Pre-detected: ${archetype}, ${hashtags.length} hashtags`);
         
@@ -1090,7 +1127,7 @@ Verwende diese Infos als Basis aber verbessere sie wenn nötig.`;
         
         // FALLBACK: Pre-detected Werte verwenden
         const fallbackResult = {
-            filename: generateFilenameV62(detectArchetypeV62(content), content),
+            filename: generateFilenameV62(detectArchetypeV62(content), content, 'professional'),
             archetype: detectArchetypeV62(content),
             hashtags: generateHashtagsV62(content, detectArchetypeV62(content)),
             summary: "Content wurde lokal analysiert (Server-Timeout).",
@@ -1658,7 +1695,7 @@ initializeApp()
       console.log(`📈 v6.1 Stats: ${enhancedStats.v61_files} v6.1 files, ${enhancedStats.legacy_files} legacy files`);
       console.log(`🎯 Workspaces: ${Object.keys(enhancedStats.workspaces).join(', ')}`);
       console.log(`📱 Entry Points: ${Object.keys(enhancedStats.entry_points).join(', ')}`);
-      console.log(`🏆 NEXUS v6.2 - NAMES & CONTACTS PERFECTLY SEARCHABLE! 👑`);
+      console.log(`🏆 NEXUS v6.2 - UUID FORMAT BULLETPROOF! 👑`);
     });
   })
   .catch(err => {
