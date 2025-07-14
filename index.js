@@ -1081,8 +1081,7 @@ Verwende diese Infos als Basis aber verbessere sie wenn nötig.`;
             model: COMPLETION_MODEL,
             messages: [{ role: "user", content: prompt }],
             max_tokens: 300,  // Drastisch reduziert!
-            temperature: 0.1,
-            timeout: 10000    // 10s statt 30s
+            temperature: 0.3,
         });
         
         console.log('[ANALYSIS v6.2] OpenAI response received');
