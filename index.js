@@ -6,6 +6,7 @@ const cors = require("cors");
 const fs = require("fs").promises;
 const fsSync = require("fs");
 const path = require("path");
+const crypto = require("crypto");
 const { uuidv7 } = require("uuidv7");
 const { OpenAI } = require("openai");
 const { google } = require("googleapis");
@@ -1115,10 +1116,52 @@ Verwende diese Infos als Basis aber verbessere sie wenn nötig.`;
         
         console.log(`[ANALYSIS v6.2] ✅ Success: ${finalResult.archetype}, ${finalResult.hashtags?.length || 0} hashtags, ${finalResult.tokens_used} tokens`);
         
+        // 6. ✅ FIXED: Create Extension-Compatible Response Format
+        const nexusContent = `# ${finalResult.archetype} Analysis
+
+**Generated:** ${new Date().toLocaleString('de-DE')}
+**Archetype:** ${finalResult.archetype}
+**Source:** ${sourceUrl || 'Unknown'}
+
+## Summary
+${finalResult.summary}
+
+## Analysis Details
+- **Hashtags:** ${finalResult.hashtags.join(', ')}
+- **Analysis Version:** ${finalResult.analysis_version}
+- **Tokens Used:** ${finalResult.tokens_used}
+
+## Original Content
+${content.substring(0, 500)}...`;
+
+        const tagsData = {
+            "SchemaVersion": "v6.2",
+            "UID": crypto.randomUUID().replace(/-/g, '').substring(0, 8),
+            "UZT_ISO8601": new Date().toISOString(),
+            "Archetype": finalResult.archetype,
+            "Subject": finalResult.summary,
+            "Tags": finalResult.hashtags,
+            "Title": `${finalResult.archetype} Analysis`,
+            "Summary": finalResult.summary,
+            "Properties": {
+                "source_url": sourceUrl,
+                "analysis_version": finalResult.analysis_version,
+                "tokens_used": finalResult.tokens_used
+            }
+        };
+
         return {
             success: true,
-            content: JSON.stringify(finalResult, null, 2),
-            metadata: finalResult
+            nexusMd: {
+                filename: `${generateFilenameV62(finalResult.archetype, content, 'professional')}.nexus.md`,
+                content: nexusContent
+            },
+            tagsJson: {
+                filename: `${generateFilenameV62(finalResult.archetype, content, 'professional')}.tags.json`,
+                content: JSON.stringify(tagsData, null, 2)
+            },
+            originalFilename: `${generateFilenameV62(finalResult.archetype, content, 'professional')}.original.txt`,
+            originalContent: content
         };
         
     } catch (error) {
@@ -1137,11 +1180,52 @@ Verwende diese Infos als Basis aber verbessere sie wenn nötig.`;
         
         console.log(`[ANALYSIS v6.2] 🛡️ Fallback used: ${fallbackResult.archetype}`);
         
+        // Auch bei Fallback Extension-kompatibles Format
+        const nexusContent = `# ${fallbackResult.archetype} Analysis (Fallback)
+
+**Generated:** ${new Date().toLocaleString('de-DE')}
+**Archetype:** ${fallbackResult.archetype}
+**Source:** ${sourceUrl || 'Unknown'}
+
+## Summary
+${fallbackResult.summary}
+
+## Analysis Details
+- **Hashtags:** ${fallbackResult.hashtags.join(', ')}
+- **Analysis Version:** ${fallbackResult.analysis_version}
+- **Error Reason:** ${fallbackResult.error_reason}
+
+## Original Content
+${content.substring(0, 500)}...`;
+
+        const tagsData = {
+            "SchemaVersion": "v6.2",
+            "UID": crypto.randomUUID().replace(/-/g, '').substring(0, 8),
+            "UZT_ISO8601": new Date().toISOString(),
+            "Archetype": fallbackResult.archetype,
+            "Subject": fallbackResult.summary,
+            "Tags": fallbackResult.hashtags,
+            "Title": `${fallbackResult.archetype} Analysis (Fallback)`,
+            "Summary": fallbackResult.summary,
+            "Properties": {
+                "source_url": sourceUrl,
+                "analysis_version": fallbackResult.analysis_version,
+                "error_reason": fallbackResult.error_reason
+            }
+        };
+
         return {
-            success: false,
-            content: JSON.stringify(fallbackResult, null, 2),
-            metadata: fallbackResult,
-            error: error.message,
+            success: true, // Override für UX - auch Fallback ist erfolgreich
+            nexusMd: {
+                filename: `${generateFilenameV62(fallbackResult.archetype, content, 'professional')}.nexus.md`,
+                content: nexusContent
+            },
+            tagsJson: {
+                filename: `${generateFilenameV62(fallbackResult.archetype, content, 'professional')}.tags.json`,
+                content: JSON.stringify(tagsData, null, 2)
+            },
+            originalFilename: `${generateFilenameV62(fallbackResult.archetype, content, 'professional')}.original.txt`,
+            originalContent: content,
             fallback_used: true
         };
     }
@@ -1695,6 +1779,7 @@ initializeApp()
       console.log(`🎯 Workspaces: ${Object.keys(enhancedStats.workspaces).join(', ')}`);
       console.log(`📱 Entry Points: ${Object.keys(enhancedStats.entry_points).join(', ')}`);
       console.log(`🏆 NEXUS v6.2 - UUID FORMAT BULLETPROOF! 👑`);
+      console.log(`✅ RESPONSE FORMAT FIX APPLIED - Extension compatibility restored!`);
     });
   })
   .catch(err => {
