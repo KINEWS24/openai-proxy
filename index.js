@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus v6.2 COMPLETE EDITION - SIMPLIFIED PROMPT SYSTEM!
+// index.js – ThinkAI Nexus v6.2 COMPLETE EDITION - SIMPLIFIED PROMPT SYSTEM + PHASE 3 CODE-AWARE SEARCH!
 
 // --- SCHRITT 1: IMPORTS & KONSTANTEN ---
 const express = require("express");
@@ -16,6 +16,9 @@ const fetch = require("node-fetch");
 
 // Nexus-All-in-One-Router
 const nexusRouter = require("./modules/nexus");
+
+// 🆕 PHASE 3: Code-Aware Search Module
+const codeSearch = require('./modules/code-search');
 
 // Globale Konfigurationen
 const KNOWLEDGE_DIR         = path.join(__dirname, "knowledge");
@@ -473,7 +476,7 @@ function setupFileWatcher() {
 }
 
 /**
- * 🚀 PERFORMANCE: Enhanced Cached Search v6.1 - Workspace & Cluster Aware
+ * 🚀 PERFORMANCE: Enhanced Cached Search v6.2 - PHASE 3 CODE-AWARE INTEGRATION
  */
 function performCachedSearch(query, options = {}) {
   const startTime = Date.now();
@@ -487,10 +490,10 @@ function performCachedSearch(query, options = {}) {
     include_related = true 
   } = options;
   
-  console.log(`[SEARCH v6.1] Processing query: "${query}" (workspace: ${workspace}, entry_point: ${entry_point})`);
+  console.log(`[SEARCH v6.2] Processing query: "${query}" (workspace: ${workspace}, entry_point: ${entry_point})`);
   
   if (knowledgeCache.size === 0) {
-    console.warn('[SEARCH v6.1] ⚠️ Cache is empty - rebuilding...');
+    console.warn('[SEARCH v6.2] ⚠️ Cache is empty - rebuilding...');
     buildKnowledgeCache().catch(console.error);
     return { results: [], stats: { totalFiles: 0, searchResults: 0, searchTime: 0 } };
   }
@@ -551,7 +554,48 @@ function performCachedSearch(query, options = {}) {
     }
   }
   
-  // Sort and limit results
+  // 🆕 PHASE 3: Code-Aware Search Enhancement
+  if (searchResults.some(r => r.metadata.Properties && r.metadata.Properties.code_info)) {
+    console.log('[SEARCH v6.2] 🎯 Applying code-aware enhancements...');
+    try {
+      const enhanced = codeSearch.enhanceSearchWithCodeAwareness(query, searchResults, knowledgeCache);
+      
+      if (enhanced.codeAwareSearch) {
+        console.log(`[SEARCH v6.2] ✅ Code-aware search applied: ${enhanced.totalCodeFiles} code files enhanced`);
+        // Use enhanced results with code relevance scoring
+        const topResults = enhanced.results.slice(0, mergedOptions.topK);
+        
+        // Add code context for later use
+        if (enhanced.codeContext) {
+          console.log('[SEARCH v6.2] 💻 Code context generated for AI');
+        }
+        
+        const searchTime = Date.now() - startTime;
+        
+        return {
+          results: topResults,
+          stats: {
+            totalFiles: targetFiles.size,
+            searchResults: enhanced.results.length,
+            topResults: topResults.length,
+            searchTime,
+            cacheHit: true,
+            lastCacheUpdate,
+            workspace,
+            entry_point,
+            cluster_id,
+            codeAwareApplied: true,
+            totalCodeFiles: enhanced.totalCodeFiles
+          },
+          codeContext: enhanced.codeContext
+        };
+      }
+    } catch (error) {
+      console.warn('[SEARCH v6.2] ⚠️ Code-aware enhancement failed, using standard search:', error.message);
+    }
+  }
+  
+  // Standard sorting if no code enhancement applied
   searchResults.sort((a, b) => b.score - a.score);
   const topResults = searchResults.slice(0, mergedOptions.topK);
   
@@ -590,7 +634,7 @@ function performCachedSearch(query, options = {}) {
   
   const searchTime = Date.now() - startTime;
   
-  console.log(`[SEARCH v6.1] ✅ Found ${searchResults.length} results in ${searchTime}ms (workspace: ${workspace})`);
+  console.log(`[SEARCH v6.2] ✅ Found ${searchResults.length} results in ${searchTime}ms (workspace: ${workspace})`);
   
   return {
     results: topResults,
@@ -603,7 +647,8 @@ function performCachedSearch(query, options = {}) {
       lastCacheUpdate,
       workspace,
       entry_point,
-      cluster_id
+      cluster_id,
+      codeAwareApplied: false
     }
   };
 }
@@ -731,12 +776,14 @@ function getMatchDetails(query, text) {
 }
 
 /**
- * Erstellt Kontext-Text für AI aus Search-Ergebnissen (v6.1 Enhanced)
+ * 🆕 PHASE 3: Enhanced AI Context mit Code-Awareness
  * @param {Array} results - Top Search Results
- * @returns {string} Formatierter Context
+ * @param {string} query - Original query for code context generation
+ * @returns {string} Enhanced context with code details
  */
-function createAIContext(results) {
-  return results.map((result, index) => {
+function createAIContext(results, query = '') {
+  // 🆕 PHASE 3: Enhanced Context with Code Details
+  const baseContext = results.map((result, index) => {
     const metadata = result.metadata;
     const uuidData = result.uuidData;
     
@@ -751,12 +798,29 @@ function createAIContext(results) {
       context += `\nZusammenfassung: ${metadata.Summary}`;
     }
     
+    // 🆕 PHASE 3: Code-specific context
+    if (metadata.Properties && metadata.Properties.code_info) {
+      const codeInfo = metadata.Properties.code_info;
+      context += `\n💻 Code: ${codeInfo.language}`;
+      if (codeInfo.framework && codeInfo.framework !== 'none') {
+        context += ` (${codeInfo.framework})`;
+      }
+      if (codeInfo.main_functions && codeInfo.main_functions.length > 0) {
+        context += `\n⚙️ Funktionen: ${codeInfo.main_functions.slice(0, 3).join(', ')}`;
+      }
+      if (codeInfo.api_endpoints && codeInfo.api_endpoints.length > 0) {
+        context += `\n🔗 APIs: ${codeInfo.api_endpoints.join(', ')}`;
+      }
+    }
+    
     if (metadata.KeyPoints && metadata.KeyPoints.length > 0) {
       context += `\nWichtige Punkte: ${metadata.KeyPoints.join(", ")}`;
     }
     
-    // Cluster Relations
-    if (result.clusterRelations && result.clusterRelations.length > 0) {
+    // Enhanced Cluster Relations (Code-Aware)
+    if (result.codeRelations && result.codeRelations.length > 0) {
+      context += `\n🔗 Verwandte Code-Files: ${result.codeRelations.length} weitere`;
+    } else if (result.clusterRelations && result.clusterRelations.length > 0) {
       context += `\nVerwandte Inhalte: ${result.clusterRelations.length} weitere Objekte`;
     }
     
@@ -770,6 +834,19 @@ function createAIContext(results) {
     
     return context;
   }).join("\n\n---\n\n");
+
+  // 🆕 PHASE 3: Generate additional code context if available
+  const codeResults = results.filter(r => r.metadata.Properties && r.metadata.Properties.code_info);
+  if (codeResults.length > 0) {
+    try {
+      const additionalContext = codeSearch.generateCodeContext(codeResults, query || 'code analysis');
+      return baseContext + '\n\n' + additionalContext;
+    } catch (error) {
+      console.warn('[CONTEXT v6.2] ⚠️ Code context generation failed:', error.message);
+    }
+  }
+
+  return baseContext;
 }
 
 // --- SCHRITT 5: v6.2 SIMPLIFIED ANALYSIS SYSTEM ---
@@ -1795,15 +1872,17 @@ app.use((req, res, next) => {
   next(); 
 });
 
-// Health Check (v6.2 Enhanced)
+// Health Check (v6.2 Enhanced with Phase 3)
 app.get("/", (req, res) => {
   const enhancedStats = getEnhancedCacheStats();
   
   res.json({ 
     status: "OK", 
-    message: "Nexus v6.2 SIMPLIFIED PROMPT SYSTEM Ready!", 
+    message: "Nexus v6.2 + PHASE 3 CODE-AWARE SEARCH Ready!", 
     version: "6.2",
+    phase: "3",
     simplified_prompt_enabled: SIMPLIFIED_PROMPT_ENABLED,
+    code_aware_search: true,
     performance: enhancedStats
   });
 });
@@ -1989,7 +2068,7 @@ app.post("/classify", async (req, res) => {
   }, req, res);
 });
 
-// --- 🚀 SUPER-FAST CACHED CHAT-ENDPOINT v6.1 ENHANCED ---
+// --- 🚀 SUPER-FAST CACHED CHAT-ENDPOINT v6.2 ENHANCED WITH PHASE 3 ---
 app.post("/chat", async (req, res) => {
   try {
     // 1) Header-Auth prüfen
@@ -2010,7 +2089,7 @@ app.post("/chat", async (req, res) => {
       });
     }
 
-    // 3) 🚀 SUPER-FAST CACHED SEARCH v6.1 (workspace & cluster aware)
+    // 3) 🚀 SUPER-FAST CACHED SEARCH v6.2 (workspace & cluster aware + CODE-AWARE)
     const searchResult = performCachedSearch(query, options);
     
     if (searchResult.results.length === 0) {
@@ -2026,28 +2105,28 @@ app.post("/chat", async (req, res) => {
       });
     }
 
-    // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
-    const contextText = createAIContext(searchResult.results);
+    // 4) 🆕 PHASE 3: Enhanced AI Context Generation with Code-Awareness
+    const contextText = createAIContext(searchResult.results, query);
 
     const aiResponse = await openai.chat.completions.create({
       model: COMPLETION_MODEL,
       messages: [
         {
           role: "system",
-          content: "Du bist ein hilfsbereiter persönlicher Assistent, der Fragen basierend auf den persönlichen Wissensdaten des Users beantwortet. Du verstehst Workspace-Kontexte (work/home/family/etc.) und kannst verwandte Inhalte aus Clustern einbeziehen. Antworte präzise, hilfreich und in der passenden Sprache. Nutze die verfügbaren Informationen, um konkrete und nützliche Antworten zu geben."
+          content: "Du bist ein hilfsbereiter persönlicher Assistent, der Fragen basierend auf den persönlichen Wissensdaten des Users beantwortet. Du verstehst Workspace-Kontexte (work/home/family/etc.) und kannst verwandte Inhalte aus Clustern einbeziehen. 🆕 PHASE 3: Du bist auch Code-Experte und kannst Code-Zusammenhänge erklären, verwandte Dateien finden und technische Fragen beantworten. Antworte präzise, hilfreich und in der passenden Sprache. Nutze die verfügbaren Informationen, um konkrete und nützliche Antworten zu geben."
         },
         {
           role: "user",
-          content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, etc.). Berücksichtige auch verwandte Inhalte aus den gleichen Clustern.`
+          content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, Code-Funktionen, etc.). Berücksichtige auch verwandte Inhalte aus den gleichen Clustern. Wenn es um Code geht, erkläre Zusammenhänge zwischen verschiedenen Dateien.`
         }
       ],
       temperature: 0.3,
-      max_tokens: 800
+      max_tokens: 1000
     });
 
     const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
 
-    // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
+    // 5) 🆕 PHASE 3: Enhanced Response with Code-Aware Sources
     return res.json({
       success: true,
       answer,
@@ -2063,13 +2142,28 @@ app.post("/chat", async (req, res) => {
         cluster_id: r.uuidData.cluster_id,
         version: r.uuidData.version,
         isRelated: r.isRelated || false,
-        clusterMembers: r.clusterRelations.length
+        clusterMembers: r.clusterRelations.length,
+        // 🆕 PHASE 3: Code-specific source information
+        ...(r.metadata.Properties && r.metadata.Properties.code_info && {
+          codeInfo: {
+            language: r.metadata.Properties.code_info.language,
+            framework: r.metadata.Properties.code_info.framework,
+            functions: r.metadata.Properties.code_info.main_functions?.slice(0, 3) || [],
+            apis: r.metadata.Properties.code_info.api_endpoints || []
+          }
+        }),
+        // Enhanced score with code relevance
+        enhancedScore: r.enhancedScore || r.score,
+        codeRelevanceBonus: r.codeRelevanceBonus || 0
       })),
       meta: {
         ...searchResult.stats,
         query,
         timestamp: new Date().toISOString(),
-        version: "6.2"
+        version: "6.2",
+        phase: "3",
+        codeAwareApplied: searchResult.stats.codeAwareApplied || false,
+        totalCodeFiles: searchResult.stats.totalCodeFiles || 0
       }
     });
 
@@ -2114,7 +2208,14 @@ app.post("/search/workspace/:workspace", async (req, res) => {
         summary: r.metadata.Summary || "",
         score: Math.round(r.score * 100) / 100,
         archetype: r.uuidData.archetype,
-        cluster_id: r.uuidData.cluster_id
+        cluster_id: r.uuidData.cluster_id,
+        // 🆕 PHASE 3: Code information in search results
+        ...(r.metadata.Properties && r.metadata.Properties.code_info && {
+          codeInfo: {
+            language: r.metadata.Properties.code_info.language,
+            framework: r.metadata.Properties.code_info.framework
+          }
+        })
       })),
       meta: searchResult.stats
     });
@@ -2138,7 +2239,10 @@ app.get("/analytics/workspace/:workspace", (req, res) => {
     archetypen: {},
     entry_points: {},
     clusters: {},
-    timeline: {}
+    timeline: {},
+    // 🆕 PHASE 3: Code-specific analytics
+    code_languages: {},
+    code_frameworks: {}
   };
   
   for (const [filename, metadata] of workspaceFiles.entries()) {
@@ -2161,9 +2265,78 @@ app.get("/analytics/workspace/:workspace", (req, res) => {
       const month = uuidData.timestamp.substring(0, 6); // YYYYMM
       analytics.timeline[month] = (analytics.timeline[month] || 0) + 1;
     }
+    
+    // 🆕 PHASE 3: Code analytics
+    if (metadata.Properties && metadata.Properties.code_info) {
+      const codeInfo = metadata.Properties.code_info;
+      if (codeInfo.language) {
+        analytics.code_languages[codeInfo.language] = (analytics.code_languages[codeInfo.language] || 0) + 1;
+      }
+      if (codeInfo.framework && codeInfo.framework !== 'none') {
+        analytics.code_frameworks[codeInfo.framework] = (analytics.code_frameworks[codeInfo.framework] || 0) + 1;
+      }
+    }
   }
   
   res.json(analytics);
+});
+
+// 🆕 PHASE 3: Code-Specific Endpoints
+
+// Code ecosystem analysis endpoint
+app.get("/debug/code-ecosystem", (req, res) => {
+  try {
+    const ecosystem = codeSearch.analyzeCodeEcosystem(knowledgeCache);
+    res.json({
+      success: true,
+      ecosystem,
+      timestamp: new Date().toISOString(),
+      version: "6.2",
+      phase: "3"
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      error: error.message,
+      version: "6.2",
+      phase: "3"
+    });
+  }
+});
+
+// Code-aware search test endpoint
+app.post("/debug/code-search", async (req, res) => {
+  try {
+    const { query } = req.body;
+    if (!query) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Query is required" 
+      });
+    }
+    
+    // Test code-aware search directly
+    const searchResult = performCachedSearch(query, {});
+    
+    res.json({
+      success: true,
+      query,
+      results: searchResult.results.length,
+      codeFiles: searchResult.results.filter(r => 
+        r.metadata.Properties && r.metadata.Properties.code_info
+      ).length,
+      stats: searchResult.stats,
+      timestamp: new Date().toISOString(),
+      version: "6.2",
+      phase: "3"
+    });
+    
+  } catch (error) {
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
 });
 
 // Nexus-All-in-One-Endpoint
@@ -2173,7 +2346,7 @@ app.use("/nexus", nexusRouter);
 initializeApp()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`🚀 Nexus v6.2 SIMPLIFIED PROMPT SYSTEM running on port ${PORT}`);
+      console.log(`🚀 Nexus v6.2 + PHASE 3 CODE-AWARE SEARCH running on port ${PORT}`);
       console.log(`📊 Knowledge Directory: ${KNOWLEDGE_DIR}`);
       console.log(`🧠 AI Model: ${COMPLETION_MODEL}`);
       console.log(`⚡ Performance Cache: ${knowledgeCache.size} files loaded`);
@@ -2183,15 +2356,17 @@ initializeApp()
       console.log(`📱 Entry Point Cache: ${entryPointCache.size} entry points`);
       console.log(`👁️ File Watcher: ${fileWatcher ? 'Active' : 'Inactive'}`);
       console.log(`🎯 v6.2 Features: Simplified Prompt ${SIMPLIFIED_PROMPT_ENABLED ? 'ENABLED' : 'DISABLED'}`);
-      console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations with ENHANCED HASHTAGS!`);
+      console.log(`🎯 PHASE 3 Features: Code-Aware Search ENABLED`);
+      console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations with CODE-AWARE SEARCH!`);
       
       // Enhanced startup stats
       const enhancedStats = getEnhancedCacheStats();
       console.log(`📈 v6.1 Stats: ${enhancedStats.v61_files} v6.1 files, ${enhancedStats.legacy_files} legacy files`);
       console.log(`🎯 Workspaces: ${Object.keys(enhancedStats.workspaces).join(', ')}`);
       console.log(`📱 Entry Points: ${Object.keys(enhancedStats.entry_points).join(', ')}`);
-      console.log(`🏆 NEXUS v6.2 - UUID FORMAT BULLETPROOF! 👑`);
-      console.log(`✅ RESPONSE FORMAT FIX APPLIED - Extension compatibility restored!`);
+      console.log(`💻 Code-Aware Search: Ready for queries like "Zeig mir meine Authentication-Files"`);
+      console.log(`🏆 NEXUS v6.2 + PHASE 3 - CODE-AWARE SEARCH BULLETPROOF! 👑`);
+      console.log(`✅ PHASE 3 COMPLETE - Oliver wird zum Code-Guru! 🧠💻`);
     });
   })
   .catch(err => {
