@@ -1087,20 +1087,40 @@ Verwende diese Infos als Basis aber verbessere sie wenn nötig.`;
         
         console.log('[ANALYSIS v6.2] OpenAI response received');
         
-        // 4. Parse JSON Response
+        // 4. Parse JSON Response - ENHANCED FIX
         const aiContent = response.choices[0]?.message?.content || "";
         let analysis;
         
         try {
+            // Try direct JSON parse first
             analysis = JSON.parse(aiContent);
         } catch (parseError) {
-            console.warn('[ANALYSIS v6.2] JSON parse failed, using fallback:', parseError.message);
-            analysis = {
-                filename: filename,
-                archetype: archetype,
-                hashtags: hashtags,
-                summary: "Content wurde analysiert (AI-JSON-Parse-Fehler)."
-            };
+            console.warn('[ANALYSIS v6.2] Direct JSON parse failed, trying extraction...');
+            
+            // Extract JSON from response text (GPT often adds explanatory text)
+            const jsonMatch = aiContent.match(/\{[\s\S]*\}/);
+            if (jsonMatch) {
+                try {
+                    analysis = JSON.parse(jsonMatch[0]);
+                    console.log('[ANALYSIS v6.2] ✅ JSON extraction successful');
+                } catch (extractError) {
+                    console.warn('[ANALYSIS v6.2] JSON extraction failed, using fallback:', extractError.message);
+                    analysis = {
+                        filename: filename,
+                        archetype: archetype,
+                        hashtags: hashtags,
+                        summary: "Content wurde analysiert (JSON-Extraktion-Fehler)."
+                    };
+                }
+            } else {
+                console.warn('[ANALYSIS v6.2] No JSON found in response, using fallback');
+                analysis = {
+                    filename: filename,
+                    archetype: archetype,
+                    hashtags: hashtags,
+                    summary: "Content wurde analysiert (Kein JSON gefunden)."
+                };
+            }
         }
         
         // 5. Validate and enhance analysis
