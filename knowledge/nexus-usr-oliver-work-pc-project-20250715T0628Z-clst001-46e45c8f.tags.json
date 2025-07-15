@@ -1,0 +1,32 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "3c996d30",
+  "UZT_ISO8601": "2025-07-15T06:28:46.610Z",
+  "Archetype": "Project",
+  "Subject": "Flow, ein AI-Tool von Google für Filmemacher, ermöglicht nun das Hinzufügen von Sprache zu Videos und wird in 76 weitere Länder ausgeweitet. Die Funktion 'Frames to Video' erlaubt die Nutzung eigener Bilder als Ausgangspunkt für Videoclips. Diese Erweiterung erhöht die Verfügbarkeit von Flow und Google AI Ultra auf über 140 Länder.",
+  "Tags": [
+    "#Google",
+    "#Flow",
+    "#AI",
+    "#KristinYim",
+    "#Expansion"
+  ],
+  "Title": "Project Analysis",
+  "Summary": "Flow, ein AI-Tool von Google für Filmemacher, ermöglicht nun das Hinzufügen von Sprache zu Videos und wird in 76 weitere Länder ausgeweitet. Die Funktion 'Frames to Video' erlaubt die Nutzung eigener Bilder als Ausgangspunkt für Videoclips. Diese Erweiterung erhöht die Verfügbarkeit von Flow und Google AI Ultra auf über 140 Länder.",
+  "Properties": {
+    "source_url": "https://blog.google/technology/google-labs/flow-adds-speech-expands/",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 1337,
+    "code_info": {
+      "language": "unknown",
+      "framework": "none",
+      "functions_count": 0,
+      "classes_count": 0,
+      "imports_count": 0,
+      "apis_count": 0,
+      "main_functions": [],
+      "main_imports": [],
+      "api_endpoints": []
+    }
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "12a59daa",
+  "UZT_ISO8601": "2025-07-15T09:05:44.549Z",
+  "Archetype": "Calendar",
+  "Subject": "User Testing Session im Büro Beta, Besprechungsraum 2. Testnutzer stellen Fragen und geben Feedback zum App-Design.",
+  "Tags": [
+    "#Calendar",
+    "#BetaSolutions",
+    "#UserTesting",
+    "#AppDesign",
+    "#Meeting"
+  ],
+  "Title": "Calendar Analysis",
+  "Summary": "User Testing Session im Büro Beta, Besprechungsraum 2. Testnutzer stellen Fragen und geben Feedback zum App-Design.",
+  "Properties": {
+    "source_url": "https://kinews24.de/wp-admin/post.php?post=26366&action=edit",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 926
+  }
+}

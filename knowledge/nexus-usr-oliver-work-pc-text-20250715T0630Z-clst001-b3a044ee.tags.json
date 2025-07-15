@@ -1,0 +1,32 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "24181dd2",
+  "UZT_ISO8601": "2025-07-15T06:30:25.702Z",
+  "Archetype": "Text",
+  "Subject": "Exists, a generative AI company, has launched a platform allowing users to create 3D virtual worlds with AI. This platform enables instant generation of immersive worlds without requiring tools or coding experience. The article is authored by Dean Takahashi, a veteran tech journalist.",
+  "Tags": [
+    "#DeanTakahashi",
+    "#AI",
+    "#3DWorld",
+    "#GamesBeat",
+    "#Technology"
+  ],
+  "Title": "Text Analysis",
+  "Summary": "Exists, a generative AI company, has launched a platform allowing users to create 3D virtual worlds with AI. This platform enables instant generation of immersive worlds without requiring tools or coding experience. The article is authored by Dean Takahashi, a veteran tech journalist.",
+  "Properties": {
+    "source_url": "https://gamesbeat.com/exists-opens-public-access-to-ai-powered-3d-world-creator/",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 1378,
+    "code_info": {
+      "language": "unknown",
+      "framework": "none",
+      "functions_count": 0,
+      "classes_count": 0,
+      "imports_count": 0,
+      "apis_count": 0,
+      "main_functions": [],
+      "main_imports": [],
+      "api_endpoints": []
+    }
+  }
+}

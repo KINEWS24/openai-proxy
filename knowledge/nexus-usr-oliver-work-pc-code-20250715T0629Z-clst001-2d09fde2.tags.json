@@ -1,0 +1,32 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "9571bd1f",
+  "UZT_ISO8601": "2025-07-15T06:29:54.350Z",
+  "Archetype": "Code",
+  "Subject": "Reka Flash 3.1 is an advanced model with significant improvements in reinforcement learning, enhancing its coding capabilities. It supports quantization through Reka Quant, enabling efficient performance in resource-constrained environments. The model is competitive with state-of-the-art solutions and offers open-source building blocks for further innovation.",
+  "Tags": [
+    "#Reka",
+    "#RekaFlash",
+    "#Quantization",
+    "#ReinforcementLearning",
+    "#Coding"
+  ],
+  "Title": "Code Analysis",
+  "Summary": "Reka Flash 3.1 is an advanced model with significant improvements in reinforcement learning, enhancing its coding capabilities. It supports quantization through Reka Quant, enabling efficient performance in resource-constrained environments. The model is competitive with state-of-the-art solutions and offers open-source building blocks for further innovation.",
+  "Properties": {
+    "source_url": "https://reka.ai/news/reka-flash-3-1-and-reka-quant",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 1396,
+    "code_info": {
+      "language": "JavaScript",
+      "framework": "none",
+      "functions_count": 0,
+      "classes_count": 0,
+      "imports_count": 0,
+      "apis_count": 0,
+      "main_functions": [],
+      "main_imports": [],
+      "api_endpoints": []
+    }
+  }
+}

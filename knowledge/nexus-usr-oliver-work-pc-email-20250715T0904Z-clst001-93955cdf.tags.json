@@ -1,0 +1,21 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "fda6512d",
+  "UZT_ISO8601": "2025-07-15T09:04:40.095Z",
+  "Archetype": "Email",
+  "Subject": "Julia Fuchs vom Beta Team berichtet über den erfolgreichen Abschluss des Sprints. Die Onboarding-Strecke ist jetzt vollständig interaktiv.",
+  "Tags": [
+    "#JuliaFuchs",
+    "#Email",
+    "#BetaSolutions",
+    "#SprintReview",
+    "#Onboarding"
+  ],
+  "Title": "Email Analysis",
+  "Summary": "Julia Fuchs vom Beta Team berichtet über den erfolgreichen Abschluss des Sprints. Die Onboarding-Strecke ist jetzt vollständig interaktiv.",
+  "Properties": {
+    "source_url": "https://kinews24.de/wp-admin/post.php?post=26366&action=edit",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 859
+  }
+}

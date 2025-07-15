@@ -1,0 +1,34 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "7eecf38f",
+  "UZT_ISO8601": "2025-07-15T05:48:34.708Z",
+  "Archetype": "Code",
+  "Subject": "JavaScript-Code mit Express.js für ein Code-Aware Search Module. Integriert verschiedene Module und APIs, um erweiterte Suchfunktionen zu ermöglichen. Nutzt OpenAI und Google APIs für verbesserte Datenverarbeitung und -analyse.",
+  "Tags": [
+    "#Express",
+    "#API",
+    "#Backend",
+    "#JavaScript",
+    "#Code"
+  ],
+  "Title": "Code Analysis",
+  "Summary": "JavaScript-Code mit Express.js für ein Code-Aware Search Module. Integriert verschiedene Module und APIs, um erweiterte Suchfunktionen zu ermöglichen. Nutzt OpenAI und Google APIs für verbesserte Datenverarbeitung und -analyse.",
+  "Properties": {
+    "source_url": "https://kinews24.de/wp-admin/post.php?post=26358&action=edit",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 1417,
+    "code_info": {
+      "language": "JavaScript",
+      "framework": "Express",
+      "functions_count": 1,
+      "classes_count": 0,
+      "imports_count": 0,
+      "apis_count": 0,
+      "main_functions": [
+        "express"
+      ],
+      "main_imports": [],
+      "api_endpoints": []
+    }
+  }
+}

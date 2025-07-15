@@ -1,0 +1,21 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "44709734",
+  "UZT_ISO8601": "2025-07-15T09:04:15.221Z",
+  "Archetype": "Calendar",
+  "Subject": "Design-Abstimmung für das Kundenportal mit Marie Neumann. Geplantes Review der Design-Entwürfe im Büro Alpha, Raum 3. Wichtiges Meeting zur finalen Abstimmung der Designs.",
+  "Tags": [
+    "#MarieNeumann",
+    "#Calendar",
+    "#AlphaGmbH",
+    "#DesignReview",
+    "#Meeting"
+  ],
+  "Title": "Calendar Analysis",
+  "Summary": "Design-Abstimmung für das Kundenportal mit Marie Neumann. Geplantes Review der Design-Entwürfe im Büro Alpha, Raum 3. Wichtiges Meeting zur finalen Abstimmung der Designs.",
+  "Properties": {
+    "source_url": "https://kinews24.de/wp-admin/post.php?post=26366&action=edit",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 947
+  }
+}

@@ -1,0 +1,1 @@
+Nachricht 2:Betreff: Risiko-AnalyseVon: Oliver WellingDie Risikoanalyse wurde aktualisiert. Es gibt eine neue Schwachstelle bei den Schnittstellen – siehe Anhang im Projektordner.

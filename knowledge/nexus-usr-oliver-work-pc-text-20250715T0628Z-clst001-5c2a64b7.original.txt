@@ -1,0 +1,66 @@
+# Flow adds speech to videos and expands to more countries
+
+**URL:** https://blog.google/technology/google-labs/flow-adds-speech-expands/
+
+**Description:** Flow now brings your images to life with speech. Plus, we’re expanding Flow and the Google AI Ultra plan to 76 more countries.
+
+## Struktur
+
+## You can now make your images talk with Veo 3 in Flow, plus we’re expanding to more countries.
+### Related stories
+#### Try featured notebooks on selected topics in NotebookLM
+#### The latest AI news we announced in June
+#### Try on looks and discover your style with Doppl
+#### Artists used Google’s generative AI products to inspire an interactive sculpture.
+
+## Inhalt
+
+By Kristin Yim | Product Manager, Google LabsJul 10, 2025You can now make your images talk with Veo 3 in Flow, plus we’re expanding to more countries. Tens of millions of videos have been generated in Flow, our AI tool for filmmakers since launching in May.To help get the most out of Flow, starting this week, you can add speech to your clips in Flow when using Frames to Video. This feature lets you bring your own images to use as the starting frame of a video clip. Veo 3 already lets you add sound effects and background noise to these clips, and now you’ll be able to generate speech as well. We're also introducing Frames to Video on Veo 3 Fast, so you can get even more out of your credits. Audio generation in Flow is still experimental and we’re continuing to improve so results may vary.We’re eager for more people to be able to create with Flow, so today we’re expanding the availability of Flow and Google AI Ultra — for the highest level of access to the best of Google AI — to 76 more countries. This means that starting today Flow is available in 140+ countries around the world with a Google AI Pro or Ultra plan. See more details on country availability here.11Note: Product feature availability may differ by country of use. Certain image types may not be supported. 0:12 POSTED IN: Related stories Try featured notebooks on selected topics in NotebookLMNotebookLM is adding featured notebooks, with works selected by partners like The Atlantic and The Economist. The latest AI news we announced in June Try on looks and discover your style with Doppl Artists used Google’s generative AI products to inspire an interactive sculpture.
+
+## Links
+
+- [Technology](https://blog.google/technology/)
+- [Google Labs](https://blog.google/technology/google-labs/)
+- [Flow,](https://blog.google/technology/ai/google-flow-veo-ai-filmmaking-tool/)
+- [Veo 3 Fast](https://support.google.com/labs/answer/16352836?sjid=12094372896335456846-NC)
+- [Google AI Pro or Ultra plan](https://one.google.com/about/google-ai-plans/)
+- [here](https://support.google.com/labs/answer/16353544?hl=en&ref_topic=16355608&sjid=12094372896335456846-NC)
+- [Google Labs](https://blog.google/technology/google-labs/)
+- [Google One](https://blog.google/products/google-one/)
+- [Try featured notebooks on selected topics in NotebookLMNotebookLM is adding featured notebooks, with works selected by partners like The Atlantic and The Economist.](https://blog.google/technology/google-labs/notebooklm-featured-notebooks/)
+- [The latest AI news we announced in June](https://blog.google/technology/ai/google-ai-updates-june-2025/)
+- [Try on looks and discover your style with Doppl](https://blog.google/technology/google-labs/doppl/)
+- [Artists used Google’s generative AI products to inspire an interactive sculpture.](https://blog.google/technology/google-labs/reflection-point-ai-sculpture/)
+
+## Bilder
+
+- ![Video of two dogs talking, created in Flow](https://storage.googleapis.com/gweb-uniblog-publish-prod/images/Thumbnail_1.width-1000.format-webp.webp)
+
+
+
+## Page Metadata
+
+**Description:** Flow now brings your images to life with speech. Plus, we’re expanding Flow and the Google AI Ultra plan to 76 more countries.
+
+**Keywords:** None
+
+**Word Count:** 290
+
+**Headings Found:** 6
+
+**Links Found:** 12
+
+**Images Found:** 1
+
+
+
+## Capture Info
+
+**Capture Method:** Current Page Capture
+
+**Extraction Method:** advanced
+
+**Captured:** 2025-07-15T06:28:32.992Z
+
+**ICS Enhanced:** No
+

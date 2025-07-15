@@ -1,0 +1,21 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "9f91fda3",
+  "UZT_ISO8601": "2025-07-15T09:06:56.577Z",
+  "Archetype": "Calendar",
+  "Subject": "Kalendereintrag für den Start der Datenmigration bei Gamma. Alle Systemverantwortlichen sind eingeladen, um den Auftakt im Serverraum zu begleiten.",
+  "Tags": [
+    "#Gamma",
+    "#Calendar",
+    "#Migration",
+    "#Meeting",
+    "#Systemverantwortliche"
+  ],
+  "Title": "Calendar Analysis",
+  "Summary": "Kalendereintrag für den Start der Datenmigration bei Gamma. Alle Systemverantwortlichen sind eingeladen, um den Auftakt im Serverraum zu begleiten.",
+  "Properties": {
+    "source_url": "https://kinews24.de/wp-admin/post.php?post=26366&action=edit",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 919
+  }
+}

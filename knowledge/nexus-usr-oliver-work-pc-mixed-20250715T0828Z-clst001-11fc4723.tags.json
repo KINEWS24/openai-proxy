@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "11fc4723",
+  "UZT_ISO8601": "2025-07-15T06:28:22.821Z",
+  "Archetype": "Mixed",
+  "ObjectType": "WebPage",
+  "Subject": "Current Page Capture: (8) Brian Armstrong on X: \"Exciting update: Coinbase has partnered with @perplexity_ai to help traders get access to real-time trusted crypto data/info for better decision making. The first stage is going live today, and there's more to come: Phase 1 (now): Perplexity is now ingesting our market data, https://t.co/4rze1q9WzL\" / X",
+  "Tags": [
+    "#Mixed",
+    "#WebPage",
+    "#CurrentPageCapture",
+    "#Fallback",
+    "#v62Enhanced",
+    "#xcom"
+  ],
+  "Title": "(8) Brian Armstrong on X: \"Exciting update: Coinbase has partnered with @perplexity_ai to help traders get access to real-time trusted crypto data/info for better decision making. The first stage is going live today, and there's more to come: Phase 1 (now): Perplexity is now ingesting our market data, https://t.co/4rze1q9WzL\" / X",
+  "Summary": "Webpage capture from x.com - fallback due to server issue",
+  "KeyPoints": [
+    "Current page capture via browser extension",
+    "Source domain: x.com",
+    "Content length: 3386 characters",
+    "Server analysis failed: Request-Timeout (30s)",
+    "Captured: 15.7.2025, 08:28:22",
+    "UUID Format: v6.2 Enhanced (nexus-usr-oliver-work-pc-mixed-20250715T0828Z-clst001-11fc4723)"
+  ],
+  "Properties": {
+    "source_url": "https://x.com/brian_armstrong/status/1943300747635925246?s=08",
+    "domain": "x.com",
+    "capture_method": "current_page_browser_extension",
+    "extraction_method": "advanced",
+    "server_error": "Request-Timeout (30s)",
+    "fallback": true,
+    "uuid_format": "v6.2",
+    "workspace": "professional",
+    "archetype_mapped": "mixed",
+    "tab_id": 29494283,
+    "word_count": 459,
+    "has_metadata": true,
+    "ics_detected": false,
+    "event_count": 0,
+    "calendar_related": false,
+    "detection_confidence": 0
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "b26d3d6b",
+  "UZT_ISO8601": "2025-07-15T06:29:35.605Z",
+  "Archetype": "Code",
+  "Subject": "Mistral AI introduces the upgraded Devstral models, including Devstral Small 1.1 and Devstral Medium, enhancing agentic coding capabilities. These models emphasize versatility and generalization, with Devstral Small 1.1 achieving state-of-the-art performance for open models. Devstral Medium offers a cost-effective solution, surpassing competitors in performance.",
+  "Tags": [
+    "#MistralAI",
+    "#API",
+    "#Code",
+    "#Devstral",
+    "#OpenSource"
+  ],
+  "Title": "Code Analysis",
+  "Summary": "Mistral AI introduces the upgraded Devstral models, including Devstral Small 1.1 and Devstral Medium, enhancing agentic coding capabilities. These models emphasize versatility and generalization, with Devstral Small 1.1 achieving state-of-the-art performance for open models. Devstral Medium offers a cost-effective solution, surpassing competitors in performance.",
+  "Properties": {
+    "source_url": "https://mistral.ai/news/devstral-2507?utm_source=futuretools.io&utm_medium=newspage",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 1379,
+    "code_info": {
+      "language": "JavaScript",
+      "framework": "none",
+      "functions_count": 0,
+      "classes_count": 0,
+      "imports_count": 0,
+      "apis_count": 0,
+      "main_functions": [],
+      "main_imports": [],
+      "api_endpoints": []
+    }
+  }
+}

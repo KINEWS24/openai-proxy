@@ -1,0 +1,32 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "3cf69675",
+  "UZT_ISO8601": "2025-07-15T06:30:25.173Z",
+  "Archetype": "Text",
+  "Subject": "Exists hat seine AI-gestützte Plattform zur Erstellung von 3D-Welten der Öffentlichkeit zugänglich gemacht. Nutzer können durch Eingabe von Textaufforderungen sofort immersive 3D-Welten generieren. Dean Takahashi berichtet über diese Innovation in der Spielebranche.",
+  "Tags": [
+    "#DeanTakahashi",
+    "#Exists",
+    "#AI",
+    "#3DWorld",
+    "#GamesBeat"
+  ],
+  "Title": "Text Analysis",
+  "Summary": "Exists hat seine AI-gestützte Plattform zur Erstellung von 3D-Welten der Öffentlichkeit zugänglich gemacht. Nutzer können durch Eingabe von Textaufforderungen sofort immersive 3D-Welten generieren. Dean Takahashi berichtet über diese Innovation in der Spielebranche.",
+  "Properties": {
+    "source_url": "https://gamesbeat.com/exists-opens-public-access-to-ai-powered-3d-world-creator/",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 1372,
+    "code_info": {
+      "language": "unknown",
+      "framework": "none",
+      "functions_count": 0,
+      "classes_count": 0,
+      "imports_count": 0,
+      "apis_count": 0,
+      "main_functions": [],
+      "main_imports": [],
+      "api_endpoints": []
+    }
+  }
+}

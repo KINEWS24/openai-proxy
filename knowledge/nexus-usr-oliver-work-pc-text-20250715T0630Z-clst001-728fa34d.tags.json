@@ -1,0 +1,32 @@
+{
+  "SchemaVersion": "v6.2",
+  "UID": "d5360425",
+  "UZT_ISO8601": "2025-07-15T06:30:08.163Z",
+  "Archetype": "Text",
+  "Subject": "Black Forest Labs hat den Kontext Komposer und kontextgesteuerte Presets veröffentlicht, die es ermöglichen, Bilder ohne manuelle Eingabeaufforderungen zu transformieren. Die Funktionen umfassen neue Orte/Stile, Beleuchtung von Porträts, Produktplatzierungen und Filmplakate. Das Tool ist kostenlos auf ihrer Website verfügbar.",
+  "Tags": [
+    "#BlackForestLabs",
+    "#KontextKomposer",
+    "#ImageEditing",
+    "#AI",
+    "#FreeTool"
+  ],
+  "Title": "Text Analysis",
+  "Summary": "Black Forest Labs hat den Kontext Komposer und kontextgesteuerte Presets veröffentlicht, die es ermöglichen, Bilder ohne manuelle Eingabeaufforderungen zu transformieren. Die Funktionen umfassen neue Orte/Stile, Beleuchtung von Porträts, Produktplatzierungen und Filmplakate. Das Tool ist kostenlos auf ihrer Website verfügbar.",
+  "Properties": {
+    "source_url": "https://x.com/bfl_ml/status/1943635700227739891?s=08",
+    "analysis_version": "v6.2-simplified",
+    "tokens_used": 1442,
+    "code_info": {
+      "language": "unknown",
+      "framework": "none",
+      "functions_count": 0,
+      "classes_count": 0,
+      "imports_count": 0,
+      "apis_count": 0,
+      "main_functions": [],
+      "main_imports": [],
+      "api_endpoints": []
+    }
+  }
+}
