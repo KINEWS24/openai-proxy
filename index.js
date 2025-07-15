@@ -1,4 +1,4 @@
-// index.js – ThinkAI Nexus v6.2 COMPLETE EDITION - SIMPLIFIED PROMPT SYSTEM + PHASE 3 CODE-AWARE SEARCH!
+// index.js – ThinkAI Nexus v6.1 COMPLETE EDITION - WORKSPACE INTELLIGENT!
 
 // --- SCHRITT 1: IMPORTS & KONSTANTEN ---
 const express = require("express");
@@ -6,7 +6,6 @@ const cors = require("cors");
 const fs = require("fs").promises;
 const fsSync = require("fs");
 const path = require("path");
-const crypto = require("crypto");
 const { uuidv7 } = require("uuidv7");
 const { OpenAI } = require("openai");
 const { google } = require("googleapis");
@@ -17,12 +16,9 @@ const fetch = require("node-fetch");
 // Nexus-All-in-One-Router
 const nexusRouter = require("./modules/nexus");
 
-// 🆕 PHASE 3: Code-Aware Search Module
-const codeSearch = require('./modules/code-search');
-
 // Globale Konfigurationen
 const KNOWLEDGE_DIR         = path.join(__dirname, "knowledge");
-const CAPTURE_PROMPT_PATH   = path.join(__dirname, "nexus_prompt_v5.3.txt");
+const CAPTURE_PROMPT_PATH   = path.join(__dirname, "nexus_prompt_v6.1.txt");
 const CLASSIFIER_PROMPT_PATH= path.join(__dirname, "nexus_prompt_classifier_v1.0.txt");
 const CLASSIFIER_OUTPUT_DIR = path.join(__dirname, "classifier-output");
 const OPENAI_API_KEY        = process.env.OPENAI_API_KEY;
@@ -30,38 +26,6 @@ const SCRAPER_API_KEY       = process.env.SCRAPER_API_KEY;
 const MAX_CONTENT_LENGTH    = 8000;
 const COMPLETION_MODEL      = "gpt-4o";
 const PORT                  = process.env.PORT || 10000;
-
-// v6.2 Enhanced Constants
-const SIMPLIFIED_PROMPT_ENABLED = true; // Feature flag for gradual rollout
-
-// === v6.2 UUID-FORMAT KONSTANTEN ===
-const NEXUS_V62_OWNER = 'oliver';           // Single-User System
-const NEXUS_V62_ENTRY_POINT = 'pc';         // Browser Extension  
-const NEXUS_V62_CLUSTER = 'clst001';        // Standard Cluster
-
-// Workspace-Abkürzungen für kompakte Dateinamen
-const WORKSPACE_CODES = {
-  'professional': 'work',
-  'personal': 'home', 
-  'social': 'community'
-};
-
-// Vereinheitlichte Archetype-Liste (lowercase für Dateinamen)
-const VALID_ARCHETYPES = {
-  'Calendar': 'calendar',
-  'Contact': 'contact', 
-  'Email': 'email',
-  'Project': 'project',
-  'Link': 'link',
-  'Document': 'document',
-  'Text': 'text',
-  'Image': 'image',
-  'Audio': 'audio',
-  'Video': 'video', 
-  'Data': 'data',
-  'Code': 'code',  // 🆕 Phase 1: Code Archetype
-  'Mixed': 'mixed'
-};
 
 // Default-Optionen für Chat
 const defaultChatOptions = {
@@ -476,7 +440,7 @@ function setupFileWatcher() {
 }
 
 /**
- * 🚀 PERFORMANCE: Enhanced Cached Search v6.2 - PHASE 3 CODE-AWARE INTEGRATION
+ * 🚀 PERFORMANCE: Enhanced Cached Search v6.1 - Workspace & Cluster Aware
  */
 function performCachedSearch(query, options = {}) {
   const startTime = Date.now();
@@ -490,10 +454,10 @@ function performCachedSearch(query, options = {}) {
     include_related = true 
   } = options;
   
-  console.log(`[SEARCH v6.2] Processing query: "${query}" (workspace: ${workspace}, entry_point: ${entry_point})`);
+  console.log(`[SEARCH v6.1] Processing query: "${query}" (workspace: ${workspace}, entry_point: ${entry_point})`);
   
   if (knowledgeCache.size === 0) {
-    console.warn('[SEARCH v6.2] ⚠️ Cache is empty - rebuilding...');
+    console.warn('[SEARCH v6.1] ⚠️ Cache is empty - rebuilding...');
     buildKnowledgeCache().catch(console.error);
     return { results: [], stats: { totalFiles: 0, searchResults: 0, searchTime: 0 } };
   }
@@ -554,48 +518,7 @@ function performCachedSearch(query, options = {}) {
     }
   }
   
-  // 🆕 PHASE 3: Code-Aware Search Enhancement
-  if (searchResults.some(r => r.metadata.Properties && r.metadata.Properties.code_info)) {
-    console.log('[SEARCH v6.2] 🎯 Applying code-aware enhancements...');
-    try {
-      const enhanced = codeSearch.enhanceSearchWithCodeAwareness(query, searchResults, knowledgeCache);
-      
-      if (enhanced.codeAwareSearch) {
-        console.log(`[SEARCH v6.2] ✅ Code-aware search applied: ${enhanced.totalCodeFiles} code files enhanced`);
-        // Use enhanced results with code relevance scoring
-        const topResults = enhanced.results.slice(0, mergedOptions.topK);
-        
-        // Add code context for later use
-        if (enhanced.codeContext) {
-          console.log('[SEARCH v6.2] 💻 Code context generated for AI');
-        }
-        
-        const searchTime = Date.now() - startTime;
-        
-        return {
-          results: topResults,
-          stats: {
-            totalFiles: targetFiles.size,
-            searchResults: enhanced.results.length,
-            topResults: topResults.length,
-            searchTime,
-            cacheHit: true,
-            lastCacheUpdate,
-            workspace,
-            entry_point,
-            cluster_id,
-            codeAwareApplied: true,
-            totalCodeFiles: enhanced.totalCodeFiles
-          },
-          codeContext: enhanced.codeContext
-        };
-      }
-    } catch (error) {
-      console.warn('[SEARCH v6.2] ⚠️ Code-aware enhancement failed, using standard search:', error.message);
-    }
-  }
-  
-  // Standard sorting if no code enhancement applied
+  // Sort and limit results
   searchResults.sort((a, b) => b.score - a.score);
   const topResults = searchResults.slice(0, mergedOptions.topK);
   
@@ -634,7 +557,7 @@ function performCachedSearch(query, options = {}) {
   
   const searchTime = Date.now() - startTime;
   
-  console.log(`[SEARCH v6.2] ✅ Found ${searchResults.length} results in ${searchTime}ms (workspace: ${workspace})`);
+  console.log(`[SEARCH v6.1] ✅ Found ${searchResults.length} results in ${searchTime}ms (workspace: ${workspace})`);
   
   return {
     results: topResults,
@@ -647,8 +570,7 @@ function performCachedSearch(query, options = {}) {
       lastCacheUpdate,
       workspace,
       entry_point,
-      cluster_id,
-      codeAwareApplied: false
+      cluster_id
     }
   };
 }
@@ -776,14 +698,12 @@ function getMatchDetails(query, text) {
 }
 
 /**
- * 🆕 PHASE 3: Enhanced AI Context mit Code-Awareness
+ * Erstellt Kontext-Text für AI aus Search-Ergebnissen (v6.1 Enhanced)
  * @param {Array} results - Top Search Results
- * @param {string} query - Original query for code context generation
- * @returns {string} Enhanced context with code details
+ * @returns {string} Formatierter Context
  */
-function createAIContext(results, query = '') {
-  // 🆕 PHASE 3: Enhanced Context with Code Details
-  const baseContext = results.map((result, index) => {
+function createAIContext(results) {
+  return results.map((result, index) => {
     const metadata = result.metadata;
     const uuidData = result.uuidData;
     
@@ -798,29 +718,12 @@ function createAIContext(results, query = '') {
       context += `\nZusammenfassung: ${metadata.Summary}`;
     }
     
-    // 🆕 PHASE 3: Code-specific context
-    if (metadata.Properties && metadata.Properties.code_info) {
-      const codeInfo = metadata.Properties.code_info;
-      context += `\n💻 Code: ${codeInfo.language}`;
-      if (codeInfo.framework && codeInfo.framework !== 'none') {
-        context += ` (${codeInfo.framework})`;
-      }
-      if (codeInfo.main_functions && codeInfo.main_functions.length > 0) {
-        context += `\n⚙️ Funktionen: ${codeInfo.main_functions.slice(0, 3).join(', ')}`;
-      }
-      if (codeInfo.api_endpoints && codeInfo.api_endpoints.length > 0) {
-        context += `\n🔗 APIs: ${codeInfo.api_endpoints.join(', ')}`;
-      }
-    }
-    
     if (metadata.KeyPoints && metadata.KeyPoints.length > 0) {
       context += `\nWichtige Punkte: ${metadata.KeyPoints.join(", ")}`;
     }
     
-    // Enhanced Cluster Relations (Code-Aware)
-    if (result.codeRelations && result.codeRelations.length > 0) {
-      context += `\n🔗 Verwandte Code-Files: ${result.codeRelations.length} weitere`;
-    } else if (result.clusterRelations && result.clusterRelations.length > 0) {
+    // Cluster Relations
+    if (result.clusterRelations && result.clusterRelations.length > 0) {
       context += `\nVerwandte Inhalte: ${result.clusterRelations.length} weitere Objekte`;
     }
     
@@ -834,976 +737,11 @@ function createAIContext(results, query = '') {
     
     return context;
   }).join("\n\n---\n\n");
-
-  // 🆕 PHASE 3: Generate additional code context if available
-  const codeResults = results.filter(r => r.metadata.Properties && r.metadata.Properties.code_info);
-  if (codeResults.length > 0) {
-    try {
-      const additionalContext = codeSearch.generateCodeContext(codeResults, query || 'code analysis');
-      return baseContext + '\n\n' + additionalContext;
-    } catch (error) {
-      console.warn('[CONTEXT v6.2] ⚠️ Code context generation failed:', error.message);
-    }
-  }
-
-  return baseContext;
 }
 
-// --- SCHRITT 5: v6.2 SIMPLIFIED ANALYSIS SYSTEM ---
+// --- SCHRITT 5: STANDARD-HILFSFUNKTIONEN (UNCHANGED) ---
 
-// =====================================
-// 🆕 PHASE 2: ENHANCED CODE PARSING
-// =====================================
-
-/**
- * 🔍 PHASE 2: Basic Code Parsing - Extrahiert Funktionen, Klassen, Imports
- * @param {string} content - Code content
- * @param {string} archetype - Detected archetype
- * @returns {object} Parsed code information
- */
-function parseCodeContent(content, archetype) {
-    if (archetype !== 'Code') {
-        return null;
-    }
-    
-    console.log('[CODE PARSER v6.2] Analyzing code content...');
-    
-    const codeInfo = {
-        functions: [],
-        classes: [],
-        imports: [],
-        variables: [],
-        apis: [],
-        components: [],
-        language: 'unknown',
-        framework: 'none'
-    };
-    
-    try {
-        const contentLower = content.toLowerCase();
-        const lines = content.split('\n');
-        
-        // Language Detection
-        if (contentLower.includes('function ') || contentLower.includes('const ') || contentLower.includes('export ')) {
-            codeInfo.language = 'JavaScript';
-        } else if (contentLower.includes('interface ') || contentLower.includes('typescript') || content.includes('.tsx')) {
-            codeInfo.language = 'TypeScript';
-        } else if (contentLower.includes('def ') || contentLower.includes('class ') || contentLower.includes('python')) {
-            codeInfo.language = 'Python';
-        } else if (contentLower.includes('<html>') || contentLower.includes('<!doctype')) {
-            codeInfo.language = 'HTML';
-        } else if (contentLower.includes('{') && contentLower.includes(':') && contentLower.includes(';')) {
-            codeInfo.language = 'CSS';
-        }
-        
-        // Framework Detection
-        if (contentLower.includes('react') || contentLower.includes('jsx') || contentLower.includes('usestate')) {
-            codeInfo.framework = 'React';
-        } else if (contentLower.includes('vue') || contentLower.includes('vue.js')) {
-            codeInfo.framework = 'Vue';
-        } else if (contentLower.includes('express') || contentLower.includes('app.get')) {
-            codeInfo.framework = 'Express';
-        } else if (contentLower.includes('nextjs') || contentLower.includes('next.js')) {
-            codeInfo.framework = 'Next.js';
-        }
-        
-        // Parse each line for specific patterns
-        for (const line of lines) {
-            const trimmedLine = line.trim();
-            const lowerLine = trimmedLine.toLowerCase();
-            
-            // JavaScript/TypeScript Functions
-            const functionMatch = trimmedLine.match(/(?:function\s+|const\s+|let\s+|var\s+)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*[=\(]/);
-            if (functionMatch) {
-                codeInfo.functions.push(functionMatch[1]);
-            }
-            
-            // Arrow Functions
-            const arrowMatch = trimmedLine.match(/(?:const\s+|let\s+|var\s+)([a-zA-Z_$][a-zA-Z0-9_$]*)\s*=.*=>/);
-            if (arrowMatch) {
-                codeInfo.functions.push(arrowMatch[1]);
-            }
-            
-            // Python Functions
-            const pythonFuncMatch = trimmedLine.match(/def\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*\(/);
-            if (pythonFuncMatch) {
-                codeInfo.functions.push(pythonFuncMatch[1]);
-            }
-            
-            // Classes
-            const classMatch = trimmedLine.match(/class\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/);
-            if (classMatch) {
-                codeInfo.classes.push(classMatch[1]);
-            }
-            
-            // React Components (functional)
-            const componentMatch = trimmedLine.match(/(?:const\s+|function\s+)([A-Z][a-zA-Z0-9_]*)\s*[=\(].*(?:jsx|tsx|react)/i);
-            if (componentMatch) {
-                codeInfo.components.push(componentMatch[1]);
-            }
-            
-            // Imports
-            const importMatch = trimmedLine.match(/import\s+.*?from\s+['"]([^'"]+)['"]/);
-            if (importMatch) {
-                codeInfo.imports.push(importMatch[1]);
-            }
-            
-            // ES6 Imports (destructured)
-            const importDestructMatch = trimmedLine.match(/import\s+\{([^}]+)\}\s+from/);
-            if (importDestructMatch) {
-                const importedItems = importDestructMatch[1].split(',').map(item => item.trim());
-                codeInfo.imports.push(...importedItems);
-            }
-            
-            // Python Imports
-            const pythonImportMatch = trimmedLine.match(/(?:import\s+|from\s+)([a-zA-Z_][a-zA-Z0-9_.]*)/);
-            if (pythonImportMatch && !trimmedLine.includes('from')) {
-                codeInfo.imports.push(pythonImportMatch[1]);
-            }
-            
-            // API Endpoints
-            const apiMatch = trimmedLine.match(/app\.(get|post|put|delete)\s*\(\s*['"]([^'"]+)['"]/);
-            if (apiMatch) {
-                codeInfo.apis.push(`${apiMatch[1].toUpperCase()} ${apiMatch[2]}`);
-            }
-            
-            // Variables (const, let, var)
-            const varMatch = trimmedLine.match(/(?:const|let|var)\s+([a-zA-Z_$][a-zA-Z0-9_$]*)/);
-            if (varMatch && !codeInfo.functions.includes(varMatch[1])) {
-                codeInfo.variables.push(varMatch[1]);
-            }
-        }
-        
-        // Remove duplicates and limit results
-        codeInfo.functions = [...new Set(codeInfo.functions)].slice(0, 10);
-        codeInfo.classes = [...new Set(codeInfo.classes)].slice(0, 10);
-        codeInfo.imports = [...new Set(codeInfo.imports)].slice(0, 15);
-        codeInfo.variables = [...new Set(codeInfo.variables)].slice(0, 10);
-        codeInfo.apis = [...new Set(codeInfo.apis)].slice(0, 10);
-        codeInfo.components = [...new Set(codeInfo.components)].slice(0, 10);
-        
-        console.log(`[CODE PARSER v6.2] ✅ Parsed ${codeInfo.language} code: ${codeInfo.functions.length} functions, ${codeInfo.classes.length} classes, ${codeInfo.imports.length} imports`);
-        
-        return codeInfo;
-        
-    } catch (error) {
-        console.warn('[CODE PARSER v6.2] ⚠️ Parsing failed:', error.message);
-        return codeInfo; // Return partial results
-    }
-}
-
-/**
- * 🏷️ PHASE 2: Enhanced Code-Aware Hashtag Generation
- * @param {object} codeInfo - Parsed code information
- * @param {string} content - Original content
- * @returns {Array} Enhanced hashtags based on code analysis
- */
-function generateCodeAwareHashtags(codeInfo, content) {
-    const hashtags = [];
-    
-    if (!codeInfo) return hashtags;
-    
-    // Language-specific tags
-    if (codeInfo.language !== 'unknown') {
-        hashtags.push(`#${codeInfo.language}`);
-    }
-    
-    // Framework tags
-    if (codeInfo.framework !== 'none') {
-        hashtags.push(`#${codeInfo.framework}`);
-    }
-    
-    // Function-based tags
-    if (codeInfo.functions.length > 0) {
-        // Look for common function patterns
-        const functionNames = codeInfo.functions.join(' ').toLowerCase();
-        if (functionNames.includes('login') || functionNames.includes('auth')) hashtags.push('#Authentication');
-        if (functionNames.includes('api') || functionNames.includes('fetch') || functionNames.includes('request')) hashtags.push('#API');
-        if (functionNames.includes('render') || functionNames.includes('component')) hashtags.push('#Frontend');
-        if (functionNames.includes('server') || functionNames.includes('route')) hashtags.push('#Backend');
-        if (functionNames.includes('test') || functionNames.includes('spec')) hashtags.push('#Testing');
-        if (functionNames.includes('config') || functionNames.includes('setup')) hashtags.push('#Configuration');
-    }
-    
-    // Import-based tags
-    if (codeInfo.imports.length > 0) {
-        const imports = codeInfo.imports.join(' ').toLowerCase();
-        if (imports.includes('react')) hashtags.push('#React');
-        if (imports.includes('express')) hashtags.push('#Express');
-        if (imports.includes('axios') || imports.includes('fetch')) hashtags.push('#HTTP');
-        if (imports.includes('mongoose') || imports.includes('sequelize')) hashtags.push('#Database');
-        if (imports.includes('jest') || imports.includes('mocha')) hashtags.push('#Testing');
-        if (imports.includes('lodash') || imports.includes('moment')) hashtags.push('#Utilities');
-    }
-    
-    // API-based tags
-    if (codeInfo.apis.length > 0) {
-        hashtags.push('#API');
-        const apiPaths = codeInfo.apis.join(' ').toLowerCase();
-        if (apiPaths.includes('user') || apiPaths.includes('auth')) hashtags.push('#UserManagement');
-        if (apiPaths.includes('product') || apiPaths.includes('order')) hashtags.push('#E-Commerce');
-        if (apiPaths.includes('admin')) hashtags.push('#Admin');
-    }
-    
-    // Component-based tags
-    if (codeInfo.components.length > 0) {
-        hashtags.push('#Components');
-        hashtags.push('#Frontend');
-    }
-    
-    return [...new Set(hashtags)]; // Remove duplicates
-}
-
-// =====================================
-// v6.2 SIMPLIFIED PROMPT DEFINITION
-// =====================================
-
-const SIMPLIFIED_ANALYSIS_PROMPT = `
-Analysiere diesen Content und antworte NUR im JSON-Format:
-
-{
-  "filename": "[YYYY-MM-DD]_[Archetyp]_[Hauptthema]_[Person/Kunde]",
-  "archetype": "[Email|Calendar|Contact|Project|Link|Document|Text|Code]", 
-  "hashtags": ["#tag1", "#tag2", "#tag3", "#tag4", "#tag5"],
-  "summary": "1-3 kurze Sätze was das ist und warum wichtig."
-}
-
-REGELN:
-- Filename: Datum_Typ_Thema_Person/Quelle (keine Sonderzeichen, max 60 Zeichen)
-- Archetype: Einen der 8 Haupttypen wählen (inkl. CODE für Programmiercode!)
-- Hashtags: Genau 5 Tags - PERSONEN haben HÖCHSTE PRIORITÄT, dann Archetyp, Kunde, Projekt, Wichtigkeit, Thema
-- Summary: Maximal 3 Sätze, faktisch, präzise
-
-PERSON/KONTAKT PRIORITY (WICHTIGSTE HASHTAGS):
-- Anna Müller → #AnnaMueller
-- Lukas Schmidt → #LukasSchmidt  
-- Claudia Becker → #ClaudiaBecker
-- Maria Müller → #MariaMueller
-- Stefan → #Stefan
-- Jens → #Jens
-- Telefonnummern → #Telefon
-- Ansprechpartner → #Ansprechpartner
-
-CODE-SPECIFIC HASHTAGS (für Archetype: Code):
-- JavaScript/TypeScript → #JavaScript, #TypeScript, #React, #NodeJS
-- Python → #Python, #API, #Backend
-- HTML/CSS → #HTML, #CSS, #Frontend
-- API/Routes → #API, #Backend, #Express
-- Components → #Components, #Frontend, #React
-- Authentication → #Authentication, #Login
-- Database → #Database, #SQL
-- Testing → #Testing, #Jest
-
-BEISPIELE:
-Filename: "2025-07-13_Contact_Telefonnummer_LukasSchmidt"
-Archetype: "Contact"  
-Hashtags: ["#LukasSchmidt", "#Telefon", "#BetaSolutions", "#Ansprechpartner", "#Contact"]
-Summary: "Lukas Schmidt von Beta Solutions, Telefon +49 30 12345678. Ansprechpartner für Projekt B mit API-Dokumentation Link."
-
-Filename: "2025-07-13_Code_LoginFunction_JavaScript"
-Archetype: "Code"
-Hashtags: ["#JavaScript", "#Authentication", "#React", "#Frontend", "#Login"]
-Summary: "JavaScript Login-Funktion mit React Hooks. Validiert Email/Password und sendet POST-Request an /api/login endpoint."
-
-Filename: "2025-07-13_Code_APIRoutes_Express"
-Archetype: "Code"
-Hashtags: ["#Express", "#API", "#Backend", "#NodeJS", "#Routes"]
-Summary: "Express.js API-Routes für User-Management. Enthält GET /users, POST /users/create und PUT /users/update endpoints."
-`;
-
-// =====================================
-// v6.2 ENHANCED ARCHETYP-ERKENNUNG 
-// =====================================
-
-function detectArchetypeV62(content) {
-    const contentLower = content.toLowerCase();
-    
-    // 🆕 PHASE 1: CODE DETECTION - HÖCHSTE PRIORITÄT nach Calendar
-    // JavaScript/TypeScript Detection
-    if (contentLower.includes('function ') || 
-        contentLower.includes('const ') || 
-        contentLower.includes('let ') ||
-        contentLower.includes('var ') ||
-        contentLower.includes('import ') || 
-        contentLower.includes('export ') ||
-        contentLower.includes('require(') ||
-        contentLower.includes('module.exports') ||
-        contentLower.includes('typescript') ||
-        contentLower.includes('.tsx') ||
-        contentLower.includes('interface ') ||
-        contentLower.includes('type ')) {
-        return 'Code';
-    }
-    
-    // HTML/JSX Detection
-    if ((contentLower.includes('<html>') || 
-         contentLower.includes('<!doctype') ||
-         contentLower.includes('<div') ||
-         contentLower.includes('<component') ||
-         contentLower.includes('jsx') ||
-         contentLower.includes('render()')) &&
-        (contentLower.includes('<') && contentLower.includes('>'))) {
-        return 'Code';
-    }
-    
-    // CSS/SCSS Detection
-    if ((contentLower.includes('{') && contentLower.includes(':') && contentLower.includes(';')) ||
-        contentLower.includes('@media') ||
-        contentLower.includes('css') ||
-        contentLower.includes('scss') ||
-        contentLower.includes('.class') ||
-        contentLower.includes('#id')) {
-        return 'Code';
-    }
-    
-    // JSON Detection (structured data)
-    if ((contentLower.trim().startsWith('{') || contentLower.trim().startsWith('[')) &&
-        contentLower.includes('"') &&
-        (contentLower.includes('json') || 
-         contentLower.includes('package.json') ||
-         contentLower.includes('config'))) {
-        return 'Code';
-    }
-    
-    // Python Detection
-    if (contentLower.includes('def ') ||
-        contentLower.includes('import ') ||
-        contentLower.includes('from ') ||
-        contentLower.includes('class ') ||
-        contentLower.includes('python') ||
-        contentLower.includes('.py')) {
-        return 'Code';
-    }
-    
-    // SQL Detection
-    if (contentLower.includes('select ') ||
-        contentLower.includes('insert ') ||
-        contentLower.includes('update ') ||
-        contentLower.includes('delete ') ||
-        contentLower.includes('create table') ||
-        contentLower.includes('sql')) {
-        return 'Code';
-    }
-    
-    // API/Config Detection
-    if (contentLower.includes('api') ||
-        contentLower.includes('endpoint') ||
-        contentLower.includes('router') ||
-        contentLower.includes('middleware') ||
-        contentLower.includes('express') ||
-        contentLower.includes('fastapi')) {
-        return 'Code';
-    }
-    
-    // ICS Calendar Detection - HÖCHSTE PRIORITÄT
-    if (contentLower.includes('begin:vcalendar') || 
-        contentLower.includes('begin:vevent') ||
-        contentLower.includes('dtstart:') ||
-        contentLower.includes('dtend:')) {
-        return 'Calendar';
-    }
-    
-    // Contact Detection - ERWEITERT für bessere Erkennung
-    if (contentLower.includes('telefon') || 
-        contentLower.includes('+49') ||
-        contentLower.includes('ansprechpartner:') ||
-        contentLower.includes('kontakt:') ||
-        (contentLower.includes('anna müller') || contentLower.includes('lukas schmidt') || contentLower.includes('claudia becker')) ||
-        contentLower.match(/\+\d{1,3}\s?\d{1,4}\s?\d{4,}/)) { // International phone patterns
-        return 'Contact';  
-    }
-    
-    // Email/Message Detection - ERWEITERT
-    if (contentLower.includes('betreff:') || 
-        contentLower.includes('von:') ||
-        contentLower.includes('subject:') ||
-        contentLower.includes('kunde:') ||
-        contentLower.match(/\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/)) {
-        return 'Email';
-    }
-    
-    // Project Detection - ERWEITERT  
-    if (contentLower.includes('projekt') ||
-        contentLower.includes('meilenstein') ||
-        contentLower.includes('status') ||
-        contentLower.includes('wichtig') ||
-        contentLower.includes('team') ||
-        contentLower.includes('qa-test') ||
-        contentLower.includes('freigabe')) {
-        return 'Project';
-    }
-    
-    // Link Detection
-    if (contentLower.includes('http://') || 
-        contentLower.includes('https://')) {
-        return 'Link';
-    }
-    
-    // Document Detection
-    if (contentLower.includes('.pdf') ||
-        contentLower.includes('.doc') ||
-        contentLower.includes('dokument') ||
-        contentLower.includes('api-doku')) {
-        return 'Document';
-    }
-    
-    // Text Detection (fallback für alles andere)
-    return 'Text';
-}
-
-// =====================================
-// v6.2 ENHANCED HASHTAG GENERATION 
-// =====================================
-
-function generateHashtagsV62(content, archetype) {
-    const hashtags = [];
-    const contentLower = content.toLowerCase();
-    
-    // 1. ARCHETYP TAG (immer)
-    hashtags.push(`#${archetype}`);
-    
-    // 🆕 PHASE 1: CODE-SPECIFIC HASHTAGS
-    if (archetype === 'Code') {
-        // Programming Languages
-        if (contentLower.includes('javascript') || contentLower.includes('.js') || contentLower.includes('function ') || contentLower.includes('const ')) hashtags.push('#JavaScript');
-        if (contentLower.includes('typescript') || contentLower.includes('.ts') || contentLower.includes('.tsx') || contentLower.includes('interface ')) hashtags.push('#TypeScript');
-        if (contentLower.includes('python') || contentLower.includes('.py') || contentLower.includes('def ')) hashtags.push('#Python');
-        if (contentLower.includes('html') || contentLower.includes('<html>') || contentLower.includes('<!doctype')) hashtags.push('#HTML');
-        if (contentLower.includes('css') || contentLower.includes('scss') || contentLower.includes('@media')) hashtags.push('#CSS');
-        if (contentLower.includes('sql') || contentLower.includes('select ') || contentLower.includes('database')) hashtags.push('#SQL');
-        if (contentLower.includes('json') || contentLower.includes('package.json')) hashtags.push('#JSON');
-        
-        // Frameworks & Libraries
-        if (contentLower.includes('react') || contentLower.includes('jsx') || contentLower.includes('usestate')) hashtags.push('#React');
-        if (contentLower.includes('vue') || contentLower.includes('vue.js')) hashtags.push('#Vue');
-        if (contentLower.includes('angular')) hashtags.push('#Angular');
-        if (contentLower.includes('express') || contentLower.includes('app.get') || contentLower.includes('app.post')) hashtags.push('#Express');
-        if (contentLower.includes('fastapi') || contentLower.includes('flask') || contentLower.includes('django')) hashtags.push('#API');
-        if (contentLower.includes('node.js') || contentLower.includes('nodejs') || contentLower.includes('npm')) hashtags.push('#NodeJS');
-        if (contentLower.includes('nextjs') || contentLower.includes('next.js')) hashtags.push('#NextJS');
-        
-        // Development Areas
-        if (contentLower.includes('frontend') || contentLower.includes('ui') || contentLower.includes('component')) hashtags.push('#Frontend');
-        if (contentLower.includes('backend') || contentLower.includes('server') || contentLower.includes('middleware')) hashtags.push('#Backend');
-        if (contentLower.includes('api') || contentLower.includes('endpoint') || contentLower.includes('route')) hashtags.push('#API');
-        if (contentLower.includes('database') || contentLower.includes('db') || contentLower.includes('mongodb') || contentLower.includes('postgres')) hashtags.push('#Database');
-        if (contentLower.includes('auth') || contentLower.includes('login') || contentLower.includes('jwt')) hashtags.push('#Authentication');
-        if (contentLower.includes('test') || contentLower.includes('jest') || contentLower.includes('cypress')) hashtags.push('#Testing');
-        if (contentLower.includes('config') || contentLower.includes('environment') || contentLower.includes('.env')) hashtags.push('#Configuration');
-        
-        // Function Types
-        if (contentLower.includes('function ') || contentLower.includes('def ') || contentLower.includes('const ')) hashtags.push('#Function');
-        if (contentLower.includes('class ') || contentLower.includes('component')) hashtags.push('#Class');
-        if (contentLower.includes('import ') || contentLower.includes('export ') || contentLower.includes('require(')) hashtags.push('#Module');
-        if (contentLower.includes('hook') || contentLower.includes('useeffect') || contentLower.includes('usestate')) hashtags.push('#Hook');
-    }
-    
-    // 2. PERSONEN TAGS - HÖCHSTE PRIORITÄT! 
-    if (contentLower.includes('anna müller') || contentLower.includes('anna mueller')) hashtags.push('#AnnaMueller');
-    if (contentLower.includes('lukas schmidt')) hashtags.push('#LukasSchmidt');
-    if (contentLower.includes('claudia becker')) hashtags.push('#ClaudiaBecker');
-    if (contentLower.includes('maria müller') || contentLower.includes('maria mueller')) hashtags.push('#MariaMueller');
-    if (contentLower.includes('stefan')) hashtags.push('#Stefan');
-    if (contentLower.includes('jens')) hashtags.push('#Jens');
-    
-    // 3. KONTAKT TAGS
-    if (contentLower.includes('telefon') || contentLower.includes('+49') || contentLower.includes('tel:')) hashtags.push('#Telefon');
-    if (contentLower.includes('ansprechpartner') || contentLower.includes('kontakt')) hashtags.push('#Ansprechpartner');
-    if (contentLower.includes('@') || contentLower.includes('email') || contentLower.includes('mail')) hashtags.push('#Email');
-    if (contentLower.includes('https://') || contentLower.includes('http://')) hashtags.push('#Link');
-    
-    // 4. KUNDEN TAG  
-    if (contentLower.includes('alpha')) hashtags.push('#AlphaGmbH');
-    if (contentLower.includes('beta')) hashtags.push('#BetaSolutions');  
-    if (contentLower.includes('cäsar') || contentLower.includes('caesar')) hashtags.push('#CaesarAG');
-    
-    // 5. PROJEKT TAG
-    if (contentLower.includes('projekt alpha')) hashtags.push('#ProjektAlpha');
-    if (contentLower.includes('projekt b')) hashtags.push('#ProjektB');
-    if (contentLower.includes('projekt cäsar')) hashtags.push('#ProjektCaesar');
-    
-    // 6. WICHTIGKEIT TAG
-    if (contentLower.includes('wichtig 1')) hashtags.push('#Wichtig1');
-    if (contentLower.includes('wichtig 2')) hashtags.push('#Wichtig2');
-    if (contentLower.includes('wichtig 3')) hashtags.push('#Wichtig3');
-    if (contentLower.includes('dringend') || contentLower.includes('urgent')) hashtags.push('#Dringend');
-    
-    // 7. THEMEN TAGS
-    if (contentLower.includes('meeting') || contentLower.includes('termin')) hashtags.push('#Meeting');
-    if (contentLower.includes('update') || contentLower.includes('status')) hashtags.push('#Update');
-    if (contentLower.includes('kickoff')) hashtags.push('#Kickoff');
-    if (contentLower.includes('design') || contentLower.includes('review')) hashtags.push('#DesignReview');
-    if (contentLower.includes('api')) hashtags.push('#API');
-    if (contentLower.includes('test') || contentLower.includes('qa')) hashtags.push('#Testing');
-    if (contentLower.includes('freigabe')) hashtags.push('#Freigabe');
-    if (contentLower.includes('meilenstein')) hashtags.push('#Meilenstein');
-    if (contentLower.includes('daily') || contentLower.includes('stand-up')) hashtags.push('#Daily');
-    if (contentLower.includes('workshop')) hashtags.push('#Workshop');
-    
-    // 8. SMART DEDUPLICATION - Remove duplicates, keep most important
-    const uniqueHashtags = [...new Set(hashtags)];
-    
-    // 9. PRIORITY ORDERING - Code-Tags und Personen zuerst
-    const priorityOrder = [
-        '#JavaScript', '#TypeScript', '#React', '#API', '#Frontend', '#Backend',  // Code priority
-        '#AnnaMueller', '#LukasSchmidt', '#ClaudiaBecker', '#Telefon', '#Ansprechpartner'  // Person priority
-    ];
-    const orderedHashtags = [];
-    
-    // Add priority tags first
-    for (const priority of priorityOrder) {
-        if (uniqueHashtags.includes(priority)) {
-            orderedHashtags.push(priority);
-        }
-    }
-    
-    // Add remaining tags
-    for (const tag of uniqueHashtags) {
-        if (!orderedHashtags.includes(tag)) {
-            orderedHashtags.push(tag);
-        }
-    }
-    
-    // Fill up to 5 tags if needed
-    while (orderedHashtags.length < 5) {
-        if (!orderedHashtags.includes('#Content')) orderedHashtags.push('#Content');
-        else if (!orderedHashtags.includes('#Business')) orderedHashtags.push('#Business');
-        else if (!orderedHashtags.includes('#Communication')) orderedHashtags.push('#Communication');
-        else break;
-    }
-    
-    return orderedHashtags.slice(0, 5); // Maximum 5 tags, priority ordered
-}
-
-// =====================================
-// v6.2 ENHANCED UUID-FORMAT FILENAME GENERATION
-// =====================================
-
-/**
- * 🆔 v6.2 UUID-Format Filename Generator - Bulletproof für Oliver's Daily Use
- * Format: nexus-usr-{owner}-{workspace}-{entrypoint}-{archetype}-{timestamp}-{cluster}-{uuid8}
- * Beispiel: nexus-usr-oliver-work-pc-contact-20250713T1430Z-clst001-a4b8c9d2
- * 
- * @param {string} archetype - Detected archetype (Contact, Email, etc.)
- * @param {string} content - Original content for analysis  
- * @param {string} workspace - Workspace (professional, personal, social)
- * @returns {string} UUID-format filename without extension
- */
-function generateFilenameV62(archetype, content = '', workspace = 'professional') {
-    console.log(`[FILENAME v6.2] Generating UUID-format filename...`);
-    
-    try {
-        // 1. OWNER (fest für Single-User)
-        const owner = NEXUS_V62_OWNER;
-        
-        // 2. WORKSPACE-ABKÜRZUNG
-        const workspaceCode = WORKSPACE_CODES[workspace] || 'work'; // Fallback auf 'work'
-        console.log(`[FILENAME v6.2] Workspace: ${workspace} → ${workspaceCode}`);
-        
-        // 3. ENTRY POINT (fest für Browser Extension)
-        const entryPoint = NEXUS_V62_ENTRY_POINT;
-        
-        // 4. ARCHETYPE MAPPING (lowercase für Dateinamen)
-        const archetypeLower = VALID_ARCHETYPES[archetype] || 'mixed';
-        console.log(`[FILENAME v6.2] Archetype: ${archetype} → ${archetypeLower}`);
-        
-        // 5. TIMESTAMP (ISO-Format, Minuten-Genauigkeit)
-        const now = new Date();
-        const year = now.getFullYear();
-        const month = String(now.getMonth() + 1).padStart(2, '0');
-        const day = String(now.getDate()).padStart(2, '0');
-        const hours = String(now.getHours()).padStart(2, '0');
-        const minutes = String(now.getMinutes()).padStart(2, '0');
-        const timestamp = `${year}${month}${day}T${hours}${minutes}Z`;
-        
-        // 6. CLUSTER (Standard)
-        const cluster = NEXUS_V62_CLUSTER;
-        
-        // 7. UNIQUE ID (8-stellige Hex-ID)
-        const uuid8 = crypto.randomUUID().replace(/-/g, '').substring(0, 8).toLowerCase();
-        
-        // 8. FILENAME ZUSAMMENBAUEN
-        const filename = `nexus-usr-${owner}-${workspaceCode}-${entryPoint}-${archetypeLower}-${timestamp}-${cluster}-${uuid8}`;
-        
-        console.log(`[FILENAME v6.2] ✅ Generated: ${filename}`);
-        
-        // 9. VALIDIERUNG (Sicherheitscheck)
-        if (filename.length > 100) {
-            console.warn(`[FILENAME v6.2] ⚠️ Filename very long: ${filename.length} chars`);
-        }
-        
-        // Ensure filename is filesystem-safe
-        const safeFilename = filename.replace(/[^a-zA-Z0-9_-]/g, '');
-        if (safeFilename !== filename) {
-            console.warn(`[FILENAME v6.2] ⚠️ Filename contained unsafe chars, cleaned: ${safeFilename}`);
-            return safeFilename;
-        }
-        
-        return filename;
-        
-    } catch (error) {
-        console.error('[FILENAME v6.2] ❌ Generation failed:', error.message);
-        
-        // EMERGENCY FALLBACK
-        const fallbackTimestamp = new Date().toISOString().replace(/[:.]/g, '').substring(0, 15);
-        const fallbackUuid = Math.random().toString(36).substring(2, 10);
-        const fallbackFilename = `nexus-usr-oliver-work-pc-mixed-${fallbackTimestamp}Z-clst001-${fallbackUuid}`;
-        
-        console.log(`[FILENAME v6.2] 🛡️ Emergency fallback: ${fallbackFilename}`);
-        return fallbackFilename;
-    }
-}
-
-// =====================================
-// v6.2 MAIN SIMPLIFIED ANALYSIS FUNCTION
-// =====================================
-
-async function analyzeContentSimplified(content, sourceUrl = null, contextUuid = null) {
-    console.log('[ANALYSIS v6.2] Starting simplified analysis...');
-    
-    try {
-        // 1. Pre-Analysis für bessere Prompts
-        const archetype = detectArchetypeV62(content);
-        const hashtags = generateHashtagsV62(content, archetype);
-        const filename = generateFilenameV62(archetype, content, 'professional'); // Default workspace
-        
-        // 🆕 PHASE 2: Enhanced Code Analysis
-        let codeInfo = null;
-        let enhancedHashtags = [...hashtags];
-        
-        if (archetype === 'Code') {
-            console.log('[ANALYSIS v6.2] 🔍 Running enhanced code analysis...');
-            codeInfo = parseCodeContent(content, archetype);
-            
-            if (codeInfo) {
-                // Generate code-aware hashtags
-                const codeHashtags = generateCodeAwareHashtags(codeInfo, content);
-                
-                // Merge with existing hashtags, prioritizing code-specific ones
-                const mergedHashtags = [...codeHashtags, ...hashtags];
-                enhancedHashtags = [...new Set(mergedHashtags)].slice(0, 5); // Keep unique, limit to 5
-                
-                console.log(`[ANALYSIS v6.2] 🎯 Code analysis: ${codeInfo.language} with ${codeInfo.functions.length} functions`);
-            }
-        }
-        
-        console.log(`[ANALYSIS v6.2] Pre-detected: ${archetype}, ${enhancedHashtags.length} hashtags`);
-        
-        // 2. Ultra-Simple Prompt an GPT-4o - Enhanced for Code
-        let prompt = `${SIMPLIFIED_ANALYSIS_PROMPT}
-
-CONTENT TO ANALYZE:
-${content.substring(0, 2000)}
-
-PRE-DETECTED INFO:
-Archetype: ${archetype}
-Suggested Hashtags: ${enhancedHashtags.join(', ')}
-Suggested Filename: ${filename}`;
-
-        // Add code-specific context for better AI analysis
-        if (codeInfo) {
-            prompt += `
-
-CODE ANALYSIS RESULTS:
-Language: ${codeInfo.language}
-Framework: ${codeInfo.framework}
-Functions: ${codeInfo.functions.slice(0, 5).join(', ')}
-Classes: ${codeInfo.classes.slice(0, 3).join(', ')}
-Imports: ${codeInfo.imports.slice(0, 5).join(', ')}
-API Endpoints: ${codeInfo.apis.slice(0, 3).join(', ')}
-
-Verwende diese Code-Analyse um eine präzise Summary zu erstellen. Fokussiere auf die Hauptfunktionalität des Codes.`;
-        } else {
-            prompt += `
-
-Verwende diese Infos als Basis aber verbessere sie wenn nötig.`;
-        }
-
-        // 3. API Call mit kurzen Timeouts
-        console.log('[ANALYSIS v6.2] Calling OpenAI with simplified prompt...');
-        
-        const response = await openai.chat.completions.create({
-            model: COMPLETION_MODEL,
-            messages: [{ role: "user", content: prompt }],
-            max_tokens: 300,  // Drastisch reduziert!
-            temperature: 0.3,
-        });
-        
-        console.log('[ANALYSIS v6.2] OpenAI response received');
-        
-        // 4. Parse JSON Response - ENHANCED FIX
-        const aiContent = response.choices[0]?.message?.content || "";
-        let analysis;
-        
-        try {
-            // Try direct JSON parse first
-            analysis = JSON.parse(aiContent);
-        } catch (parseError) {
-            console.warn('[ANALYSIS v6.2] Direct JSON parse failed, trying extraction...');
-            
-            // Extract JSON from response text (GPT often adds explanatory text)
-            const jsonMatch = aiContent.match(/\{[\s\S]*\}/);
-            if (jsonMatch) {
-                try {
-                    analysis = JSON.parse(jsonMatch[0]);
-                    console.log('[ANALYSIS v6.2] ✅ JSON extraction successful');
-                } catch (extractError) {
-                    console.warn('[ANALYSIS v6.2] JSON extraction failed, using fallback:', extractError.message);
-                    analysis = {
-                        filename: filename,
-                        archetype: archetype,
-                        hashtags: enhancedHashtags,
-                        summary: "Content wurde analysiert (JSON-Extraktion-Fehler)."
-                    };
-                }
-            } else {
-                console.warn('[ANALYSIS v6.2] No JSON found in response, using fallback');
-                analysis = {
-                    filename: filename,
-                    archetype: archetype,
-                    hashtags: enhancedHashtags,
-                    summary: "Content wurde analysiert (Kein JSON gefunden)."
-                };
-            }
-        }
-        
-        // 5. Validate and enhance analysis
-        const finalResult = {
-            filename: analysis.filename || filename,
-            archetype: analysis.archetype || archetype,
-            hashtags: analysis.hashtags || enhancedHashtags,
-            summary: analysis.summary || "Content erfolgreich analysiert.",
-            source_url: sourceUrl,
-            tokens_used: response.usage?.total_tokens || 0,
-            analysis_version: 'v6.2-simplified',
-            // 🆕 Add code analysis results
-            ...(codeInfo && {
-                code_info: {
-                    language: codeInfo.language,
-                    framework: codeInfo.framework,
-                    functions_count: codeInfo.functions.length,
-                    classes_count: codeInfo.classes.length,
-                    imports_count: codeInfo.imports.length,
-                    apis_count: codeInfo.apis.length,
-                    main_functions: codeInfo.functions.slice(0, 5),
-                    main_imports: codeInfo.imports.slice(0, 5),
-                    api_endpoints: codeInfo.apis.slice(0, 3)
-                }
-            })
-        };
-        
-        console.log(`[ANALYSIS v6.2] ✅ Success: ${finalResult.archetype}, ${finalResult.hashtags?.length || 0} hashtags, ${finalResult.tokens_used} tokens`);
-        
-        // 6. ✅ FIXED: Create Extension-Compatible Response Format
-        const nexusContent = `# ${finalResult.archetype} Analysis
-
-**Generated:** ${new Date().toLocaleString('de-DE')}
-**Archetype:** ${finalResult.archetype}
-**Source:** ${sourceUrl || 'Unknown'}
-
-## Summary
-${finalResult.summary}
-
-## Analysis Details
-- **Hashtags:** ${finalResult.hashtags.join(', ')}
-- **Analysis Version:** ${finalResult.analysis_version}
-- **Tokens Used:** ${finalResult.tokens_used}${
-    finalResult.code_info ? `
-
-## Code Analysis
-- **Language:** ${finalResult.code_info.language}
-- **Framework:** ${finalResult.code_info.framework}
-- **Functions:** ${finalResult.code_info.functions_count} (${finalResult.code_info.main_functions.join(', ')})
-- **Classes:** ${finalResult.code_info.classes_count}
-- **Imports:** ${finalResult.code_info.imports_count} (${finalResult.code_info.main_imports.join(', ')})
-- **API Endpoints:** ${finalResult.code_info.apis_count} (${finalResult.code_info.api_endpoints.join(', ')})` : ''
-}
-
-## Original Content
-${content.substring(0, 500)}...`;
-
-        const tagsData = {
-            "SchemaVersion": "v6.2",
-            "UID": crypto.randomUUID().replace(/-/g, '').substring(0, 8),
-            "UZT_ISO8601": new Date().toISOString(),
-            "Archetype": finalResult.archetype,
-            "Subject": finalResult.summary,
-            "Tags": finalResult.hashtags,
-            "Title": `${finalResult.archetype} Analysis`,
-            "Summary": finalResult.summary,
-            "Properties": {
-                "source_url": sourceUrl,
-                "analysis_version": finalResult.analysis_version,
-                "tokens_used": finalResult.tokens_used,
-                ...(finalResult.code_info && { "code_info": finalResult.code_info })
-            }
-        };
-
-        return {
-            success: true,
-            nexusMd: {
-                filename: `${generateFilenameV62(finalResult.archetype, content, 'professional')}.nexus.md`,
-                content: nexusContent
-            },
-            tagsJson: {
-                filename: `${generateFilenameV62(finalResult.archetype, content, 'professional')}.tags.json`,
-                content: JSON.stringify(tagsData, null, 2)
-            },
-            originalFilename: `${generateFilenameV62(finalResult.archetype, content, 'professional')}.original.txt`,
-            originalContent: content
-        };
-        
-    } catch (error) {
-        console.error('[ANALYSIS v6.2] ❌ Error:', error.message);
-        
-        // FALLBACK: Pre-detected Werte verwenden
-        const fallbackResult = {
-            filename: generateFilenameV62(detectArchetypeV62(content), content, 'professional'),
-            archetype: detectArchetypeV62(content),
-            hashtags: generateHashtagsV62(content, detectArchetypeV62(content)),
-            summary: "Content wurde lokal analysiert (Server-Timeout).",
-            source_url: sourceUrl,
-            error_reason: error.message,
-            analysis_version: 'v6.2-fallback'
-        };
-        
-        console.log(`[ANALYSIS v6.2] 🛡️ Fallback used: ${fallbackResult.archetype}`);
-        
-        // Auch bei Fallback Extension-kompatibles Format
-        const nexusContent = `# ${fallbackResult.archetype} Analysis (Fallback)
-
-**Generated:** ${new Date().toLocaleString('de-DE')}
-**Archetype:** ${fallbackResult.archetype}
-**Source:** ${sourceUrl || 'Unknown'}
-
-## Summary
-${fallbackResult.summary}
-
-## Analysis Details
-- **Hashtags:** ${fallbackResult.hashtags.join(', ')}
-- **Analysis Version:** ${fallbackResult.analysis_version}
-- **Error Reason:** ${fallbackResult.error_reason}
-
-## Original Content
-${content.substring(0, 500)}...`;
-
-        const tagsData = {
-            "SchemaVersion": "v6.2",
-            "UID": crypto.randomUUID().replace(/-/g, '').substring(0, 8),
-            "UZT_ISO8601": new Date().toISOString(),
-            "Archetype": fallbackResult.archetype,
-            "Subject": fallbackResult.summary,
-            "Tags": fallbackResult.hashtags,
-            "Title": `${fallbackResult.archetype} Analysis (Fallback)`,
-            "Summary": fallbackResult.summary,
-            "Properties": {
-                "source_url": sourceUrl,
-                "analysis_version": fallbackResult.analysis_version,
-                "error_reason": fallbackResult.error_reason
-            }
-        };
-
-        return {
-            success: true, // Override für UX - auch Fallback ist erfolgreich
-            nexusMd: {
-                filename: `${generateFilenameV62(fallbackResult.archetype, content, 'professional')}.nexus.md`,
-                content: nexusContent
-            },
-            tagsJson: {
-                filename: `${generateFilenameV62(fallbackResult.archetype, content, 'professional')}.tags.json`,
-                content: JSON.stringify(tagsData, null, 2)
-            },
-            originalFilename: `${generateFilenameV62(fallbackResult.archetype, content, 'professional')}.original.txt`,
-            originalContent: content,
-            fallback_used: true
-        };
-    }
-}
-
-// =====================================
-// v6.2 LEGACY FUNCTION WRAPPER
-// =====================================
-
-// Wrapper für Backwards Compatibility
-async function generateNexusObject(content, sourceUrl = null, contextUuid = null) {
-    if (SIMPLIFIED_PROMPT_ENABLED) {
-        console.log('[LEGACY] Redirecting to v6.2 simplified analysis...');
-        return await analyzeContentSimplified(content, sourceUrl, contextUuid);
-    } else {
-        // Original v6.1 function (fallback)
-        try {
-            const capturePrompt = await fs.readFile(CAPTURE_PROMPT_PATH, 'utf8');
-            const prompt = `${capturePrompt}\n\nContent:\n${content}\n\nSource URL: ${sourceUrl || 'N/A'}`;
-            
-            const response = await openai.chat.completions.create({
-                model: COMPLETION_MODEL,
-                messages: [{ role: "user", content: prompt }],
-                temperature: 0.2,
-                max_tokens: 2000
-            });
-            
-            const nexusContent = response.choices[0]?.message?.content || "";
-            return { success: true, content: nexusContent };
-        } catch (error) {
-            console.error("Fehler bei generateNexusObject:", error);
-            return { success: false, error: error.message };
-        }
-    }
-}
-
-// =====================================
-// v6.2 ENHANCED ERROR HANDLING
-// =====================================
-
-// Enhanced Wrapper für Analyse-Requests mit besseren Status Messages
-async function handleAnalysisRequestV62(analysisFunction, req, res) {
-    try {
-        // Status Message statt "Achtung"
-        console.log('[ANALYSIS v6.2] 🔄 Processing request...');
-        
-        const result = await analysisFunction(req.body);
-        
-        if (result.success) {
-            console.log('[ANALYSIS v6.2] ✅ Request successful');
-            res.json({
-                ...result,
-                status_message: "✅ Content erfolgreich analysiert und zu Nexus hinzugefügt!",
-                version: "6.2"
-            });
-        } else {
-            console.log('[ANALYSIS v6.2] ⚠️ Request failed but handled gracefully');
-            
-            // Auch bei "Fehlern" positive Response wenn Fallback verwendet wurde
-            if (result.fallback_used) {
-                res.json({
-                    ...result,
-                    success: true, // Override für UX
-                    status_message: "⚡ Content analysiert (Offline-Modus) und zu Nexus hinzugefügt!",
-                    version: "6.2"
-                });
-            } else {
-                res.status(400).json({
-                    ...result,
-                    status_message: "❌ Analyse fehlgeschlagen. Bitte versuchen Sie es erneut.",
-                    version: "6.2"
-                });
-            }
-        }
-    } catch (error) {
-        console.error('[ANALYSIS v6.2] ❌ Unexpected error:', error);
-        res.status(500).json({ 
-            success: false, 
-            error: error.message,
-            status_message: "❌ Unerwarteter Server-Fehler. Bitte kontaktieren Sie den Support.",
-            version: "6.2"
-        });
-    }
-}
-
-// Legacy wrapper for backwards compatibility
-const handleAnalysisRequest = handleAnalysisRequestV62;
-
-// Klassifiziert Content mit OpenAI (UNCHANGED)
+// Klassifiziert Content mit OpenAI
 async function classifyContent(content, sourceUrl = null) {
   try {
     const classifierPrompt = await fs.readFile(CLASSIFIER_PROMPT_PATH, 'utf8');
@@ -1831,14 +769,50 @@ async function classifyContent(content, sourceUrl = null) {
   }
 }
 
-// Text-Content bereinigen (UNCHANGED)
+// Generiert Nexus-Objekt mit OpenAI
+async function generateNexusObject(content, sourceUrl = null, contextUuid = null) {
+  try {
+    const capturePrompt = await fs.readFile(CAPTURE_PROMPT_PATH, 'utf8');
+    const prompt = `${capturePrompt}\n\nContent:\n${content}\n\nSource URL: ${sourceUrl || 'N/A'}`;
+    
+    const response = await openai.chat.completions.create({
+      model: COMPLETION_MODEL,
+      messages: [{ role: "user", content: prompt }],
+      temperature: 0.2,
+      max_tokens: 2000
+    });
+    
+    const nexusContent = response.choices[0]?.message?.content || "";
+    return { success: true, content: nexusContent };
+  } catch (error) {
+    console.error("Fehler bei generateNexusObject:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+// Wrapper für Analyse-Requests
+async function handleAnalysisRequest(analysisFunction, req, res) {
+  try {
+    const result = await analysisFunction(req.body);
+    if (result.success) {
+      res.json(result);
+    } else {
+      res.status(400).json(result);
+    }
+  } catch (error) {
+    console.error("Fehler in handleAnalysisRequest:", error);
+    res.status(500).json({ success: false, error: error.message });
+  }
+}
+
+// Text-Content bereinigen
 function cleanTextContent(html) {
   const $ = cheerio.load(html);
   $('script, style, nav, footer, aside').remove();
   return $.text().replace(/\s+/g, ' ').trim();
 }
 
-// Web-Scraping mit ScraperAPI oder Puppeteer (UNCHANGED)
+// Web-Scraping mit ScraperAPI oder Puppeteer
 async function scrapeUrl(url) {
   try {
     if (SCRAPER_API_KEY) {
@@ -1862,6 +836,89 @@ async function scrapeUrl(url) {
     throw error;
   }
 }
+// === NEUER ENDPOINT: /api/example-questions (Kompakt & robust) ===
+app.get('/api/example-questions', (req, res) => {
+  try {
+    // Step 1: Kandidaten sammeln (nur die letzten 5 Tage, max 50)
+    const since = dayjs().subtract(5, 'day');
+    const candidates = [];
+
+    for (const [filename, data] of knowledgeCache.entries()) {
+      // Robust: Finde Datum (UZT_ISO8601) und Textfelder
+      let d = data.UZT_ISO8601 || data.Properties?.DTSTART || null;
+      if (!d || !dayjs(d).isValid() || !dayjs(d).isAfter(since)) continue;
+
+      candidates.push({
+        text: data.Subject || data.Summary || data.Title || "",
+        archetype: data.Archetype || "Text",
+        date: d,
+        title: data.Title || "",
+        tags: data.Tags || []
+      });
+      if (candidates.length >= 50) break;
+    }
+
+    // Step 2: Termin/Appointment extrahieren
+    const isAppointment = entry =>
+      ["calendar", "appointment", "event", "meeting"].some(t => (entry.archetype||"").toLowerCase().includes(t)) ||
+      /(termin|meeting|event|besprechung|call|calendar|appointment)/i.test(entry.text + " " + entry.title);
+
+    let selected = [];
+    let appointment = candidates.find(isAppointment);
+    let rest = candidates.filter(e => !isAppointment(e));
+
+    if (appointment) {
+      selected.push(appointment);
+      while (selected.length < 5 && rest.length > 0) {
+        const idx = Math.floor(Math.random() * rest.length);
+        selected.push(rest[idx]);
+        rest.splice(idx, 1);
+      }
+    } else {
+      // Fallback: Default Termin + 4 random weitere
+      selected.push({
+        text: "Termin: Arztbesuch am 26. Juli – Impfpass mitbringen!",
+        archetype: "Calendar",
+        date: null,
+        title: "Arzttermin",
+        tags: ["#Calendar"]
+      });
+      while (selected.length < 5 && candidates.length > 0) {
+        const idx = Math.floor(Math.random() * candidates.length);
+        selected.push(candidates[idx]);
+        candidates.splice(idx, 1);
+      }
+    }
+
+    // Mit Defaults auffüllen falls nötig
+    const defaultFragen = [
+      { text: "Was ist Mistral AI Devstral?", archetype: "Code", date: null, title: "Mistral AI Devstral", tags: ["#Code"] },
+      { text: "Was gibt es Neues zu Reka Flash 3.1?", archetype: "Text", date: null, title: "Reka Flash 3.1", tags: ["#Reka"] },
+      { text: "Wie nutze ich den Kalender in Nexus?", archetype: "Message", date: null, title: "Kalender-Feature", tags: ["#HowTo"] },
+      { text: "Wie starte ich einen neuen Chat mit meinem Wissen?", archetype: "Text", date: null, title: "Chat starten", tags: ["#Nexus"] }
+    ];
+    let i = 0;
+    while (selected.length < 5 && i < defaultFragen.length) {
+      selected.push(defaultFragen[i++]);
+    }
+
+    // Format-Ausgabe
+    res.json({
+      questions: selected.slice(0,5).map(entry => ({
+        text: (isAppointment(entry) ? `Termin: ${entry.title || entry.text}`.replace(/\s+/g, ' ').trim()
+              : entry.title?.trim() || entry.text?.trim() || "Frage aus deinem Fundus"),
+        archetype: entry.archetype,
+        date: entry.date,
+        title: entry.title,
+        tags: entry.tags
+      }))
+    });
+
+  } catch (err) {
+    console.error("[example-questions] Fehler:", err);
+    res.status(500).json({ error: "Interner Fehler beim Generieren der Beispiel-Fragen." });
+  }
+});
 
 // --- SCHRITT 6: EXPRESS APP & MIDDLEWARE ---
 const app = express();
@@ -1872,17 +929,14 @@ app.use((req, res, next) => {
   next(); 
 });
 
-// Health Check (v6.2 Enhanced with Phase 3)
+// Health Check (v6.1 Enhanced)
 app.get("/", (req, res) => {
   const enhancedStats = getEnhancedCacheStats();
   
   res.json({ 
     status: "OK", 
-    message: "Nexus v6.2 + PHASE 3 CODE-AWARE SEARCH Ready!", 
-    version: "6.2",
-    phase: "3",
-    simplified_prompt_enabled: SIMPLIFIED_PROMPT_ENABLED,
-    code_aware_search: true,
+    message: "Nexus v6.1 WORKSPACE INTELLIGENT EDITION Ready!", 
+    version: "6.1",
     performance: enhancedStats
   });
 });
@@ -1984,6 +1038,91 @@ app.post("/cache/rebuild", async (req, res) => {
   }
 });
 
+// === NEUER ENDPOINT: /api/example-questions (Kompakt & robust) ===
+app.get('/api/example-questions', (req, res) => {
+  try {
+    // Step 1: Kandidaten sammeln (nur die letzten 5 Tage, max 50)
+    const since = dayjs().subtract(5, 'day');
+    const candidates = [];
+
+    for (const [filename, data] of knowledgeCache.entries()) {
+      // Robust: Finde Datum (UZT_ISO8601) und Textfelder
+      let d = data.UZT_ISO8601 || data.Properties?.DTSTART || null;
+      if (!d || !dayjs(d).isValid() || !dayjs(d).isAfter(since)) continue;
+
+      candidates.push({
+        text: data.Subject || data.Summary || data.Title || "",
+        archetype: data.Archetype || "Text",
+        date: d,
+        title: data.Title || "",
+        tags: data.Tags || []
+      });
+      if (candidates.length >= 50) break;
+    }
+
+    // Step 2: Termin/Appointment extrahieren
+    const isAppointment = entry =>
+      ["calendar", "appointment", "event", "meeting"].some(t => (entry.archetype||"").toLowerCase().includes(t)) ||
+      /(termin|meeting|event|besprechung|call|calendar|appointment)/i.test(entry.text + " " + entry.title);
+
+    let selected = [];
+    let appointment = candidates.find(isAppointment);
+    let rest = candidates.filter(e => !isAppointment(e));
+
+    if (appointment) {
+      selected.push(appointment);
+      while (selected.length < 5 && rest.length > 0) {
+        const idx = Math.floor(Math.random() * rest.length);
+        selected.push(rest[idx]);
+        rest.splice(idx, 1);
+      }
+    } else {
+      // Fallback: Default Termin + 4 random weitere
+      selected.push({
+        text: "Termin: Arztbesuch am 26. Juli – Impfpass mitbringen!",
+        archetype: "Calendar",
+        date: null,
+        title: "Arzttermin",
+        tags: ["#Calendar"]
+      });
+      while (selected.length < 5 && candidates.length > 0) {
+        const idx = Math.floor(Math.random() * candidates.length);
+        selected.push(candidates[idx]);
+        candidates.splice(idx, 1);
+      }
+    }
+
+    // Mit Defaults auffüllen falls nötig
+    const defaultFragen = [
+      { text: "Was ist Mistral AI Devstral?", archetype: "Code", date: null, title: "Mistral AI Devstral", tags: ["#Code"] },
+      { text: "Was gibt es Neues zu Reka Flash 3.1?", archetype: "Text", date: null, title: "Reka Flash 3.1", tags: ["#Reka"] },
+      { text: "Wie nutze ich den Kalender in Nexus?", archetype: "Message", date: null, title: "Kalender-Feature", tags: ["#HowTo"] },
+      { text: "Wie starte ich einen neuen Chat mit meinem Wissen?", archetype: "Text", date: null, title: "Chat starten", tags: ["#Nexus"] }
+    ];
+    let i = 0;
+    while (selected.length < 5 && i < defaultFragen.length) {
+      selected.push(defaultFragen[i++]);
+    }
+
+    // Format-Ausgabe
+    res.json({
+      questions: selected.slice(0,5).map(entry => ({
+        text: (isAppointment(entry) ? `Termin: ${entry.title || entry.text}`.replace(/\s+/g, ' ').trim()
+              : entry.title?.trim() || entry.text?.trim() || "Frage aus deinem Fundus"),
+        archetype: entry.archetype,
+        date: entry.date,
+        title: entry.title,
+        tags: entry.tags
+      }))
+    });
+
+  } catch (err) {
+    console.error("[example-questions] Fehler:", err);
+    res.status(500).json({ error: "Interner Fehler beim Generieren der Beispiel-Fragen." });
+  }
+});
+
+
 // --- ANALYSE-ENDPOINTS (UNCHANGED) ---
 
 // Text-Analyse
@@ -1994,7 +1133,7 @@ app.post("/analyze-text", async (req, res) => {
       return { success: false, error: "Content ist erforderlich" };
     }
     
-    let cleanContent = cleanTextContent(content);
+    const cleanContent = cleanTextContent(content);
     if (cleanContent.length > MAX_CONTENT_LENGTH) {
       cleanContent = cleanContent.substring(0, MAX_CONTENT_LENGTH);
     }
@@ -2014,7 +1153,7 @@ app.post("/analyze-image", async (req, res) => {
     
     try {
       const response = await openai.chat.completions.create({
-        model: "gpt-4o",
+        model: "gpt-4-vision-preview",
         messages: [{
           role: "user",
           content: [
@@ -2068,7 +1207,7 @@ app.post("/classify", async (req, res) => {
   }, req, res);
 });
 
-// --- 🚀 SUPER-FAST CACHED CHAT-ENDPOINT v6.2 ENHANCED WITH PHASE 3 ---
+// --- 🚀 SUPER-FAST CACHED CHAT-ENDPOINT v6.1 ENHANCED ---
 app.post("/chat", async (req, res) => {
   try {
     // 1) Header-Auth prüfen
@@ -2089,7 +1228,7 @@ app.post("/chat", async (req, res) => {
       });
     }
 
-    // 3) 🚀 SUPER-FAST CACHED SEARCH v6.2 (workspace & cluster aware + CODE-AWARE)
+    // 3) 🚀 SUPER-FAST CACHED SEARCH v6.1 (workspace & cluster aware)
     const searchResult = performCachedSearch(query, options);
     
     if (searchResult.results.length === 0) {
@@ -2105,28 +1244,28 @@ app.post("/chat", async (req, res) => {
       });
     }
 
-    // 4) 🆕 PHASE 3: Enhanced AI Context Generation with Code-Awareness
-    const contextText = createAIContext(searchResult.results, query);
+    // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
+    const contextText = createAIContext(searchResult.results);
 
     const aiResponse = await openai.chat.completions.create({
       model: COMPLETION_MODEL,
       messages: [
         {
           role: "system",
-          content: "Du bist ein hilfsbereiter persönlicher Assistent, der Fragen basierend auf den persönlichen Wissensdaten des Users beantwortet. Du verstehst Workspace-Kontexte (work/home/family/etc.) und kannst verwandte Inhalte aus Clustern einbeziehen. 🆕 PHASE 3: Du bist auch Code-Experte und kannst Code-Zusammenhänge erklären, verwandte Dateien finden und technische Fragen beantworten. Antworte präzise, hilfreich und in der passenden Sprache. Nutze die verfügbaren Informationen, um konkrete und nützliche Antworten zu geben."
+          content: "Du bist ein hilfsbereiter persönlicher Assistent, der Fragen basierend auf den persönlichen Wissensdaten des Users beantwortet. Du verstehst Workspace-Kontexte (work/home/family/etc.) und kannst verwandte Inhalte aus Clustern einbeziehen. Antworte präzise, hilfreich und in der passenden Sprache. Nutze die verfügbaren Informationen, um konkrete und nützliche Antworten zu geben."
         },
         {
           role: "user",
-          content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, Code-Funktionen, etc.). Berücksichtige auch verwandte Inhalte aus den gleichen Clustern. Wenn es um Code geht, erkläre Zusammenhänge zwischen verschiedenen Dateien.`
+          content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, etc.). Berücksichtige auch verwandte Inhalte aus den gleichen Clustern.`
         }
       ],
       temperature: 0.3,
-      max_tokens: 1000
+      max_tokens: 800
     });
 
     const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
 
-    // 5) 🆕 PHASE 3: Enhanced Response with Code-Aware Sources
+    // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
     return res.json({
       success: true,
       answer,
@@ -2142,33 +1281,18 @@ app.post("/chat", async (req, res) => {
         cluster_id: r.uuidData.cluster_id,
         version: r.uuidData.version,
         isRelated: r.isRelated || false,
-        clusterMembers: r.clusterRelations.length,
-        // 🆕 PHASE 3: Code-specific source information
-        ...(r.metadata.Properties && r.metadata.Properties.code_info && {
-          codeInfo: {
-            language: r.metadata.Properties.code_info.language,
-            framework: r.metadata.Properties.code_info.framework,
-            functions: r.metadata.Properties.code_info.main_functions?.slice(0, 3) || [],
-            apis: r.metadata.Properties.code_info.api_endpoints || []
-          }
-        }),
-        // Enhanced score with code relevance
-        enhancedScore: r.enhancedScore || r.score,
-        codeRelevanceBonus: r.codeRelevanceBonus || 0
+        clusterMembers: r.clusterRelations.length
       })),
       meta: {
         ...searchResult.stats,
         query,
         timestamp: new Date().toISOString(),
-        version: "6.2",
-        phase: "3",
-        codeAwareApplied: searchResult.stats.codeAwareApplied || false,
-        totalCodeFiles: searchResult.stats.totalCodeFiles || 0
+        version: "6.1"
       }
     });
 
   } catch (err) {
-    console.error("[CHAT v6.2] Error:", err);
+    console.error("[CHAT v6.1] Error:", err);
     return res.status(500).json({
       success: false,
       error: { 
@@ -2208,14 +1332,7 @@ app.post("/search/workspace/:workspace", async (req, res) => {
         summary: r.metadata.Summary || "",
         score: Math.round(r.score * 100) / 100,
         archetype: r.uuidData.archetype,
-        cluster_id: r.uuidData.cluster_id,
-        // 🆕 PHASE 3: Code information in search results
-        ...(r.metadata.Properties && r.metadata.Properties.code_info && {
-          codeInfo: {
-            language: r.metadata.Properties.code_info.language,
-            framework: r.metadata.Properties.code_info.framework
-          }
-        })
+        cluster_id: r.uuidData.cluster_id
       })),
       meta: searchResult.stats
     });
@@ -2239,10 +1356,7 @@ app.get("/analytics/workspace/:workspace", (req, res) => {
     archetypen: {},
     entry_points: {},
     clusters: {},
-    timeline: {},
-    // 🆕 PHASE 3: Code-specific analytics
-    code_languages: {},
-    code_frameworks: {}
+    timeline: {}
   };
   
   for (const [filename, metadata] of workspaceFiles.entries()) {
@@ -2265,78 +1379,9 @@ app.get("/analytics/workspace/:workspace", (req, res) => {
       const month = uuidData.timestamp.substring(0, 6); // YYYYMM
       analytics.timeline[month] = (analytics.timeline[month] || 0) + 1;
     }
-    
-    // 🆕 PHASE 3: Code analytics
-    if (metadata.Properties && metadata.Properties.code_info) {
-      const codeInfo = metadata.Properties.code_info;
-      if (codeInfo.language) {
-        analytics.code_languages[codeInfo.language] = (analytics.code_languages[codeInfo.language] || 0) + 1;
-      }
-      if (codeInfo.framework && codeInfo.framework !== 'none') {
-        analytics.code_frameworks[codeInfo.framework] = (analytics.code_frameworks[codeInfo.framework] || 0) + 1;
-      }
-    }
   }
   
   res.json(analytics);
-});
-
-// 🆕 PHASE 3: Code-Specific Endpoints
-
-// Code ecosystem analysis endpoint
-app.get("/debug/code-ecosystem", (req, res) => {
-  try {
-    const ecosystem = codeSearch.analyzeCodeEcosystem(knowledgeCache);
-    res.json({
-      success: true,
-      ecosystem,
-      timestamp: new Date().toISOString(),
-      version: "6.2",
-      phase: "3"
-    });
-  } catch (error) {
-    res.status(500).json({ 
-      success: false, 
-      error: error.message,
-      version: "6.2",
-      phase: "3"
-    });
-  }
-});
-
-// Code-aware search test endpoint
-app.post("/debug/code-search", async (req, res) => {
-  try {
-    const { query } = req.body;
-    if (!query) {
-      return res.status(400).json({ 
-        success: false, 
-        error: "Query is required" 
-      });
-    }
-    
-    // Test code-aware search directly
-    const searchResult = performCachedSearch(query, {});
-    
-    res.json({
-      success: true,
-      query,
-      results: searchResult.results.length,
-      codeFiles: searchResult.results.filter(r => 
-        r.metadata.Properties && r.metadata.Properties.code_info
-      ).length,
-      stats: searchResult.stats,
-      timestamp: new Date().toISOString(),
-      version: "6.2",
-      phase: "3"
-    });
-    
-  } catch (error) {
-    res.status(500).json({ 
-      success: false, 
-      error: error.message 
-    });
-  }
 });
 
 // Nexus-All-in-One-Endpoint
@@ -2346,7 +1391,7 @@ app.use("/nexus", nexusRouter);
 initializeApp()
   .then(() => {
     app.listen(PORT, () => {
-      console.log(`🚀 Nexus v6.2 + PHASE 3 CODE-AWARE SEARCH running on port ${PORT}`);
+      console.log(`🚀 Nexus v6.1 WORKSPACE INTELLIGENT EDITION running on port ${PORT}`);
       console.log(`📊 Knowledge Directory: ${KNOWLEDGE_DIR}`);
       console.log(`🧠 AI Model: ${COMPLETION_MODEL}`);
       console.log(`⚡ Performance Cache: ${knowledgeCache.size} files loaded`);
@@ -2355,18 +1400,14 @@ initializeApp()
       console.log(`🧩 Cluster Cache: ${clusterCache.size} clusters active`);
       console.log(`📱 Entry Point Cache: ${entryPointCache.size} entry points`);
       console.log(`👁️ File Watcher: ${fileWatcher ? 'Active' : 'Inactive'}`);
-      console.log(`🎯 v6.2 Features: Simplified Prompt ${SIMPLIFIED_PROMPT_ENABLED ? 'ENABLED' : 'DISABLED'}`);
-      console.log(`🎯 PHASE 3 Features: Code-Aware Search ENABLED`);
-      console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations with CODE-AWARE SEARCH!`);
+      console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations!`);
       
       // Enhanced startup stats
       const enhancedStats = getEnhancedCacheStats();
       console.log(`📈 v6.1 Stats: ${enhancedStats.v61_files} v6.1 files, ${enhancedStats.legacy_files} legacy files`);
       console.log(`🎯 Workspaces: ${Object.keys(enhancedStats.workspaces).join(', ')}`);
       console.log(`📱 Entry Points: ${Object.keys(enhancedStats.entry_points).join(', ')}`);
-      console.log(`💻 Code-Aware Search: Ready for queries like "Zeig mir meine Authentication-Files"`);
-      console.log(`🏆 NEXUS v6.2 + PHASE 3 - CODE-AWARE SEARCH BULLETPROOF! 👑`);
-      console.log(`✅ PHASE 3 COMPLETE - Oliver wird zum Code-Guru! 🧠💻`);
+      console.log(`🏆 NEXUS v6.1 - KNOWLEDGE SOVEREIGNTY ACHIEVED! 👑`);
     });
   })
   .catch(err => {
