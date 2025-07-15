@@ -12,6 +12,7 @@ const { google } = require("googleapis");
 const cheerio = require("cheerio");
 const puppeteer = require("puppeteer");
 const fetch = require("node-fetch");
+const dayjs = require("dayjs");
 
 // Nexus-All-in-One-Router
 const nexusRouter = require("./modules/nexus");
@@ -836,89 +837,6 @@ async function scrapeUrl(url) {
     throw error;
   }
 }
-// === NEUER ENDPOINT: /api/example-questions (Kompakt & robust) ===
-app.get('/api/example-questions', (req, res) => {
-  try {
-    // Step 1: Kandidaten sammeln (nur die letzten 5 Tage, max 50)
-    const since = dayjs().subtract(5, 'day');
-    const candidates = [];
-
-    for (const [filename, data] of knowledgeCache.entries()) {
-      // Robust: Finde Datum (UZT_ISO8601) und Textfelder
-      let d = data.UZT_ISO8601 || data.Properties?.DTSTART || null;
-      if (!d || !dayjs(d).isValid() || !dayjs(d).isAfter(since)) continue;
-
-      candidates.push({
-        text: data.Subject || data.Summary || data.Title || "",
-        archetype: data.Archetype || "Text",
-        date: d,
-        title: data.Title || "",
-        tags: data.Tags || []
-      });
-      if (candidates.length >= 50) break;
-    }
-
-    // Step 2: Termin/Appointment extrahieren
-    const isAppointment = entry =>
-      ["calendar", "appointment", "event", "meeting"].some(t => (entry.archetype||"").toLowerCase().includes(t)) ||
-      /(termin|meeting|event|besprechung|call|calendar|appointment)/i.test(entry.text + " " + entry.title);
-
-    let selected = [];
-    let appointment = candidates.find(isAppointment);
-    let rest = candidates.filter(e => !isAppointment(e));
-
-    if (appointment) {
-      selected.push(appointment);
-      while (selected.length < 5 && rest.length > 0) {
-        const idx = Math.floor(Math.random() * rest.length);
-        selected.push(rest[idx]);
-        rest.splice(idx, 1);
-      }
-    } else {
-      // Fallback: Default Termin + 4 random weitere
-      selected.push({
-        text: "Termin: Arztbesuch am 26. Juli – Impfpass mitbringen!",
-        archetype: "Calendar",
-        date: null,
-        title: "Arzttermin",
-        tags: ["#Calendar"]
-      });
-      while (selected.length < 5 && candidates.length > 0) {
-        const idx = Math.floor(Math.random() * candidates.length);
-        selected.push(candidates[idx]);
-        candidates.splice(idx, 1);
-      }
-    }
-
-    // Mit Defaults auffüllen falls nötig
-    const defaultFragen = [
-      { text: "Was ist Mistral AI Devstral?", archetype: "Code", date: null, title: "Mistral AI Devstral", tags: ["#Code"] },
-      { text: "Was gibt es Neues zu Reka Flash 3.1?", archetype: "Text", date: null, title: "Reka Flash 3.1", tags: ["#Reka"] },
-      { text: "Wie nutze ich den Kalender in Nexus?", archetype: "Message", date: null, title: "Kalender-Feature", tags: ["#HowTo"] },
-      { text: "Wie starte ich einen neuen Chat mit meinem Wissen?", archetype: "Text", date: null, title: "Chat starten", tags: ["#Nexus"] }
-    ];
-    let i = 0;
-    while (selected.length < 5 && i < defaultFragen.length) {
-      selected.push(defaultFragen[i++]);
-    }
-
-    // Format-Ausgabe
-    res.json({
-      questions: selected.slice(0,5).map(entry => ({
-        text: (isAppointment(entry) ? `Termin: ${entry.title || entry.text}`.replace(/\s+/g, ' ').trim()
-              : entry.title?.trim() || entry.text?.trim() || "Frage aus deinem Fundus"),
-        archetype: entry.archetype,
-        date: entry.date,
-        title: entry.title,
-        tags: entry.tags
-      }))
-    });
-
-  } catch (err) {
-    console.error("[example-questions] Fehler:", err);
-    res.status(500).json({ error: "Interner Fehler beim Generieren der Beispiel-Fragen." });
-  }
-});
 
 // --- SCHRITT 6: EXPRESS APP & MIDDLEWARE ---
 const app = express();
