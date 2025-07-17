@@ -1480,6 +1480,69 @@ app.post("/analyze-link", async (req, res) => {
   }
 });
 
+// Calendar-Analyse - QUICK-FIX Alias für Demo
+app.post("/analyze-calendar", async (req, res) => {
+  try {
+    const { content, source_url } = req.body;
+    if (!content) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "Content ist erforderlich" 
+      });
+    }
+    
+    console.log('[ANALYZE-CALENDAR] Processing calendar analysis with file creation...');
+    
+    // 1. Clean content
+    const cleanContent = cleanTextContent(content);
+    const limitedContent = cleanContent.length > MAX_CONTENT_LENGTH 
+      ? cleanContent.substring(0, MAX_CONTENT_LENGTH)
+      : cleanContent;
+    
+    // 2. Generate AI analysis
+    const aiResult = await generateNexusObject(limitedContent, source_url);
+    if (!aiResult.success) {
+      return res.status(400).json(aiResult);
+    }
+    
+    // 3. Parse AI content into MD and JSON
+    const { mdContent, tagsJson } = parseAIGeneratedContent(aiResult.content);
+    
+    // 4. Calendar-specific enhancements
+    tagsJson.Archetype = 'Calendar'; // Force calendar archetype
+    tagsJson.Properties = { 
+      ...tagsJson.Properties, 
+      event_source: source_url || 'calendar_capture',
+      capture_timestamp: new Date().toISOString()
+    };
+    
+    // 5. Generate v6.1 UUID for calendar
+    const uuid = generateV61UUID('Calendar', 'work', 'pc');
+    
+    // 6. Save files to knowledge directory
+    const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
+    
+    // 7. Format extension-compatible response
+    const response = formatExtensionResponse(
+      fileInfo.mdFilename,
+      fileInfo.tagsFilename,
+      mdContent,
+      tagsJson
+    );
+    
+    console.log(`[ANALYZE-CALENDAR] ✅ Created calendar files: ${fileInfo.mdFilename}, ${fileInfo.tagsFilename}`);
+    
+    res.json(response);
+    
+  } catch (error) {
+    console.error('[ANALYZE-CALENDAR] ❌ Error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
 // Klassifizierungs-Endpoint (UNCHANGED)
 app.post("/classify", async (req, res) => {
   await handleAnalysisRequest(async (body) => {
