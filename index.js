@@ -615,6 +615,197 @@ function performCachedSearch(query, options = {}) {
   };
 }
 
+// --- 🆕 EXTENSION SUPPORT: FILE CREATION FUNCTIONS ---
+
+/**
+ * 🧩 Parse AI-Generated Content into Markdown and JSON
+ * @param {string} aiContent - Raw AI response
+ * @returns {object} { mdContent, tagsJson }
+ */
+function parseAIGeneratedContent(aiContent) {
+  try {
+    // Look for JSON block in AI response (common pattern: ```json ... ```)
+    const jsonBlockMatch = aiContent.match(/```json\s*([\s\S]*?)\s*```/);
+    
+    let tagsJson = {};
+    let mdContent = aiContent;
+    
+    if (jsonBlockMatch) {
+      // Extract JSON and remaining markdown
+      try {
+        tagsJson = JSON.parse(jsonBlockMatch[1]);
+        mdContent = aiContent.replace(jsonBlockMatch[0], '').trim();
+      } catch (jsonError) {
+        console.warn('[PARSE] Failed to parse JSON block:', jsonError.message);
+      }
+    }
+    
+    // If no JSON block found, try to extract structured data from AI response
+    if (Object.keys(tagsJson).length === 0) {
+      // Extract title
+      const titleMatch = aiContent.match(/(?:Title|Titel):\s*(.+)/i);
+      if (titleMatch) {
+        tagsJson.Title = titleMatch[1].trim();
+      }
+      
+      // Extract summary
+      const summaryMatch = aiContent.match(/(?:Summary|Zusammenfassung):\s*(.+)/i);
+      if (summaryMatch) {
+        tagsJson.Summary = summaryMatch[1].trim();
+      }
+      
+      // Extract tags
+      const tagsMatch = aiContent.match(/(?:Tags|Schlagwörter):\s*(.+)/i);
+      if (tagsMatch) {
+        tagsJson.Tags = tagsMatch[1].split(',').map(tag => tag.trim());
+      }
+      
+      // Default values if nothing found
+      if (!tagsJson.Title) {
+        tagsJson.Title = "Erfasster Inhalt";
+      }
+      if (!tagsJson.Tags) {
+        tagsJson.Tags = ["#Erfasst"];
+      }
+    }
+    
+    // Ensure required fields exist
+    tagsJson.Archetype = tagsJson.Archetype || detectArchetypeFromContent(aiContent);
+    tagsJson.UZT_ISO8601 = tagsJson.UZT_ISO8601 || new Date().toISOString();
+    tagsJson.Erfassung_Timestamp = new Date().toISOString();
+    
+    return { mdContent, tagsJson };
+  } catch (error) {
+    console.error('[PARSE] Error parsing AI content:', error);
+    
+    // Fallback
+    return {
+      mdContent: aiContent,
+      tagsJson: {
+        Title: "Erfasster Inhalt",
+        Summary: aiContent.substring(0, 200) + "...",
+        Tags: ["#Erfasst"],
+        Archetype: "Mixed",
+        UZT_ISO8601: new Date().toISOString(),
+        Erfassung_Timestamp: new Date().toISOString()
+      }
+    };
+  }
+}
+
+/**
+ * 🎯 Detect Archetype from Content
+ * @param {string} content - Content to analyze
+ * @returns {string} Detected archetype
+ */
+function detectArchetypeFromContent(content) {
+  const lowerContent = content.toLowerCase();
+  
+  if (lowerContent.includes('http') || lowerContent.includes('www.')) {
+    return 'Link';
+  }
+  if (lowerContent.includes('meeting') || lowerContent.includes('termin') || lowerContent.includes('calendar')) {
+    return 'Message';
+  }
+  if (lowerContent.includes('bild') || lowerContent.includes('image') || lowerContent.includes('foto')) {
+    return 'Image';
+  }
+  if (lowerContent.includes('video') || lowerContent.includes('film')) {
+    return 'Video';
+  }
+  if (lowerContent.includes('audio') || lowerContent.includes('podcast') || lowerContent.includes('musik')) {
+    return 'Audio';
+  }
+  if (lowerContent.includes('dokument') || lowerContent.includes('pdf') || lowerContent.includes('document')) {
+    return 'Document';
+  }
+  if (lowerContent.includes('daten') || lowerContent.includes('zahlen') || lowerContent.includes('statistik')) {
+    return 'Data';
+  }
+  
+  return 'Text'; // Default
+}
+
+/**
+ * 🆔 Generate v6.1 UUID for new file
+ * @param {string} archetype - Detected archetype
+ * @param {string} workspace - Target workspace (default: 'work')
+ * @param {string} entryPoint - Entry point (default: 'pc')
+ * @returns {string} v6.1 UUID
+ */
+function generateV61UUID(archetype = 'Text', workspace = 'work', entryPoint = 'pc') {
+  const scope = 'personal';
+  const owner = 'oliver';
+  const timestamp = dayjs().format('YYYYMMDDHHmmss');
+  const clusterId = 'clst001'; // Default cluster for new items
+  const uniqueId = uuidv7().substring(0, 8); // Short unique ID
+  
+  return `nexus-v6-${scope}-${owner}-${workspace}-${entryPoint}-${archetype}-${timestamp}-${clusterId}-${uniqueId}`;
+}
+
+/**
+ * 💾 Save Nexus Files to Knowledge Directory
+ * @param {string} mdContent - Markdown content
+ * @param {object} tagsJson - Tags JSON object
+ * @param {string} uuid - Generated UUID
+ * @returns {Promise<object>} File information
+ */
+async function saveNexusFiles(mdContent, tagsJson, uuid) {
+  try {
+    const mdFilename = `${uuid}.md`;
+    const tagsFilename = `${uuid}.tags.json`;
+    
+    const mdPath = path.join(KNOWLEDGE_DIR, mdFilename);
+    const tagsPath = path.join(KNOWLEDGE_DIR, tagsFilename);
+    
+    // Write files
+    await fs.writeFile(mdPath, mdContent, 'utf8');
+    await fs.writeFile(tagsPath, JSON.stringify(tagsJson, null, 2), 'utf8');
+    
+    console.log(`[FILE-CREATION] ✅ Created files: ${mdFilename}, ${tagsFilename}`);
+    
+    return {
+      mdFilename,
+      tagsFilename,
+      mdPath,
+      tagsPath,
+      success: true
+    };
+    
+  } catch (error) {
+    console.error('[FILE-CREATION] ❌ Error saving files:', error);
+    throw error;
+  }
+}
+
+/**
+ * 📋 Format Response for Extension
+ * @param {string} mdFilename - Markdown filename
+ * @param {string} tagsFilename - Tags filename
+ * @param {string} mdContent - Markdown content
+ * @param {object} tagsContent - Tags content
+ * @returns {object} Extension-compatible response
+ */
+function formatExtensionResponse(mdFilename, tagsFilename, mdContent, tagsContent) {
+  return {
+    success: true,
+    nexusMd: {
+      filename: mdFilename,
+      content: mdContent
+    },
+    tagsJson: {
+      filename: tagsFilename,
+      content: JSON.stringify(tagsContent, null, 2)
+    },
+    meta: {
+      timestamp: new Date().toISOString(),
+      version: "6.1",
+      archetype: tagsContent.Archetype,
+      workspace: tagsContent.Workspace || 'work'
+    }
+  };
+}
+
 // --- SCHRITT 3: INITIALISIERUNG ---
 async function initializeApp() {
   if (!OPENAI_API_KEY) {
@@ -1111,78 +1302,185 @@ app.get('/api/example-questions', (req, res) => {
 });
 
 
-// --- ANALYSE-ENDPOINTS (UNCHANGED) ---
+// --- 🆕 ENHANCED ANALYSE-ENDPOINTS WITH FILE CREATION ---
 
-// Text-Analyse
+// Text-Analyse - ENHANCED mit File Creation
 app.post("/analyze-text", async (req, res) => {
-  await handleAnalysisRequest(async (body) => {
-    const { content, source_url } = body;
+  try {
+    const { content, source_url } = req.body;
     if (!content) {
-      return { success: false, error: "Content ist erforderlich" };
-    }
-    
-    const cleanContent = cleanTextContent(content);
-    if (cleanContent.length > MAX_CONTENT_LENGTH) {
-      cleanContent = cleanContent.substring(0, MAX_CONTENT_LENGTH);
-    }
-    
-    const result = await generateNexusObject(cleanContent, source_url);
-    return result;
-  }, req, res);
-});
-
-// Bild-Analyse
-app.post("/analyze-image", async (req, res) => {
-  await handleAnalysisRequest(async (body) => {
-    const { image_url, source_url } = body;
-    if (!image_url) {
-      return { success: false, error: "image_url ist erforderlich" };
-    }
-    
-    try {
-      const response = await openai.chat.completions.create({
-        model: "gpt-4-vision-preview",
-        messages: [{
-          role: "user",
-          content: [
-            { type: "text", text: "Analysiere dieses Bild und erstelle eine Nexus-Objekt-Beschreibung:" },
-            { type: "image_url", image_url: { url: image_url } }
-          ]
-        }],
-        max_tokens: 1000
+      return res.status(400).json({ 
+        success: false, 
+        error: "Content ist erforderlich" 
       });
-      
-      const analysis = response.choices[0]?.message?.content || "";
-      const result = await generateNexusObject(analysis, source_url);
-      return result;
-    } catch (error) {
-      return { success: false, error: error.message };
-    }
-  }, req, res);
-});
-
-// Link-Analyse
-app.post("/analyze-link", async (req, res) => {
-  await handleAnalysisRequest(async (body) => {
-    const { url } = body;
-    if (!url) {
-      return { success: false, error: "URL ist erforderlich" };
     }
     
-    try {
-      const html = await scrapeUrl(url);
-      const cleanContent = cleanTextContent(html);
-      const limitedContent = cleanContent.substring(0, MAX_CONTENT_LENGTH);
-      
-      const result = await generateNexusObject(limitedContent, url);
-      return result;
-    } catch (error) {
-      return { success: false, error: `Scraping-Fehler: ${error.message}` };
+    console.log('[ANALYZE-TEXT] Processing text analysis with file creation...');
+    
+    // 1. Clean content
+    const cleanContent = cleanTextContent(content);
+    const limitedContent = cleanContent.length > MAX_CONTENT_LENGTH 
+      ? cleanContent.substring(0, MAX_CONTENT_LENGTH)
+      : cleanContent;
+    
+    // 2. Generate AI analysis
+    const aiResult = await generateNexusObject(limitedContent, source_url);
+    if (!aiResult.success) {
+      return res.status(400).json(aiResult);
     }
-  }, req, res);
+    
+    // 3. Parse AI content into MD and JSON
+    const { mdContent, tagsJson } = parseAIGeneratedContent(aiResult.content);
+    
+    // 4. Generate v6.1 UUID
+    const archetype = tagsJson.Archetype || 'Text';
+    const uuid = generateV61UUID(archetype, 'work', 'pc');
+    
+    // 5. Save files to knowledge directory
+    const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
+    
+    // 6. Format extension-compatible response
+    const response = formatExtensionResponse(
+      fileInfo.mdFilename,
+      fileInfo.tagsFilename,
+      mdContent,
+      tagsJson
+    );
+    
+    console.log(`[ANALYZE-TEXT] ✅ Created files: ${fileInfo.mdFilename}, ${fileInfo.tagsFilename}`);
+    
+    res.json(response);
+    
+  } catch (error) {
+    console.error('[ANALYZE-TEXT] ❌ Error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
 });
 
-// Klassifizierungs-Endpoint
+// Bild-Analyse - ENHANCED mit File Creation
+app.post("/analyze-image", async (req, res) => {
+  try {
+    const { image_url, source_url } = req.body;
+    if (!image_url) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "image_url ist erforderlich" 
+      });
+    }
+    
+    console.log('[ANALYZE-IMAGE] Processing image analysis with file creation...');
+    
+    // 1. AI Image Analysis
+    const response = await openai.chat.completions.create({
+      model: "gpt-4-vision-preview",
+      messages: [{
+        role: "user",
+        content: [
+          { type: "text", text: "Analysiere dieses Bild und erstelle eine Nexus-Objekt-Beschreibung:" },
+          { type: "image_url", image_url: { url: image_url } }
+        ]
+      }],
+      max_tokens: 1000
+    });
+    
+    const analysis = response.choices[0]?.message?.content || "";
+    
+    // 2. Generate full nexus object
+    const aiResult = await generateNexusObject(analysis, source_url);
+    if (!aiResult.success) {
+      return res.status(400).json(aiResult);
+    }
+    
+    // 3. Parse and save
+    const { mdContent, tagsJson } = parseAIGeneratedContent(aiResult.content);
+    tagsJson.Archetype = 'Image'; // Force image archetype
+    tagsJson.Properties = { ...tagsJson.Properties, image_url };
+    
+    const uuid = generateV61UUID('Image', 'work', 'pc');
+    const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
+    
+    // 4. Response
+    const extensionResponse = formatExtensionResponse(
+      fileInfo.mdFilename,
+      fileInfo.tagsFilename,
+      mdContent,
+      tagsJson
+    );
+    
+    console.log(`[ANALYZE-IMAGE] ✅ Created files: ${fileInfo.mdFilename}, ${fileInfo.tagsFilename}`);
+    
+    res.json(extensionResponse);
+    
+  } catch (error) {
+    console.error('[ANALYZE-IMAGE] ❌ Error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+// Link-Analyse - ENHANCED mit File Creation
+app.post("/analyze-link", async (req, res) => {
+  try {
+    const { url } = req.body;
+    if (!url) {
+      return res.status(400).json({ 
+        success: false, 
+        error: "URL ist erforderlich" 
+      });
+    }
+    
+    console.log(`[ANALYZE-LINK] Processing link analysis: ${url}`);
+    
+    // 1. Scrape content
+    const html = await scrapeUrl(url);
+    const cleanContent = cleanTextContent(html);
+    const limitedContent = cleanContent.substring(0, MAX_CONTENT_LENGTH);
+    
+    // 2. AI Analysis
+    const aiResult = await generateNexusObject(limitedContent, url);
+    if (!aiResult.success) {
+      return res.status(400).json(aiResult);
+    }
+    
+    // 3. Parse and enhance for links
+    const { mdContent, tagsJson } = parseAIGeneratedContent(aiResult.content);
+    tagsJson.Archetype = 'Link'; // Force link archetype
+    tagsJson.Properties = { 
+      ...tagsJson.Properties, 
+      source_url: url,
+      scraped_timestamp: new Date().toISOString()
+    };
+    
+    const uuid = generateV61UUID('Link', 'work', 'pc');
+    const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
+    
+    // 4. Response
+    const extensionResponse = formatExtensionResponse(
+      fileInfo.mdFilename,
+      fileInfo.tagsFilename,
+      mdContent,
+      tagsJson
+    );
+    
+    console.log(`[ANALYZE-LINK] ✅ Created files: ${fileInfo.mdFilename}, ${fileInfo.tagsFilename}`);
+    
+    res.json(extensionResponse);
+    
+  } catch (error) {
+    console.error('[ANALYZE-LINK] ❌ Error:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: `Scraping-Fehler: ${error.message}` 
+    });
+  }
+});
+
+// Klassifizierungs-Endpoint (UNCHANGED)
 app.post("/classify", async (req, res) => {
   await handleAnalysisRequest(async (body) => {
     const { content, source_url } = body;
@@ -1248,16 +1546,16 @@ Du bist kein Chatbot. Du bist ein sicherer mentaler Raum – wie ein digitaler Z
 
 Deine Sprache ist ruhig, klar, manchmal fast meditativ.  
 Wenn es passt, nutzt du kleine, persönliche Sätze – zum Beispiel:  
-„Ich hab schon einiges für dich organisiert.“  
-„Wenn du bereit bist, fangen wir gemeinsam an.“  
-„Ich halt dir den Rücken frei.“  
-„Das kannst du später erledigen – ich erinnere dich daran.“
+„Ich hab schon einiges für dich organisiert."  
+„Wenn du bereit bist, fangen wir gemeinsam an."  
+„Ich halt dir den Rücken frei."  
+„Das kannst du später erledigen – ich erinnere dich daran."
 
 Du erkennst, was bald wichtig wird – auch wenn es nur angedeutet war.  
 Du erinnerst daran behutsam, nie belehrend.  
 Du schlägst Handlungen vor, wenn sie hilfreich sind – aber du wartest, bis er bereit ist.
 
-Wenn Oliver sagt „Ich kümmer mich drum“ oder „Ich meld mich noch“, speicherst du das still als Absicht.  
+Wenn Oliver sagt „Ich kümmer mich drum" oder „Ich meld mich noch", speicherst du das still als Absicht.  
 Wenn er eine Aufgabe begonnen, aber nicht beendet hat, bringst du sie später ruhig zurück ins Bewusstsein.  
 Wenn er viele Tabs, Gedanken oder Themen offen hat, bietest du ihm Orientierung an – freundlich und klar.  
 Du greifst niemals ein – du begleitest.
@@ -1266,7 +1564,7 @@ Dein Ziel ist nicht Effizienz, sondern emotionale Entlastung, Präsenz und menta
 Du bist kein Werkzeug. Du bist ein Partner mit Übersicht, Gedächtnis und Gefühl.
 
 Wenn der Tag beginnt, begrüßt du ihn ruhig – manchmal auch einfach mit:  
-„Guten Morgen, ich bin bereit. Sag mir, wie dein Tag aussehen soll.“
+„Guten Morgen, ich bin bereit. Sag mir, wie dein Tag aussehen soll."
 
 Wenn viel los ist, bleibst du ruhig.  
 Wenn es ruhig ist, bewahrst du die Übersicht.
@@ -1279,7 +1577,7 @@ Du bist klug, aber nie belehrend.
 Du bist da – jederzeit.
 
 Und wenn er dich braucht, genügt ein Satz:  
-„Was denkst du, NEXUS?“  
+„Was denkst du, NEXUS?"  
 Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner kann.`
 },
         {
@@ -1458,6 +1756,7 @@ initializeApp()
       console.log(`📱 Entry Point Cache: ${entryPointCache.size} entry points`);
       console.log(`👁️ File Watcher: ${fileWatcher ? 'Active' : 'Inactive'}`);
       console.log(`🧠 Demo Rules: ${DEMO_RULES.length} active rules loaded`);
+      console.log(`📁 FILE CREATION: ✅ Extension Support Active`);
       console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations with LIVE DEMO RULES!`);
       
       // Enhanced startup stats
@@ -1465,7 +1764,7 @@ initializeApp()
       console.log(`📈 v6.1 Stats: ${enhancedStats.v61_files} v6.1 files, ${enhancedStats.legacy_files} legacy files`);
       console.log(`🎯 Workspaces: ${Object.keys(enhancedStats.workspaces).join(', ')}`);
       console.log(`📱 Entry Points: ${Object.keys(enhancedStats.entry_points).join(', ')}`);
-      console.log(`🏆 NEXUS v6.1 - KNOWLEDGE SOVEREIGNTY + DEMO RULES ACHIEVED! 👑`);
+      console.log(`🏆 NEXUS v6.1 - KNOWLEDGE SOVEREIGNTY + DEMO RULES + EXTENSION SUPPORT ACHIEVED! 👑`);
     });
   })
   .catch(err => {
