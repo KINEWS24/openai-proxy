@@ -1901,10 +1901,12 @@ app.post("/chat", async (req, res) => {
       reminderResponse = `\n\n✅ Reminder gesetzt: ${extractedReminder.activity} mit ${extractedReminder.person} am ${extractedReminder.time}!`;
     }
     
-  // 🎯 SMALL-TALK DETECTION - Lass GPT-4o antworten auch ohne Suchergebnisse
+ // 🎯 SMALL-TALK DETECTION - Einfache Lösung  
+    const smallTalkWords = ['moin', 'hallo', 'hi', 'hey', 'danke', 'thanks', 'ok', 'super', 'cool', 'wow', 'schlaf gut', 'gute nacht', 'tschüss', 'bye', 'ciao', 'geil', 'krass', 'hammer', ':)', '😊', '👍'];
+    const lowerQuery = query.toLowerCase();
     const isSmallTalk = query.length < 30 && 
-      /^(moin|moin moin|tach|servus|hallo|hi|hey|heyho|grüß dich|na|yo|was geht|was läuft|alles klar|alles fit|wie geht's|guten morgen|guten abend|guten tag|peace|here we go|let's go|let's rock|auf geht's|los geht's|ready|abfahrt|ran an den speck|let's do this|check in|present|bin da|go|let's start|tschüss|tschüß|ciao|bye|bye bye|bis später|bis dann|bis bald|bis gleich|gute nacht|schlaf gut|mach's gut|hau rein|reingehauen|adieu|auf wiedersehen|see ya|catch you later|take care|schönes wochenende|schönen abend|schönen tag noch|danke|danke dir|vielen dank|tausend dank|merci|dankeschön|lieben dank|top danke|appreciate it|danke vielmals|you're the best|super danke|mega danke|ok|okay|alles klar|super|top|cool|passt|läuft|in ordnung|safe|alles gut|jo|jup|jap|stimmt|klingt gut|fein|alles klaro|sehr gut|wunderbar|klasse|kein problem|klar doch|logisch|na logo|geht klar|perfekt|nice|geil|bombastisch|mega|absolut|wow|oha|boah|krass|hammer|fett|yay|yess|juhu|awesome|wowza|genial|herrlich|yeah|whoop|whoa|woohoo|:)|😊|👍)/i.test(query) ||
-      !/\b(wann|wo|wie|was|wer|warum|termine|meeting|projekt|dokument|info)\b/i.test(query);
+      (smallTalkWords.some(word => lowerQuery.includes(word)) || 
+       !/\b(wann|wo|wie|was|wer|warum|termine|meeting|projekt|dokument|info)\b/i.test(query));
     
     if (searchResult.results.length === 0 && !isSmallTalk) {
       return res.json({
