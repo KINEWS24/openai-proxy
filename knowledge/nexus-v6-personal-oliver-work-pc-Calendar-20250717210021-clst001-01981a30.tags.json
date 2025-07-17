@@ -1,0 +1,14 @@
+{
+  "Summary": "Oliver trifft sich mit Vanessa zu einem geschäftlichen Mittagessen im ThinkAI Büro, das im Konferenzraum stattfindet.",
+  "Title": "Erfasster Inhalt",
+  "Tags": [
+    "#Erfasst"
+  ],
+  "Archetype": "Calendar",
+  "UZT_ISO8601": "2025-07-17T21:00:21.699Z",
+  "Erfassung_Timestamp": "2025-07-17T21:00:21.699Z",
+  "Properties": {
+    "event_source": "calendar_capture",
+    "capture_timestamp": "2025-07-17T21:00:21.699Z"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "Summary": "Der Text beschreibt ein geplantes privates Treffen zwischen Oliver und Max, bei dem sie einen Tapasabend mit Wein bei Oliver zuhause verbringen werden. Das Ereignis ist für den 17. Juli 2025 von 19:30 bis 21:00 Uhr angesetzt.",
+  "Title": "Erfasster Inhalt",
+  "Tags": [
+    "#Erfasst"
+  ],
+  "Archetype": "Calendar",
+  "UZT_ISO8601": "2025-07-17T21:00:14.763Z",
+  "Erfassung_Timestamp": "2025-07-17T21:00:14.763Z",
+  "Properties": {
+    "event_source": "calendar_capture",
+    "capture_timestamp": "2025-07-17T21:00:14.763Z"
+  }
+}

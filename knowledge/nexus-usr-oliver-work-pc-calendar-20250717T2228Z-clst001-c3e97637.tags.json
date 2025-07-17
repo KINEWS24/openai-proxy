@@ -1,0 +1,26 @@
+{
+  "SchemaVersion": "v6.3",
+  "UID": "c3e97637",
+  "UZT_ISO8601": "2025-07-17T20:28:53.134Z",
+  "Archetype": "Calendar",
+  "Subject": "Kalender-Inhalt als Fallback erfasst.",
+  "Tags": [
+    "#Fallback",
+    "#LocalGenerated",
+    "#Calendar_text",
+    "#calendar"
+  ],
+  "Title": "Fallback: Calendar-Analyse",
+  "Summary": "Kalender-Inhalt als Fallback erfasst.",
+  "KeyPoints": [
+    "Lokales Fallback-Objekt aufgrund von Server-Problem erstellt.",
+    "Erkanntes Format: Calendar"
+  ],
+  "Properties": {
+    "ErrorMessage": "Nach 4 Versuchen fehlgeschlagen: <!DOCTYPE html>\n<html lang=\"en\">\n<head>\n<meta charset=\"utf-8\">\n<title>Error</title>\n</head>\n<body>\n<pre>Cannot POST /analyze-calendar</pre>\n</body>\n</html>\n",
+    "AnalysisType": "calendar_text",
+    "FallbackReason": "Server nicht verfügbar",
+    "LocallyGenerated": true,
+    "DetectedFormat": "Calendar"
+  }
+}

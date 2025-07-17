@@ -1,0 +1,3 @@
+Thema: Entlassungen bei Scale AI und strategische Neuausrichtung
+
+Zusammenfassung: Scale AI, ein Unternehmen im Bereich der Datenkennzeichnung, entlässt 14% seiner Belegschaft, was 200 Mitarbeitern entspricht, und beendet die Zusammenarbeit mit 500 globalen Auftragnehmern. Diese Entscheidung folgt auf die kürzliche Anstellung des Scale AI-CEOs durch Meta in einem 14,3-Milliarden-Dollar-Deal. Der interimistische CEO Jason Droege erklärte, dass das Unternehmen sein Kerngeschäft zu schnell ausgebaut habe und nun den Fokus auf Unternehmens- und Regierungsvertrieb legen werde. Aufgrund der Investition von Meta haben mehrere große Kunden von Scale AI die Zusammenarbeit beendet.
