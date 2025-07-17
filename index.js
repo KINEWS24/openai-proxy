@@ -22,6 +22,45 @@ const KNOWLEDGE_DIR         = path.join(__dirname, "knowledge");
 const CAPTURE_PROMPT_PATH   = path.join(__dirname, "nexus_prompt_v6.1.txt");
 const CLASSIFIER_PROMPT_PATH= path.join(__dirname, "nexus_prompt_classifier_v1.0.txt");
 const CLASSIFIER_OUTPUT_DIR = path.join(__dirname, "classifier-output");
+
+// 🧠 DEMO RULES – Spektakuläre Live-Regeln
+const DEMO_RULES = [
+  {
+    name: "Demo-Frist-Erkennung",
+    trigger: "chat_input",
+    condition: {
+      contains_phrases: ["bis", "deadline", "fertig sein", "abgeben"],
+      has_date_reference: true
+    },
+    action: {
+      type: "show_notification",
+      message: "⏰ Frist erkannt! Soll ich eine Erinnerung setzen?"
+    }
+  },
+  {
+    name: "Demo-Versprechen-Tracker",
+    trigger: "chat_input",
+    condition: {
+      contains_phrases: ["ich melde mich", "ich kümmere mich", "ich mach das"]
+    },
+    action: {
+      type: "show_notification",
+      message: "✅ Versprechen erkannt! Als Todo speichern?"
+    }
+  },
+  {
+    name: "Demo-VIP-Erkennung",
+    trigger: "chat_input",
+    condition: {
+      contains_phrases: ["Geschäftsführung", "CEO", "Chef", "Vorstand", "wichtig"]
+    },
+    action: {
+      type: "show_notification",
+      message: "🚨 VIP-Kontext erkannt! Hohe Priorität?"
+    }
+  }
+];
+
 const OPENAI_API_KEY        = process.env.OPENAI_API_KEY;
 const SCRAPER_API_KEY       = process.env.SCRAPER_API_KEY;
 const MAX_CONTENT_LENGTH    = 8000;
@@ -740,6 +779,37 @@ function createAIContext(results) {
   }).join("\n\n---\n\n");
 }
 
+// --- DEMO RULES FUNKTIONEN ---
+
+/**
+ * 🧠 Regel-Matching Funktion für Demo-Regeln
+ * @param {string} text - Input text to check
+ * @returns {Array} Matched rules
+ */
+function checkDemoRules(text) {
+  const results = [];
+  const lowerText = text.toLowerCase();
+  
+  for (const rule of DEMO_RULES) {
+    const phrases = rule.condition.contains_phrases;
+    const hasPhrase = phrases.some(phrase => lowerText.includes(phrase));
+    
+    // Check for date reference if required
+    const hasDate = rule.condition.has_date_reference
+      ? /\b\d{1,2}\.\d{1,2}\.?\d{0,4}\b|\b(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|morgen|heute|nächste woche)\b/i.test(text)
+      : true;
+    
+    if (hasPhrase && hasDate) {
+      results.push({
+        ruleName: rule.name,
+        action: rule.action
+      });
+    }
+  }
+  
+  return results;
+}
+
 // --- SCHRITT 5: STANDARD-HILFSFUNKTIONEN (UNCHANGED) ---
 
 // Klassifiziert Content mit OpenAI
@@ -1222,6 +1292,35 @@ app.post("/chat", async (req, res) => {
   }
 });
 
+// --- 🧠 DEMO RULES ENDPOINT ---
+app.post("/check-rules", async (req, res) => {
+  try {
+    const { text } = req.body;
+    if (!text || typeof text !== "string") {
+      return res.status(400).json({ 
+        success: false, 
+        error: "text ist erforderlich" 
+      });
+    }
+    
+    const matchedRules = checkDemoRules(text);
+    
+    console.log(`[DEMO-RULES] Checked "${text.substring(0,50)}..." - Found ${matchedRules.length} matches`);
+    
+    res.json({ 
+      success: true, 
+      matches: matchedRules,
+      text: text.substring(0, 100) // Debug info
+    });
+  } catch (error) {
+    console.error("[DEMO-RULES] Error:", error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
 // --- v6.1 WORKSPACE SEARCH ENDPOINTS ---
 
 // Workspace-specific search
@@ -1318,14 +1417,15 @@ initializeApp()
       console.log(`🧩 Cluster Cache: ${clusterCache.size} clusters active`);
       console.log(`📱 Entry Point Cache: ${entryPointCache.size} entry points`);
       console.log(`👁️ File Watcher: ${fileWatcher ? 'Active' : 'Inactive'}`);
-      console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations!`);
+      console.log(`🧠 Demo Rules: ${DEMO_RULES.length} active rules loaded`);
+      console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations with LIVE DEMO RULES!`);
       
       // Enhanced startup stats
       const enhancedStats = getEnhancedCacheStats();
       console.log(`📈 v6.1 Stats: ${enhancedStats.v61_files} v6.1 files, ${enhancedStats.legacy_files} legacy files`);
       console.log(`🎯 Workspaces: ${Object.keys(enhancedStats.workspaces).join(', ')}`);
       console.log(`📱 Entry Points: ${Object.keys(enhancedStats.entry_points).join(', ')}`);
-      console.log(`🏆 NEXUS v6.1 - KNOWLEDGE SOVEREIGNTY ACHIEVED! 👑`);
+      console.log(`🏆 NEXUS v6.1 - KNOWLEDGE SOVEREIGNTY + DEMO RULES ACHIEVED! 👑`);
     });
   })
   .catch(err => {
