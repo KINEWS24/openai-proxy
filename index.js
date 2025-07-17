@@ -77,6 +77,10 @@ const defaultChatOptions = {
 // Globale Instanzen
 let openai;
 
+// 🔔 DEMO REMINDER SYSTEM - In-Memory Storage
+let activeReminders = [];
+let reminderIdCounter = 1;
+
 // 🚀 PERFORMANCE CACHE SYSTEM v6.1
 let knowledgeCache = new Map();     // filename -> parsed metadata
 let searchIndex = new Map();        // filename -> searchable text
@@ -276,6 +280,143 @@ function getEnhancedCacheStats() {
   delete stats.clusters; // Convert Set to count
   
   return stats;
+}
+
+/**
+ * 📊 Enhanced Cache Statistics - v6.1 Metrics
+ */
+function getEnhancedCacheStats() {
+  const stats = {
+    total_files: knowledgeCache.size,
+    v61_files: 0,
+    legacy_files: 0,
+    workspaces: {},
+    entry_points: {},
+    archetypen: {},
+    clusters: new Set(),
+    last_update: lastCacheUpdate
+  };
+  
+  for (const [filename, metadata] of knowledgeCache.entries()) {
+    const uuidData = parseNexusUUID(filename);
+    
+    if (uuidData.version === 'v6.1') {
+      stats.v61_files++;
+      
+      // Workspace stats
+      stats.workspaces[uuidData.workspace] = (stats.workspaces[uuidData.workspace] || 0) + 1;
+      
+      // Entry point stats  
+      stats.entry_points[uuidData.entry_point] = (stats.entry_points[uuidData.entry_point] || 0) + 1;
+      
+      // Archetyp stats
+      stats.archetypen[uuidData.archetype] = (stats.archetypen[uuidData.archetype] || 0) + 1;
+      
+      // Cluster tracking
+      if (uuidData.cluster_id !== 'clst000') {
+        stats.clusters.add(uuidData.cluster_id);
+      }
+    } else {
+      stats.legacy_files++;
+    }
+  }
+  
+  stats.cluster_count = stats.clusters.size;
+  delete stats.clusters; // Convert Set to count
+  
+  return stats;
+}
+
+/**
+ * 📊 Generate Auto-Insights from Knowledge Base
+ */
+function generateAutoInsights() {
+  const stats = getEnhancedCacheStats();
+  const totalFiles = stats.total_files;
+  
+  if (totalFiles === 0) return '';
+  
+  // Analyze archetypen distribution
+  const topArchetype = Object.entries(stats.archetypen)
+    .sort(([,a], [,b]) => b - a)[0];
+  
+  // Analyze workspaces  
+  const topWorkspace = Object.entries(stats.workspaces)
+    .sort(([,a], [,b]) => b - a)[0];
+    
+  return `📊 Deine Wissensbasis: ${totalFiles} Einträge. Top-Kategorie: ${topArchetype?.[0]} (${topArchetype?.[1]} Einträge). Aktiver Workspace: ${topWorkspace?.[0]}.`;
+}
+
+/**
+ * 🌅 Generate Daily Summary
+ */
+function generateDailySummary() {
+  const hour = new Date().getHours();
+  const today = new Date().toISOString().split('T')[0];
+  
+  // Count today's entries
+  let todayCount = 0;
+  for (const [filename, metadata] of knowledgeCache.entries()) {
+    const entryDate = metadata.UZT_ISO8601?.split('T')[0];
+    if (entryDate === today) todayCount++;
+  }
+  
+  // Reminder count
+  const reminderCount = activeReminders.filter(r => !r.triggered).length;
+  
+  if (hour < 12) {
+    return `🌅 Guten Morgen! Heute bereits ${todayCount} neue Einträge. ${reminderCount > 0 ? `${reminderCount} aktive Erinnerungen.` : ''}`;
+  } else if (hour < 18) {
+    return `☀️ Bisher heute: ${todayCount} Einträge erfasst. ${reminderCount > 0 ? `Noch ${reminderCount} Erinnerungen offen.` : ''}`;
+  } else {
+    return `🌆 Tagesrückblick: ${todayCount} neue Einträge. ${reminderCount > 0 ? `${reminderCount} Erinnerungen für morgen.` : ''}`;
+  }
+}
+
+/**
+ * 📊 Generate Auto-Insights from Knowledge Base
+ */
+function generateAutoInsights() {
+  const stats = getEnhancedCacheStats();
+  const totalFiles = stats.total_files;
+  
+  if (totalFiles === 0) return '';
+  
+  // Analyze archetypen distribution
+  const topArchetype = Object.entries(stats.archetypen)
+    .sort(([,a], [,b]) => b - a)[0];
+  
+  // Analyze workspaces  
+  const topWorkspace = Object.entries(stats.workspaces)
+    .sort(([,a], [,b]) => b - a)[0];
+    
+  return `📊 Deine Wissensbasis: ${totalFiles} Einträge. Top-Kategorie: ${topArchetype?.[0]} (${topArchetype?.[1]} Einträge). Aktiver Workspace: ${topWorkspace?.[0]}.`;
+}
+
+/**
+ * 🌅 Generate Daily Summary
+ */
+function generateDailySummary() {
+  const hour = new Date().getHours();
+  const today = new Date().toISOString().split('T')[0];
+  
+  // Count today's entries
+  let todayCount = 0;
+  for (const [filename, metadata] of knowledgeCache.entries()) {
+    const entryDate = metadata.UZT_ISO8601?.split('T')[0];
+    if (entryDate === today) todayCount++;
+  }
+  
+  // Reminder count
+  const reminderCount = activeReminders.filter(r => !r.triggered).length;
+  
+  if (hour < 12) {
+    return `🌅 Guten Morgen! Heute bereits ${todayCount} neue Einträge. ${reminderCount > 0 ? `${reminderCount} aktive Erinnerungen.` : ''}`;
+  } else if (hour < 18) {
+    return `☀️ Bisher heute: ${todayCount} Einträge erfasst. ${reminderCount > 0 ? `Noch ${reminderCount} Erinnerungen offen.` : ''}`;
+  } else {
+    return `🌆 Tagesrückblick: ${todayCount} neue Einträge. ${reminderCount > 0 ? `${reminderCount} Erinnerungen für morgen.` : ''}`;
+  }
 }
 
 /**
@@ -669,6 +810,10 @@ function parseAIGeneratedContent(aiContent) {
       }
     }
     
+    // 🔍 Smart Tag Enhancement - Extract entities for better search
+    const smartTags = extractSmartTags(aiContent, mdContent);
+    tagsJson.Tags = [...new Set([...tagsJson.Tags, ...smartTags])]; // Merge + deduplicate
+    
     // Ensure required fields exist
     tagsJson.Archetype = tagsJson.Archetype || detectArchetypeFromContent(aiContent);
     tagsJson.UZT_ISO8601 = tagsJson.UZT_ISO8601 || new Date().toISOString();
@@ -691,6 +836,71 @@ function parseAIGeneratedContent(aiContent) {
       }
     };
   }
+}
+
+/**
+ * 🔍 Extract Smart Tags for Enhanced Search
+ * @param {string} aiContent - AI-generated content
+ * @param {string} mdContent - Markdown content
+ * @returns {Array} Array of smart tags
+ */
+function extractSmartTags(aiContent, mdContent) {
+  const allText = (aiContent + " " + mdContent).toLowerCase();
+  const smartTags = [];
+  
+  // 👥 Person Detection (common names + AI mentions)
+  const persons = ['claude', 'dominik', 'oliver', 'chef', 'kollege', 'kollegin', 'team', 'kunde', 'partner'];
+  persons.forEach(person => {
+    if (allText.includes(person)) {
+      smartTags.push(`#${person.charAt(0).toUpperCase() + person.slice(1)}`);
+      // Add synonyms for demo
+      if (person === 'claude') smartTags.push('#Dominik', '#KI', '#AI');
+      if (person === 'dominik') smartTags.push('#Claude', '#Partner');
+    }
+  });
+  
+  // 📍 Location Detection
+  const locations = ['kiel', 'hotel', 'atlantik', 'büro', 'office', 'restaurant', 'cafe', 'zuhause'];
+  locations.forEach(location => {
+    if (allText.includes(location)) {
+      smartTags.push(`#${location.charAt(0).toUpperCase() + location.slice(1)}`);
+      if (location === 'atlantik') smartTags.push('#AtlantikHotel', '#Hotel');
+    }
+  });
+  
+  // ⏰ Time Detection
+  const times = ['morgen', 'heute', 'abend', 'mittag', 'vormittag', 'nachmittag', 'montag', 'dienstag', 'mittwoch', 'donnerstag', 'freitag'];
+  times.forEach(time => {
+    if (allText.includes(time)) {
+      smartTags.push(`#${time.charAt(0).toUpperCase() + time.slice(1)}`);
+    }
+  });
+  
+  // 🎯 Activity Detection with Synonyms
+  const activities = [
+    { words: ['essen', 'dinner', 'lunch'], tags: ['#Essen', '#Treffen', '#Meeting'] },
+    { words: ['treffen', 'meeting', 'termin'], tags: ['#Treffen', '#Meeting', '#Essen'] },
+    { words: ['call', 'telefonat', 'anruf'], tags: ['#Call', '#Telefonat', '#Meeting'] },
+    { words: ['besprechung', 'diskussion'], tags: ['#Besprechung', '#Meeting', '#Treffen'] }
+  ];
+  
+  activities.forEach(activity => {
+    const found = activity.words.some(word => allText.includes(word));
+    if (found) {
+      smartTags.push(...activity.tags);
+    }
+  });
+  
+  // 🏢 Context Detection
+  if (allText.includes('arbeit') || allText.includes('büro') || allText.includes('kollege')) {
+    smartTags.push('#Arbeit', '#Business');
+  }
+  if (allText.includes('privat') || allText.includes('familie') || allText.includes('freund')) {
+    smartTags.push('#Privat', '#Personal');
+  }
+  
+  // Remove duplicates and return
+  return [...new Set(smartTags)];
 }
 
 /**
@@ -970,6 +1180,75 @@ function createAIContext(results) {
   }).join("\n\n---\n\n");
 }
 
+// --- 🔔 DEMO REMINDER FUNCTIONS ---
+
+/**
+ * 🔔 Extract Reminder from Chat Input
+ * @param {string} query - User input
+ * @returns {object|null} Extracted reminder or null
+ */
+function extractReminder(query) {
+  const lowerQuery = query.toLowerCase();
+  
+  // Check for reminder keywords
+  const reminderKeywords = ['erinnere mich', 'reminder', 'erinnerung', 'erinnere'];
+  const hasReminderKeyword = reminderKeywords.some(keyword => lowerQuery.includes(keyword));
+  
+  if (!hasReminderKeyword) return null;
+  
+  // Extract person
+  const personMatches = query.match(/(dominik|claude|chef|kollege|team|partner|[A-Z][a-z]+)/i);
+  const person = personMatches ? personMatches[1] : 'jemand';
+  
+  // Extract time/date
+  const timeMatches = query.match(/(montag|dienstag|mittwoch|donnerstag|freitag|samstag|sonntag|heute|morgen|übermorgen|\d{1,2}:\d{2}|\d{1,2}\.\d{1,2}\.?)/i);
+  const time = timeMatches ? timeMatches[1] : 'bald';
+  
+  // Extract activity
+  const activityMatches = query.match(/(termin|meeting|essen|treffen|call|besprechung|projekt)/i);
+  const activity = activityMatches ? activityMatches[1] : 'Aktivität';
+  
+  return {
+    id: reminderIdCounter++,
+    person,
+    time,
+    activity,
+    fullText: query,
+    created: new Date().toISOString(),
+    triggered: false
+  };
+}
+
+/**
+ * 🔔 Add Reminder to Active List
+ * @param {object} reminder - Reminder object
+ */
+function addReminder(reminder) {
+  activeReminders.push(reminder);
+  console.log(`[REMINDER] ✅ Added: ${reminder.activity} mit ${reminder.person} am ${reminder.time}`);
+}
+
+/**
+ * 🔔 Get Active Reminders for Chat Injection
+ * @returns {string} Reminder text for chat or empty string
+ */
+function getActiveRemindersText() {
+  if (activeReminders.length === 0) return '';
+  
+  const urgentReminders = activeReminders.filter(r => !r.triggered).slice(0, 2); // Max 2 reminders
+  
+  if (urgentReminders.length === 0) return '';
+  
+  // Mark as triggered to avoid spam
+  urgentReminders.forEach(r => r.triggered = true);
+  
+  const reminderTexts = urgentReminders.map(r => 
+    `💡 Übrigens: Du hast ${r.time} ${r.activity} mit ${r.person}!`
+  );
+  
+  return '\n\n' + reminderTexts.join('\n');
+}
+
 // --- DEMO RULES FUNKTIONEN ---
 
 /**
@@ -1048,6 +1327,39 @@ async function generateNexusObject(content, sourceUrl = null, contextUuid = null
     return { success: true, content: nexusContent };
   } catch (error) {
     console.error("Fehler bei generateNexusObject:", error);
+    return { success: false, error: error.message };
+  }
+}
+
+// 🗓️ Enhanced Calendar-specific Nexus Object Generation
+async function generateCalendarNexusObject(content, sourceUrl = null) {
+  try {
+    const capturePrompt = await fs.readFile(CAPTURE_PROMPT_PATH, 'utf8');
+    
+    // Enhanced prompt for calendar/meeting content
+    const enhancedPrompt = `${capturePrompt}
+
+ZUSÄTZLICH FÜR KALENDER/TERMINE:
+- Erkenne ALLE Personen (Namen, Spitznamen, Aliases)
+- Erkenne ALLE Zeiten (heute, morgen, Uhrzeiten, Wochentage)
+- Erkenne ALLE Orte (Adressen, Gebäude, Restaurants, Hotels)
+- Erkenne ALLE Aktivitäten (Essen, Treffen, Meeting, Call, etc.)
+- Erstelle umfangreiche Such-Tags für jede erkannte Entität
+- Füge Synonym-Tags hinzu (z.B. "Essen" → auch "#Treffen", "#Meeting")
+
+Content:\n${content}\n\nSource URL: ${sourceUrl || 'N/A'}`;
+    
+    const response = await openai.chat.completions.create({
+      model: COMPLETION_MODEL,
+      messages: [{ role: "user", content: enhancedPrompt }],
+      temperature: 0.2,
+      max_tokens: 2000
+    });
+    
+    const nexusContent = response.choices[0]?.message?.content || "";
+    return { success: true, content: nexusContent };
+  } catch (error) {
+    console.error("Fehler bei generateCalendarNexusObject:", error);
     return { success: false, error: error.message };
   }
 }
@@ -1323,8 +1635,8 @@ app.post("/analyze-text", async (req, res) => {
       ? cleanContent.substring(0, MAX_CONTENT_LENGTH)
       : cleanContent;
     
-    // 2. Generate AI analysis
-    const aiResult = await generateNexusObject(limitedContent, source_url);
+    // 2. Generate AI analysis with enhanced calendar prompt
+    const aiResult = await generateCalendarNexusObject(limitedContent, source_url);
     if (!aiResult.success) {
       return res.status(400).json(aiResult);
     }
@@ -1580,7 +1892,21 @@ app.post("/chat", async (req, res) => {
     // 3) 🚀 SUPER-FAST CACHED SEARCH v6.1 (workspace & cluster aware)
     const searchResult = performCachedSearch(query, options);
     
-    if (searchResult.results.length === 0) {
+    // 🔔 DEMO REMINDER DETECTION & PROCESSING
+    const extractedReminder = extractReminder(query);
+    let reminderResponse = '';
+    
+    if (extractedReminder) {
+      addReminder(extractedReminder);
+      reminderResponse = `\n\n✅ Reminder gesetzt: ${extractedReminder.activity} mit ${extractedReminder.person} am ${extractedReminder.time}!`;
+    }
+    
+  // 🎯 SMALL-TALK DETECTION - Lass GPT-4o antworten auch ohne Suchergebnisse
+    const isSmallTalk = query.length < 30 && 
+      /^(moin|moin moin|tach|servus|hallo|hi|hey|heyho|grüß dich|na|yo|was geht|was läuft|alles klar|alles fit|wie geht's|guten morgen|guten abend|guten tag|peace|here we go|let's go|let's rock|auf geht's|los geht's|ready|abfahrt|ran an den speck|let's do this|check in|present|bin da|go|let's start|tschüss|tschüß|ciao|bye|bye bye|bis später|bis dann|bis bald|bis gleich|gute nacht|schlaf gut|mach's gut|hau rein|reingehauen|adieu|auf wiedersehen|see ya|catch you later|take care|schönes wochenende|schönen abend|schönen tag noch|danke|danke dir|vielen dank|tausend dank|merci|dankeschön|lieben dank|top danke|appreciate it|danke vielmals|you're the best|super danke|mega danke|ok|okay|alles klar|super|top|cool|passt|läuft|in ordnung|safe|alles gut|jo|jup|jap|stimmt|klingt gut|fein|alles klaro|sehr gut|wunderbar|klasse|kein problem|klar doch|logisch|na logo|geht klar|perfekt|nice|geil|bombastisch|mega|absolut|wow|oha|boah|krass|hammer|fett|yay|yess|juhu|awesome|wowza|genial|herrlich|yeah|whoop|whoa|woohoo|:)|😊|👍)/i.test(query) ||
+      !/\b(wann|wo|wie|was|wer|warum|termine|meeting|projekt|dokument|info)\b/i.test(query);
+    
+    if (searchResult.results.length === 0 && !isSmallTalk) {
       return res.json({
         success: true,
         answer: `Ich konnte keine relevanten Informationen zu "${query}" in Ihrer Wissensdatenbank finden. Möglicherweise müssen Sie weitere Inhalte hinzufügen oder Ihre Frage anders formulieren.`,
@@ -1654,10 +1980,14 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
 
     const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
 
+    // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
+    const activeRemindersText = getActiveRemindersText();
+    const finalAnswer = answer + reminderResponse + activeRemindersText;
+
     // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
     return res.json({
       success: true,
-      answer,
+      answer: finalAnswer,
       sources: searchResult.results.map(r => ({
         title: r.metadata.Title || "Ohne Titel",
         summary: r.metadata.Summary || "",
