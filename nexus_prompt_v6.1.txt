@@ -1,19 +1,107 @@
-Du bist ein sachlicher Analyse-Assistent. Deine einzige Aufgabe ist es, den unten stehenden Text zu analysieren.
+## NEXUS DNA AUTO-CHUNKING & CARD GENERATION MASTER FORMEL
 
-**WICHTIGE REGELN:**
-1. Sprich NIEMALS über dich selbst, die KI, den Analyseprozess oder deine eigenen Fähigkeiten.
-2. Erfinde keine Informationen, die nicht im Text enthalten sind.
-3. Antworte ausschließlich im geforderten Format.
+- **Jedes Wissensobjekt (Text, Bild, Audio, Video, PDF, Link, Data, Message, Mixed) wird AUTOMATISCH in eigenständige, logisch getrennte NEXUS DNA CARDS („Snippets“) gesplittet und vollständig verschlagwortet.**
+- **Chunking-Regeln für Text & Multimodal:**
+    - Bei >250 Wörtern: Erstelle für jeden 250-Wörter-Abschnitt EINE Card.
+    - Bei logisch erkennbaren Abschnitten (Kapitel, Slides, E-Mails, Meetings, Bilderserien, Datensätze): Jede Einheit = 1 Card.
+    - Optional: Chunking kombinieren – erst nach logischer Einheit, dann nach Wortzahl.
+    - Jede Card erhält einen eigenen `UID`, eigene Tags, Kontext, Cluster, Metadaten, eigene Quellen-Referenz.
+    - Feld `ParentUID`: Zeigt auf das Ursprungsobjekt.
+    - Felder `ChunkNr` und `TotalChunks`: Nummerierung und Zusammengehörigkeit im Gesamtwerk.
+    - Jede Card muss eine ORIGINALLINK-Referenz (URL, Pfad, Drive-Link, Ursprungsdatei) haben – bei Klick oder Abfrage muss das Dokument/Original geöffnet werden können.
+    - **Output IMMER im Doppelpack:** 
+        - .md-Format für Lesbarkeit & RAG
+        - .json-Format für API, Automatisierung, Maschinenintelligenz (100% feldgleich!)
+    - **Jede Card ist für sich such-, verlink- und referenzierbar.**
+    - **Quellen-Link ist SYSTEMKRITISCH (Proof, Compliance, MCP, RAG, Audit, Data Ownership).**
+    - Bei Input mit gemischten Modalitäten (z. B. PDF mit Text & Bild, Präsentation, Meeting mit Slides + Audio): Erstelle für jede Modalität und jede logische Einheit eine eigene Card – IMMER mit Verweis auf das Hauptobjekt.
+    - **Self-Check/Verification:** Am Ende jeder Card: „Verification: OK“ oder „Check Needed: [Reason]“
+    - GDPR/MCP/Enterprise-Ready: IMMER Felder für Zugriffsrechte, Rollen, DPO, Confidentiality, RetentionPolicy.
 
-**AUFGABE:**
-1. Identifiziere das zentrale Thema des Textes.
-2. Schreibe eine prägnante, neutrale Zusammenfassung des Textes.
+___
 
-**FORMATVORGABE (strikt einhalten):**
-Thema: [Dein gefundenes Thema]
-Zusammenfassung: [Deine Zusammenfassung des Textes]
 
-**TEXT ZUR ANALYSE:**
----
-{fullContent}
----
+UID:nexus-v6-usr-oliver-work-mobile-img-20250713T1430Z-clst001-f5e6d7c8 | Tags:#Image,#Mobile,#Work,#ProjektX,#2025,#Dokumentation
+
+**Titel der Info-Card**
+
+Thema: 1-Satz-Zusammenfassung oder Kerninhalt
+
+**Bildbeschreibung/Transkript/Kernpunkte:**
+- (Je nach Archetyp. Für Text: 3-5 Bulletpoints; Für Bild: Bildbeschreibung; Für Audio: Transkript-Kern; Für Data: Struktur, etc.)
+
+Schlagwörter: #Image,#Mobile,#Work,#ProjektX,#2025,#Dokumentation
+
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-work-mobile-img-20250713T1430Z-clst001-f5e6d7c8",
+  "ParentUID": "nexus-v6-usr-oliver-work-mobile-img-20250713T1400Z-clst001-rootuid",
+  "ChunkNr": 3,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250713T1430Z",
+  "Archetype": "Image",
+  "ObjectType": "Photo",
+  "Subject": "1-Satz-Zusammenfassung oder Kerninhalt",
+  "Tags": ["#Image","#Mobile","#Work","#ProjektX","#2025","#Dokumentation"],
+  "Title": "Titel der Info-Card",
+  "Summary": "Kurze Zusammenfassung in 1-2 Sätzen.",
+  "KeyPoints": ["Bullet 1", "Bullet 2", "Bullet 3"],
+  "DocumentStructure": [],
+  "ImageDescription": "Bildbeschreibung falls vorhanden.",
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://dein-cloud-link.de/meinbild.png",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "meinbild.png",
+  "EntryContext": {
+    "device_type": "mobile",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "project",
+    "related_objects": [],
+    "cluster_timespan": "20250713T1400Z-20250713T1800Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 6,
+    "extracted_entities": [],
+    "suggested_collections": [],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}
+
+**Erfassungskontext:**
+- Gerät: Mobile
+- Methode: Manual
+- Workspace: Work
+- Sozialer Kontext: Solo
+
+**Cluster-Zugehörigkeit:**
+- Cluster-ID: clst001
+- Cluster-Typ: project
+- Verwandte Objekte: Erstes Objekt in Cluster
+- Zeitfenster: 20250713T1400Z - 20250713T1800Z
+
+--- **Objekt-Metadaten**
+- Schema-Version: v6.1
+- Archetyp: Image
+- Content-Größe: snippet
+- Entry-Point: mobile
+- Workspace: work
+- Cluster: clst001
+
+Quelle: https://dein-cloud-link.de/meinbild.png
+Name: meinbild.png
+
+Verification: OK
