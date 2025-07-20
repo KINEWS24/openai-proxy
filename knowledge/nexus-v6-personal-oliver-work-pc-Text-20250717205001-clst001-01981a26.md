@@ -1,3 +1,0 @@
-Thema: Ankündigung eines neuen AI-Produkts von Thinking Machines
-
-Zusammenfassung: Mira Murati, Gründerin des AI-Startups Thinking Machines, kündigt die bevorstehende Veröffentlichung eines neuen Produkts mit einem bedeutenden Open-Source-Anteil an, das für Forscher und Startups nützlich sein soll. Das Unternehmen hat kürzlich 2 Milliarden Dollar an Risikokapital erhalten, um die Entwicklung voranzutreiben. Diese Ankündigung erfolgt inmitten von Verzögerungen bei OpenAI, Muratis ehemaligem Arbeitgeber, der seine eigene Open-Source-AI-Modellveröffentlichung verschoben hat. Thinking Machines zielt darauf ab, fortschrittliche, anpassungsfähige und zugängliche AI-Systeme zu liefern und betont die Bedeutung von Open Science und Sicherheit.

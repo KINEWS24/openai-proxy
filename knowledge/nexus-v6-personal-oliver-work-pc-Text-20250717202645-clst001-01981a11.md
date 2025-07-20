@@ -1,3 +1,0 @@
-Thema: Einstellung eines Ingenieurs für die Entwicklung von AI-animierten Charakteren bei xAI
-
-Zusammenfassung: xAI, ein Unternehmen von Elon Musk, sucht einen Fullstack-Ingenieur für die Entwicklung von AI-animierten Charakteren, speziell Anime-Mädchen. Diese Rolle ist Teil der Mission von xAI, AI-Systeme zu schaffen, die das Universum verstehen und der Menschheit bei der Wissensvermehrung helfen. Derzeit bietet xAI mehrere offene Stellen an, was darauf hindeutet, dass das Unternehmen nicht ausschließlich auf die Entwicklung von Anime-Charakteren fokussiert ist.

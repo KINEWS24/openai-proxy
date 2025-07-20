@@ -1,1 +1,0 @@
-Betreff: Backend-AnbindungVon: Thomas Weber (Entwicklung Alpha)Wir haben das API-Interface erfolgreich mit dem Testsystem verbunden. Erste Daten fließen, weitere Tests am Montag.

@@ -1,3 +1,0 @@
-Thema: Datenschutz in der KI-Nutzung
-
-Zusammenfassung: Der Text behandelt die Herausforderungen des Datenschutzes bei der Nutzung von KI-Tools und stellt das Startup Confident Security vor, das mit seinem Produkt CONFSEC eine Lösung bietet. CONFSEC ist ein End-to-End-Verschlüsselungstool, das sicherstellt, dass Daten nicht gespeichert, eingesehen oder für KI-Training verwendet werden können. Das Unternehmen hat 4,2 Millionen US-Dollar an Startkapital erhalten und zielt darauf ab, als Vermittler zwischen KI-Anbietern und deren Kunden zu fungieren, um den Datenschutz zu gewährleisten und die Akzeptanz von KI in regulierten Branchen zu fördern.

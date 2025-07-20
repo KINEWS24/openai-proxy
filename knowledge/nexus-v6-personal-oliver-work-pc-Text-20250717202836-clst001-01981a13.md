@@ -1,2 +1,0 @@
-Thema: Projektstatus von Nexus AI  
-Zusammenfassung: Der Text beschreibt den aktuellen Status des Projekts "Nexus AI". Es ist aktiv, und es gibt zwei Aufgaben: "Design UI", die abgeschlossen ist, und "Implement Detection", die noch nicht abgeschlossen ist.

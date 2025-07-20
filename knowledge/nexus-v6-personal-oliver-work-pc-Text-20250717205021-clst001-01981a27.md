@@ -1,3 +1,0 @@
-Thema: Einführung des neuen ChatGPT Agent von OpenAI
-
-Zusammenfassung: OpenAI hat den neuen ChatGPT Agent vorgestellt, der in der Lage ist, komplexe Web- und Computeraufgaben eigenständig zu starten und abzuschließen. Der Agent kombiniert die Webaktivitätsfunktionen des vorherigen Operators mit den tiefen Recherchefähigkeiten und der Gesprächsschnittstelle von ChatGPT. Er kann Aufgaben wie das Überprüfen von Kalendern, das Planen von Mahlzeiten und das Erstellen von Präsentationen ausführen. Der Agent erfordert die Erlaubnis des Nutzers, bevor er sensible Aktionen durchführt, und Nutzer können jederzeit die Kontrolle übernehmen. Der neue Agent ist für Abonnenten der kostenpflichtigen Versionen von ChatGPT verfügbar.

@@ -1,3 +1,0 @@
-Thema: Einführung neuer KI-gestützter Funktionen von Google
-
-Zusammenfassung: Google führt eine neue KI-gestützte Funktion für Geschäftsanrufe in den USA ein, die es Nutzern ermöglicht, Informationen über Verfügbarkeit und Preise von lokalen Unternehmen zu erhalten, ohne selbst anrufen zu müssen. Diese Funktion wurde zuvor in einem Testprogramm erprobt und identifiziert sich als automatisiertes System. Zusätzlich verbessert Google die Suchfunktion mit dem Gemini 2.5 Pro Modell, das komplexe Fragen beantworten kann, und führt eine "Deep Search"-Funktion ein, die umfassende Berichte erstellt. Diese Neuerungen sind Teil von Googles Bemühungen, seine KI-Funktionen auszubauen und mit anderen Diensten zu konkurrieren.
