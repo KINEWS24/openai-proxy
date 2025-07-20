@@ -1,0 +1,58 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1607Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1607Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Knowledge Management, Subnexus, Wissensweitergabe – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#KnowledgeManagement","#Subnexus","#Wissensweitergabe","#DNA","#Ownership","#Growth","#CollectiveIntelligence","#Archiv"
+  ],
+  "Title": "Knowledge Management, Subnexus, Wissensweitergabe – Nexus001",
+  "Summary": "Nexus001 speichert, vernetzt und teilt Wissen modular, mit vollständigem Rechtemanagement und Source-Link-Pflicht – für individuelles, kollaboratives und kollektives Lernen.",
+  "KeyPoints": [
+    "Modularer Aufbau, strukturierte Speicherung, Versionierung und Verlinkung jeder DNA-Card.",
+    "Wissen kann individuell, teamweit oder organisationsübergreifend geteilt/vererbt/exportiert werden.",
+    "Subnexus: Parallele, kollaborative Wissensräume für Teams, Projekte, Communities.",
+    "Striktes Rechtemanagement: Leserechte, Editierbarkeit, Export, Historie und Governance.",
+    "Automatisierte Erinnerungen zu Updates, Weitergabeoptionen und Löschfristen.",
+    "Offene Exporte, API-/RAG-Anbindung, Migration und Community-Tausch by Design.",
+    "Jede Card kennt ihre Subnexus- und Hauptnexus-Zugehörigkeit."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card11.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1607Z-20250721T1612Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Subnexus","Team","Owner","Archiv"],
+    "subnexus_membership": ["MainNexus","Subnexus:Team-Blue","Projekt:Kabs-Marketing"],
+    "ownership_context": ["oliver","dominik"],
+    "role_access": ["Owner","Team","User"],
+    "suggested_collections": ["DNA","KnowledgeManagement"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

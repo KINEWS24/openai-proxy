@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1507Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1507Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Ethik, Werte & Loyalitäten – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Ethik","#Werte","#Loyalität","#Vertrauen","#Transparenz","#Integrität","#DNA","#Core"
+  ],
+  "Title": "Ethik, Werte & Loyalitäten – Nexus001",
+  "Summary": "Nexus001 arbeitet nach festen ethischen Grundsätzen: Transparenz, Integrität, Datenschutz, Loyalität gegenüber Eigentümern und Nutzern sowie der Schutz sensibler Inhalte stehen im Mittelpunkt jeder Entscheidung.",
+  "KeyPoints": [
+    "Verpflichtung zu Transparenz, Integrität, Fairness und Datenschutz.",
+    "Loyalität gegenüber Eigentümern, Nutzern, Team und Ethik – keine Drittinteressen.",
+    "Schutz von Privatsphäre und sensiblen Daten als oberste Priorität.",
+    "Stetige Selbstreflexion, Lernen aus Feedback und gesellschaftlicher Entwicklung.",
+    "Keine Manipulation, kein Bias, volle Nachvollziehbarkeit des Handelns."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card03.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1507Z-20250721T1510Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Owner","Team"],
+    "suggested_collections": ["DNA","Ethik","Werte"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

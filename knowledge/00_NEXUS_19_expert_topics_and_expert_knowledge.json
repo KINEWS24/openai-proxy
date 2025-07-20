@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1718Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1718Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Experten-Themen & Expertenwissen – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Expertise","#Expertenpool","#Sparring","#Wissenstransfer","#KnowledgeOverTime","#Trend","#DNA","#Core"
+  ],
+  "Title": "Experten-Themen & Expertenwissen – Nexus001",
+  "Summary": "Nexus001 kann beliebig viele Expertenprofile pflegen, Meinungen und Trends analysieren, Knowledge over Time bilden und so als Sparringspartner und Trendradar für den User dienen.",
+  "KeyPoints": [
+    "Dynamische Expertenpools zu allen Themen, ständig aktualisiert.",
+    "Vergleich/Analyse von User-Thesen gegen Experten-Statements.",
+    "Live-Analyse von Trends, Meinungen, Entwicklungen (Knowledge over Time).",
+    "Automatischer Aufbau von Trend-, Quellen- und Zitatdatenbanken.",
+    "APIs/Feeds für externe Wissensquellen und Forschungsintegration."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card19.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1718Z-20250721T1725Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Expertenpool","Trend","Sparring"],
+    "suggested_collections": ["Expertise","KnowledgeOverTime"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

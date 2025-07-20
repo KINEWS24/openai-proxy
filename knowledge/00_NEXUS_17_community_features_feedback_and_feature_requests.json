@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1645Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1645Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Community-Features & Feedback – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Community","#Feedback","#FeatureRequest","#Collaboration","#UserVoice","#DNA","#Core"
+  ],
+  "Title": "Community-Features & Feedback – Nexus001",
+  "Summary": "Nexus001 bietet Feedback-, Wunsch- und Community-Funktionen, die als Cards abgelegt und mit Entscheidungsweg transparent gemacht werden. Das System lernt von jedem User-Input.",
+  "KeyPoints": [
+    "Feedback und Feature-Wünsche als eigene Cards mit Status.",
+    "Community-Interaktion über Rollen und Hierarchie kontrolliert.",
+    "Nachvollziehbarer Entscheidungsweg für alle Vorschläge.",
+    "Lernende Feedback-Loops für KI, Prozesse, User Experience.",
+    "Peer-Rating, Bug-Report, Voting, User-Forum möglich."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card17.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1645Z-20250721T1650Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 9,
+    "extracted_entities": ["Community","Feedback","FeatureRequest"],
+    "suggested_collections": ["Community","UserVoice","FeatureRequest"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

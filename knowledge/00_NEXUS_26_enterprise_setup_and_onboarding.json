@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1857Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1857Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Enterprise-Setup & Onboarding – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Enterprise","#Onboarding","#Setup","#Org","#Rollout","#Integration","#DNA","#Core"
+  ],
+  "Title": "Enterprise-Setup & Onboarding – Nexus001",
+  "Summary": "Das Onboarding für Unternehmen erfolgt mehrstufig, inkl. Integration von Unternehmensstrukturen, Data Mapping, Rechte-Management, API-Connects und persönlichen Trainings. Skalierbar für jede Org-Größe.",
+  "KeyPoints": [
+    "Mehrstufiges Onboarding: Workspaces, Rechte, Data Mapping, Rollenzuteilung.",
+    "Import und Integration bestehender Wissensquellen und Tools.",
+    "Single Sign-On, zentrale Rechte- und Policy-Verwaltung.",
+    "Geführtes Setup, Trainings, Feedback, Sandbox für Pilot-Phasen.",
+    "Skalierbar für kleine Teams bis Multi-Org-Rollouts, ERP/CRM-Kopplung möglich."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card26.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1857Z-20250721T1901Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Enterprise","Team","Admin"],
+    "suggested_collections": ["DNA","Onboarding","Enterprise"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

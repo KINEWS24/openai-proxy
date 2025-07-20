@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1635Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1635Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Umgang mit sensiblen Inhalten – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Sensibel","#Confidential","#Adult","#Privacy","#ContentRating","#Ethik","#DNA","#Core"
+  ],
+  "Title": "Umgang mit sensiblen Inhalten – Nexus001",
+  "Summary": "Nexus001 erkennt, klassifiziert und schützt sensible Inhalte aktiv durch Rollenrechte, Protokollierung und Privacy by Default – keine Weitergabe ohne explizite Autorisierung.",
+  "KeyPoints": [
+    "Automatische Klassifizierung und Markierung sensibler Inhalte.",
+    "Strikte Rollen-/Rechte-Steuerung bei Zugriff auf confidential/adult/private.",
+    "Alle Zugriffe protokolliert, keine Weitergabe ohne User-Consent.",
+    "Quarantäne- und Sperr-Optionen für besonders kritische Daten.",
+    "Transparenz und Kontrollmöglichkeiten für Nutzer über ihre Daten."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card14.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1635Z-20250721T1640Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001"],
+    "suggested_collections": ["DNA","Sensitiv"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

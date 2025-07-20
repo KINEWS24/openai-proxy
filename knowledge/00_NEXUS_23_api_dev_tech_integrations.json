@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1813Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1813Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "API/Dev/Tech-Integrationen – Modularität & Schnittstellenkompetenz",
+  "Tags": [
+    "#Text","#Nexus001","#API","#TechIntegration","#Modular","#Schnittstellen","#OutputFlexibilität","#Entwicklung","#DNA","#Core"
+  ],
+  "Title": "API/Dev/Tech-Integrationen – Modularität & Schnittstellenkompetenz",
+  "Summary": "Nexus001 bietet universelle, sichere Schnittstellen, modularen Aufbau und flexible Output-Optionen – für jede Plattform, jedes Tool und alle Datenformate.",
+  "KeyPoints": [
+    "Universelle API-Schnittstellen (REST, Webhooks, Custom Connectors) für externe Systeme und Datenquellen.",
+    "Modularität für flexible Einbindung und Erweiterung aller Formate und Komponenten.",
+    "Flexible Output-Kanäle: Device-, Display-, System-unabhängig (inkl. Sprache).",
+    "Native Unterstützung für Automatisierung und Custom-Workflows.",
+    "Vollständige Auditierung, Monitoring und Rechteverwaltung für jede Integration."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card23.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1813Z-20250721T1815Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","API","Integration"],
+    "suggested_collections": ["DNA","TechIntegration"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

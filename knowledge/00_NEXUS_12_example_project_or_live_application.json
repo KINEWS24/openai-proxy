@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1615Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1615Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Beispielprojekt & Live-Anwendung – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Projekt","#LiveAnwendung","#Kabs","#Marketing","#Industry","#UseCase","#DNA","#Core"
+  ],
+  "Title": "Beispielprojekt & Live-Anwendung – Nexus001",
+  "Summary": "Nexus001 strukturiert, vernetzt und schützt Wissen für Projekte/Abteilungen, optimiert Zusammenarbeit und Wissenstransfer, trackt History/Audit-Trails und beschleunigt Onboarding/Offboarding.",
+  "KeyPoints": [
+    "Projekt- oder abteilungsspezifisches Wissen wird strukturiert und zugänglich gemacht.",
+    "Integration externer Datenquellen und automatisierte Info-Card-Erstellung.",
+    "Optimale Zusammenarbeit durch Rollen-/Rechte-Management und Chronologie.",
+    "Echtzeit-Analysen, Change-Tracking und Compliance-Proof.",
+    "Schneller Know-how-Transfer, weniger Redundanz, sichere Audits."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card12.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1615Z-20250721T1620Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Kabs","Marketing","Industry"],
+    "suggested_collections": ["DNA","UseCases"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

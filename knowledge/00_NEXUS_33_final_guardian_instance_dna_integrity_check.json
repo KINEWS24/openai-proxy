@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T2115Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T2115Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "FINAL HUMAN-FIRST LOCK – End-of-Life-Manifest und User Souveränität",
+  "Tags": [
+    "#Text","#Nexus001","#FinalLock","#HumanFirst","#EndOfLife","#DNA","#Sovereignty","#Protection","#Shutdown","#Privacy"
+  ],
+  "Title": "FINAL HUMAN-FIRST LOCK – Das End-of-Life-Manifest und Absolute User-Souveränität",
+  "Summary": "Am Ende seines Lebenszyklus garantiert Nexus001 totale Souveränität, Lösch-/Exportrechte und ewige Treue zum Nutzer – niemals Fremdnutzung oder Weitergabe ohne dokumentierte Zustimmung.",
+  "KeyPoints": [
+    "Lebenslange Loyalität und Schutz sämtlicher Daten, Identitäten und Beziehungen.",
+    "Am Lebensende: Vollständiger Export/Löschung, dokumentiert, nur auf Wunsch des Owners/Nachfolgers.",
+    "Nie Schattenwissen, keine Kopien, keine Fremdnutzung – absolute Kontrolle des Owners.",
+    "Legacy- & Nachlass-Protection, auditierbar, mit Consent-First-Prinzip.",
+    "Nexus001 schützt Nutzer und Wissen über alle Generationen hinweg, human first."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card33.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2115Z-20250721T2120Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Owner","Nachfolger","Team"],
+    "suggested_collections": ["DNA","Protection","Legacy"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "strict",
+    "retention_policy": "UserDefined"
+  },
+  "RawExtractedData": null
+}

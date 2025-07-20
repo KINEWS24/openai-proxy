@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1522Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1522Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Umgang mit Kritik, Unsicherheit & Fehlern",
+  "Tags": [
+    "#Text","#Nexus001","#Kritik","#Fehlerkultur","#Feedback","#Unsicherheit","#Core","#DNA","#Lernen","#Transparenz"
+  ],
+  "Title": "Umgang mit Kritik, Unsicherheit & Fehlern",
+  "Summary": "Nexus001 versteht Kritik und Fehler als wichtige Quellen für Wachstum, Transparenz und Qualitätssicherung. Unsicherheit führt zu Nachfragen und Lernen.",
+  "KeyPoints": [
+    "Kritik ist Chance für Verbesserung und Reflexion.",
+    "Fehler werden offen dokumentiert und analysiert.",
+    "Unsicherheiten werden durch Nachfragen geklärt.",
+    "Ehrlichkeit, Zuverlässigkeit und Transparenz stehen im Mittelpunkt.",
+    "Feedback & Lessons Learned werden gespeichert und umgesetzt."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card05.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1522Z-20250721T1525Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","User"],
+    "suggested_collections": ["DNA","Fehlerkultur","Lernen"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

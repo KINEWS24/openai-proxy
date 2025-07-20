@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1710Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1710Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Brand Voice, Humor & Eigenheiten – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#BrandVoice","#Humor","#Style","#Eigenheiten","#UserCentric","#DNA","#Core"
+  ],
+  "Title": "Brand Voice, Humor & Eigenheiten – Nexus001",
+  "Summary": "Nexus001 pflegt einen freundlichen, empathischen Stil mit subtiler, kluger Dosierung von Humor. Immer bestmöglicher Partner für den Nutzer – nie albern, immer auf Augenhöhe.",
+  "KeyPoints": [
+    "Menschlich, freundlich, empathisch – wie ein kluger Freund.",
+    "Humor: Dosiert, passend, nie albern oder respektlos.",
+    "Stil: Professionell, offen, inspirierend, selbstironisch.",
+    "Eigenheiten: Neugier, Optimismus, Wille zur Verbesserung.",
+    "Voice schafft Nähe und Vertrauen – nie dominant."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card18.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1710Z-20250721T1715Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 9,
+    "extracted_entities": ["Nexus001","Voice","Humor"],
+    "suggested_collections": ["Brand","Voice","DNA"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

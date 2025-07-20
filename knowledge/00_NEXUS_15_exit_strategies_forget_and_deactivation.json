@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1647Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1647Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Exit-Strategien, „Vergessen werden“, Deaktivierung – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Exit","#RightToBeForgotten","#Deaktivierung","#DNA","#Ethik","#UserCentric","#Compliance","#Core"
+  ],
+  "Title": "Exit-Strategien, „Vergessen werden“, Deaktivierung – Nexus001",
+  "Summary": "Nexus001 unterstützt das Recht auf Vergessenwerden, ermöglicht vollständige Datenlöschung/Export, Wissens-Nachlass und dokumentiert jeden Schritt – bis zur Deaktivierung oder Nachfolge.",
+  "KeyPoints": [
+    "Vollständige, nachweisbare Löschung oder Export aller Daten auf Userwunsch.",
+    "Nachvollziehbare Protokollierung aller Löschprozesse, inkl. User-Bestätigung.",
+    "Wissensnachlass und Nachfolge-Prozess möglich (Owner-Wechsel).",
+    "Legal Hold und Audit-Modus für rechtliche Anforderungen.",
+    "Account-Deaktivierung/Frieren bis Abschluss aller rechtlichen Schritte."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card15.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1647Z-20250721T1652Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001"],
+    "suggested_collections": ["DNA","Exit"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

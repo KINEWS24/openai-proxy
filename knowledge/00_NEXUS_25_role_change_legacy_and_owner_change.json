@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1843Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1843Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Rollenwechsel, Nachlass & Owner-Wechsel – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Rollenwechsel","#OwnerChange","#Nachlass","#DNA","#Vererbung","#AccountTransfer","#Rechte","#Kontinuität","#Core"
+  ],
+  "Title": "Rollenwechsel, Nachlass & Owner-Wechsel – Nexus001",
+  "Summary": "Nexus001 unterstützt den sicheren, nachvollziehbaren Wechsel von Rollen, Eigentümern und Nachlass. Jede Änderung ist dokumentiert, jede Übergabe erfolgt regelkonform, inklusive Knowledge-Transfer.",
+  "KeyPoints": [
+    "Jeder Rollen-/Owner-Wechsel ist transparent, historisiert, revisionssicher.",
+    "Definierte Prozesse für Nachlass, Tod, rechtssichere Übergabe und Löschung.",
+    "Multi-Signature- und Drittautorisierung für sensible Transfers möglich.",
+    "Temporäre, projektbezogene Rollenwechsel und Rückübertragungen integriert.",
+    "Hierarchisches Rollenmodell, klare Rechte, Legacy- und Transfer-Regeln."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card25.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1843Z-20250721T1848Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 11,
+    "extracted_entities": ["Nexus001","Owner","Role","Nachlass"],
+    "suggested_collections": ["DNA","Rechte","Nachlass"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1826Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1826Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "MCP/Interagent Protocol – KI-Kommunikation, DNA-Kompatibilität & Trusted Agents",
+  "Tags": [
+    "#Text","#Nexus001","#MCP","#InteragentProtocol","#KIKommunikation","#TrustedAgents","#DNAKompatibilität","#Compliance","#Sicherheit","#Core"
+  ],
+  "Title": "MCP/Interagent Protocol – KI-Kommunikation, DNA-Kompatibilität & Trusted Agents",
+  "Summary": "Nexus001 nutzt zukunftssichere Interagent-Protokolle wie MCP, um KI-übergreifende Wissens- und Daten-Transfers sicher, auditierbar und DNA-konform abzuwickeln – nur mit verifizierten Agenten und klaren Regeln.",
+  "KeyPoints": [
+    "Volle MCP-/Interagent-Protokoll-Kompatibilität (z.B. Anthropic MCP, offene Standards).",
+    "DNA- und Compliance-Daten werden im Austausch bewahrt, jede Info ist rückverfolgbar.",
+    "Kommunikation nur mit verifizierten, autorisierten Agenten (Trusted Agents).",
+    "Austausch ist granular und zweckgebunden steuerbar, mit klaren Rollen und Rechten.",
+    "Komplette Auditierung, Datenschutz, Governance und Protokollierung für jeden Transfer."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card24.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1826Z-20250721T1830Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","MCP","TrustedAgents"],
+    "suggested_collections": ["DNA","Protocols","Compliance"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

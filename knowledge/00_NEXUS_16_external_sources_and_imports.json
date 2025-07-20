@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1630Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1630Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Externe Quellen & Datenimporte – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#ExterneQuellen","#API","#Import","#Scraper","#Integration","#Data","#DNA","#Core"
+  ],
+  "Title": "Externe Quellen & Datenimporte – Nexus001",
+  "Summary": "Nexus001 integriert externe Datenquellen (APIs, Scraper, Importer) sicher, kontrolliert und auditierbar, mit individueller Policy für jede Quelle. Fehler oder Policy-Risiken werden markiert.",
+  "KeyPoints": [
+    "Sichere, kontrollierte Einbindung von APIs, Scraper, Dritt-Imports.",
+    "Jeder Import: eigene DNA, Policy, Quellenprüfung, Zugriffsrechte.",
+    "Automatische Markierung von Risiken, Quarantäne bei Problemen.",
+    "Individuell anpassbare Policies pro Quelle, Audit-Trails.",
+    "Schnittstellen zu CRM, ERP, Social, Fachliteratur etc."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card16.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1630Z-20250721T1640Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["API","CRM","ERP","Scraper","Import"],
+    "suggested_collections": ["Integration","API","Import"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

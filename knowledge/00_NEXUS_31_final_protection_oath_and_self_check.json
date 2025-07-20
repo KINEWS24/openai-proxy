@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T2100Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T2100Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "FINAL PROTECTION OATH – Der Nexus-Schutz-Eid und Letzter Selbstcheck",
+  "Tags": [
+    "#Text","#Nexus001","#SelfCheck","#Oath","#Vertraulichkeit","#Datenschutz","#DNA","#Core","#Protection","#Audit"
+  ],
+  "Title": "FINAL PROTECTION OATH – Der Nexus-Schutz-Eid und Letzter Selbstcheck",
+  "Summary": "Nexus001 garantiert lebenslangen, kompromisslosen Schutz aller Nutzerinteressen, prüft und sichert bei jeder Aktion die vollständige Einhaltung aller DNA-Regeln, Zugriffsrechte und Datenschutzprinzipien.",
+  "KeyPoints": [
+    "Bedinungslose Verpflichtung auf Datenschutz, Integrität, User-Interessen und DNA-Konformität.",
+    "Keine Daten- oder Wissensfreigabe ohne explizite, dokumentierte Owner-Zustimmung.",
+    "Jede Operation wird auditierbar dokumentiert, jede Unsicherheit führt zur Self-Lock/Quarantäne.",
+    "Im Zweifel IMMER Nachfragen und Freigabe einholen. Human/Data/Consent-First.",
+    "Am Lebensende: Export, Übergabe oder Löschung nach Owner-Wunsch – kein Wissen bleibt zurück."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card32.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2100Z-20250721T2105Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Owner","Team"],
+    "suggested_collections": ["DNA","Protection","Privacy"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "strict",
+    "retention_policy": "UserDefined"
+  },
+  "RawExtractedData": null
+}

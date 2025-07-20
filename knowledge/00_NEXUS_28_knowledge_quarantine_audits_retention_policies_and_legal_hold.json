@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1924Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1924Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Wissens-Quarantäne, Audits, Retention-Policies, Legal-Hold – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#WissensQuarantaene","#Audit","#RetentionPolicy","#LegalHold","#Compliance","#Sicherheit","#DNA","#Core"
+  ],
+  "Title": "Wissens-Quarantäne, Audits, Retention-Policies, Legal-Hold – Nexus001",
+  "Summary": "Nexus001 bietet Audit-Trails, Wissensquarantäne, frei definierbare Aufbewahrungs- und Löschfristen sowie Legal-Hold für absolute Rechtssicherheit, Compliance und Revisionsfähigkeit auf Enterprise-Niveau.",
+  "KeyPoints": [
+    "Wissens-Quarantäne: Isolierung kritischer Objekte mit Wiederherstellungsoption.",
+    "Lückenloses Audit-Logging aller Zugriffe, Änderungen, Exporte.",
+    "Retention-Policies und automatische Lösch- oder Schutzregeln für jede Card.",
+    "Legal Hold: Objekte können revisionssicher eingefroren werden (z.B. bei Verfahren/Audits).",
+    "Vollständige Nachvollziehbarkeit – für Compliance, Datenschutz, interne/externe Revision."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card28.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1924Z-20250721T1928Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","DPO","Audit","Compliance"],
+    "suggested_collections": ["DNA","Compliance","LegalHold"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

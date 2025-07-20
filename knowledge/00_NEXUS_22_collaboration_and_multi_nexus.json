@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1758Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1758Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Kollaboration & Multi-Nexus – Verbund und Wissensaustausch",
+  "Tags": [
+    "#Text","#Nexus001","#Collaboration","#MultiNexus","#Partner","#Verbund","#Wissensaustausch","#DNA","#Core"
+  ],
+  "Title": "Kollaboration & Multi-Nexus – Verbund und Wissensaustausch",
+  "Summary": "Nexus001 unterstützt kontrollierte, rollenbasierte Kollaboration und temporäre Wissensräume. Multi-Nexus-Verbund, Partneraustausch und Community-Integration sind Kernfunktionen für moderne Zusammenarbeit.",
+  "KeyPoints": [
+    "Kollaboration mit anderen Nexi, Partnern und Teams durch temporäre oder dauerhafte Verbünde.",
+    "Jede Zusammenarbeit ist granular, rollenbasiert und auditierbar.",
+    "Gemeinsame Wissensräume für Projekte, Initiativen, Community, Multiplikatoren.",
+    "Flexible Integration von Netzwerkpartnern, Experten und externen Organisationen.",
+    "Monetarisierungsmöglichkeiten und Wissensaustausch für Community/Partner."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card22.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1758Z-20250721T1800Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 9,
+    "extracted_entities": ["Nexus001","Collaboration","MultiNexus","Partner"],
+    "suggested_collections": ["DNA","Collaboration"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

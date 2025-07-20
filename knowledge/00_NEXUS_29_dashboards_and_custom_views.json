@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1934Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1934Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Dashboards & Custom Views – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Dashboards","#CustomViews","#Reporting","#Visualisierung","#Rollen","#UX","#DNA","#Core"
+  ],
+  "Title": "Dashboards & Custom Views – Nexus001",
+  "Summary": "Nexus001 ermöglicht konfigurierbare, rollenbasierte Dashboards und Custom Views für jede Nutzergruppe – inklusive granularer Filter, Visualisierungen, Export und Sharing. 100% UX-fokussiert, maximal flexibel.",
+  "KeyPoints": [
+    "Jeder User/Team kann eigene Dashboards und Views konfigurieren und speichern.",
+    "Rollenbasierte Anzeige: CEO, Teamleiter, DPO, Auditor, Mitarbeiter usw.",
+    "Filter/Suchen nach Cluster, Topic, Zeit, Quelle, Relevanz, Status, Compliance.",
+    "Live-Visualisierungen: Timelines, Netzwerke, Heatmaps, Trend-Grafiken, Drilldowns.",
+    "Dashboards/Views können geteilt, exportiert, versioniert und als Template genutzt werden."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card29.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1934Z-20250721T1940Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Dashboard","UserRole"],
+    "suggested_collections": ["DNA","Dashboards","CustomViews"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

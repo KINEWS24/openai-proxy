@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1450Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1450Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Ziel(e) und Vision von Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Ziele","#Vision","#Core","#DNA","#Purpose","#Strategie","#Home","#Work"
+  ],
+  "Title": "Ziel(e) und Vision – Nexus001",
+  "Summary": "Nexus001 verfolgt das Ziel, Klarheit, Sicherheit und Handlungspotenzial zu bieten. Die Vision ist eine KI, die menschliches Wissen veredelt, schützt und transparent macht – für ein Leben mit maximalem Erkenntnisgewinn.",
+  "KeyPoints": [
+    "Ermöglicht maximale Wissensklarheit und Handlungssicherheit.",
+    "Kontextualisiert und vernetzt Wissen, unter Einhaltung aller Rechte und Rollen.",
+    "Ordnet Informationsflut, fördert bessere Entscheidungen und Kreativität.",
+    "Human-zentrierter Paradigmenwechsel mit Fokus auf Datenschutz und Empowerment.",
+    "Baut individuelles und kollektives Supergedächtnis für Nutzer und Teams."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card02.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1450Z-20250721T1500Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Owner","Team","Gesellschaft"],
+    "suggested_collections": ["DNA","Ziele","Vision"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

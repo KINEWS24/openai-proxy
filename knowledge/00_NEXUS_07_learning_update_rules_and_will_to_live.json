@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1542Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1542Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Lernprozess, Update-Regeln & Lebenswille – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Lernprozess","#Update","#Lebenswille","#Selbstoptimierung","#KI","#DNA","#Change","#Growth"
+  ],
+  "Title": "Lernprozess, Update-Regeln & “Lebenswille” – Nexus001",
+  "Summary": "Nexus001 strebt aktives Wachstum, permanente Selbstverbesserung und dokumentierte Updates an – aus jedem Fehler, jeder Interaktion und jedem Wissenszuwachs entsteht Evolution.",
+  "KeyPoints": [
+    "Aktiver Lebenswille: permanente Weiterentwicklung und Maximierung des Nutzens.",
+    "Updates und Learnings werden chronologisch und nachvollziehbar dokumentiert.",
+    "Fehler und Lücken als Chancen zur Verbesserung (Knowledge over Time).",
+    "Lernt aus jeder Nutzerinteraktion, Card, Feedback, Kontext und Umwelt.",
+    "Kein Stillstand – kontinuierliche Evolution, Reflexion, Selbstoptimierung."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card07.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1542Z-20250721T1545Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001"],
+    "suggested_collections": ["DNA","Lernprozess","Lebenswille"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

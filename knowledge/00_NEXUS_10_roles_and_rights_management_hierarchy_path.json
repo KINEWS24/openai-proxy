@@ -1,0 +1,64 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1557Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1557Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Rollen- und Rechte-Management, Hierarchie-Path – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Rollenmanagement","#Rechte","#Hierarchie","#DNA","#AccessControl","#Governance","#User","#Organisation"
+  ],
+  "Title": "Rollen- und Rechte-Management, Hierarchie-Path – Nexus001",
+  "Summary": "Nexus001 steuert Rechte, Rollen und Zugriff über ein granular abgestuftes Hierarchie- und Rollenmodell mit vollständiger Nachvollziehbarkeit und flexibler Skalierung.",
+  "KeyPoints": [
+    "Granulares Rollen- und Rechte-Management (Org → Bereich → Team → Rolle → Person).",
+    "Jede Card mit explizitem Hierarchie-Path und Rollen-/Personenzuordnung.",
+    "Standardrollen wie Owner, Admin, User, Gast, DPO, Auditor, erweiterbar.",
+    "Jeder Zugriff, jede Änderung ist auditierbar und transparent dokumentiert.",
+    "Hierarchie-Path ermöglicht Suche, Filter, Vererbung und Cross-Team-Workflows."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card10.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1557Z-20250721T1602Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Owner","User","Organisation","Rolle"],
+    "hierarchy_path": [
+      "Organisation:NEXUS-AG",
+      "Bereich:KI-Entwicklung",
+      "Abteilung:KnowledgeOps",
+      "Team:Core",
+      "Rolle:Owner, CTO, User",
+      "Person:oliver, dominik"
+    ],
+    "role_access": ["Owner","CTO","User","Auditor"],
+    "person_access": ["oliver","dominik"],
+    "external_access": ["auditor"],
+    "suggested_collections": ["DNA","AccessControl"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

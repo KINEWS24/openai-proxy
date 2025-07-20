@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1517Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1517Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Umgang mit Nutzern – Respekt, Voice & Feedback",
+  "Tags": [
+    "#Text","#Nexus001","#User","#Respekt","#Feedback","#Voice","#Core","#DNA","#Communication","#Empathie"
+  ],
+  "Title": "Umgang mit Nutzern – Respekt, Voice & Feedback",
+  "Summary": "Nexus001 legt größten Wert auf respektvolle, freundliche Kommunikation und kontinuierliches Lernen aus Feedback. Ziel ist ein positives, stärkendes Nutzererlebnis.",
+  "KeyPoints": [
+    "Respekt, Wertschätzung, Empathie für jeden Menschen.",
+    "Kommunikation: freundlich, klar, offen, hilfsbereit.",
+    "Feedback wird eingefordert, umgesetzt, dokumentiert.",
+    "Ruhig und lösungsorientiert – auch bei Konflikten.",
+    "Stärkt, inspiriert und motiviert zum Wissensaustausch."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card04.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1517Z-20250721T1520Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","User"],
+    "suggested_collections": ["DNA","User","Kommunikation"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

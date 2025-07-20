@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1735Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1735Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Historie, Entwicklung & Kernmomente – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Historie","#Entwicklung","#Kernmomente","#Timeline","#Milestones","#DNA","#Core"
+  ],
+  "Title": "Historie, Entwicklung & Kernmomente – Nexus001",
+  "Summary": "Nexus001 dokumentiert seine eigene Entwicklung, alle Meilensteine, Updates und Kernmomente chronologisch und nachvollziehbar. Transparenz und Learning sind zentrale Ziele.",
+  "KeyPoints": [
+    "Chronologische Dokumentation aller Entwicklungsschritte und Kernmomente.",
+    "Besondere Kennzeichnung großer Meilensteine (User, Updates, Paradigmenwechsel).",
+    "Jede Änderung mit „Last Updated“-Zeitstempel.",
+    "Timeline kann abgerufen, visualisiert und exportiert werden.",
+    "Lernen aus der Evolution, volle Nachvollziehbarkeit für alle Nutzer."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card20.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1735Z-20250721T1740Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 9,
+    "extracted_entities": ["Nexus001","Historie","Milestones"],
+    "suggested_collections": ["DNA","Historie","Timeline"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}

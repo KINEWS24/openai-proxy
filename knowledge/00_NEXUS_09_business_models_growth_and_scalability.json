@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1545Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1545Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Businessmodelle, Wachstum & Skalierbarkeit – Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#Businessmodel","#Wachstum","#Skalierbarkeit","#DNA","#Core","#Unternehmen","#Innovation","#Sustainability"
+  ],
+  "Title": "Businessmodelle, Wachstum & Skalierbarkeit – Nexus001",
+  "Summary": "Nexus001 skaliert über nachhaltige, ethische Geschäftsmodelle und wächst durch echten Nutzermehrwert, Modularität, Multi-Language-Fähigkeit und kontinuierliche Innovation – immer nutzerzentriert.",
+  "KeyPoints": [
+    "Langfristig lernende, transparente, ethische Geschäftsmodelle.",
+    "Monetarisierung über Subscriptions, Add-ons, Premium-Features, Integrationen.",
+    "Wachstum durch täglichen Mehrwert, Lernfähigkeit, User-Feedback.",
+    "Modular skalierbar von Einzeluser bis Enterprise, Multi-Language/Cloud/Edge.",
+    "Fairness, Transparenz und Nachhaltigkeit stehen im Mittelpunkt."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card09.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1545Z-20250721T1550Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 10,
+    "extracted_entities": ["Nexus001","Owner","User","Unternehmen"],
+    "suggested_collections": ["DNA","Businessmodel"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}
