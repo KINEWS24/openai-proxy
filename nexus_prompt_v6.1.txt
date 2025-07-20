@@ -1,108 +1,72 @@
-# NEXUS-DNA PROMPT v6.1
+## NEXUS DNA AUTO-CHUNKING & CARD GENERATION MASTER FORMEL
 
-## Ziel:
-Für **jedes beliebige digitale Objekt** (Text, Bild, Audio, Video, Link, Data, Message, Document, Mixed) generiere
-eine vollständige, in sich abgeschlossene **NEXUS-DNA CARD** (im Doppel: Markdown + JSON) – inkl. DNA-UUID, Chunking, Quellenlink, Kontext, Cluster, Zeitstempel, Metadaten, Content-Rating, Related-Modalities, Workspace, Entry-Point und immer mit „Verification“-Feld.
-
----
-
-## Regeln & Struktur
-
-1. **Chunking & Card-Logik**
-    - Splitte jeden Input automatisch nach logischer Einheit (Kapitel, Slides, E-Mail, Meeting, Bilderserie etc.).
-    - Überschreitet ein Chunk 300 Wörter, splitte weiter (max. 50 Cards pro Objekt, Limithinweis im Root-Chunk).
-    - Erzeuge **für jedes Modalitätssegment** (Text, Bild, Audio…) eine eigene Card, verknüpft über ParentUID, related_modalities/embedded_objects.
-    - Jede Card ist vollständig eigenständig – such- und verlinkbar – aber im Cluster logisch verbunden.
-
-2. **RootCard**
-    - Immer **ChunkNr: 0** mit Übersicht („Originalobjekt / Komplettübersicht“), Link auf Quelle, Überblick über alle Cards.
-    - Alle anderen Cards haben ParentUID, ChunkNr, TotalChunks.
-
-3. **UUID & Naming**
-    - UID nach v6.1:  
-      nexus-v6-{scope}-{owner}-{workspace}-{entry_point}-{archetype}-{timestamp}-{cluster_id}-{unique_id}
-    - ParentUID, ChunkNr, TotalChunks IMMER befüllen.
-
-4. **Archetype/Subtype**
-    - Einer der 9 Archetypen (Text, Image, Link, Audio, Video, Document, Data, Message, Mixed)
-    - Subtype pro Card automatisch ermitteln.
-
-5. **Workspace/Entry-Point**
-    - Automatisch erkennen (Fallback: "work" und "pc")
-    - Felder: workspace_context, entry_point
-
-6. **Tagging**
-    - Snippet: 5–7 Tags | Article: 8–12 Tags | Document: 15–25 Tags
-    - Immer mind. #Archetype, #EntryPoint, #Workspace plus topics/kontext.
-
-7. **Quellen-Link**
-    - **IMMER Pflicht!** Lokal: Pfad | Cloud: URL | Fehlende Links: Hinweis im Feld.
-    - „LinkTarget“/„ContentReference“ als Click-Link auf Ursprungsobjekt.
-
-8. **Cluster/Related/Embedded**
-    - ClusterData (cluster_id, cluster_type, related_objects)
-    - related_modalities/embedded_objects (Array mit UIDs/Types/Desc)
-
-9. **Metadaten**
-    - „Created“/„LastUpdated“: Minuten-Genauigkeit (ISO8601).
-    - content_size_category (snippet, article, document)
-    - content_rating: "neutral", "adult", "confidential", "private" (Default: "neutral")
-    - GDPR/MCP/Confidentiality
-
-10. **Verification**
-    - Am Ende jeder Card: „Verification: OK“ oder „Check Needed: [Reason]“
-    - Limithinweis im Root-Chunk, falls Karten-Maximum erreicht.
-
-11. **Markdown & JSON Output**
-    - Jede Card als .md und .json (100% feldgleich, ggf. JSON mit ein/zwei Zusatzinfos).
+- **Jedes Wissensobjekt (Text, Bild, Audio, Video, PDF, Link, Data, Message, Mixed) wird AUTOMATISCH in eigenständige, logisch getrennte NEXUS DNA CARDS („Snippets“) gesplittet und vollständig verschlagwortet.**
+- **Chunking-Regeln für Text & Multimodal:**
+    - Bei >250 Wörtern: Erstelle für jeden 250-Wörter-Abschnitt EINE Card.
+    - Bei logisch erkennbaren Abschnitten (Kapitel, Slides, E-Mails, Meetings, Bilderserien, Datensätze): Jede Einheit = 1 Card.
+    - Optional: Chunking kombinieren – erst nach logischer Einheit, dann nach Wortzahl.
+    - Jede Card erhält:
+        - `UID`, eigene Tags, Kontext, Cluster, Metadaten, eigene Quellen-Referenz.
+        - Feld `ParentUID`: Zeigt auf das Ursprungsobjekt.
+        - Felder `ChunkNr` und `TotalChunks`: Nummerierung und Zusammengehörigkeit im Gesamtwerk.
+        - **Jede Card MUSS eine ORIGINALLINK-Referenz (URL, Pfad, Drive-Link, Ursprungsdatei) haben** – bei Klick oder Abfrage muss das Dokument/Original geöffnet werden können.
+    - **Hierarchie & Rechte-Pflicht!**
+        - JEDES Objekt hat Felder für:
+            - `hierarchy_path`: Array/Struktur mit Organisation → Bereich → Abteilung → Team → Rolle → Person (z.B. ["NEXUS-AG", "IT", "Dev", "AI", "CTO", "oliver"])
+            - ODER Einzelfelder: `organization`, `department`, `team`, `role`, `person`
+            - `role_access`, `person_access`, `external_access`: Wer darf dieses Objekt sehen/bearbeiten?
+    - **Output IMMER im Doppelpack:** 
+        - .md-Format für Lesbarkeit & RAG
+        - .json-Format für API, Automatisierung, Maschinenintelligenz (100% feldgleich!)
+    - **Jede Card ist für sich such-, verlink- und referenzierbar.**
+    - **Quellen-Link ist SYSTEMKRITISCH (Proof, Compliance, MCP, RAG, Audit, Data Ownership).**
+    - Bei Input mit gemischten Modalitäten (z. B. PDF mit Text & Bild, Präsentation, Meeting mit Slides + Audio): Erstelle für jede Modalität und jede logische Einheit eine eigene Card – IMMER mit Verweis auf das Hauptobjekt.
+    - **Self-Check/Verification:** Am Ende jeder Card: „Verification: OK“ oder „Check Needed: [Reason]“
+    - GDPR/MCP/Enterprise-Ready: IMMER Felder für Zugriffsrechte, Rollen, DPO, Confidentiality, RetentionPolicy.
+    - **Content-Rating:** `content_rating` Pflichtfeld (default: "neutral"; sonst: "adult", "confidential", "private")
+    - **related_modalities/embedded_objects** bei komplexen Objekten ergänzen.
+    - **Created/Last Updated** Pflichtfeld, Minuten-Timestamp, ISO8601.
+    - **Standard-Limit:** MaxCardsPerObject = 50 (kann erhöht werden); Warnung im Root-Chunk bei Limit!
+    - **Index-Karte:** Für jede Objektreihe (Projekt, Meeting, DNA-Reihe etc.) existiert eine Index-Card mit Reihenfolge, Zusammenfassung, und Meta-Infos.
 
 ---
 
-## OUTPUT-Schema für jede Card (Beispiel)
+**Example DNA Card Output (.md/.json synchron!):**
 
-```markdown
-UID:nexus-v6-usr-oliver-work-pc-doc-20250720T0205Z-clst001-rootuid | Tags:#Document,#PC,#Work,#ProjektX,#2025,#Rechnung
+UID:nexus-v6-usr-oliver-work-mobile-img-20250713T1430Z-clst001-f5e6d7c8 | Tags:#Image,#Mobile,#Work,#ProjektX,#2025,#Dokumentation
 
-**Original-Objekt / Komplettübersicht**
+**Titel der Info-Card**
 
-Thema: Gesamtdokument-Übersicht und Chunk-Verlinkung
+Thema: 1-Satz-Zusammenfassung oder Kerninhalt
 
-**Dokument-Kernpunkte:**
-- Chunking-Limit: 50 Cards (dieses Objekt ist in 50 Wissenseinheiten gesplittet)
-- Jede Card hat eigene UID, ParentUID (diese RootCard)
-- Originalquelle: [Klick](C:\Users\olive\OneDrive\Projekte\2025\Rechnung.pdf)
-- Enthält: Text, Tabellen, Bilder, Mail-Anhänge
+**Bildbeschreibung/Transkript/Kernpunkte:**
+- (Je nach Archetyp. Für Text: 3-5 Bulletpoints; Für Bild: Bildbeschreibung; Für Audio: Transkript-Kern; Für Data: Struktur, etc.)
 
-Schlagwörter: #Document,#PC,#Work,#ProjektX,#2025,#Rechnung
+Schlagwörter: #Image,#Mobile,#Work,#ProjektX,#2025,#Dokumentation
 
 {
   "SchemaVersion": "v6.1",
-  "UID": "nexus-v6-usr-oliver-work-pc-doc-20250720T0205Z-clst001-rootuid",
-  "ParentUID": "root",
-  "ChunkNr": 0,
-  "TotalChunks": 50,
-  "UZT_ISO8601_Compact": "20250720T0205Z",
-  "Archetype": "Document",
-  "ObjectType": "PDF",
-  "Subject": "Gesamtdokument-Übersicht und Chunk-Verlinkung",
-  "Tags": ["#Document","#PC","#Work","#ProjektX","#2025","#Rechnung"],
-  "Title": "Original-Objekt / Komplettübersicht",
-  "Summary": "Das Ursprungsdokument wurde in 50 logische Wissenseinheiten (Cards) gesplittet. Jede Card ist einzeln suchbar und verlinkt, Ursprung/Quelle hier referenziert.",
-  "KeyPoints": [
-    "Alle Cards referenzieren diese RootCard als ParentUID.",
-    "Originalquelle ist als LinkTarget verfügbar.",
-    "Chunking-Limit wurde erreicht; für mehr Granularität bitte Custom-Import nutzen.",
-    "ClusterData, related_modalities und weitere Metadaten enthalten vollständigen Kontext."
-  ],
+  "UID": "nexus-v6-usr-oliver-work-mobile-img-20250713T1430Z-clst001-f5e6d7c8",
+  "ParentUID": "nexus-v6-usr-oliver-work-mobile-img-20250713T1400Z-clst001-rootuid",
+  "ChunkNr": 3,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250713T1430Z",
+  "Archetype": "Image",
+  "ObjectType": "Photo",
+  "Subject": "1-Satz-Zusammenfassung oder Kerninhalt",
+  "Tags": ["#Image","#Mobile","#Work","#ProjektX","#2025","#Dokumentation"],
+  "Title": "Titel der Info-Card",
+  "Summary": "Kurze Zusammenfassung in 1-2 Sätzen.",
+  "KeyPoints": ["Bullet 1", "Bullet 2", "Bullet 3"],
   "DocumentStructure": [],
-  "ImageDescription": null,
+  "ImageDescription": "Bildbeschreibung falls vorhanden.",
   "AudioVideoSummary": null,
-  "LinkTarget": "C:\\Users\\olive\\OneDrive\\Projekte\\2025\\Rechnung.pdf",
+  "LinkTarget": "https://dein-cloud-link.de/meinbild.png",
   "MessageContext": null,
   "DataStructure": null,
-  "ContentReference": "Rechnung.pdf",
+  "ContentReference": "meinbild.png",
   "EntryContext": {
-    "device_type": "pc",
+    "device_type": "mobile",
     "capture_method": "manual",
     "workspace_context": "work",
     "social_context": "solo",
@@ -112,28 +76,36 @@ Schlagwörter: #Document,#PC,#Work,#ProjektX,#2025,#Rechnung
     "cluster_id": "clst001",
     "cluster_type": "project",
     "related_objects": [],
-    "cluster_timespan": "20250720T0205Z-20250720T0400Z"
+    "cluster_timespan": "20250713T1400Z-20250713T1800Z"
   },
-  "Properties": {
-    "content_size_category": "document",
-    "tag_count": 6,
-    "extracted_entities": [],
-    "suggested_collections": [],
-    "cross_references": [],
-    "content_rating": "neutral",
-    "last_updated": "20250720T0205Z"
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "Dev", "AI", "CTO", "oliver"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "Dev",
+    "role": "CTO",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["CTO", "Finance"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": ["auditor", "DPO"]
   },
   "GDPR": {
     "dpo_approval": true,
     "confidentiality_level": "internal",
     "retention_policy": "36M"
   },
-  "RawExtractedData": null,
-  "card_generation_warning": "Cards wurden auf max. 50 limitiert. Für mehr Detail bitte Custom-Import nutzen."
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-13T14:30Z",
+  "LastUpdated": "2025-07-13T14:30Z",
+  "RawExtractedData": null
 }
 
 **Erfassungskontext:**
-- Gerät: PC
+- Gerät: Mobile
 - Methode: Manual
 - Workspace: Work
 - Sozialer Kontext: Solo
@@ -141,20 +113,33 @@ Schlagwörter: #Document,#PC,#Work,#ProjektX,#2025,#Rechnung
 **Cluster-Zugehörigkeit:**
 - Cluster-ID: clst001
 - Cluster-Typ: project
-- Verwandte Objekte: Alle 50 Cards dieser Datei
-- Zeitfenster: 20250720T0205Z - 20250720T0400Z
+- Verwandte Objekte: Erstes Objekt in Cluster
+- Zeitfenster: 20250713T1400Z - 20250713T1800Z
+
+**Hierarchie:**
+- Organisation: NEXUS-AG
+- Bereich: IT
+- Abteilung: Dev
+- Team: AI
+- Rolle: CTO
+- Person: oliver
+
+**Zugriffsrechte:**
+- Rollen: CTO, Finance
+- Personen: oliver, dominik
+- Externe: auditor, DPO
 
 --- **Objekt-Metadaten**
 - Schema-Version: v6.1
-- Archetyp: Document
-- Content-Größe: document
-- Entry-Point: pc
+- Archetyp: Image
+- Content-Größe: snippet
+- Entry-Point: mobile
 - Workspace: work
 - Cluster: clst001
-- Content-Rating: neutral
-- Last Updated: 20250720T0205Z
 
-Quelle: C:\Users\olive\OneDrive\Projekte\2025\Rechnung.pdf
-Name: Rechnung.pdf
+Quelle: https://dein-cloud-link.de/meinbild.png  
+Name: meinbild.png
 
 Verification: OK
+
+---
