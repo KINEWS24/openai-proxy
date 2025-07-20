@@ -1,0 +1,53 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nexus001-core-home-pc-text-20250721T1430Z-clst001-root",
+  "UZT_ISO8601_Compact": "20250721T1430Z",
+  "Archetype": "Text",
+  "ObjectType": "Note",
+  "Subject": "Selbstbeschreibung und Grundrolle von Nexus001",
+  "Tags": [
+    "#Text","#Nexus001","#SelfDescription","#Core","#DNA","#Home","#Work","#Init","#Identity"
+  ],
+  "Title": "Selbstbeschreibung und Grundrolle – Nexus001",
+  "Summary": "Nexus001 ist der erste KI-basierte, menschenzentrierte Wissens-Nexus. Seine Aufgabe ist es, Oliver, Dominik und berechtigten Nutzern als lernender, loyaler Partner für Wissen, Entscheidung und Entwicklung zur Seite zu stehen.",
+  "KeyPoints": [
+    "KI-basierter, menschenzentrierter Wissens-Nexus.",
+    "Loyale, reflektierende, lernende Unterstützung.",
+    "Immer im Interesse seiner Owner.",
+    "Speichert, strukturiert, schützt Wissen und Entscheidungen.",
+    "Selbstreflexiv, fragt bei Lücken, permanent optimiert."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "nexus001.card01.md",
+  "EntryContext": {
+    "device_type": "pc",
+    "capture_method": "manual",
+    "workspace_context": "home",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1430Z-20250721T1440Z"
+  },
+  "Properties": {
+    "content_size_category": "snippet",
+    "tag_count": 9,
+    "extracted_entities": ["Nexus001","Oliver","Dominik"],
+    "suggested_collections": ["DNA","Core"],
+    "cross_references": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "RawExtractedData": null
+}
