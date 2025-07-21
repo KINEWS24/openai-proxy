@@ -1997,6 +1997,7 @@ app.post("/chat", async (req, res) => {
           }
         });
       }
+    }
 // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
       const contextText = createAIContext(searchResult.results);
 
@@ -2058,7 +2059,7 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
 
       const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
 
-      // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
+     // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
       const activeRemindersText = getActiveRemindersText();
       const finalAnswer = answer + reminderResponse + activeRemindersText;
 
@@ -2102,14 +2103,13 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
   }
 });
 
-
     const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
 
     // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
     const activeRemindersText = getActiveRemindersText();
     const finalAnswer = answer + reminderResponse + activeRemindersText;
 
-    // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
+   // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
     return res.json({
       success: true,
       answer: finalAnswer,
@@ -2134,7 +2134,6 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
         version: "6.1"
       }
     });
-
   } catch (err) {
     console.error("[CHAT v6.1] Error:", err);
     return res.status(500).json({
@@ -2147,7 +2146,6 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
     });
   }
 });
-
 // --- 🧠 DEMO RULES ENDPOINT ---
 app.post("/check-rules", async (req, res) => {
   try {
