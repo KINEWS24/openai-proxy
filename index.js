@@ -105,6 +105,53 @@ const NEXUS_V61_WORKSPACES = {
 
 const NEXUS_V61_ENTRY_POINTS = ['pc', 'mobile', 'office', 'auto'];
 
+
+/**
+ * 🧬 DNA SEQUENZIELLE LADUNG - Lädt alle 34 DNA-Karten in korrekter Reihenfolge
+ */
+async function loadCompleteDNA() {
+  console.log('[DNA LOADING] 🧬 Lade vollständige Nexus001 DNA...');
+  
+  const dnaCards = [];
+  
+  // Lade alle DNA-Karten von 00 bis 33
+  for (let i = 0; i <= 33; i++) {
+    const cardNumber = String(i).padStart(2, '0');
+    
+    try {
+      // Finde alle Dateien mit diesem Prefix
+      const allFiles = await fs.readdir(KNOWLEDGE_DIR);
+      const dnaFile = allFiles.find(f => f.startsWith(`00_NEXUS_${cardNumber}_`) && f.endsWith('.json'));
+      
+      if (dnaFile) {
+        const filePath = path.join(KNOWLEDGE_DIR, dnaFile);
+        const content = await fs.readFile(filePath, 'utf8');
+        const dnaCard = JSON.parse(content);
+        
+        dnaCards.push({
+          cardNumber: i,
+          filename: dnaFile,
+          data: dnaCard
+        });
+        
+        console.log(`[DNA LOADING] ✅ Karte ${cardNumber}: ${dnaCard.Title || dnaFile}`);
+      } else {
+        console.warn(`[DNA LOADING] ⚠️ Karte ${cardNumber} nicht gefunden`);
+      }
+    } catch (error) {
+      console.error(`[DNA LOADING] ❌ Fehler bei Karte ${cardNumber}:`, error.message);
+    }
+  }
+  
+  // Speichere in nexusState
+  nexusState.completeDNA = dnaCards;
+  
+  console.log(`[DNA LOADING] 🧬 DNA vollständig geladen: ${dnaCards.length} Karten`);
+  
+  return dnaCards;
+}
+
+
 // --- SCHRITT 2: v6.1 UUID & CACHE FUNKTIONEN ---
 
 /**
@@ -1076,6 +1123,13 @@ async function initializeApp() {
     // Wir beenden den Prozess nicht, aber der Nexus wird im "Hohlkopf"-Modus bleiben.
   }
 
+// 🧬 DNA SEQUENZIELLE LADUNG - Alle 34 Karten in korrekter Reihenfolge
+  try {
+    await loadCompleteDNA();
+  } catch (error) {
+    console.error('❌ [DNA LOADING] Fehler beim Laden der DNA-Karten:', error);
+  }
+
   // 🚀 PERFORMANCE: Build initial enhanced cache
   try {
     await buildKnowledgeCache();
@@ -1919,7 +1973,7 @@ app.post("/chat", async (req, res) => {
       });
     }
 
-    // NEU: =================================================================
+// NEU: =================================================================
     // NEU: SCHRITT 3: DER INTENT-ROUTER
     // NEU: Prüft, ob die Eingabe eine Direktive oder eine Suchanfrage ist.
     // NEU: =================================================================
@@ -2100,49 +2154,6 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
   }
 });
 
-    const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
-
-    // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
-    const activeRemindersText = getActiveRemindersText();
-    const finalAnswer = answer + reminderResponse + activeRemindersText;
-
-   // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
-    return res.json({
-      success: true,
-      answer: finalAnswer,
-      sources: searchResult.results.map(r => ({
-        title: r.metadata.Title || "Ohne Titel",
-        summary: r.metadata.Summary || "",
-        score: Math.round(r.score * 100) / 100,
-        matchedTerms: r.matchDetails.matchedTerms,
-        filename: r.filename,
-        workspace: r.uuidData.workspace,
-        archetype: r.uuidData.archetype,
-        entry_point: r.entryPoint,
-        cluster_id: r.uuidData.cluster_id,
-        version: r.uuidData.version,
-        isRelated: r.isRelated || false,
-        clusterMembers: r.clusterRelations.length
-      })),
-      meta: {
-        ...searchResult.stats,
-        query,
-        timestamp: new Date().toISOString(),
-        version: "6.1"
-      }
-    });
-  } catch (err) {
-    console.error("[CHAT v6.1] Error:", err);
-    return res.status(500).json({
-      success: false,
-      error: { 
-        code: "INTERNAL_ERROR", 
-        message: "Ein unerwarteter Fehler ist aufgetreten",
-        details: { message: err.message }
-      }
-    });
-  }
-});
 // --- 🧠 DEMO RULES ENDPOINT ---
 app.post("/check-rules", async (req, res) => {
   try {
