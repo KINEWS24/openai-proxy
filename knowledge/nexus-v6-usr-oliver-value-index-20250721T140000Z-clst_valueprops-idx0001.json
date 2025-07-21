@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-value-index-20250721T140000Z-clst_valueprops-idx0001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T140000Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Title": "Value Proposition Index",
+  "Summary": [
+    "Value Proposition – Individuum (UID: nexus-v6-usr-oliver-value-individuum-20250721T140100Z)",
+    "Value Proposition – Team (UID: nexus-v6-usr-oliver-value-team-20250721T140200Z)",
+    "Value Proposition – Unternehmen (UID: nexus-v6-usr-oliver-value-org-20250721T140300Z)",
+    "Chart 3 – Word-Cloud der Wirkungszitate (UID: nexus-v6-usr-oliver-chart-wordcloud-20250721T140400Z)",
+    "Chart 3 – Mini-Cases (UID: nexus-v6-usr-oliver-chart-minicases-20250721T140500Z)"
+  ],
+  "Tags": ["#Index","#ValueProp","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "value_index.md",
+  "ClusterData": {
+    "cluster_id": "clst_valueprops",
+    "cluster_type": "value_proposition"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:00Z",
+  "LastUpdated": "2025-07-21T14:00Z"
+}

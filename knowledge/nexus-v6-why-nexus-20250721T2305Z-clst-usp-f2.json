@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-why-nexus-20250721T2305Z-clst-usp-f2",
+  "ParentUID": "nexus-v6-arch-root",
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2305Z",
+  "Archetype": "USP",
+  "ObjectType": "Empowerment",
+  "Subject": "Der Paradigmenwechsel – Warum NEXUS jetzt gebaut wird",
+  "Tags": [
+    "#Ownership", "#Privacy", "#HumanFirst", "#Versionierung", "#Empowerment"
+  ],
+  "Title": "Der Paradigmenwechsel – Warum NEXUS jetzt gebaut wird",
+  "Summary": "NEXUS ist radikal user-zentriert, gibt Macht und Kontrolle zurück, macht Wissen und Erfahrung erstmals zu einem eigenen, versionierbaren Lebenswerk.",
+  "KeyPoints": [
+    "Radikale Ownership und Privacy – gegen die Big Tech-Logik.",
+    "User unterschätzen eigenen Lebensweg – NEXUS macht ihn zur DNA.",
+    "Human First statt MBA- oder Investorenlogik: Empowerment als Norm.",
+    "NEXUS = Digitales Lebenswerk + Kollaboration + AI-Power.",
+    "Jetzt möglich: KI, Storage, Privacy-Laws und API-Ökoystem reif."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/why2",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-usp",
+    "cluster_type": "architecture",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2305Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Architecture", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Architecture",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Architecture"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T23:05Z",
+  "LastUpdated": "2025-07-21T23:05Z",
+  "RawExtractedData": null
+}

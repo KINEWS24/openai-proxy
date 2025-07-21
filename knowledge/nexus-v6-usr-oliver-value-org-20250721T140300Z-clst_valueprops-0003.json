@@ -1,0 +1,47 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-value-org-20250721T140300Z-clst_valueprops-0003",
+  "ParentUID": "nexus-v6-usr-oliver-value-index-20250721T140000Z-clst_valueprops-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T140300Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Value Proposition – Unternehmen",
+  "Summary": [
+    "Teams und Unternehmen werden zum Kollektiv-Gehirn: Wissen bleibt – egal, wer geht.",
+    "Abwesenheiten, Wechsel? Wissen bleibt, Nexus denkt weiter.",
+    "Projekte laufen nicht aus dem Ruder – Nexus trackt alles mit."
+  ],
+  "KeyPoints": [
+    "Owner-Kontrolle: Kein Cloudzwang.",
+    "Management-Zusammenfassungen ohne Volltextlesen.",
+    "Schnellere und bessere Entscheidungen."
+  ],
+  "Tags": ["#Text","#ValueProp","#Organisation","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "value_org.md",
+  "ClusterData": {
+    "cluster_id": "clst_valueprops",
+    "cluster_type": "value_proposition"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:03Z",
+  "LastUpdated": "2025-07-21T14:03Z"
+}

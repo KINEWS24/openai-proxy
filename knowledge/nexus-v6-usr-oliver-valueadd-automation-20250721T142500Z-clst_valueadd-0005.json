@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-valueadd-automation-20250721T142500Z-clst_valueadd-0005",
+  "ParentUID": "nexus-v6-usr-oliver-value-additional-index-20250721T142000Z-clst_valueadd-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T142500Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Automation & Rule Effects",
+  "Summary": [
+    "Wiederkehrende Muster automatisch erkennen und erinnern.",
+    "Vorlagen & Priorisierung ohne manuellen Aufwand.",
+    "Automatische Klassifikation von Nachrichten und Dokumenten."
+  ],
+  "Tags": ["#Text","#ValueAdditional","#Automation","#Rules","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "valueadd_automation.md",
+  "ClusterData": {
+    "cluster_id": "clst_valueadd",
+    "cluster_type": "value_additional"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+  "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+  "confidentiality_level": "public",
+  "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:25Z",
+  "LastUpdated": "2025-07-21T14:25Z"
+}

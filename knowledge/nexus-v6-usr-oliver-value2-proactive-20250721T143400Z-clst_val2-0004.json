@@ -1,0 +1,45 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-value2-proactive-20250721T143400Z-clst_val2-0004",
+  "ParentUID": "nexus-v6-usr-oliver-value2-index-20250721T143000Z-clst_val2-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T143400Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Proaktive Aktionen",
+  "Summary": [
+    "Fortlaufendes Monitoring & Vorschläge basierend auf Regel-Logik."
+  ],
+  "KeyPoints": [
+    "Deadline-Warner & Projekt-Memory.",
+    "Doppelte Aufgaben bündeln.",
+    "Automatische Mini-Briefings & Priorisierung."
+  ],
+  "Tags": ["#Text","#ValueAdditional","#Proactive","#Actions","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "value2_proactive.md",
+  "ClusterData": {
+    "cluster_id": "clst_val2",
+    "cluster_type": "value_additional"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+  "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+  "person_access": ["Oliver Welling"],
+  "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+  "confidentiality_level": "public",
+  "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:34Z",
+  "LastUpdated": "2025-07-21T14:34Z"
+}

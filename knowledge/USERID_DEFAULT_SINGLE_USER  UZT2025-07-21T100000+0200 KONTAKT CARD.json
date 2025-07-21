@@ -1,0 +1,65 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "018f6f4f-a896-7bce-b8c0-0b3ef1fd5c66",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T100000+0200",
+  "Archetype": "Text",
+  "ObjectType": "ContactCard",
+  "Subject": "Kontakte – Oliver Welling & Brain Two GmbH",
+  "Title": "Kontakte – Oliver Welling & Brain Two GmbH",
+  "Summary": "Ansprechpartner, Standort, Rolle und Kontaktinformationen zu Oliver Welling und der Brain Two GmbH.",
+  "KeyPoints": [
+    "Name: Oliver Welling",
+    "Rolle/Funktion: Owner / Gründer",
+    "Firma: Brain Two GmbH",
+    "Standort/Büro: Alte Dorfstrasse 2, 24245 Kleinbarkau (Raum Hamburg)",
+    "Teamgröße: [bitte ergänzen]",
+    "Weitere Ansprechpartner: [z. B. Co-Founder, CTO, CFO – bitte ergänzen]",
+    "E-Mail: oliver.welling@brain-two.de",
+    "Telefon: +49 172 9992200",
+    "LinkedIn: https://www.linkedin.com/in/oliver-welling-58529653/",
+    "Website: https://kinews24.de/"
+  ],
+  "DocumentStructure": [],
+  "ContentReference": "oliver_welling_kontakt.md",
+  "LinkTarget": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "team"
+  },
+  "ClusterData": {
+    "cluster_id": "contact_cards",
+    "cluster_type": "directory",
+    "related_objects": [],
+    "cluster_timespan": "20250721T100000Z-20250721T100000Z"
+  },
+  "Hierarchy": {
+    "organization": "Brain Two GmbH",
+    "department": "",
+    "team": "",
+    "role": "Owner/Founder",
+    "person": "Oliver Welling",
+    "hierarchy_path": ["Brain Two GmbH", "", "", "Owner/Founder", "Oliver Welling"]
+  },
+  "Access": {
+    "role_access": ["Owner", "Founder"],
+    "person_access": ["Oliver Welling"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:00:00+02:00",
+  "LastUpdated": "2025-07-21T10:00:00+02:00",
+  "RawExtractedData": null,
+  "Verification": "OK"
+}

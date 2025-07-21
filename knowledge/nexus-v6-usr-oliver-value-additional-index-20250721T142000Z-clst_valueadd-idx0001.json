@@ -1,0 +1,47 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-value-additional-index-20250721T142000Z-clst_valueadd-idx0001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T142000Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Title": "Additional Value Proposition Index",
+  "Summary": [
+    "Ask & Retrieval (valueadd-retrieval)",
+    "Memory & Reminders (valueadd-reminders)",
+    "Project & Context Management (valueadd-context)",
+    "Team Collaboration (valueadd-team)",
+    "Automation & Rule Effects (valueadd-automation)",
+    "Elevator Pitch Sentences (valueadd-elevator)",
+    "Work-Alltag Statements (valueadd-workday)",
+    "Conclusion Impact (valueadd-conclusion)"
+  ],
+  "Tags": ["#Index","#ValueAdditional","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "valueadd_index.md",
+  "ClusterData": {
+    "cluster_id": "clst_valueadd",
+    "cluster_type": "value_additional"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:20Z",
+  "LastUpdated": "2025-07-21T14:20Z"
+}

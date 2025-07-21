@@ -1,0 +1,60 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-why-nexus-20250721T2305Z-clst-usp-f1",
+  "ParentUID": "nexus-v6-arch-root",
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2305Z",
+  "Archetype": "USP",
+  "ObjectType": "Differentiator",
+  "Subject": "Warum gibt es (fast) keinen zweiten NEXUS?",
+  "Tags": [
+    "#KIHype", "#Struktur", "#HumanFirst", "#Generalist", "#DNA", "#BigTechLockin"
+  ],
+  "Title": "Warum gibt es (fast) keinen zweiten NEXUS?",
+  "Summary": "Die Welt der KI ist fragmentiert, Tool-zentriert und von Big Tech dominiert. NEXUS vereint Struktur, Ownership, Privacy, Zeit & DNA in einer menschenzentrierten Generalisten-KI.",
+  "KeyPoints": [
+    "NEXUS denkt radikal strukturiert UND human-first – KI als Generalist.",
+    "Markt ist dominiert von Punktlösungen & Lock-in, nicht von echten Frameworks.",
+    "Die fragmentierte Techwelt belohnt Einzelprobleme, nicht lebenslange DNA.",
+    "Mit KI wird echter Ownership, Privacy, Zeit- und Kontext-DNA erstmals praktisch."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/why",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-usp",
+    "cluster_type": "architecture",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2305Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Architecture", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Architecture",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Architecture"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T23:05Z",
+  "LastUpdated": "2025-07-21T23:05Z",
+  "RawExtractedData": null
+}
