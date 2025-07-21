@@ -504,7 +504,7 @@ async function buildKnowledgeCache() {
   
   try {
     const allFiles = await fs.readdir(KNOWLEDGE_DIR);
-    const jsonFiles = allFiles.filter(f => f.endsWith(".tags.json"));
+    const jsonFiles = allFiles.filter(f => f.endsWith(".json"));
     
     console.log(`[CACHE v6.1] Found ${jsonFiles.length} knowledge files to cache`);
     
