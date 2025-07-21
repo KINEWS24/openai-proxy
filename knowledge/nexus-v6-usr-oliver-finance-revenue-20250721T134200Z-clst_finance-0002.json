@@ -1,0 +1,46 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-finance-revenue-20250721T134200Z-clst_finance-0002",
+  "ParentUID": "nexus-v6-usr-oliver-finance-index-20250721T134000Z-clst_finance-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T134200Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Einnahmen & Pricing",
+  "Summary": [
+    "Chat-Only: 5,99 €/Monat oder 49 €/Jahr.",
+    "Chat+Voice: 9,99 €/Monat oder 89 €/Jahr.",
+    "Founders-Special: 69 €/Jahr für Erst-1.000."
+  ],
+  "KeyPoints": [
+    "Q1: 1.000 × 50 €/Jahr = 50k €.",
+    "6M: 5.000 User × Ø 8 €/Monat = 40k €/Monat."
+  ],
+  "Tags": ["#Revenue","#Pricing","#Subscription","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "finance_revenue.md",
+  "ClusterData": {
+    "cluster_id": "clst_finance",
+    "cluster_type": "investment_plan"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T13:42Z",
+  "LastUpdated": "2025-07-21T13:42Z"
+}

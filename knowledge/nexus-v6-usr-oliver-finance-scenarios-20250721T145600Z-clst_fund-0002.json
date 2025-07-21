@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-finance-scenarios-20250721T145600Z-clst_fund-0002",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145600Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Finanzierungs-Szenarien",
+  "Summary": [
+    "Lean Seed: 150–250 k € für 6–9 Monate.",
+    "Classic Seed: 300–500 k € für 12–15 Monate.",
+    "Large Round: 350–500 k €+ bzw. 1 M+ für Series A."
+  ],
+  "Tags": ["#Text","#Finance","#Scenarios","#Investment","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "finance_scenarios.md",
+  "ClusterData": {
+    "cluster_id": "clst_fund",
+    "cluster_type": "finance"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Strategy",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Finance"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:56Z",
+  "LastUpdated": "2025-07-21T14:56Z"
+}

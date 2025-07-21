@@ -1,0 +1,47 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-colors-accents-20250721T144050Z-clst_colors-0005",
+  "ParentUID": "nexus-v6-usr-oliver-colors-index-20250721T144000Z-clst_colors-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T144050Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Weitere Designfarben",
+  "Summary": [
+    "Ergänzende Akzentfarben für Brand und Visuals."
+  ],
+  "KeyPoints": [
+    "Bright Neon Blue: #00FFF0",
+    "Dark Blue: #0A4C8A",
+    "Bright Blue: #1A85FF",
+    "Light Grey: #B3B3B3",
+    "Dark Grey: #333333"
+  ],
+  "Tags": ["#Design","#Colors","#Accents","#Brand","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "colors_accents.md",
+  "ClusterData": {
+    "cluster_id": "clst_colors",
+    "cluster_type": "design_tokens"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Design",
+    "team": "Core",
+    "role": "Owner",
+  "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Design"],
+  "person_access": ["Oliver Welling"],
+  "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+  "confidentiality_level": "public",
+  "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:40Z",
+  "LastUpdated": "2025-07-21T14:40Z"
+}

@@ -1,0 +1,68 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usp-20250721T2127Z-clst-usp-f2",
+  "ParentUID": "nexus-v6-genesis-clst-root",
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2127Z",
+  "Archetype": "USP",
+  "ObjectType": "FeatureOverview",
+  "Subject": "Rechte, Compliance, Kollaboration, Flexibilität, Integrität",
+  "Tags": [
+    "#USP", "#Hierarchie", "#Compliance", "#MultiModal", "#Kollaboration",
+    "#Audit", "#Personalization", "#PlugPlay", "#Integrity", "#Guard"
+  ],
+  "Title": "NEXUS USPs Teil 2 – Rechte, Compliance, Kollaboration, Flexibilität",
+  "Summary": "USPs: Rechteverwaltung, Compliance, Multi-Modalität, Kollaboration, Audit-Trail, Personalisierung, Interoperabilität, Schutz.",
+  "KeyPoints": [
+    "Jede Card ist an Rolle/Hierarchie gebunden, vom Owner bis zum Audit – ideal für Teams, Unternehmen, Familien, Boards.",
+    "Datenschutz, Audit, Retention, Quarantäne by Design – MCP-ready, Privacy-Pionier.",
+    "Text, Bild, Video, Audio, Data – maximale Flexibilität, kein Lock-In, alles durchsuchbar.",
+    "Owner entscheidet über Speicherort, Nutzung, Infrastruktur.",
+    "Permanente/temporäre Wissensräume, Verbünde, Kooperationen.",
+    "Jede Änderung ist nachverfolgbar, 'Vergessen werden' by DNA.",
+    "Eigene Voice, Brand, Community-Style – der KI-Buddy für dich.",
+    "Jeder Nutzer, jede Rolle sieht, was wirklich gebraucht wird – Zero-Noise, Ultra-UX.",
+    "Maximale Interoperabilität, keine KI-Insel, Future-Safe.",
+    "Halluzinationsschutz, Quellencheck, immer belegbar.",
+    "100% Human-First, Schutz vor Missbrauch, kein Datendiebstahl."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/usp",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-usp",
+    "cluster_type": "usps",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2126Z-20250721T2127Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "USP", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "USP",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Strategy"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:27Z",
+  "LastUpdated": "2025-07-21T21:27Z",
+  "RawExtractedData": null
+}

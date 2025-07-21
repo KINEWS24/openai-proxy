@@ -1,0 +1,64 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-rk-master-index-20250721T2101Z-clst001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 6,
+  "UZT_ISO8601_Compact": "20250721T2101Z",
+  "Archetype": "Index",
+  "ObjectType": "DNACluster",
+  "Subject": "NEXUS-Cluster für Robert Kabs – Persönlich & Organisation",
+  "Tags": ["#Index", "#Start", "#NEXUS", "#Kabs", "#Persönlich", "#Organisation", "#2025"],
+  "Title": "NEXUS für Robert André Kabs – Persönlich & Organisation",
+  "Summary": "Startkarte für die NEXUS-DNA-Reihe. Zeigt, wie NEXUS Robert Kabs als Unternehmer und CEO auf persönlicher und organisatorischer Ebene unterstützt.",
+  "KeyPoints": [
+    "Persönliche Entlastung: Dokumentation, Memory, Rechte, Compliance",
+    "ORG-Support: Auditierbare, rollensichere Wissens- und Prozessablage für alle Teams",
+    "Cluster-Fähigkeit: Jeder Bereich (Persönlich, Team, Standort) hat eigene Karten"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-docs/kabs-cluster-index",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "kabs-cluster-index",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "user_cluster",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2100Z-20250721T2159Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["ORG_Kabs", "CEO", "Robert_Kabs"],
+    "organization": "ORG_Kabs",
+    "department": "Management",
+    "team": "CEO-Office",
+    "role": "CEO",
+    "person": "Robert_Kabs"
+  },
+  "Access": {
+    "role_access": ["CEO", "Management"],
+    "person_access": ["Robert_Kabs"],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:01Z",
+  "LastUpdated": "2025-07-21T21:01Z",
+  "RawExtractedData": null,
+  "Verification": "OK"
+}

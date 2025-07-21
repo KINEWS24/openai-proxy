@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-chart-minicases-20250721T140500Z-clst_valueprops-0005",
+  "ParentUID": "nexus-v6-usr-oliver-value-index-20250721T140000Z-clst_valueprops-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T140500Z",
+  "Archetype": "Design",
+  "ObjectType": "ChartCard",
+  "Title": "Chart 3 – Mini-Cases",
+  "Summary": [
+    "Mini-Case 1: Agenda & Notizen automatisch bereit.",
+    "Mini-Case 2: Angebot-Duplizierung auf Knopfdruck.",
+    "Mini-Case 3: Projektstatus in Sekunden."
+  ],
+  "Tags": ["#Chart","#MiniCases","#ValueProp","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "chart_minicases.md",
+  "ClusterData": {
+    "cluster_id": "clst_valueprops",
+    "cluster_type": "value_proposition"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Design",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:05Z",
+  "LastUpdated": "2025-07-21T14:05Z"
+}

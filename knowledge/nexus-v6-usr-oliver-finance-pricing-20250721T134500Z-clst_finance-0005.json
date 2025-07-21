@@ -1,0 +1,43 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-finance-pricing-20250721T134500Z-clst_finance-0005",
+  "ParentUID": "nexus-v6-usr-oliver-finance-index-20250721T134000Z-clst_finance-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T134500Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Preisempfehlung & Suchtfaktor",
+  "Summary": [
+    "Chat+Voice: 9,99 €/Monat oder 89 €/Jahr (Early statt 12,99 €).",
+    "First 1.000: 69 €/Jahr forever.",
+    "Kein Free-Tier, kurzer Test → zahlende Nutzer.",
+    "Voice builtin als Killer-Feature für hohe Anziehung."
+  ],
+  "Tags": ["#Pricing","#Growth","#Adoption","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "finance_pricing.md",
+  "ClusterData": {
+    "cluster_id": "clst_finance",
+    "cluster_type": "investment_plan"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T13:45Z",
+  "LastUpdated": "2025-07-21T13:45Z"
+}

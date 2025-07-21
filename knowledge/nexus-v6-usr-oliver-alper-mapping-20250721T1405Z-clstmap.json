@@ -1,0 +1,71 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-alper-mapping-20250721T1405Z-clstmap",
+  "ParentUID": "nexus-v6-usr-oliver-mainprofile-20250721T1400Z-root",
+  "ChunkNr": 2,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250721T1405Z",
+  "Archetype": "NetworkMapping",
+  "ObjectType": "Connection",
+  "Subject": "Netzwerk-Visualisierung: Oliver Welling → Alper Eger",
+  "Tags": ["#Netzwerk","#Mapping","#Person","#Cluster","#Kontakt"],
+  "Title": "Netzwerk-Mapping: Oliver Welling ↔ Alper Eger",
+  "Summary": "Abbildung des Netzwerks von Oliver Welling zu Alper Eger, inkl. gemeinsamer Kontakte und History.",
+  "KeyPoints": [
+    "Zentrale Verbindung Oliver → Alper (exmox/Start-up Hamburg)",
+    "Mapping über gemeinsame Kontakte wie Patrick Abrar",
+    "History-Log: Initiale Vernetzung Q3 2024, weitere Kontakte Q1 2025"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://www.linkedin.com/in/oliver-welling-58529653/",
+  "MessageContext": null,
+  "DataStructure": {
+    "from": "oliver",
+    "to": "alper_eger",
+    "common_contacts": ["Patrick Abrar", "Branche Hamburg", "KI-Cluster"],
+    "first_connection": "2024-08-15",
+    "history": [
+      {"timestamp": "2024-08-15", "event": "Kontakt über Startup-Netzwerk"},
+      {"timestamp": "2025-04-18", "event": "gemeinsamer Event/Workshop"}
+    ]
+  },
+  "ContentReference": "dynamic_network_map",
+  "EntryContext": {
+    "device_type": "api",
+    "capture_method": "auto",
+    "workspace_context": "networking",
+    "social_context": "public"
+  },
+  "ClusterData": {
+    "cluster_id": "clst_oliver_network",
+    "cluster_type": "network_map",
+    "related_objects": ["nexus-v6-usr-oliver-mainprofile-20250721T1400Z-root", "nexus-v6-usr-alper-eger-20250721T1330Z-root"],
+    "cluster_timespan": "2024-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Network", "Mapping", "oliver"],
+    "organization": "Brain-Two GmbH",
+    "department": "Advisory",
+    "team": "KI",
+    "role": "CEO",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["CEO", "Network"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T14:05Z",
+  "LastUpdated": "2025-07-21T14:05Z",
+  "RawExtractedData": null
+}

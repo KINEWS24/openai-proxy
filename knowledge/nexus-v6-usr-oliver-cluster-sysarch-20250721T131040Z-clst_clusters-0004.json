@@ -1,0 +1,46 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-cluster-sysarch-20250721T131040Z-clst_clusters-0004",
+  "ParentUID": "nexus-v6-usr-oliver-cluster-index-20250721T131000Z-clst_clusters-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T131040Z",
+  "Archetype": "Cluster",
+  "ObjectType": "ClusterCard",
+  "Title": "System Architecture Cluster",
+  "Summary": [
+    "Marketing – Datenerfassung (clst_marketing_concept-0002)",
+    "Marketing – Aggregation (clst_marketing_concept-0003)",
+    "Marketing – API (clst_marketing_concept-0004)",
+    "Marketing – Visualisierung (clst_marketing_concept-0005)",
+    "Demo-Integration (clst_comm_integration-0003)",
+    "Real-Betrieb Connector (clst_comm_integration-0004)",
+    "Ingestion-Protokoll Template (clst_comm_integration-0005)"
+  ],
+  "Tags": ["#Cluster","#SystemArchitecture","#Tech","#Integration","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "cluster_sysarch.md",
+  "ClusterData": {
+    "cluster_id": "clst_clusters",
+    "cluster_type": "thematic"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Knowledge",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T13:10Z",
+  "LastUpdated": "2025-07-21T13:10Z"
+}

@@ -1,0 +1,59 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usp-20250721T2126Z-clst-usp-f1",
+  "ParentUID": "nexus-v6-genesis-clst-root",
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2126Z",
+  "Archetype": "USP",
+  "ObjectType": "FeatureOverview",
+  "Subject": "Ownership, DNA, Proof, Chronologie, Chunking",
+  "Tags": ["#USP","#HumanOwnership","#DNA","#Quellenpflicht","#Compliance","#Chunking","#Rechte"],
+  "Title": "NEXUS USPs Teil 1 – Ownership, DNA, Quellen, Zeit, Chunking",
+  "Summary": "Kern-USPs: Eigentümerschaft, DNA-Steuerung, vollständige Quellenpflicht, Wissen über Zeit, automatisches Chunking.",
+  "KeyPoints": [
+    "Jeder Nexus gehört 100% dem Owner (Person, Team, Org) – volle Kontrolle, kein anderes KI-System bietet das.",
+    "Ziele, Ethik, Rechte werden von Anfang an durch die DNA gesteuert – explizit, versioniert, konfigurierbar.",
+    "Jede Card MUSS einen Quelllink enthalten, Proof/Auditing garantiert, Zero Halluzinationen.",
+    "Jedes Wissensobjekt ist chronologisch nachvollziehbar, mit vollständigem Änderungs-Log.",
+    "Automatisches Chunking für alle Formate und Modalitäten, maximale Suchbarkeit, jede Card für sich nutzbar."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/usp",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-usp",
+    "cluster_type": "usps",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2126Z-20250721T2127Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "USP", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "USP",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Strategy"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:26Z",
+  "LastUpdated": "2025-07-21T21:26Z",
+  "RawExtractedData": null
+}

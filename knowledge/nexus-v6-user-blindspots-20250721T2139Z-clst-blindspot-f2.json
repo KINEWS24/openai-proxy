@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-user-blindspots-20250721T2139Z-clst-blindspot-f2",
+  "ParentUID": "nexus-v6-ux-root",
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2139Z",
+  "Archetype": "UX",
+  "ObjectType": "MLPChecklist",
+  "Subject": "Vision-Alltag-Lücke, Vertrauen, Minimum Lovable Product",
+  "Tags": [
+    "#VisionGap", "#Trust", "#MLP", "#UserExperience", "#DayOne"
+  ],
+  "Title": "NEXUS – Lücke zwischen Vision und Alltag, Vertrauen & MLP",
+  "Summary": "Erwartung vs. Praxis: Fokus auf Sofortnutzen, Vertrauen, Compliance und ein begeisterndes Day-One-Erlebnis.",
+  "KeyPoints": [
+    "Nutzer erwarten sofort Nutzen, keine Klickhölle, keine Überforderung.",
+    "Vertrauen und Compliance (Audit, Privacy, Reset) als Kernprinzipien.",
+    "Dauerhaftigkeit durch Backup, Redundanz, jederzeit Export.",
+    "Frust und Unsicherheit vermeiden – Erfolge ab Tag 1.",
+    "MLP: Kontext-Suche, Rechte, Proof, Transparenz, Onboarding in Minuten."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/ux/mlp",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-blindspot",
+    "cluster_type": "uxrisk",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2139Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "UX", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "UX",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "UX"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:39Z",
+  "LastUpdated": "2025-07-21T21:39Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-user-blindspots-20250721T2139Z-clst-blindspot-f1",
+  "ParentUID": "nexus-v6-ux-root",
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2139Z",
+  "Archetype": "UX",
+  "ObjectType": "RiskList",
+  "Subject": "Blinde Flecken, Risiken, Akzeptanz UX",
+  "Tags": [
+    "#Onboarding", "#Akzeptanz", "#BlindSpots", "#UX", "#Compliance"
+  ],
+  "Title": "NEXUS – Blinde Flecken und UX-Herausforderungen",
+  "Summary": "Kritische Risiken bei Bedienbarkeit, Datenreview, emotionaler Akzeptanz, Konfliktmanagement und Human Interface.",
+  "KeyPoints": [
+    "Initialkonfiguration muss einfach, verständlich, nicht überfordernd sein.",
+    "Review- und Cleanup-Features für fehlerhafte/duplizierte Cards essenziell.",
+    "Blackbox-Gefahr: User akzeptieren kein System, das Kontrolle nimmt.",
+    "Konflikte in Wissen und Rollen erfordern transparente Auflösung.",
+    "KI muss Menschen Raum lassen, nie dominant oder entmündigend werden."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/ux/blindspots",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-blindspot",
+    "cluster_type": "uxrisk",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2139Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "UX", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "UX",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "UX"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:39Z",
+  "LastUpdated": "2025-07-21T21:39Z",
+  "RawExtractedData": null
+}

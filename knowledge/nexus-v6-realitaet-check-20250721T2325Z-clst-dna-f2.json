@@ -1,0 +1,60 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-realitaet-check-20250721T2325Z-clst-dna-f2",
+  "ParentUID": "nexus-v6-arch-root",
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2325Z",
+  "Archetype": "Realitätscheck",
+  "ObjectType": "DNA-Start",
+  "Subject": "Sofortige Skalierbarkeit, Zukunftssicherheit und „Self-Explaining“ DNA",
+  "Tags": [
+    "#Skalierbarkeit", "#APIready", "#SelfExplaining", "#Blueprint", "#ZeroHandbuch"
+  ],
+  "Title": "Sofortige Skalierbarkeit, Zukunftssicherheit und „Self-Explaining“ DNA",
+  "Summary": "Alle Features wie Knowledge over Time, Rechte, Rollen, API, MCP wachsen direkt ab DNA-Upload mit – die DNA ist Blueprint und Self-Explainer zugleich.",
+  "KeyPoints": [
+    "Neues Wissen wird automatisch nach DNA verarbeitet und integriert.",
+    "Kein Extra-Handbuch: Prinzipien & Logik sind self-explaining.",
+    "API, Schnittstellen, UI – alles baut sofort auf der DNA-Struktur auf.",
+    "Zukunftssicher: Skalierbar, versionierbar, investitionssicher."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/realitaet-check2",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-dna",
+    "cluster_type": "dna-core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2325Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Architecture", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Architecture",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Architecture"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T23:25Z",
+  "LastUpdated": "2025-07-21T23:25Z",
+  "RawExtractedData": null
+}

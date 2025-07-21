@@ -1,0 +1,17 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "<edge-UID>",
+  "ParentUID": "<übergeordneter-Cluster-UID>",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "<timestamp>",
+  "Archetype": "Edge",
+  "ObjectType": "RelationshipCard",
+  "SourceUID": "<SourceUID>",
+  "TargetUID": "<TargetUID>",
+  "RelationshipType": "<RelationshipType>",
+  "Description": "<kurze Erläuterung der Verbindung>",
+  "Tags": ["#Edge","#Relationship","#<SourceUID>","#<TargetUID>","#<RelationshipType>"],
+  "Created": "<timestamp>",
+  "LastUpdated": "<timestamp>"
+}

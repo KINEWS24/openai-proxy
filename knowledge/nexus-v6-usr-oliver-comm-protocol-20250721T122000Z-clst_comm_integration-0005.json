@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-comm-protocol-20250721T122000Z-clst_comm_integration-0005",
+  "ParentUID": "nexus-v6-usr-oliver-comm-index-20250721T121500Z-clst_comm_integration-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T122000Z",
+  "Archetype": "Template",
+  "ObjectType": "TemplateCard",
+  "Title": "NEXUS Ingestion-Protokoll Template",
+  "Summary": [
+    "System-Prompt zur Chunking-Regel: ROOT-CARD + DAILY-CARDS + MEDIA-Cards.",
+    "Parameter: Chat-Partner, Cluster-ID, Workspace.",
+    "Regeln: Datumstrenner nutzen, Child-Cards pro Tag, Media-Cards mit LinkTarget-Platzhaltern, intelligente Tag-Generierung."
+  ],
+  "Tags": ["#Template","#Ingestion","#Protocol","#ChatImport","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "comm_ingestion_protocol_template.md",
+  "ClusterData": {
+    "cluster_id": "clst_comm_integration",
+    "cluster_type": "workflow"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Integration",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Integration"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T12:20Z",
+  "LastUpdated": "2025-07-21T12:20Z"
+}
