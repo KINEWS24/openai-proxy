@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-knowhow-20250721T2110Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 1,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2110Z",
+  "Archetype": "Text",
+  "ObjectType": "Wissensmanagement",
+  "Subject": "Wissenssicherung & Know-how-Transfer",
+  "Tags": ["#KMU", "#Wissensmanagement", "#Sicherung", "#Nachfolge", "#Prozessdoku"],
+  "Title": "NEXUS als zentrales Wissenssystem",
+  "Summary": "Schützt vor Wissensverlust, erleichtert Übergaben, spart Zeit bei Einarbeitung und Fehlersuche.",
+  "KeyPoints": [
+    "Wissen aller Mitarbeiter zentral & sicher gespeichert",
+    "Schnelle Einarbeitung, weniger Fehler",
+    "Prozesse, Anleitungen und Erfahrungswerte dokumentiert",
+    "Automatisierte Erinnerung bei Wissenslücken"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/knowhow",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "alle",
+    "role": "alle"
+  },
+  "Access": {
+    "role_access": ["GF", "IT", "alle"],
+    "person_access": [],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:10Z",
+  "LastUpdated": "2025-07-21T21:10Z",
+  "Verification": "OK"
+}

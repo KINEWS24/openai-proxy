@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kombi-modellstrategie-20250721T2320Z-batch08",
+  "ParentUID": null,
+  "ChunkNr": 8,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2320Z",
+  "Archetype": "Strategy",
+  "ObjectType": "TipCard",
+  "Subject": "Best of Both Worlds – Kombinierte Modell-Strategie",
+  "Tags": ["#NEXUS","#Kombi","#Modellstrategie","#Kostenoptimierung","#Compliance"],
+  "Title": "Best of Both Worlds – Kombinierte Modell-Strategie",
+  "Summary": "NEXUS kann Aufgaben individuell mit dem passenden Modell fahren: Power + Compliance. Das ist einzigartig!",
+  "KeyPoints": [
+    "Mix aus Mistral (Preis/Skalierung) und Aleph Alpha (Compliance)",
+    "Jede Card individuell modell- und policybasiert",
+    "Optimale Kosten/Nutzen/Sicherheitsbalance"
+  ],
+  "DocumentStructure": ["Modell-Kombi", "Policy-Konfiguration", "Vorteile"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:20Z",
+  "LastUpdated": "2025-07-21T23:20Z",
+  "Verification": "OK"
+}

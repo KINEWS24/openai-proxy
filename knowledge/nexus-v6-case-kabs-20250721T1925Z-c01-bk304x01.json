@@ -1,0 +1,73 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-case-kabs-20250721T1925Z-c01-bk304x01",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T1925Z",
+  "Archetype": "BusinessCase",
+  "ObjectType": "CompanySimulation",
+  "Subject": "NEXUS Mittelstand Simulation: Kabs (2025)",
+  "Tags": [
+    "#Kabs",
+    "#BusinessCase",
+    "#Simulation",
+    "#Pricing",
+    "#Voice",
+    "#AI",
+    "#Cards",
+    "#KMU"
+  ],
+  "Title": "NEXUS Business-Case: Mittelständler „Kabs“ (2025)",
+  "Summary": "Rollout-Simulation für Kabs (300 MA): Kostenstruktur, AI/Voice-Anteil, Break-Even, Rohertrag. Modell ist profitabel & skalierbar.",
+  "KeyPoints": [
+    "300 Mitarbeiter, 120.000 Cards/Monat",
+    "AI+Voice-Kosten <7% der Erlöse",
+    "Break-Even bei 20 Usern",
+    "Rohertrag/Jahr >30.000 €"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "consulting",
+    "social_context": "team",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "case-kabs-2025",
+    "cluster_type": "business_case",
+    "related_objects": [],
+    "cluster_timespan": "20250721T0000Z-20250721T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["Kabs", "Management", "Consulting", "NEXUS", "oliver"],
+    "organization": "Kabs",
+    "department": "Management",
+    "team": "Consulting",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Management", "Consultant", "Finance"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T19:25Z",
+  "LastUpdated": "2025-07-21T19:25Z",
+  "RawExtractedData": null
+}

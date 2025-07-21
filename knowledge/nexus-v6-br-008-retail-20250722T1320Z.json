@@ -1,0 +1,31 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-br-008-retail-20250722T1320Z",
+  "ParentUID": null,
+  "ChunkNr": 8,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250722T1320Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Branche",
+  "Subject": "KOT im Handel & Retail – Aktionen, Sortiment, Kundenfeedback",
+  "Tags": ["#KOT", "#Handel", "#Retail", "#Sortiment", "#Feedback"],
+  "Title": "Sortimentswechsel, Aktionszyklen, Kundenfeedback – Entwicklung, Erfolg, Fehler",
+  "Summary": "Alle Aktionen, Sortimentswechsel, Feedback als Card mit Trend- und Fehleranalyse, Proof für Lieferanten und Marketing.",
+  "KeyPoints": [
+    "Entwicklung und Trend-Analyse für Aktionen und Sortiment",
+    "Proof für Lieferanten, Revision, Marketing",
+    "Fehler- und Erfolgsdokumentation über Zeit"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "retail_kot_case.md",
+  "EntryContext": { "branche": "Handel", "anwendung": "Aktion/Feedback/Trend" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Handel", "role": null, "person": null },
+  "Access": { "role_access": ["Filialleitung", "Marketing", "Revision"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "84M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T13:20Z",
+  "LastUpdated": "2025-07-22T13:20Z"
+}

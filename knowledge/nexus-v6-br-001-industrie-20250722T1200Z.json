@@ -1,0 +1,31 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-br-001-industrie-20250722T1200Z",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250722T1200Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Branche",
+  "Subject": "KOT in der Industrie – Produktion, Audit & Innovation",
+  "Tags": ["#KOT", "#Industrie", "#Prozess", "#Timeline", "#Audit", "#Innovation"],
+  "Title": "Produkt- und Prozessentwicklung als Zeitreise",
+  "Summary": "Jede Prozess- und Produktänderung, Innovation oder Störung ist als Card in der Zeitachse abgelegt – Audit, Lessons Learned, Know-how-Transfer, ISO-Compliance: alles mit 1 Klick.",
+  "KeyPoints": [
+    "Alle Prozessänderungen, Innovationen und Fehler als Cards mit Proof",
+    "Volle Audit-Timeline für ISO, QM, Rückruf",
+    "Transparenz und Wissenstransfer für neue Mitarbeiter/Generationen"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "industrie_kot_case.md",
+  "EntryContext": { "branche": "Industrie", "anwendung": "Produktion & Audit" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Industrie", "role": null, "person": null },
+  "Access": { "role_access": ["Produktmanager", "Qualitätssicherung", "Audit"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "60M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:00Z",
+  "LastUpdated": "2025-07-22T12:00Z"
+}

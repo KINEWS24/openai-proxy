@@ -1,0 +1,30 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-hw-001-projektchronik-20250722T1400Z",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250722T1400Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Handwerk",
+  "Subject": "KOT im Handwerk – Baustellen- & Projektchronik",
+  "Tags": ["#KOT", "#Handwerk", "#Baustelle", "#Dokumentation", "#Projekt"],
+  "Title": "Baustellen- und Projektchronik – lückenlose Nachweisführung",
+  "Summary": "Alle Absprache, Änderungen, Mängelrügen als Card – Timeline, Proof, Nachbesserung.",
+  "KeyPoints": [
+    "Lückenlose Projektchronik für Nachweise",
+    "Fotos, Protokolle, Änderungen mit Zeit und Verantwortlichen",
+    "Beweisführung für Abnahme und Abrechnung"
+  ],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "handwerk_kot_projektchronik.md",
+  "EntryContext": { "branche": "Handwerk", "anwendung": "Projektchronik" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Handwerk", "role": null, "person": null },
+  "Access": { "role_access": ["Bauleiter", "Geschäftsführung", "Kunde"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "96M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T14:00Z",
+  "LastUpdated": "2025-07-22T14:00Z"
+}

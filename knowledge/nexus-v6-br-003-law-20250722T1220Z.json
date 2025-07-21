@@ -1,0 +1,31 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-br-003-law-20250722T1220Z",
+  "ParentUID": null,
+  "ChunkNr": 3,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250722T1220Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Branche",
+  "Subject": "KOT im Recht – Fallchronologie & Mandantendokumentation",
+  "Tags": ["#KOT", "#Recht", "#Kanzlei", "#Fallhistorie", "#Proof"],
+  "Title": "Fallhistorie, Urteile, Mandantendokumentation – jede Änderung als Card",
+  "Summary": "Alle rechtlichen Entwicklungen, Schriftsätze, Urteile als Cards mit Audit-Trail – vollständige Nachvollziehbarkeit für Kanzleien.",
+  "KeyPoints": [
+    "Vollständige Fallhistorie und Mandantendokumentation",
+    "Proof/Audit für jede Änderung",
+    "Vergleichbare Fallanalysen für Kanzleiteams"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "law_kot_case.md",
+  "EntryContext": { "branche": "Recht", "anwendung": "Kanzlei & Fallhistorie" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Recht", "role": null, "person": null },
+  "Access": { "role_access": ["Partner", "Associate", "Audit"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "confidential", "retention_policy": "84M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:20Z",
+  "LastUpdated": "2025-07-22T12:20Z"
+}

@@ -1,0 +1,41 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-modelle-mistral-20250721T2305Z-pricing01",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 4,
+  "UZT_ISO8601_Compact": "20250721T2305Z",
+  "Archetype": "Pricing",
+  "ObjectType": "Table",
+  "Subject": "Mistral AI Modelle – Preise & Leistung (Juli 2025)",
+  "Tags": ["#MistralAI","#Pricing","#Leistung","#Modelle","#Tokenstaffel","#Juli2025","#NEXUS"],
+  "Title": "Mistral AI Modelle – Preise & Leistung (Juli 2025)",
+  "Summary": "Aktuelle Staffelpreise und Leistungsbeschreibungen für alle wichtigen Mistral-Modelle. Übersicht für User, Team und Organisation.",
+  "KeyPoints": [
+    "Preis-Leistungs-Sieger Europa/Deutschland",
+    "Batch-Jobs möglich, massive Skalierung ab 10 Mio. Tokens",
+    "Breite Modellpalette (Text, Code, Audio, Multimodal, Math)",
+    "Für Power-User: Medium/Large unschlagbar im Preis"
+  ],
+  "DocumentStructure": ["Tabellarische Staffelübersicht", "Nutzungsempfehlung nach Größe", "Batch-Tipps"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:05Z",
+  "LastUpdated": "2025-07-21T23:05Z",
+  "Verification": "OK"
+}

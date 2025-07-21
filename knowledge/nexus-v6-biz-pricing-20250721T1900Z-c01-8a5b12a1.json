@@ -1,0 +1,72 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-biz-pricing-20250721T1900Z-c01-8a5b12a1",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T1900Z",
+  "Archetype": "BusinessModel",
+  "ObjectType": "Pricing",
+  "Subject": "NEXUS Business/Company Preisstruktur 2025 – Staffelmodelle",
+  "Tags": [
+    "#Pricing",
+    "#SaaS",
+    "#Voice",
+    "#AI",
+    "#DSGVO",
+    "#Business",
+    "#Enterprise"
+  ],
+  "Title": "NEXUS Business-Preisstruktur 2025 – Staffelmodelle",
+  "Summary": "Staffelpreise, Features und Zielgruppen für NEXUS SaaS-Pläne: Individual, Business Basic, Pro, Core, Enterprise. Voice/AI Fair-Use bei allen inklusive.",
+  "KeyPoints": [
+    "5 Preisstufen von Individual bis Enterprise",
+    "Funktionalitätsstaffelung pro Nutzerzahl und Bedarf",
+    "Voice/AI Fair-Use pro User enthalten",
+    "Upgrades/Add-Ons flexibel, keine versteckten Kosten"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "admin",
+    "social_context": "n/a",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "biz-pricing-2025",
+    "cluster_type": "business",
+    "related_objects": [],
+    "cluster_timespan": "20250721T0000Z-20250721T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Business", "Sales", "Pricing", "ProductOwner", "oliver"],
+    "organization": "NEXUS-AG",
+    "department": "Business",
+    "team": "Sales",
+    "role": "ProductOwner",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["ProductOwner", "Sales", "Admin"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T19:00Z",
+  "LastUpdated": "2025-07-21T19:00Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-lieferanten-20250721T2123Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 8,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250721T2123Z",
+  "Archetype": "Text",
+  "ObjectType": "Lieferantenmanagement",
+  "Subject": "Lieferanten- & Partnermanagement",
+  "Tags": ["#Lieferantenmanagement", "#Qualität", "#Audit", "#KMU", "#Partnerschaft"],
+  "Title": "Partner- & Lieferantenakte für Risikominimierung & Qualität",
+  "Summary": "Alle wichtigen Infos zu Partnern und Lieferanten digital, versioniert und stets verfügbar – Prüfungen und Audits werden planbar.",
+  "KeyPoints": [
+    "Digitale Lieferantenakten mit Feedback",
+    "Automatische Erinnerungen an wichtige Termine",
+    "Einfache Audit-Vorbereitung"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/lieferanten",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "Einkauf, Qualität",
+    "role": "QM, Einkauf"
+  },
+  "Access": {
+    "role_access": ["GF", "Einkauf", "QM"],
+    "person_access": [],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:23Z",
+  "LastUpdated": "2025-07-21T21:23Z",
+  "Verification": "OK"
+}

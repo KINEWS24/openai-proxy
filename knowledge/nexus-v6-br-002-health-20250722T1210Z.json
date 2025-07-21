@@ -1,0 +1,31 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-br-002-health-20250722T1210Z",
+  "ParentUID": null,
+  "ChunkNr": 2,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250722T1210Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Branche",
+  "Subject": "KOT im Gesundheitswesen – Patientenverlauf & Therapie",
+  "Tags": ["#KOT", "#Gesundheit", "#Medizin", "#Patientenverlauf", "#Audit"],
+  "Title": "Patientenverlauf, Therapiehistorie und Medikation – lückenlos und beweisbar",
+  "Summary": "Jede Behandlung, jedes Ereignis als Card, mit Zeitachse, Proof, Audit-Trail – optimale Transparenz und Sicherheit im Gesundheitswesen.",
+  "KeyPoints": [
+    "Jeder Behandlungsschritt ist nachvollziehbar dokumentiert",
+    "Lückenlose Chronologie für Medizin, Pflege, Abrechnung",
+    "Audit-/Proof-Lösung für Haftung und Compliance"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "healthcare_kot_case.md",
+  "EntryContext": { "branche": "Gesundheitswesen", "anwendung": "Patientenverlauf & Audit" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Gesundheit", "role": null, "person": null },
+  "Access": { "role_access": ["Arzt", "Pflege", "QM", "Audit"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "confidential", "retention_policy": "120M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:10Z",
+  "LastUpdated": "2025-07-22T12:10Z"
+}

@@ -1,0 +1,71 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-gtm-20250721-clst-g2m002",
+  "ParentUID": null,
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T1920Z",
+  "Archetype": "BusinessModel",
+  "ObjectType": "PhaseBreakdown",
+  "Subject": "Wachstumsphasen, Erfolgsfaktoren und Risiken",
+  "Tags": [
+    "#BusinessModel",
+    "#Phasen",
+    "#Hype",
+    "#Risiko",
+    "#Voice",
+    "#Compliance",
+    "#Team"
+  ],
+  "Title": "Wachstumsphasen, Erfolgsfaktoren und Risiken",
+  "Summary": "NEXUS strukturiert Wachstum und Umsatz in drei Phasen. Voice/AI-First, Compliance und Community setzen Differenzierung. Risiken: Voice, DS-GVO, BigTech. Early Exit oder profitabler Betrieb nach 2–3 Jahren realistisch.",
+  "KeyPoints": [
+    "Phase 1: Prosumer, Voice/Mobile/Cloud-Sync, Social Proof",
+    "Phase 2: Teams, Rechte, Doku, Analytics, Mittelstand",
+    "Phase 3: MCP/Enterprise, On-Prem, Custom, B2B",
+    "Hype durch KI-Automation, AI-Insights, Viralität",
+    "Risiko: Voice, Compliance, BigTech, Adoption Speed",
+    "Fazit: Markt sucht KI-ready Company, NEXUS liefert"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "NEXUS Go-to-Market 2025-07-21",
+  "EntryContext": {
+    "device_type": "server",
+    "capture_method": "manual",
+    "workspace_context": "strategy",
+    "social_context": "owner"
+  },
+  "ClusterData": {
+    "cluster_id": "clst-g2m001",
+    "cluster_type": "GoToMarket",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1915Z-20250721T1930Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Business", "Strategy", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Business",
+    "team": "Strategy",
+    "role": "Owner",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Owner", "Strategy", "Business"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T19:20Z",
+  "LastUpdated": "2025-07-21T19:20Z",
+  "RawExtractedData": null
+}

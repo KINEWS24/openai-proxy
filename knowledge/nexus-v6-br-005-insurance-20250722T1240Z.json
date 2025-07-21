@@ -1,0 +1,31 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-br-005-insurance-20250722T1240Z",
+  "ParentUID": null,
+  "ChunkNr": 5,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250722T1240Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Branche",
+  "Subject": "KOT in Versicherungen – Schadensverlauf, Policen, Claims",
+  "Tags": ["#KOT", "#Versicherung", "#Schaden", "#Timeline", "#Proof"],
+  "Title": "Schadensverlauf, Policen, Claims – lückenlose Entwicklung, nachvollziehbar & auditierbar",
+  "Summary": "Alle Versicherungsprozesse als Cards: Vom Vertragsabschluss über jeden Schaden bis zur Regulierung – alles nachvollziehbar.",
+  "KeyPoints": [
+    "Lückenlose Timeline für jeden Vorgang",
+    "Proof für Kunden, Audit, Compliance",
+    "Prozessoptimierung und Betrugsprävention"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "insurance_kot_case.md",
+  "EntryContext": { "branche": "Versicherungen", "anwendung": "Schaden/Timeline/Audit" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Versicherung", "role": null, "person": null },
+  "Access": { "role_access": ["Schaden", "Kundenservice", "Audit"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "120M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:40Z",
+  "LastUpdated": "2025-07-22T12:40Z"
+}

@@ -1,0 +1,58 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-pricing-20250721T2115Z-clst-pricing-f1",
+  "ParentUID": "nexus-v6-genesis-clst-root",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250721T2115Z",
+  "Archetype": "Info",
+  "ObjectType": "PricingOverview",
+  "Subject": "Preismodelle, Zielgruppen, Features (Juli 2025)",
+  "Tags": ["#Pricing","#Monetarisierung","#NEXUS","#2025","#Preismodelle"],
+  "Title": "NEXUS Preismodelle 2025 – Übersicht",
+  "Summary": "Preismodelle von Free bis Enterprise. Modular mit Upgrades/Addons. Zielgruppen von Privat bis Corporate.",
+  "KeyPoints": [
+    "Free bis Enterprise: von 0 € bis >3.500 €",
+    "Modular: Upgrades, Addons, Customization möglich",
+    "Features klar gestaffelt: KI, Export, Team, Compliance, API",
+    "Zielgruppen: Privat, Power-User, Teams, Business, Corporates"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "NEXUS Manifest / Pricing Deck",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-pricing",
+    "cluster_type": "pricing",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2100Z-20250721T2115Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Pricing", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Pricing",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Finance"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:15Z",
+  "LastUpdated": "2025-07-21T21:15Z",
+  "RawExtractedData": null
+}

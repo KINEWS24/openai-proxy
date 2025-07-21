@@ -1,0 +1,31 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-br-007-construction-20250722T1310Z",
+  "ParentUID": null,
+  "ChunkNr": 7,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250722T1310Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Branche",
+  "Subject": "KOT in Bau & Immobilien – Bauprojekt-Chronologie",
+  "Tags": ["#KOT", "#Bau", "#Immobilien", "#Dokumentation", "#Audit"],
+  "Title": "Bauprojekte, Mängel, Abnahmen – Bauzeit, Veränderungen, Dokumentation, alles sichtbar",
+  "Summary": "Jede Bauphase, Mängelmeldung, Abnahme als Card mit Proof, Audit-Trail und Dokumentintegration.",
+  "KeyPoints": [
+    "Lückenlose Chronologie jedes Bauprojekts",
+    "Proof bei Abnahme, Versicherung, Gewährleistung",
+    "Foto- und Planintegration als Cards"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "construction_kot_case.md",
+  "EntryContext": { "branche": "Bau", "anwendung": "Projekt/Doku/Audit" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Bau", "role": null, "person": null },
+  "Access": { "role_access": ["Bauleitung", "QM", "Audit"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "120M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T13:10Z",
+  "LastUpdated": "2025-07-22T13:10Z"
+}

@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-modelle-alephalpha-20250721T2305Z-pricing02",
+  "ParentUID": null,
+  "ChunkNr": 2,
+  "TotalChunks": 4,
+  "UZT_ISO8601_Compact": "20250721T2305Z",
+  "Archetype": "Pricing",
+  "ObjectType": "Table",
+  "Subject": "Aleph Alpha Modelle – Preise & Leistung (Juli 2025)",
+  "Tags": ["#AlephAlpha","#Pricing","#Leistung","#Modelle","#GDPR","#Tokenstaffel","#Juli2025","#NEXUS"],
+  "Title": "Aleph Alpha Modelle – Preise & Leistung (Juli 2025)",
+  "Summary": "Staffelpreise, Leistung und Compliance-Highlights für Aleph Alpha Modelle (Juli 2025).",
+  "KeyPoints": [
+    "Explainability und DSGVO/GDPR als USP",
+    "Enterprise-Grade Modelle für höchste Konformität",
+    "Batch- und API-Preise für große Organisationen"
+  ],
+  "DocumentStructure": ["Tabellarische Staffelübersicht", "Compliance-Hinweise"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:05Z",
+  "LastUpdated": "2025-07-21T23:05Z",
+  "Verification": "OK"
+}

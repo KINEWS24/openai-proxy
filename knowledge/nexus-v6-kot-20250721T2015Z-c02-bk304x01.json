@@ -1,0 +1,71 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-kot-20250721T2015Z-c02-bk304x01",
+  "ParentUID": null,
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2015Z",
+  "Archetype": "BusinessCase",
+  "ObjectType": "KOT_Business",
+  "Subject": "KOT im Business-Effekt: Skalierung, AI-Kosten, Risiken",
+  "Tags": [
+    "#Business",
+    "#AI",
+    "#Kosten",
+    "#Voice",
+    "#Risiken",
+    "#Skalierung",
+    "#Microtransaction"
+  ],
+  "Title": "KOT im Business-Effekt: Skalierung, AI-Kosten, Risiken",
+  "Summary": "Granularität steigert Nutzen, AI-Kosten und Lock-In. Jede Card = Micro-Revenue, Pricing und DNA-Logik sichern das Modell ab.",
+  "KeyPoints": [
+    "Granularität erzeugt Bindung und Revenue",
+    "Pricing, Rights, Pre-Indexing steuern Kosten",
+    "Jede Card = Such-, Audit- und Voice-Touchpoint"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "product",
+    "social_context": "team",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "feature-kot-2025",
+    "cluster_type": "feature",
+    "related_objects": [],
+    "cluster_timespan": "20250721T0000Z-20250721T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS", "Features", "Knowledge over Time", "Product", "oliver"],
+    "organization": "NEXUS",
+    "department": "Product",
+    "team": "Features",
+    "role": "Product Owner",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Product Owner", "Consultant"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T20:15Z",
+  "LastUpdated": "2025-07-21T20:15Z",
+  "RawExtractedData": null
+}

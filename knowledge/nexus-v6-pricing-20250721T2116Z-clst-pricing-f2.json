@@ -1,0 +1,59 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-pricing-20250721T2116Z-clst-pricing-f2",
+  "ParentUID": "nexus-v6-genesis-clst-root",
+  "ChunkNr": 2,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250721T2116Z",
+  "Archetype": "Info",
+  "ObjectType": "UmsatzSimulation",
+  "Subject": "Umsatzentwicklung je Invest-Szenario (konservativ, 2025–2030)",
+  "Tags": ["#Umsatz","#Simulation","#SaaS","#NEXUS","#Wachstum"],
+  "Title": "Umsatz- und Wachstumssimulation – NEXUS Pricing 2025",
+  "Summary": "ARPU 12 €. Szenarien für 100k–1 Mio € Invest. Exponentielles Wachstum bei Erfolg. Bis 54 Mio €/Jahr möglich.",
+  "KeyPoints": [
+    "ARPU: 12 € (Mischung Free/Personal/Pro/Team/Business)",
+    "Simulation für Invest von 100k, 250k, 500k, 1 Mio €",
+    "Monatliches Wachstum von moderat bis exponentiell",
+    "Rollout: Zuerst DACH, dann global ab Monat 12",
+    "Umsatzpotenzial: Bis zu 54 Mio €/Jahr in aggressivem Wachstum"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "NEXUS Manifest / Pricing Sheet",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-pricing",
+    "cluster_type": "pricing",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2100Z-20250721T2116Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Pricing", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Pricing",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Finance"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:16Z",
+  "LastUpdated": "2025-07-21T21:16Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-onboarding-20250721T2114Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 4,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2114Z",
+  "Archetype": "Text",
+  "ObjectType": "Onboarding",
+  "Subject": "Schnelles Onboarding & Lernkultur",
+  "Tags": ["#Onboarding", "#Personalentwicklung", "#KMU", "#Wissensmanagement", "#HR"],
+  "Title": "NEXUS für Onboarding & Personalentwicklung",
+  "Summary": "Jeder Mitarbeitende profitiert von strukturierter, individueller Einarbeitung und laufender Weiterbildung.",
+  "KeyPoints": [
+    "Schnelle Einarbeitung durch individuelle Checklisten",
+    "Alle Ansprechpartner, Prozesse & FAQs gebündelt",
+    "Feedback-Loop: Onboarding stetig verbessern"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/onboarding",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "HR",
+    "role": "Personalentwicklung"
+  },
+  "Access": {
+    "role_access": ["GF", "HR", "Teamleitung"],
+    "person_access": [],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:14Z",
+  "LastUpdated": "2025-07-21T21:14Z",
+  "Verification": "OK"
+}

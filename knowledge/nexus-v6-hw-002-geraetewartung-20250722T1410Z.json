@@ -1,0 +1,30 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-hw-002-geraetewartung-20250722T1410Z",
+  "ParentUID": null,
+  "ChunkNr": 2,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250722T1410Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Handwerk",
+  "Subject": "KOT im Handwerk – Geräte- & Wartungshistorie",
+  "Tags": ["#KOT", "#Handwerk", "#Wartung", "#Geräte", "#Audit"],
+  "Title": "Geräte- und Wartungshistorie, Einsatzpläne – Proof, Audit, Erinnerung",
+  "Summary": "Alle Einsätze, Wartungen als Card – Audit, Nachweis, automatische Zyklus-Erinnerung.",
+  "KeyPoints": [
+    "Lückenlose Historie aller Geräte-Einsätze",
+    "Wartung/Audit-Nachweis, Proof für Versicherung",
+    "Automatische Erinnerung an Prüfzyklen"
+  ],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "handwerk_kot_geraetewartung.md",
+  "EntryContext": { "branche": "Handwerk", "anwendung": "Gerätewartung" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Handwerk", "role": null, "person": null },
+  "Access": { "role_access": ["Werkstatt", "Geschäftsführung", "Audit"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "84M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T14:10Z",
+  "LastUpdated": "2025-07-22T14:10Z"
+}

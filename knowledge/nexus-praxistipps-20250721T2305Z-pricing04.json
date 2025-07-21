@@ -1,0 +1,41 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-praxistipps-20250721T2305Z-pricing04",
+  "ParentUID": null,
+  "ChunkNr": 4,
+  "TotalChunks": 4,
+  "UZT_ISO8601_Compact": "20250721T2305Z",
+  "Archetype": "BestPractice",
+  "ObjectType": "TipCard",
+  "Subject": "Praxis-Tipps Modellwahl & Batch-Optimierung",
+  "Tags": ["#NEXUS","#Praxis","#Modellwahl","#Batch","#Optimierung","#Pricing","#Juli2025"],
+  "Title": "Praxis-Tipps Modellwahl & Batch-Optimierung",
+  "Summary": "Empfohlene Modellwahl und Kostenoptimierung für den NEXUS-Einsatz, je nach Use Case.",
+  "KeyPoints": [
+    "Batch-Verarbeitung spart massiv Kosten",
+    "Compliance-Kritisch: Aleph Alpha",
+    "Operative Masse: Mistral Medium/Large",
+    "API- und Self-Hosting ab Enterprise-Volumen"
+  ],
+  "DocumentStructure": ["Praxis-Tipps", "Batch-Strategien", "Empfehlungen für Nutzer"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:05Z",
+  "LastUpdated": "2025-07-21T23:05Z",
+  "Verification": "OK"
+}

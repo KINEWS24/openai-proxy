@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-krise-20250721T2121Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 6,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250721T2121Z",
+  "Archetype": "Text",
+  "ObjectType": "Krisenmanagement",
+  "Subject": "Nachfolgeabsicherung & Notfall",
+  "Tags": ["#Krisenmanagement", "#Nachfolge", "#Notfall", "#KMU", "#Risikoprävention"],
+  "Title": "Unternehmensresilienz durch Dokumentation & Rollenübergabe",
+  "Summary": "Sichert das Unternehmen bei Ausfall von Schlüsselpersonen – alle Aufgaben und Verantwortlichkeiten dokumentiert, sofort übertragbar.",
+  "KeyPoints": [
+    "Dokumentation von Schlüsselaufgaben und Rollen",
+    "Notfallpläne & Checklisten für Interimsführung",
+    "Transparente Nachfolgeprozesse"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/krise",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "Geschäftsführung",
+    "role": "GF, Prokurist, Schlüsselkräfte"
+  },
+  "Access": {
+    "role_access": ["GF", "Prokurist"],
+    "person_access": [],
+    "external_access": ["Berater"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "72M"
+  },
+  "content_rating": "confidential",
+  "Created": "2025-07-21T21:21Z",
+  "LastUpdated": "2025-07-21T21:21Z",
+  "Verification": "OK"
+}

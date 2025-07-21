@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-dna-autochunking-20250721T2225Z-clst-dna-f1",
+  "ParentUID": "nexus-v6-arch-root",
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2225Z",
+  "Archetype": "Architecture",
+  "ObjectType": "DNAandChunking",
+  "Subject": "Warum kann Nexus das? – DNA-Prinzip & Auto-Chunking",
+  "Tags": [
+    "#DNA", "#Chunking", "#Context", "#Governance", "#NoHallucination"
+  ],
+  "Title": "Warum kann Nexus das? – DNA-Prinzip & Auto-Chunking",
+  "Summary": "Jede Info wird als eigene Card mit DNA-Logik, Kontext und exakter Referenz abgelegt. Suchfunktionen, RAG und Governance basieren auf expliziten, auditierbaren Cards.",
+  "KeyPoints": [
+    "Jede Information, Policy, Meeting, Datei = eigene Card mit Kontext und DNA.",
+    "Automatisches Chunking, Tagging, DNA-Referenzierung für jedes Objekt.",
+    "Nexus-Search arbeitet ausschließlich auf existierenden Cards – kein Halluzinieren.",
+    "Jede Card enthält Rolle, Policy, Hierarchie, Historie.",
+    "Governance und Zugriff immer im Card-Kontext steuerbar."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/architektur/dna-prinzip",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-dna",
+    "cluster_type": "architecture",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2225Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Architecture", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Architecture",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Architecture"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T22:25Z",
+  "LastUpdated": "2025-07-21T22:25Z",
+  "RawExtractedData": null
+}

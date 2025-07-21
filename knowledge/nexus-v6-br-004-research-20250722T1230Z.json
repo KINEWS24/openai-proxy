@@ -1,0 +1,31 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-br-004-research-20250722T1230Z",
+  "ParentUID": null,
+  "ChunkNr": 4,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250722T1230Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Branche",
+  "Subject": "KOT in Forschung/Wissenschaft – Paper- und Hypothesentracking",
+  "Tags": ["#KOT", "#Forschung", "#Wissenschaft", "#Paper", "#Proof"],
+  "Title": "Paper, Hypothesen, Experimente – wissenschaftliche Chronologie und Widerlegungskette",
+  "Summary": "Alle Paper, Thesen, Experimente, Reviews als Cards – Trends, Proofs, Korrekturen und Zitate über Zeitachse nachvollziehbar.",
+  "KeyPoints": [
+    "Wissenschaftliche Timeline mit Proof und Trendanalyse",
+    "Zitier- und Nachweisfähigkeit über KOT",
+    "Plagiats- und Fälschungsschutz"
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "research_kot_case.md",
+  "EntryContext": { "branche": "Forschung", "anwendung": "Paper/Proof/Trends" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Forschung", "role": null, "person": null },
+  "Access": { "role_access": ["Wissenschaftler", "Reviewer", "Editor"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "120M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:30Z",
+  "LastUpdated": "2025-07-22T12:30Z"
+}

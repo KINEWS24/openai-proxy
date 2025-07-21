@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-modellwahl-strategie-20250721T2320Z-batch05",
+  "ParentUID": null,
+  "ChunkNr": 5,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2320Z",
+  "Archetype": "DecisionGuide",
+  "ObjectType": "GuideCard",
+  "Subject": "Modellwahl im NEXUS – Entscheidungshilfe nach Use Case",
+  "Tags": ["#Modellwahl","#Strategie","#Batching","#Skalierung","#NEXUS","#Juli2025"],
+  "Title": "Modellwahl im NEXUS – Entscheidungshilfe nach Use Case",
+  "Summary": "Wann wähle ich welches Modell? Orientierung für persönliche, Team- und Org-Nutzung mit Fokus auf Preis, Compliance, und Massendaten.",
+  "KeyPoints": [
+    "Modelle auf Use Case, Compliance und Kosten optimieren",
+    "Batching für Skalierung und Preisvorteile nutzen",
+    "API & Self-Hosting als Schlüssel für Integration und Datenschutz"
+  ],
+  "DocumentStructure": ["Entscheidungskriterien", "Checkliste", "Batching-Tipps"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:20Z",
+  "LastUpdated": "2025-07-21T23:20Z",
+  "Verification": "OK"
+}

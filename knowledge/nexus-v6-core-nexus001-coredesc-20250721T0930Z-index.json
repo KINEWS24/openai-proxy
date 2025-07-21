@@ -1,0 +1,78 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-core-nexus001-coredesc-20250721T0930Z-clst001-c1a7b9f3",
+  "ParentUID": "nexus-v6-core-nexus001-coredesc-20250721T0930Z-index",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T0930Z",
+  "Archetype": "Text",
+  "ObjectType": "Systembeschreibung",
+  "Subject": "Kernfunktionen & Zielsetzung des NEXUS-Systems",
+  "Tags": [
+    "#NEXUS",
+    "#Kernsystem",
+    "#Wissensarchitektur",
+    "#Governance",
+    "#RobertKabs",
+    "#2025",
+    "#Organisation",
+    "#Entlastung",
+    "#GDPR",
+    "#Delegation",
+    "#ClusterIntelligenz"
+  ],
+  "Title": "Was ist der NEXUS? – Systembeschreibung (Kernfunktion)",
+  "Summary": "NEXUS ist ein adaptives, auditierbares Wissens- und Organisationssystem, das Menschen wie Robert Kabs in Organisation, Wissen und Verantwortung entlastet.",
+  "KeyPoints": [
+    "Proaktives, auditierbares, adaptives System",
+    "Ownership, Rechte, Datenschutz, Governance vollständig integriert",
+    "Fehlertransparenz, Lernfähigkeit, Dokumentation",
+    "Kartenbasiertes Wissensmanagement mit Cluster- und Rollenstruktur",
+    "Persönliches Delegationssystem, inklusive Auditpfade",
+    "GDPR/MCP-konforme Exit-, Deaktivierungs- und Quarantäne-Strategien",
+    "Sprachfähige Interaktion mit Menschen und Teams"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "INTERNAL-DOC-NEXUS_CORE_001",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "INTERNAL-DOC-NEXUS_CORE_001",
+  "EntryContext": {
+    "device_type": "system",
+    "capture_method": "manual",
+    "workspace_context": "core",
+    "social_context": "organization"
+  },
+  "ClusterData": {
+    "cluster_id": "nexus-core-architektur",
+    "cluster_type": "core",
+    "related_objects": [],
+    "cluster_timespan": "20250721T0900Z-20250721T1800Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS", "Core", "Architektur", "Design", "CPO", "robert.kabs"],
+    "organization": "NEXUS",
+    "department": "Core",
+    "team": "Architektur",
+    "role": "CPO",
+    "person": "robert.kabs"
+  },
+  "Access": {
+    "role_access": ["CPO", "CTO", "Audit"],
+    "person_access": ["robert.kabs"],
+    "external_access": ["DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "unlimited"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T09:30Z",
+  "LastUpdated": "2025-07-21T09:30Z",
+  "RawExtractedData": null
+}

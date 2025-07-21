@@ -1,0 +1,59 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-pricing-20250721T2118Z-clst-pricing-f3",
+  "ParentUID": "nexus-v6-genesis-clst-root",
+  "ChunkNr": 3,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250721T2118Z",
+  "Archetype": "Info",
+  "ObjectType": "KritikLimitierungen",
+  "Subject": "Herausforderungen und Chancen bei Skalierung & Pricing",
+  "Tags": ["#Kritik","#SaaS","#Churn","#VoiceUSP","#NEXUS","#Wachstum"],
+  "Title": "Limitierungen, Kritik & Wachstumstreiber – NEXUS Pricing 2025",
+  "Summary": "Chancen und Risiken der Umsatz-Skalierung. Voice und Agenten als Treiber. Risiken: ARPU, Churn, Enterprise-Komplexität.",
+  "KeyPoints": [
+    "ARPU sinkt mit Free/Low-Tier, steigt mit Team/Business",
+    "Voice-Features und KI-Agenten als Wachstumstreiber",
+    "B2B/Enterprise-Vertrieb braucht eigene Sales-Pipeline",
+    "Mit viralem Effekt & Netzwerkeffekten ist >2x–5x Wachstum realistisch",
+    "Risiken: Churn, Preisdruck, Enterprise-Komplexität"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "NEXUS Manifest / Pricing Sheet",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-pricing",
+    "cluster_type": "pricing",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2100Z-20250721T2118Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Pricing", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Pricing",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Finance"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T21:18Z",
+  "LastUpdated": "2025-07-21T21:18Z",
+  "RawExtractedData": null
+}

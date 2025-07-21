@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-preisprognose-20250721T2305Z-pricing03",
+  "ParentUID": null,
+  "ChunkNr": 3,
+  "TotalChunks": 4,
+  "UZT_ISO8601_Compact": "20250721T2305Z",
+  "Archetype": "Pricing",
+  "ObjectType": "Table",
+  "Subject": "Kostenprognose & Nutzungsempfehlung nach Größe (Juli 2025)",
+  "Tags": ["#NEXUS","#Preismatrix","#UserTeamOrg","#Kalkulation","#BestPractice","#Juli2025"],
+  "Title": "Kostenprognose & Nutzungsempfehlung nach Größe (Juli 2025)",
+  "Summary": "Praktische Preisfaustregeln für User, Teams und Organisationen beim Einsatz von Mistral und Aleph Alpha.",
+  "KeyPoints": [
+    "Schnelle Preisorientierung für Planung und Budget",
+    "Modelle nach Anwendungsfall und Teamgröße wählbar",
+    "Batch/Scaling einfach kalkulierbar"
+  ],
+  "DocumentStructure": ["Faustregeltabelle", "Nutzungshinweise"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:05Z",
+  "LastUpdated": "2025-07-21T23:05Z",
+  "Verification": "OK"
+}

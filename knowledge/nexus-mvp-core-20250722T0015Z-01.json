@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-mvp-core-20250722T0015Z-01",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 6,
+  "UZT_ISO8601_Compact": "20250722T0015Z",
+  "Archetype": "Text",
+  "ObjectType": "DNA_Card",
+  "Subject": "MVP-Fokus: Kernprozesse als Grundpfeiler",
+  "Tags": [
+    "#MVP","#Kernprozess","#Chunking","#Tagging","#Audit","#DNA","#Klarheit","#Cluster_MVP"
+  ],
+  "Title": "MVP-Fokus: Kernprozesse als Grundpfeiler",
+  "Summary": "Ein radikal fokussiertes MVP mit kompromisslos robusten Kernprozessen (Chunking, Tagging, Quellen-Verlinkung, DNA-Proofing) ist unverhandelbar. Jeder Kernprozess muss ab Launch so abliefern wie bei Google, Dropbox oder Apple.",
+  "KeyPoints": [
+    "Kompromissloses Chunking, Tagging, Quellenhandling",
+    "100% auditierbar, proofed, validierbar",
+    "Lieber weniger Features, dafür maximal robust"
+  ],
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "role": "Owner"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-22T00:15Z",
+  "LastUpdated": "2025-07-22T00:15Z",
+  "Verification": "OK"
+}

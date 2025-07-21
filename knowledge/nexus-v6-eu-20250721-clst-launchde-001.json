@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-eu-20250721-clst-launchde-001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T1830Z",
+  "Archetype": "Strategy",
+  "ObjectType": "Launch",
+  "Subject": "Deutschland/EU-Start als Proof für globale KI und Datenkontrolle",
+  "Tags": ["#Launch","#Germany","#EU","#GDPR","#Strategy","#Localization"],
+  "Title": "Deutschland/EU-Start – Proof by Fire",
+  "Summary": "Mit Deutschland/EU als Testmarkt stellt NEXUS früh höchste Compliance, Skalierbarkeit und Multilingualität sicher. Weltweite Aufmerksamkeit und Marktfähigkeit werden durch lokale Proofs forciert.",
+  "KeyPoints": [
+    "Start in D/EU = global anerkanntes Compliance-Level (DSGVO, Auditability, Privacy by Design).",
+    "Multi-Language & Voice-Support out of the box.",
+    "Shared Knowledge Bridges für Teams/Orgs ab Phase 2.",
+    "AI-first, aber Human Ownership als USP.",
+    "Technische Skalierbarkeit durch Multi-Cloud und Load-Balancer."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "NEXUS Strategy 2025-07-21",
+  "EntryContext": {
+    "device_type": "server",
+    "capture_method": "manual",
+    "workspace_context": "strategy",
+    "social_context": "owner"
+  },
+  "ClusterData": {
+    "cluster_id": "clst-launchde",
+    "cluster_type": "launch",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1830Z-20250721T1900Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Founders", "AI", "Strategy", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Founders",
+    "team": "AI",
+    "role": "Strategy",
+    "person": "Owner"
+  },
+  "Access": {
+    "role_access": ["Owner", "Founder", "Strategy"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T18:30Z",
+  "LastUpdated": "2025-07-21T18:30Z",
+  "RawExtractedData": null
+}

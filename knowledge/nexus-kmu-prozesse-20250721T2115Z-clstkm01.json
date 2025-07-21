@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-prozesse-20250721T2115Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 5,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2115Z",
+  "Archetype": "Text",
+  "ObjectType": "Prozesse",
+  "Subject": "Effizientere Prozesse & Automatisierung",
+  "Tags": ["#Prozesse", "#Automatisierung", "#Effizienz", "#KMU", "#Digitalisierung"],
+  "Title": "NEXUS für Prozessoptimierung & Automatisierung",
+  "Summary": "Alle Prozesse sichtbar, analysierbar und optimierbar – Automatisierungspotenzial sofort erkennbar.",
+  "KeyPoints": [
+    "Prozessmapping für alle Bereiche",
+    "Automatisierungsvorschläge pro DNA-Card",
+    "Schnittstellen zu IT-Systemen möglich"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/prozesse",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "alle",
+    "role": "alle"
+  },
+  "Access": {
+    "role_access": ["GF", "Prozessverantwortliche"],
+    "person_access": [],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:15Z",
+  "LastUpdated": "2025-07-21T21:15Z",
+  "Verification": "OK"
+}

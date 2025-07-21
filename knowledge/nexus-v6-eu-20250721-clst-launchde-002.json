@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-eu-20250721-clst-launchde-002",
+  "ParentUID": null,
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T1833Z",
+  "Archetype": "Strategy",
+  "ObjectType": "Internationalization",
+  "Subject": "Internationalisierung, Wachstum & Disruption ab Phase 2",
+  "Tags": ["#Internationalization","#Growth","#Voice","#Brand","#OpenKnowledge"],
+  "Title": "Internationalisierung, Wachstum & Voice-Disruption",
+  "Summary": "Mit Multilang, Voice und Shared-Knowledge wird NEXUS zum globalen, disruptiven 'Knowledge OS' – exportierbar und marktfähig durch den DACH/EU-Start.",
+  "KeyPoints": [
+    "DE/ENG sofort nutzbar, weitere Sprachen je nach Nachfrage.",
+    "Voice-Support ab Tag 1 als USP.",
+    "Shared Knowledge Bridges für kooperative Branchenräume.",
+    "Open Knowledge Market als Growth-Driver geplant.",
+    "Positionierung als neuronales Betriebssystem für Mittelstand & Weltmarkt."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "NEXUS Strategy 2025-07-21",
+  "EntryContext": {
+    "device_type": "server",
+    "capture_method": "manual",
+    "workspace_context": "strategy",
+    "social_context": "owner"
+  },
+  "ClusterData": {
+    "cluster_id": "clst-launchde",
+    "cluster_type": "launch",
+    "related_objects": [],
+    "cluster_timespan": "20250721T1830Z-20250721T1900Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Founders", "AI", "Strategy", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Founders",
+    "team": "AI",
+    "role": "Strategy",
+    "person": "Owner"
+  },
+  "Access": {
+    "role_access": ["Owner", "Founder", "Strategy"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T18:33Z",
+  "LastUpdated": "2025-07-21T18:33Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,30 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-hw-003-angebot-nachkalkulation-20250722T1420Z",
+  "ParentUID": null,
+  "ChunkNr": 3,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250722T1420Z",
+  "Archetype": "KOT-Use-Case",
+  "ObjectType": "Handwerk",
+  "Subject": "KOT im Handwerk – Angebot bis Nachkalkulation",
+  "Tags": ["#KOT", "#Handwerk", "#Angebot", "#Nachkalkulation", "#Proof"],
+  "Title": "Vom Angebot bis zur Nachkalkulation – Proof, Steuer, Nachweis",
+  "Summary": "Alle Angebote, Aufträge, Änderungen als Card – Proof für Kalkulation, Streitfall, Steuer.",
+  "KeyPoints": [
+    "Jede Angebots-, Auftrags-, Nachtragsänderung dokumentiert",
+    "Proof für Nachkalkulation, Streitfälle, Steuer",
+    "Volle Rückverfolgbarkeit aller Vorgänge"
+  ],
+  "LinkTarget": "NEXUS DNA KOT-Branchenreihe 2025",
+  "ContentReference": "handwerk_kot_angebot.md",
+  "EntryContext": { "branche": "Handwerk", "anwendung": "Angebot/Nachkalkulation" },
+  "Hierarchy": { "organization": "NEXUS", "department": "Handwerk", "role": null, "person": null },
+  "Access": { "role_access": ["Buchhaltung", "Geschäftsführung", "Kalkulation"], "person_access": [], "external_access": [] },
+  "GDPR": { "dpo_approval": true, "confidentiality_level": "internal", "retention_policy": "72M" },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T14:20Z",
+  "LastUpdated": "2025-07-22T14:20Z"
+}

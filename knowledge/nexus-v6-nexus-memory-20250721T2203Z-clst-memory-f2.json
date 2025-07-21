@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-nexus-memory-20250721T2203Z-clst-memory-f2",
+  "ParentUID": "nexus-v6-arch-root",
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2203Z",
+  "Archetype": "Architecture",
+  "ObjectType": "ParadigmShift",
+  "Subject": "Paradigmenwechsel: User-Control, Lebenslanges Eigentum, No Lock-In",
+  "Tags": [
+    "#UserControl", "#Wissenssouveränität", "#ParadigmShift", "#NoLockIn"
+  ],
+  "Title": "Paradigmenwechsel – User-Defined, Auditierbar, Lebenslanges Eigentum",
+  "Summary": "Nexus setzt einen neuen Standard: Wissen bleibt beim Nutzer, alles ist auditierbar, exportierbar, löschbar. KI ist nur Interface – Kontrolle und Eigentum beim User.",
+  "KeyPoints": [
+    "User, Team, Org bestimmen, was als Wissen im Nexus landet.",
+    "Wissen ist lebenslang auditierbar, löschbar, exportierbar.",
+    "KI ist nur Interface, nicht Gedächtnis – Nexus = Gedächtnis.",
+    "Komplexität und Modularität als USP.",
+    "Kein Lock-In, Paradigmenwechsel gegenüber klassischen KI-Plattformen."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/architektur/ownership",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-memory",
+    "cluster_type": "architecture",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2203Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Architecture", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Architecture",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Architecture"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T22:03Z",
+  "LastUpdated": "2025-07-21T22:03Z",
+  "RawExtractedData": null
+}

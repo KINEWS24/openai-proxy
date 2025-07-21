@@ -1,0 +1,71 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-kot-20250721T2015Z-c01-bk304x01",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2015Z",
+  "Archetype": "USP",
+  "ObjectType": "KOT_Scenario",
+  "Subject": "Knowledge over Time: USP & Praxis-Szenarien",
+  "Tags": [
+    "#KnowledgeOverTime",
+    "#Timeline",
+    "#USP",
+    "#BusinessCase",
+    "#Proof",
+    "#Compliance",
+    "#Science"
+  ],
+  "Title": "Knowledge over Time (KOT) in NEXUS: USP & Szenarien",
+  "Summary": "NEXUS erzeugt filterbare, referenzierbare Zeitachsen für jedes Thema. Use-Cases: Medien, Unternehmen, Wissenschaft. Jeder Schritt ist nachvollziehbar & auditierbar.",
+  "KeyPoints": [
+    "Timeline für jedes Topic, Akteur, Projekt",
+    "Audit/Proof per Klick – Quellenlink immer dabei",
+    "Vergleichbar, referenzierbar, filterbar über Jahre hinweg"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "consulting",
+    "social_context": "team",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "feature-kot-2025",
+    "cluster_type": "feature",
+    "related_objects": [],
+    "cluster_timespan": "20250721T0000Z-20250721T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS", "Features", "Knowledge over Time", "Product", "oliver"],
+    "organization": "NEXUS",
+    "department": "Product",
+    "team": "Features",
+    "role": "Product Owner",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Product Owner", "Consultant"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T20:15Z",
+  "LastUpdated": "2025-07-21T20:15Z",
+  "RawExtractedData": null
+}

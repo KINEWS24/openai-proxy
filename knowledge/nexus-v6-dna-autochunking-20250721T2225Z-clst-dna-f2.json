@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-dna-autochunking-20250721T2225Z-clst-dna-f2",
+  "ParentUID": "nexus-v6-arch-root",
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2225Z",
+  "Archetype": "Architecture",
+  "ObjectType": "ScalabilityAndPersonalization",
+  "Subject": "Mehr Wissen, mehr Power – Skalierbarkeit, Personalisierung, Realtime-Readiness",
+  "Tags": [
+    "#Realtime", "#Scaling", "#Personalization", "#CollectiveLearning", "#ReadyToUse"
+  ],
+  "Title": "Mehr Wissen, mehr Power – Skalierbarkeit, Personalisierung & Realtime-Readiness",
+  "Summary": "Nexus wächst mit jeder geprüften Card, ermöglicht kollektives Lernen, skaliert automatisch und ist sofort auf jedem Server, jedem LLM und jeder Teamstruktur einsatzbereit.",
+  "KeyPoints": [
+    "Mehr geprüfte Cards = höhere faktische Intelligenz und Leistung.",
+    "Team/Org: Gemeinsame Wissensbasis, feingranulare Rollen- und Rechteverwaltung.",
+    "Demo-Ready ab Start, Multi-User, Multi-LLM, API-Ready.",
+    "Personalisierte Demos und Use-Cases dank DNA-/Kontext-Analyse.",
+    "Skalierung und Erweiterbarkeit direkt eingebaut."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/architektur/scaling",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-dna",
+    "cluster_type": "architecture",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2225Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Architecture", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Architecture",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Architecture"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T22:25Z",
+  "LastUpdated": "2025-07-21T22:25Z",
+  "RawExtractedData": null
+}

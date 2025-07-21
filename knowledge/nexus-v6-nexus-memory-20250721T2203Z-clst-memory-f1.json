@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-nexus-memory-20250721T2203Z-clst-memory-f1",
+  "ParentUID": "nexus-v6-arch-root",
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250721T2203Z",
+  "Archetype": "Architecture",
+  "ObjectType": "MemoryModel",
+  "Subject": "So funktioniert Nexus-Erinnerung – Cards als transparente Wissensbasis",
+  "Tags": [
+    "#Memory", "#KnowledgeBase", "#Transparency", "#Ownership", "#Audit"
+  ],
+  "Title": "Nexus-Erinnerung – So funktioniert die DNA-basierte Wissensbasis",
+  "Summary": "Jede Information, jede Erfahrung, jede Änderung wird als eigene Card in zwei Formaten abgelegt – 100% transparent, kontextvollständig, versionierbar und auditierbar.",
+  "KeyPoints": [
+    "Jede Card existiert als .json für Maschinen, .md für Menschen.",
+    "Voller Kontext: Wer, wann, was, warum, wie, Rechte, Quelle etc.",
+    "Alle Interaktionen = neue Cards, explizit indiziert & versionierbar.",
+    "Kein Chat-Verlauf, sondern explizite, transparente Wissensbasis.",
+    "Jede Antwort und Entscheidung ist nachvollziehbar und belegbar."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://nexus-dna.de/architektur/memory",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": null,
+  "ClusterData": {
+    "cluster_id": "clst-memory",
+    "cluster_type": "architecture",
+    "related_objects": [],
+    "cluster_timespan": "20250721T2203Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Product", "Architecture", "Owner"],
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Architecture",
+    "role": "Owner",
+    "person": null
+  },
+  "Access": {
+    "role_access": ["Owner", "Product", "Architecture"],
+    "person_access": [],
+    "external_access": ["auditor", "DPO"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T22:03Z",
+  "LastUpdated": "2025-07-21T22:03Z",
+  "RawExtractedData": null
+}

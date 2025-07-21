@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-kundenservice-20250721T2122Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 7,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250721T2122Z",
+  "Archetype": "Text",
+  "ObjectType": "Kundenservice",
+  "Subject": "Kundenwissen & Servicehistorie",
+  "Tags": ["#Kundenservice", "#CRM", "#Servicequalität", "#KMU", "#CustomerSuccess"],
+  "Title": "Kundenwissen & Servicehistorie auf einen Klick",
+  "Summary": "Alle Infos zu Kundenbeziehungen, Servicefällen und Feedback jederzeit transparent – optimale Servicequalität.",
+  "KeyPoints": [
+    "Kundenakte mit vollständiger Historie",
+    "Feedbacksystem integriert",
+    "Schnittstellen zu CRM/ERP"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/kundenservice",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "Vertrieb, Service",
+    "role": "Vertrieb, Serviceleitung"
+  },
+  "Access": {
+    "role_access": ["GF", "Vertrieb", "Serviceleitung"],
+    "person_access": [],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:22Z",
+  "LastUpdated": "2025-07-21T21:22Z",
+  "Verification": "OK"
+}
