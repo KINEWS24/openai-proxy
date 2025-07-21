@@ -1,0 +1,83 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-linkedin-20250721T0935Z-cstr01-d1a2e6b8",
+  "ParentUID": "nexus001-mkabs-index-20250721T0900Z-cstr01-b1e7a5c9",
+  "ChunkNr": 4,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250721T0935Z",
+  "Archetype": "SocialProfile",
+  "ObjectType": "LinkedInProfile",
+  "Subject": "LinkedIn-Profil: Robert André Kabs – Netzwerk, Recruiting & Aktivitäten",
+  "Tags": [
+    "#RobertKabs",
+    "#LinkedIn",
+    "#Profil",
+    "#Netzwerk",
+    "#Recruiting",
+    "#Social"
+  ],
+  "Title": "LinkedIn-Profil: Robert André Kabs – Netzwerk, Recruiting & Aktivitäten",
+  "Summary": "Robert Kabs ist als Geschäftsführer von Kabs PolsterWelt auf LinkedIn sehr aktiv im Netzwerkaufbau, Employer Branding und Recruiting. Fokus: Team, Social Media-Kommunikation.",
+  "KeyPoints": [
+    "2.000+ Follower, >500 Kontakte",
+    "Regelmäßige Recruiting- und Employer-Branding-Posts",
+    "Starkes Team- und Leadership-Messaging (Steve Jobs-Zitat)",
+    "Skills: E-Commerce, Start-ups, 48+ Bestätigungen",
+    "Hamburg Area, Präsenz für Kabs PolsterWelt und FOLLOW THE RABBIT Ventures"
+  ],
+  "DocumentStructure": [
+    "Profilübersicht",
+    "Netzwerk & Reichweite",
+    "Employer Branding & Recruiting",
+    "Kompetenzen & Skills"
+  ],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://www.linkedin.com/in/robertkabs",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "public_research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "CaseStudyKabs",
+    "related_objects": [],
+    "cluster_timespan": "2024-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T09:35Z",
+  "LastUpdated": "2025-07-21T09:35Z",
+  "RawExtractedData": null
+}

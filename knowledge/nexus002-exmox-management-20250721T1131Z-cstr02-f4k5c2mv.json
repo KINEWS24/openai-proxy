@@ -1,0 +1,77 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-management-20250721T1131Z-cstr02-f4k5c2mv",
+  "ParentUID": "nexus002-exmox-exit-20250721T1123Z-cstr02-g5y2l9vb",
+  "ChunkNr": 4,
+  "TotalChunks": 5,
+  "UZT_ISO8601_Compact": "20250721T1131Z",
+  "Archetype": "Management",
+  "ObjectType": "Team",
+  "Subject": "Management & Team – exmox unter Aonic (2022–2025)",
+  "Tags": [
+    "#exmox",
+    "#Management",
+    "#Team",
+    "#Aonic",
+    "#Nachfolge",
+    "#Hamburg"
+  ],
+  "Title": "Management & Team – exmox unter Aonic (2022–2025)",
+  "Summary": "Nach dem Exit: Führungsduo Alper & Caglar Eger, Teamwachstum, Integration in Aonic Group, Hamburger Standort bleibt Dreh- und Angelpunkt.",
+  "KeyPoints": [
+    "CEO: Caglar Eger (seit 2022), COO: Alper Eger",
+    "60+ Mitarbeiter (2025), Performance-Marketing-Fokus",
+    "Integration weiterer Plattformen als Wachstumsstrategie",
+    "Zentrale Rolle im Aonic-Portfolio"
+  ],
+  "DocumentStructure": [
+    "Management",
+    "Teamstruktur",
+    "Integration",
+    "Standort"
+  ],
+  "LinkTarget": null,
+  "EntryContext": {
+    "device_type": "research",
+    "capture_method": "public_sources",
+    "workspace_context": "investor-profile",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "Management",
+    "related_objects": [],
+    "cluster_timespan": "2022-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Management",
+      "Team",
+      "Aonic",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Team",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:31Z",
+  "LastUpdated": "2025-07-21T11:31Z",
+  "RawExtractedData": null
+}

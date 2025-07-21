@@ -1,0 +1,50 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-index-20250721T2230Z-clstinv001",
+  "ParentUID": null,
+  "ChunkNr": 0,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2230Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Subject": "Cluster-Index: Investor/Pitch & Selbstverständnis (NEXUS)",
+  "Tags": ["#Index","#Investor","#Cluster","#Pitch","#Selbstverständnis","#Strategie","#MLP","#Roadmap","#USP","#NEXUS"],
+  "Title": "Index-Card – Cluster “Investor/Pitch & Selbstverständnis” (NEXUS)",
+  "Summary": "Index- und Referenzkarte für das Card-Set zum Thema NEXUS-Investor/Pitch/Selbstverständnis. Dient der Navigation und dem Gesamtüberblick.",
+  "KeyPoints": [
+    "Cluster-Inhalt: Pitch, Pricing, MLP, Roadmap, USP",
+    "Alle Cards sind referenziert & verbunden",
+    "Dient als Einstieg und Navigationspunkt für Investoren/Owner"
+  ],
+  "DocumentStructure": [
+    "Card 1: Spezialmodelle & Batch-Pricing",
+    "Card 2: SaaS-Metriken & KPIs",
+    "Card 3: Was muss das Produkt können? (MLP)",
+    "Card 4: Must-Have Features im Detail",
+    "Card 5: Nice-To-Have Features Early",
+    "Card 6: Roadmap/Phasenplan",
+    "Card 7: Persönliches Fazit",
+    "Card 8: KERN-USP",
+    "Card 9: Diese Index-Card"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Owner, Strategy",
+    "role": "Owner, CTO, Investor"
+  },
+  "Access": {
+    "role_access": ["Owner", "Investor", "CTO"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T22:30Z",
+  "LastUpdated": "2025-07-21T22:30Z",
+  "Verification": "OK"
+}

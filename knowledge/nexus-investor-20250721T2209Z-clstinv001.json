@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2209Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 5,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2209Z",
+  "Archetype": "Text",
+  "ObjectType": "Features",
+  "Subject": "Frühzeitige Zusatzfunktionen im NEXUS",
+  "Tags": ["#NiceToHave","#FeatureGrowth","#Mobile","#API","#Batch","#VoiceAgent","#Innovation","#EarlyAdopter","#NEXUS"],
+  "Title": "Frühzeitige Mehrwerte – NICE-TO-HAVE Features im NEXUS-MLP",
+  "Summary": "API-Import, Batch-Upload, Mobile-Optimierung und Voice-Agenten schaffen zusätzliche Begeisterung und Differenzierung beim Early Launch.",
+  "KeyPoints": [
+    "API- und Batch-Import",
+    "Mobile/Tablet-Optimierung",
+    "Voice/Mini-Agent für Meetings und Suche"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Product, UX",
+    "role": "Owner, Product Lead, UX"
+  },
+  "Access": {
+    "role_access": ["Owner", "Product Lead", "UX"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T22:09Z",
+  "LastUpdated": "2025-07-21T22:09Z",
+  "Verification": "OK"
+}

@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2207Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 4,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2207Z",
+  "Archetype": "Text",
+  "ObjectType": "Produktfeatures",
+  "Subject": "Minimum Lovable Product für NEXUS",
+  "Tags": ["#MLP","#Produktstrategie","#Investor","#MagicMoment","#DNAChunking","#Proof","#Audit","#Privacy","#DSGVO","#NEXUS"],
+  "Title": "MLP-Features für NEXUS – Was ist ab Launch 2026 unverzichtbar?",
+  "Summary": "Das MLP von NEXUS muss mit sofortigem DNA-Chunking, auditierbaren Cards, Rechte- und Owner-Zuweisung, sowie Privacy by Design überzeugen.",
+  "KeyPoints": [
+    "Upload → Sofort-Chunking & Card-Gen",
+    "Komplette Kontext- und Rechtezuweisung",
+    "DSGVO- und Proof-Felder integriert"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Product, Development",
+    "role": "Owner, CTO, Product Lead"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Product Lead"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T22:07Z",
+  "LastUpdated": "2025-07-21T22:07Z",
+  "Verification": "OK"
+}

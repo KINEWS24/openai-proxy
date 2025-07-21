@@ -1,0 +1,78 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-linkedin-community-20250721T1159Z-cstr02-c1d2f9wj",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 10,
+  "TotalChunks": 11,
+  "UZT_ISO8601_Compact": "20250721T1159Z",
+  "Archetype": "LinkedIn",
+  "ObjectType": "Community",
+  "Subject": "Community-Posts & Startup-Engagement – Alper Eger",
+  "Tags": [
+    "#AlperEger",
+    "#Community",
+    "#Startup",
+    "#Hamburg",
+    "#AdTech",
+    "#Meetups",
+    "#Engagement"
+  ],
+  "Title": "Community-Posts & Startup-Engagement – Alper Eger",
+  "Summary": "Alper Eger zeigt hohe Sichtbarkeit und Engagement in Hamburger Startup-, AdTech- und Gaming-Communities. Unterstützt neue Gründer:innen und fördert Community-Events.",
+  "KeyPoints": [
+    "Regelmäßige LinkedIn-Posts zu Startup-Community, Innovation, Mut",
+    "Förderung von Meetups und Wissensaustausch (exmox-Office als Ort)",
+    "Engagement im Körber Next.Gen Inkubator",
+    "Motivierender, unterstützender Tonfall"
+  ],
+  "DocumentStructure": [
+    "Community",
+    "Meetups",
+    "Startup-Förderung",
+    "KeyPostings"
+  ],
+  "LinkTarget": "https://www.linkedin.com/in/alper-eger/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "linkedin",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "LinkedIn",
+    "related_objects": [],
+    "cluster_timespan": "2022-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Founder",
+      "Community",
+      "AlperEger",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Community",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:59Z",
+  "LastUpdated": "2025-07-21T11:59Z",
+  "RawExtractedData": null
+}

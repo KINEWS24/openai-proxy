@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-compliance-alephalpha-20250721T2320Z-batch07",
+  "ParentUID": null,
+  "ChunkNr": 7,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2320Z",
+  "Archetype": "Compliance",
+  "ObjectType": "BestPractice",
+  "Subject": "Compliance & Datenschutz – Warum Aleph Alpha im NEXUS?",
+  "Tags": ["#Compliance","#Datenschutz","#AlephAlpha","#Audit","#DSGVO","#NEXUS"],
+  "Title": "Compliance & Datenschutz – Warum Aleph Alpha im NEXUS?",
+  "Summary": "Aleph Alpha ist für Audit- und DSGVO-kritische Anwendungen im NEXUS alternativlos. Empfohlen für alle Org/Enterprise-Anwendungen mit Auditbedarf.",
+  "KeyPoints": [
+    "Explainability/Audit als Alleinstellungsmerkmal",
+    "Nachvollziehbarkeit und Retention Policy auf Card-Ebene",
+    "On-Premises/Custom-API für höchste Compliance"
+  ],
+  "DocumentStructure": ["Compliance-Felder", "Audit-Trail", "Retention-Policy"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:20Z",
+  "LastUpdated": "2025-07-21T23:20Z",
+  "Verification": "OK"
+}

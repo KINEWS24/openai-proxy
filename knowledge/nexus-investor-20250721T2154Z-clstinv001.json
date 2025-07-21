@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2154Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 3,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2154Z",
+  "Archetype": "Text",
+  "ObjectType": "SaaS-KPIs",
+  "Subject": "NEXUS als Retentions-Monster – SaaS-Metriken",
+  "Tags": ["#SaaS","#KPIs","#Churn","#Retention","#Investor","#NEXUS","#Lockin","#LTV","#ARPU"],
+  "Title": "SaaS-Metriken & DNA-Lock-in: NEXUS als Retentions-Monster",
+  "Summary": "NEXUS senkt Churn, steigert LTV und ARPU, erhöht die Produktbindung – alles für nachhaltiges Wachstum und Top-Investorenattraktivität.",
+  "KeyPoints": [
+    "DNA-Lock-in senkt Churn, steigert Lifetime-Value",
+    "KI-gestütztes Onboarding & User-Activation",
+    "Preismodell für Upsell und Skalierung"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Product, Finance",
+    "role": "Owner, CFO, Investor"
+  },
+  "Access": {
+    "role_access": ["Owner", "CFO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:54Z",
+  "LastUpdated": "2025-07-21T21:54Z",
+  "Verification": "OK"
+}

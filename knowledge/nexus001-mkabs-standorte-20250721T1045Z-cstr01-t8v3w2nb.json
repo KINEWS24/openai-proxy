@@ -1,0 +1,77 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-standorte-20250721T1045Z-cstr01-t8v3w2nb",
+  "ParentUID": "nexus001-mkabs-webstruktur-20250721T1040Z-cstr01-s9p8k2zl",
+  "ChunkNr": 17,
+  "TotalChunks": 19,
+  "UZT_ISO8601_Compact": "20250721T1045Z",
+  "Archetype": "Location",
+  "ObjectType": "StoreList",
+  "Subject": "Standorte – Kabs PolsterWelt: Filialübersicht Deutschland 2025",
+  "Tags": [
+    "#Standorte",
+    "#Stores",
+    "#KabsPolsterWelt",
+    "#Filialnetz",
+    "#Geo",
+    "#CustomerJourney"
+  ],
+  "Title": "Standorte – Kabs PolsterWelt: Filialübersicht Deutschland 2025",
+  "Summary": "Aktuelle Übersicht aller Kabs-PolsterWelt-Standorte und Outlets mit Fokus auf Beratung, Service und Kundenzufriedenheit.",
+  "KeyPoints": [
+    "13 Filialen deutschlandweit (Nord- und Westdeutschland)",
+    "2 große Outlets (Hamburg-Harburg, Essen-Steele)",
+    "Starke Kundenbewertungen (4.2 Sterne, Service/Qualität/Termintreue)",
+    "Filialfinder & lokale Aktionen über die Website"
+  ],
+  "DocumentStructure": [
+    "Standortliste",
+    "Outlets",
+    "Kundenbewertungen",
+    "Lokale Aktionen"
+  ],
+  "LinkTarget": "https://www.kabs.de/stores/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "Stores",
+    "related_objects": [],
+    "cluster_timespan": "2025-07"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Retail",
+      "Filialnetz",
+      "Standorte",
+      "Research",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Retail",
+    "team": "Filialnetz",
+    "role": "Research",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:45Z",
+  "LastUpdated": "2025-07-21T10:45Z",
+  "RawExtractedData": null
+}

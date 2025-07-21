@@ -1,0 +1,84 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-bio-20250721T0938Z-cstr01-e2b8f5d9",
+  "ParentUID": "nexus001-mkabs-index-20250721T0900Z-cstr01-b1e7a5c9",
+  "ChunkNr": 5,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250721T0938Z",
+  "Archetype": "PersonProfile",
+  "ObjectType": "Biography",
+  "Subject": "Robert André Kabs – Unternehmer, Investor & Familienunternehmer",
+  "Tags": [
+    "#RobertKabs",
+    "#Profil",
+    "#Biografie",
+    "#Entrepreneur",
+    "#Hamburg",
+    "#FamilyBusiness"
+  ],
+  "Title": "Robert André Kabs – Unternehmer, Investor & Familienunternehmer",
+  "Summary": "Geboren 1973, Bankkaufmann, seit 1992 geschäftsführender Gesellschafter bei Kabs PolsterWelt. Unternehmerisch, sozial engagiert, digitaler Vorreiter.",
+  "KeyPoints": [
+    "Geboren am 4.2.1973, Bankkaufmann",
+    "Seit 1992 Leitung Kabs PolsterWelt",
+    "Parallel Digitalprojekte (möbel.de, FOLLOW THE RABBIT Ventures)",
+    "2025: Beirat Europa Möbel-Verbund (EMV)",
+    "Jährliche Charity-Aktionen, z.B. mit Kinderhilfe e.V."
+  ],
+  "DocumentStructure": [
+    "Persönliche Daten",
+    "Unternehmerische Stationen",
+    "Digitale Innovationen",
+    "Beirat und Verbandsarbeit",
+    "Soziales Engagement"
+  ],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://www.kabs.de/unternehmen/team/robert-kabs/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "public_research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "CaseStudyKabs",
+    "related_objects": [],
+    "cluster_timespan": "1973-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T09:38Z",
+  "LastUpdated": "2025-07-21T09:38Z",
+  "RawExtractedData": null
+}

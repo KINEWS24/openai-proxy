@@ -1,0 +1,80 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-li-kompetenzen-20250721T1100Z-cstr01-k2m8p9qs",
+  "ParentUID": "nexus001-mkabs-index-20250721T0900Z-cstr01-b1e7a5c9",
+  "ChunkNr": 19,
+  "TotalChunks": 19,
+  "UZT_ISO8601_Compact": "20250721T1100Z",
+  "Archetype": "Profile",
+  "ObjectType": "SkillSet",
+  "Subject": "Kompetenz- & Skillprofil – Robert André Kabs (LinkedIn 2025)",
+  "Tags": [
+    "#LinkedIn",
+    "#Kompetenzen",
+    "#Skills",
+    "#RobertKabs",
+    "#ECommerce",
+    "#Startups",
+    "#Venture",
+    "#Leadership"
+  ],
+  "Title": "Kompetenz- & Skillprofil – Robert André Kabs (LinkedIn 2025)",
+  "Summary": "Vollständige Skillübersicht Robert André Kabs: Digital, E-Commerce, Venture, Strategie, Führung – mehrfach peer-verifiziert.",
+  "KeyPoints": [
+    "Top Skills: E-Commerce, Start-ups, SEO, Online Marketing, Venture Capital",
+    "Digitale Kompetenz: Web Analytics, Digitales Marketing, Product Management",
+    "Strategie: Unternehmensstrategie, Business Development, Leadership",
+    "Peers: Anton Eder, Jens Rusch u.a. bestätigen die Skills",
+    "Digitalisierung & Teamorientierung als Leitmotiv"
+  ],
+  "DocumentStructure": [
+    "Skill-Cluster",
+    "Peer-Bestätigungen",
+    "Digital/Strategie-Fokus",
+    "Persönliches Motto"
+  ],
+  "LinkTarget": "https://www.linkedin.com/in/robertkabs",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "linkedin_scrape",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "Profile",
+    "related_objects": [],
+    "cluster_timespan": "2025-07"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Management",
+      "Geschäftsführung",
+      "Profil",
+      "LinkedIn",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Management",
+    "team": "Geschäftsführung",
+    "role": "Profil",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:00Z",
+  "LastUpdated": "2025-07-21T11:00Z",
+  "RawExtractedData": null
+}

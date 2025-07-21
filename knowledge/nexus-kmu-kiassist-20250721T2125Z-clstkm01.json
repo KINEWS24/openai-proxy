@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-kiassist-20250721T2125Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 10,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250721T2125Z",
+  "Archetype": "Text",
+  "ObjectType": "KI-Assistenz",
+  "Subject": "KI-gestützte Entscheidungsfindung & Assistenz",
+  "Tags": ["#KI", "#Assistenz", "#Entscheidungen", "#KMU", "#Produktivität"],
+  "Title": "KI-Assistenz für Geschäftsführung & Teams",
+  "Summary": "Die NEXUS-KI wird zur Schaltzentrale und Assistentin – für alle Unternehmensbereiche.",
+  "KeyPoints": [
+    "KI schlägt Entscheidungen und Lösungen vor",
+    "Automatische Berichte und Dashboards",
+    "Proaktive Hinweise zu Risiken & Chancen"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/kiassist",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "GF, alle",
+    "role": "GF, Teams"
+  },
+  "Access": {
+    "role_access": ["GF", "IT", "Teamleitung"],
+    "person_access": [],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:25Z",
+  "LastUpdated": "2025-07-21T21:25Z",
+  "Verification": "OK"
+}

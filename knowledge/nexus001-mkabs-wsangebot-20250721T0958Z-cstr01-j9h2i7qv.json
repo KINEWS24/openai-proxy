@@ -1,0 +1,75 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-wsangebot-20250721T0958Z-cstr01-j9h2i7qv",
+  "ParentUID": "nexus001-mkabs-wsstart-20250721T0955Z-cstr01-i8e3g2kl",
+  "ChunkNr": 10,
+  "TotalChunks": 17,
+  "UZT_ISO8601_Compact": "20250721T0958Z",
+  "Archetype": "Mail",
+  "ObjectType": "WorkshopProposal",
+  "Subject": "Angebotsphase: Workshop-Konzept & Budgetierung",
+  "Tags": [
+    "#Angebot",
+    "#Workshop",
+    "#KI",
+    "#Konzept",
+    "#Consulting",
+    "#Enablement"
+  ],
+  "Title": "Angebotsphase: Workshop-Konzept & Budgetierung",
+  "Summary": "Workshop-Angebot mit maßgeschneiderter Agenda, Fokus auf Enablement, nachhaltigen Transfer und strategische Follow-up-Optionen.",
+  "KeyPoints": [
+    "Modularer Tagesworkshop mit Praxis und Strategie",
+    "Ziel: Aha-Effekt, Quick Wins, nachhaltige Lernreise",
+    "Angebot: 4.000€ (Konzept, Durchführung, Nachbereitung)",
+    "Optional: Learning Journey als Folgeprojekt"
+  ],
+  "DocumentStructure": [
+    "Konzeptbeschreibung",
+    "Module & Agenda",
+    "Budget & Optionen"
+  ],
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "mail",
+    "workspace_context": "workshop",
+    "social_context": "consultant"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "KIWorkshops",
+    "related_objects": [],
+    "cluster_timespan": "2025-05-06"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T09:58Z",
+  "LastUpdated": "2025-07-21T09:58Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-batch-automatisierung-20250721T2320Z-batch06",
+  "ParentUID": null,
+  "ChunkNr": 6,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2320Z",
+  "Archetype": "Automation",
+  "ObjectType": "TipCard",
+  "Subject": "Batching im NEXUS – Kosten, Geschwindigkeit, Skalierung",
+  "Tags": ["#Batch","#Automatisierung","#Preisvorteil","#Massendaten","#NEXUS"],
+  "Title": "Batching im NEXUS – Kosten, Geschwindigkeit, Skalierung",
+  "Summary": "Batch-Import und Automatisierung sind Schlüssel für Kostenersparnis, hohe Verarbeitungsgeschwindigkeit und Bulk-Prozesse.",
+  "KeyPoints": [
+    "Große Mengen Daten effizient und günstig verarbeiten",
+    "Batch-Jobs automatisierbar (API-Integration)",
+    "Preisnachlässe für Nacht- und Massen-Importe"
+  ],
+  "DocumentStructure": ["Batch-Workflow", "Kostenargumente", "Bulk-Use Cases"],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:20Z",
+  "LastUpdated": "2025-07-21T23:20Z",
+  "Verification": "OK"
+}

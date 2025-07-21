@@ -1,0 +1,81 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-linkedin-career-20250721T1146Z-cstr02-p3j8b4kr",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 7,
+  "TotalChunks": 11,
+  "UZT_ISO8601_Compact": "20250721T1146Z",
+  "Archetype": "Career",
+  "ObjectType": "Berufserfahrung",
+  "Subject": "Beruflicher Werdegang – Alper Eger",
+  "Tags": [
+    "#AlperEger",
+    "#Career",
+    "#exmox",
+    "#Testerheld",
+    "#empfohlen",
+    "#iQU",
+    "#Goodgame",
+    "#FastCash",
+    "#Hamburg"
+  ],
+  "Title": "Beruflicher Werdegang – Alper Eger",
+  "Summary": "Executive-Karriere mit Schwerpunkt AdTech, Performance Marketing, Gaming, internationale Skalierung (u. a. iQU, Goodgame, exmox, Testerheld, empfohlen.de).",
+  "KeyPoints": [
+    "Founder/CEO/COO bei exmox (2015–heute)",
+    "COO bei Testerheld & empfohlen.de",
+    "SVP of Sales iQU (Amsterdam, 2010–2013)",
+    "Partner bei FastCash (Südamerika)",
+    "Marketing & Sales Manager bei Goodgame Studios"
+  ],
+  "DocumentStructure": [
+    "Timeline",
+    "Rollen",
+    "Orte",
+    "Schwerpunkte"
+  ],
+  "LinkTarget": "https://www.linkedin.com/in/alper-eger/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "linkedin",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "LinkedIn",
+    "related_objects": [],
+    "cluster_timespan": "2009-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Founder",
+      "Berufserfahrung",
+      "AlperEger",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Executive",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:46Z",
+  "LastUpdated": "2025-07-21T11:46Z",
+  "RawExtractedData": null
+}

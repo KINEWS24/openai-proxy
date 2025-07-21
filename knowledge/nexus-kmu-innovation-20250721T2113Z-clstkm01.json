@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-innovation-20250721T2113Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 3,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250721T2113Z",
+  "Archetype": "Text",
+  "ObjectType": "Innovation",
+  "Subject": "Innovations- und Projektbeschleuniger",
+  "Tags": ["#Innovation", "#Projektmanagement", "#KMU", "#Wettbewerb", "#Förderung"],
+  "Title": "NEXUS für Innovation & Wettbewerbsfähigkeit",
+  "Summary": "Innovation sichtbar, steuerbar und nutzbar machen – alle Ideen und Projekte im Überblick.",
+  "KeyPoints": [
+    "Ideenpool für Mitarbeitende",
+    "Projekte, Förderungen und Reporting digital steuern",
+    "Fehler und Learnings werden gesammelt"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/innovation",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "Forschung",
+    "role": "Innovation"
+  },
+  "Access": {
+    "role_access": ["GF", "Innovation", "Teamleitung"],
+    "person_access": [],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:13Z",
+  "LastUpdated": "2025-07-21T21:13Z",
+  "Verification": "OK"
+}

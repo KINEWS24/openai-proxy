@@ -1,0 +1,54 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-index-modelle-preisstrategie-20250721T2330Z-batch",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T2330Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Subject": "NEXUS Index-Card: Modelle & Preisstrategie 2025",
+  "Tags": [
+    "#Index","#Modellstrategie","#Preise","#Mistral","#AlephAlpha","#2025","#Cluster","#NEXUS"
+  ],
+  "Title": "NEXUS Index-Card: Modelle & Preisstrategie 2025",
+  "Summary": "Cluster-Übersicht: Preis, Modellwahl, Strategie, Compliance und Kostenargumente für Mistral, Aleph Alpha & Co. im NEXUS.",
+  "KeyPoints": [
+    "Alle Karten dieses Clusters auf einen Blick",
+    "Vergleich und Entscheidungshilfen zur Modellwahl",
+    "Batching, Automatisierung und Praxisempfehlungen",
+    "Compliance & Datenschutz als eigene Karten"
+  ],
+  "DocumentStructure": [
+    "Kartenübersicht",
+    "UID-Liste",
+    "Kernargumente",
+    "Vergleichstabellen"
+  ],
+  "RelatedCards": [
+    "nexus-modellwahl-strategie-20250721T2320Z-batch05",
+    "nexus-batch-automatisierung-20250721T2320Z-batch06",
+    "nexus-compliance-alephalpha-20250721T2320Z-batch07",
+    "nexus-kombi-modellstrategie-20250721T2320Z-batch08"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Tech, Owner",
+    "role": "Owner, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T23:30Z",
+  "LastUpdated": "2025-07-21T23:30Z",
+  "Verification": "OK"
+}

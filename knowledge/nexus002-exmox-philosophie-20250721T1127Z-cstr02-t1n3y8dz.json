@@ -1,0 +1,77 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-philosophie-20250721T1127Z-cstr02-t1n3y8dz",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 3,
+  "TotalChunks": 5,
+  "UZT_ISO8601_Compact": "20250721T1127Z",
+  "Archetype": "Culture",
+  "ObjectType": "Leadership",
+  "Subject": "Führungsstil & Arbeitsphilosophie – Alper Eger (exmox)",
+  "Tags": [
+    "#AlperEger",
+    "#Führung",
+    "#Arbeitsweise",
+    "#Philosophie",
+    "#Bootstrapping",
+    "#TeamCulture"
+  ],
+  "Title": "Führungsstil & Arbeitsphilosophie – Alper Eger (exmox)",
+  "Summary": "Alper Eger: Teamorientiert, pragmatisch, bodenständig – Fokus auf Produktivität, Mitarbeiterwohl und nachhaltige Geschäftsentwicklung.",
+  "KeyPoints": [
+    "Teamkultur und Mitarbeiterwohl im Mittelpunkt",
+    "Spartanisches Büro, wenig Show, Understatement",
+    "Pragmatische, ergebnisorientierte Haltung",
+    "Auch nach Exit keine Statussymbole, Fokus auf Team"
+  ],
+  "DocumentStructure": [
+    "Werte",
+    "Arbeitsumfeld",
+    "Führung",
+    "Post-Exit-Philosophie"
+  ],
+  "LinkTarget": null,
+  "EntryContext": {
+    "device_type": "research",
+    "capture_method": "public_sources",
+    "workspace_context": "investor-profile",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "Culture",
+    "related_objects": [],
+    "cluster_timespan": "2015-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Management",
+      "Führung",
+      "Philosophie",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Leadership",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:27Z",
+  "LastUpdated": "2025-07-21T11:27Z",
+  "RawExtractedData": null
+}

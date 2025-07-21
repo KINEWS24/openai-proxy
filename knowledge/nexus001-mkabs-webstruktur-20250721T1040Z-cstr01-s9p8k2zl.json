@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-webstruktur-20250721T1040Z-cstr01-s9p8k2zl",
+  "ParentUID": "nexus001-mkabs-index-20250721T0900Z-cstr01-b1e7a5c9",
+  "ChunkNr": 16,
+  "TotalChunks": 19,
+  "UZT_ISO8601_Compact": "20250721T1040Z",
+  "Archetype": "Website",
+  "ObjectType": "NavigationMap",
+  "Subject": "Website-Struktur & Angebot – Kabs PolsterWelt (2025)",
+  "Tags": [
+    "#Website",
+    "#Navigation",
+    "#Kategorien",
+    "#Service",
+    "#Produktwelt",
+    "#KabsPolsterWelt"
+  ],
+  "Title": "Website-Struktur & Angebot – Kabs PolsterWelt (2025)",
+  "Summary": "Zentrale Navigationsstruktur und Angebote des Kabs-Onlineshops für ein konsistentes digitales Einkaufserlebnis.",
+  "KeyPoints": [
+    "Kernnavigation: Sofas, Betten, Sessel, Esstische, Stühle, Prospekte, Aktionen, Outlet, Stores, Service",
+    "Zusatzbereiche: Inspiration, Markenwelten, Stilwelten, Produktwelten",
+    "Services: Lieferstatus, Alt gegen Neu, Aufbauservice, Probesitzen, Bestpreisgarantie, Kundenservice",
+    "Userbereich: Konto, Bestellungen, Datenverwaltung",
+    "Footer: Karriere, Kontakt, Rechtliches"
+  ],
+  "DocumentStructure": [
+    "Navigation",
+    "Produkt- und Servicekategorien",
+    "User Journey",
+    "Zahlarten & Logistik",
+    "Footer-Struktur"
+  ],
+  "LinkTarget": "https://www.kabs.de/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "Website",
+    "related_objects": [],
+    "cluster_timespan": "2025-07"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "E-Commerce",
+      "Web",
+      "Kabs.de",
+      "Research",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "E-Commerce",
+    "team": "Web",
+    "role": "Research",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:40Z",
+  "LastUpdated": "2025-07-21T10:40Z",
+  "RawExtractedData": null
+}

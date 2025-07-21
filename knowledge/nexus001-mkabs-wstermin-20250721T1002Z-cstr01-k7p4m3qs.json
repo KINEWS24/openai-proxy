@@ -1,0 +1,74 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-wstermin-20250721T1002Z-cstr01-k7p4m3qs",
+  "ParentUID": "nexus001-mkabs-wsangebot-20250721T0958Z-cstr01-j9h2i7qv",
+  "ChunkNr": 11,
+  "TotalChunks": 17,
+  "UZT_ISO8601_Compact": "20250721T1002Z",
+  "Archetype": "Mail",
+  "ObjectType": "WorkshopScheduling",
+  "Subject": "Terminfindung & Organisation – KI-Workshop Möbel Kabs",
+  "Tags": [
+    "#Workshop",
+    "#Orga",
+    "#Termin",
+    "#Consulting",
+    "#KI",
+    "#Terminkoordination"
+  ],
+  "Title": "Terminfindung & Organisation – KI-Workshop Möbel Kabs",
+  "Summary": "Koordination von Terminen, Technik, Teilnehmerdaten und Vorbereitungsfragen für den KI-Workshop.",
+  "KeyPoints": [
+    "Abstimmung mehrerer Wunschtermin-Optionen (2.–16.7.)",
+    "Abfrage von Teilnehmerdaten, Technikbedarf und Vorerfahrung",
+    "Fokus: optimale Vorbereitung und Klarheit über Erwartungen"
+  ],
+  "DocumentStructure": [
+    "Terminabstimmung",
+    "Teilnehmer- und Technikliste",
+    "Vorbereitung auf Workshop"
+  ],
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "mail",
+    "workspace_context": "workshop",
+    "social_context": "consultant"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "KIWorkshops",
+    "related_objects": [],
+    "cluster_timespan": "2025-05-12 bis 2025-06-28"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:02Z",
+  "LastUpdated": "2025-07-21T10:02Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,77 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-linkedin-endorsements-20250721T1151Z-cstr02-m7d2k4nf",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 8,
+  "TotalChunks": 11,
+  "UZT_ISO8601_Compact": "20250721T1151Z",
+  "Archetype": "LinkedIn",
+  "ObjectType": "Recommendations",
+  "Subject": "Empfehlungen & Testimonials zu Alper Eger",
+  "Tags": [
+    "#AlperEger",
+    "#Endorsements",
+    "#Reputation",
+    "#Trust",
+    "#Leadership",
+    "#IndustryKnowledge"
+  ],
+  "Title": "Empfehlungen & Testimonials zu Alper Eger",
+  "Summary": "Alper Eger wird von internationalen Partnern als visionär, pragmatisch, loyal, extrem kompetent und netzwerkstark beschrieben. Exzellente Social Reputation.",
+  "KeyPoints": [
+    "Über 30 qualifizierte Empfehlungen (u. a. von Trackier, Plarium, iQU, Goodgame)",
+    "Kernkompetenzen: Vision, Deals, Netzwerk, Branchenwissen",
+    "Transparenz, Loyalität, Hands-On, Ergebnisorientierung",
+    "Empfohlen als „Partner, dem man vertraut und mit dem man wachsen will“"
+  ],
+  "DocumentStructure": [
+    "Testimonials",
+    "Wiederkehrende Motive",
+    "Social Proof",
+    "Leadership"
+  ],
+  "LinkTarget": "https://www.linkedin.com/in/alper-eger/details/recommendations/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "linkedin",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "LinkedIn",
+    "related_objects": [],
+    "cluster_timespan": "2010-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Founder",
+      "Empfehlungen",
+      "AlperEger",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Reputation",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:51Z",
+  "LastUpdated": "2025-07-21T11:51Z",
+  "RawExtractedData": null
+}

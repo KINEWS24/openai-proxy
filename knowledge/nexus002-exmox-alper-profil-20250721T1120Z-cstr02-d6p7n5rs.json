@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 5,
+  "UZT_ISO8601_Compact": "20250721T1120Z",
+  "Archetype": "Profile",
+  "ObjectType": "Entrepreneur",
+  "Subject": "Alper Eger – Der außergewöhnliche Bootstrapping-Unternehmer (exmox, 100 Mio $ Exit)",
+  "Tags": [
+    "#AlperEger",
+    "#exmox",
+    "#Entrepreneur",
+    "#Exit",
+    "#Hamburg",
+    "#Tech",
+    "#Bootstrapping",
+    "#Aonic"
+  ],
+  "Title": "Alper Eger – Der außergewöhnliche Bootstrapping-Unternehmer (exmox, 100 Mio $ Exit)",
+  "Summary": "Alper Eger: Unkonventioneller Weg zum Tech-Millionenexit, pragmatisch, teamorientiert, ohne klassische Ausbildung, Fokus auf Gaming/Ad-Tech.",
+  "KeyPoints": [
+    "Gaming als Leidenschaft & Einstieg ins Business",
+    "Werdegang: Realschule, Abi, mehrere Studiengänge ohne Abschluss",
+    "Exmox-Gründung & Exit ohne Venture Capital (Bootstrapping)",
+    "Schlichtes Auftreten, Fokus auf Team & Geschäft"
+  ],
+  "DocumentStructure": [
+    "Biografie",
+    "Ausbildung",
+    "Business-Werdegang",
+    "Philosophie & Stil"
+  ],
+  "LinkTarget": null,
+  "EntryContext": {
+    "device_type": "research",
+    "capture_method": "public_sources",
+    "workspace_context": "investor-profile",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "EntrepreneurProfiles",
+    "related_objects": [],
+    "cluster_timespan": "2015-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Founder",
+      "Exit",
+      "AlperEger",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Founder",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:20Z",
+  "LastUpdated": "2025-07-21T11:20Z",
+  "RawExtractedData": null
+}

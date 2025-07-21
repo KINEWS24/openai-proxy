@@ -1,0 +1,88 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-index-20250721T0900Z-cstr01-b1e7a5c9",
+  "ParentUID": null,
+  "ChunkNr": 0,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T0900Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Subject": "Überblick, Struktur und Cluster der Recherche Möbel Kabs & Robert Kabs",
+  "Tags": [
+    "#MöbelKabs",
+    "#Index",
+    "#Research",
+    "#FamilyBusiness",
+    "#Mittelstand",
+    "#2025",
+    "#CaseStudy",
+    "#KabsUniversum"
+  ],
+  "Title": "Möbel Kabs & Robert Kabs – NEXUS DNA Index-Card",
+  "Summary": "Gliederung und Clusterstruktur für alle DNA Cards zum Thema Möbel Kabs & Robert Kabs. Bietet den Überblick zur Recherche und zu allen künftigen Ergänzungen.",
+  "KeyPoints": [
+    "Alle Cards logisch verknüpft und suchbar",
+    "Cluster für Möbelhandel, Digitalisierung, Case Studies etc.",
+    "Proof: interneRecherche – Stand Juli 2025"
+  ],
+  "DocumentStructure": [
+    "Historie & Entwicklung",
+    "Robert Kabs Profil",
+    "Unternehmensstruktur",
+    "Expansion & Innovation",
+    "House of Kabs",
+    "Venture Capital & Startup-Aktivitäten",
+    "Marktumfeld & Wettbewerb",
+    "Kultur & Verantwortung",
+    "Zukunft & Strategie"
+  ],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "index",
+    "related_objects": [],
+    "cluster_timespan": "20250721T0900Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T09:00Z",
+  "LastUpdated": "2025-07-21T09:00Z",
+  "RawExtractedData": null
+}

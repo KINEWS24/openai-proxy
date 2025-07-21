@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-nexususecase-20250721T1019Z-cstr01-p6q9k7tu",
+  "ParentUID": "nexus001-mkabs-ai-solutions-20250721T1015Z-cstr01-n4d3j6rf",
+  "ChunkNr": 15,
+  "TotalChunks": 17,
+  "UZT_ISO8601_Compact": "20250721T1019Z",
+  "Archetype": "UseCase",
+  "ObjectType": "NexusEnablement",
+  "Subject": "NEXUS DNA – Mehrwert für die AI-Solutions Specialist-Rolle bei Kabs",
+  "Tags": [
+    "#NexusUseCase",
+    "#KI",
+    "#Automatisierung",
+    "#Consulting",
+    "#AIJob",
+    "#Workshop",
+    "#Enablement"
+  ],
+  "Title": "NEXUS DNA – Mehrwert für die AI-Solutions Specialist-Rolle bei Kabs",
+  "Summary": "Das NEXUS-Modell bietet alle Strukturen und Funktionen, um die Rolle 'AI-Solutions Specialist' effizient, skalierbar und compliant bei Möbel Kabs zu etablieren.",
+  "KeyPoints": [
+    "Automatisierte, strukturierte Wissenssammlung für alle KI-Anwendungsbereiche",
+    "Prompt-Management, Team-Enablement, interne Mini-Guides & Support-Workflows",
+    "Onboarding & Rollout neuer Tools sowie nachhaltige Schulungsformate",
+    "Datenschutz/Compliance bereits integriert",
+    "Kombiniert Consulting, Enablement und Operations in einer Plattform"
+  ],
+  "DocumentStructure": [
+    "Enablement-Schnittstelle",
+    "Praxisnutzen",
+    "Multiplikatoreffekt",
+    "Skalierung und Nachhaltigkeit"
+  ],
+  "LinkTarget": null,
+  "EntryContext": {
+    "device_type": "workshop",
+    "capture_method": "consulting",
+    "workspace_context": "workshop",
+    "social_context": "consultant"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "NexusUseCase",
+    "related_objects": [],
+    "cluster_timespan": "2025-07"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "KI-Innovation",
+    "team": "NexusOps",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:19Z",
+  "LastUpdated": "2025-07-21T10:19Z",
+  "RawExtractedData": null
+}

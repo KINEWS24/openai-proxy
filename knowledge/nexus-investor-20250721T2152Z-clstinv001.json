@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2152Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 2,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2152Z",
+  "Archetype": "Text",
+  "ObjectType": "Pricing/Scaling",
+  "Subject": "Batch-Pricing & Custom-API-Deals",
+  "Tags": ["#BatchPricing","#CustomAPI","#Scaling","#Enterprise","#CostEfficiency","#NEXUS","#Investor","#SLA","#OnPrem"],
+  "Title": "Batch-Pricing & Custom-API: So wird NEXUS skalierbar und effizient",
+  "Summary": "Große Volumina, Massen-Upload, individuelle API-Deals: NEXUS kann für Enterprise-Kunden skalieren, Kosten senken und Compliance sichern.",
+  "KeyPoints": [
+    "Batch-Preise: Rabatte ab 1 Mrd. Tokens/Monat",
+    "API/Massen-Upload für große Dokumentenmengen",
+    "Self-Hosting, eigene SLAs, Audit-Trails"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Product, Sales",
+    "role": "Owner, CTO, Sales, Investor"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Sales", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:52Z",
+  "LastUpdated": "2025-07-21T21:52Z",
+  "Verification": "OK"
+}

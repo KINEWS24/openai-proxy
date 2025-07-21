@@ -1,0 +1,75 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-wsdurchf-20250721T1007Z-cstr01-l2w6n3zt",
+  "ParentUID": "nexus001-mkabs-wstermin-20250721T1002Z-cstr01-k7p4m3qs",
+  "ChunkNr": 12,
+  "TotalChunks": 17,
+  "UZT_ISO8601_Compact": "20250721T1007Z",
+  "Archetype": "Event",
+  "ObjectType": "WorkshopExecution",
+  "Subject": "Durchführung KI-Workshop Möbel Kabs – Eindrücke & Highlights",
+  "Tags": [
+    "#Workshop",
+    "#Durchführung",
+    "#KI",
+    "#Erfahrung",
+    "#Impressionen",
+    "#Praxis"
+  ],
+  "Title": "Durchführung KI-Workshop Möbel Kabs – Eindrücke & Highlights",
+  "Summary": "Praxisorientierter Workshop mit starker Resonanz und Begeisterung der Führungsmannschaft, Fokus auf direkte Anwendung und offene Diskussion.",
+  "KeyPoints": [
+    "Starke Praxisnähe, positives Feedback",
+    "Besonders erste Hälfte als 'Augenöffner' bewertet",
+    "Thema AI Solutions Specialist erstmals vertieft",
+    "Teambildung und aktives Mitmachen als Erfolgsfaktor"
+  ],
+  "DocumentStructure": [
+    "Ablauf",
+    "Feedback & Learnings",
+    "Themenschwerpunkte"
+  ],
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "mail",
+    "workspace_context": "workshop",
+    "social_context": "consultant"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "KIWorkshops",
+    "related_objects": [],
+    "cluster_timespan": "2025-07-08"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:07Z",
+  "LastUpdated": "2025-07-21T10:07Z",
+  "RawExtractedData": null
+}

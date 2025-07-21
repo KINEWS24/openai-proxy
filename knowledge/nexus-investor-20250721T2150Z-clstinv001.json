@@ -1,0 +1,40 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2150Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 1,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2150Z",
+  "Archetype": "Text",
+  "ObjectType": "Spezialmodelle",
+  "Subject": "Spezial-KI-Modelle und NEXUS-Strategie",
+  "Tags": ["#Spezialmodelle","#KI","#NEXUS","#Investor","#CustomAI","#Multimodal","#Voice","#Coding","#Reasoning"],
+  "Title": "Spezialmodelle für KI-gestützte Use Cases im NEXUS",
+  "Summary": "NEXUS integriert spezialisierte KI-Modelle nach Aufgabenbereich: Coding, Voice, Multimodal, Reasoning. Jedes Modell bringt Vorteile für bestimmte User-Jobs.",
+  "KeyPoints": [
+    "Coding-Modelle: Doku, Automatisierung, Entwickler",
+    "Voice-Modelle: Sprachsuche, Meeting, Audio",
+    "Multimodal: Text, Bild, Tabellen, Präsentation",
+    "Math/Reasoning: Wissenschaft, Consulting, Finance"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "AI/Strategy",
+    "role": "Owner, CTO, Investor"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:50Z",
+  "LastUpdated": "2025-07-21T21:50Z",
+  "Verification": "OK"
+}

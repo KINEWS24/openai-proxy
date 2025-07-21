@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-linkedin-netzwerk-20250721T1142Z-cstr02-h2b5f7qp",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 6,
+  "TotalChunks": 11,
+  "UZT_ISO8601_Compact": "20250721T1142Z",
+  "Archetype": "LinkedIn",
+  "ObjectType": "Network",
+  "Subject": "LinkedIn-Präsenz & Netzwerk von Alper Eger",
+  "Tags": [
+    "#AlperEger",
+    "#exmox",
+    "#LinkedIn",
+    "#Networking",
+    "#Hamburg",
+    "#Community",
+    "#AdTech",
+    "#Gaming"
+  ],
+  "Title": "LinkedIn-Präsenz & Netzwerk von Alper Eger",
+  "Summary": "Alper Eger als sichtbarer, gut vernetzter Player im AdTech- und Gaming-Umfeld – aktive Community-Events und thematische Beiträge.",
+  "KeyPoints": [
+    "LinkedIn >500 Kontakte, 5.255 Follower:innen",
+    "Aktive Rolle in AdTech/Gaming/Startup-Community (z. B. Meetups, Knowledge-Sharing)",
+    "Viele gemeinsame Szene-Kontakte",
+    "Positioniert exmox als Community-Hub im Hamburger Startup-Ökosystem"
+  ],
+  "DocumentStructure": [
+    "Netzwerk",
+    "Community",
+    "Events",
+    "Bekannte Kontakte"
+  ],
+  "LinkTarget": "https://www.linkedin.com/in/alper-eger/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "linkedin",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "LinkedIn",
+    "related_objects": [],
+    "cluster_timespan": "2010-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Founder",
+      "LinkedIn",
+      "AlperEger",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Founder",
+    "team": "Network",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:42Z",
+  "LastUpdated": "2025-07-21T11:42Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,78 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-angebot-20250721T1050Z-cstr01-b3f7y5zw",
+  "ParentUID": "nexus001-mkabs-webstruktur-20250721T1040Z-cstr01-s9p8k2zl",
+  "ChunkNr": 18,
+  "TotalChunks": 19,
+  "UZT_ISO8601_Compact": "20250721T1050Z",
+  "Archetype": "USP",
+  "ObjectType": "ServicePromise",
+  "Subject": "Angebot & Service – Kabs PolsterWelt: Kundenversprechen und USPs",
+  "Tags": [
+    "#Service",
+    "#Kundenversprechen",
+    "#USP",
+    "#KabsPolsterWelt",
+    "#Qualität",
+    "#Erfahrung"
+  ],
+  "Title": "Angebot & Service – Kabs PolsterWelt: Kundenversprechen und USPs",
+  "Summary": "Kabs überzeugt mit starken Serviceleistungen, Qualitätssiegeln und exzellenter Kundenzufriedenheit – seit 1969.",
+  "KeyPoints": [
+    "Kostenlose Lieferung, 100 Tage Probewohnen, Altmöbelmitnahme",
+    "Bestpreis-Garantie, Finanzierung, persönliche Beratung",
+    "Offiziell ausgezeichnet (Goldenes M, Familiensiegel, Service-Qualität)",
+    "1 Mio+ zufriedene Kunden, 95% Weiterempfehlung",
+    "Tradition & Erfahrung als Markenversprechen"
+  ],
+  "DocumentStructure": [
+    "Serviceleistungen",
+    "Auszeichnungen",
+    "Kundenbindung",
+    "Markenwerte"
+  ],
+  "LinkTarget": "https://www.kabs.de/service/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "ServiceUSP",
+    "related_objects": [],
+    "cluster_timespan": "2025-07"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "CustomerCare",
+      "Service",
+      "Kundenversprechen",
+      "Research",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "CustomerCare",
+    "team": "Service",
+    "role": "Research",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:50Z",
+  "LastUpdated": "2025-07-21T10:50Z",
+  "RawExtractedData": null
+}

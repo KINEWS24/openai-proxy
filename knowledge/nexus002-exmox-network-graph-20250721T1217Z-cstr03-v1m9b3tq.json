@@ -1,0 +1,27 @@
+{
+  "nodes": [
+    {"id": "alper-eger", "label": "Alper Eger", "type": "Person"},
+    {"id": "caglar-eger", "label": "Caglar Eger", "type": "Person"},
+    {"id": "alejandro-spicker", "label": "Alejandro Spicker", "type": "Person"},
+    {"id": "hamed-farhadian", "label": "Hamed Farhadian", "type": "Person"},
+    {"id": "patrick-abrar", "label": "Patrick Abrar", "type": "Person"},
+    {"id": "jens-rusch", "label": "Jens Rusch", "type": "Person"},
+    {"id": "anton-eder", "label": "Anton Eder", "type": "Person"},
+    {"id": "trackier", "label": "Trackier (Himanshu Tiwari)", "type": "Org"},
+    {"id": "goodgame", "label": "Goodgame Studios", "type": "Org"},
+    {"id": "iqu", "label": "iQU", "type": "Org"},
+    {"id": "exmox", "label": "exmox", "type": "Org"}
+  ],
+  "edges": [
+    {"source": "alper-eger", "target": "caglar-eger", "type": "family/business"},
+    {"source": "alper-eger", "target": "alejandro-spicker", "type": "colleague"},
+    {"source": "alper-eger", "target": "hamed-farhadian", "type": "mutual-contact"},
+    {"source": "alper-eger", "target": "patrick-abrar", "type": "industry"},
+    {"source": "alper-eger", "target": "jens-rusch", "type": "mutual-contact"},
+    {"source": "alper-eger", "target": "anton-eder", "type": "mutual-contact"},
+    {"source": "alper-eger", "target": "trackier", "type": "partner/client"},
+    {"source": "alper-eger", "target": "goodgame", "type": "former-employer"},
+    {"source": "alper-eger", "target": "iqu", "type": "former-employer"},
+    {"source": "alper-eger", "target": "exmox", "type": "founder"}
+  ]
+}

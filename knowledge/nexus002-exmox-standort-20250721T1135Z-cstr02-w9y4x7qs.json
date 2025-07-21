@@ -1,0 +1,75 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-standort-20250721T1135Z-cstr02-w9y4x7qs",
+  "ParentUID": "nexus002-exmox-management-20250721T1131Z-cstr02-f4k5c2mv",
+  "ChunkNr": 5,
+  "TotalChunks": 5,
+  "UZT_ISO8601_Compact": "20250721T1135Z",
+  "Archetype": "Location",
+  "ObjectType": "Office",
+  "Subject": "Standort & Umfeld – exmox GmbH (Hamburg/Norderstedt, 2025)",
+  "Tags": [
+    "#exmox",
+    "#Standort",
+    "#Hamburg",
+    "#Norderstedt",
+    "#Office",
+    "#Aonic"
+  ],
+  "Title": "Standort & Umfeld – exmox GmbH (Hamburg/Norderstedt, 2025)",
+  "Summary": "exmox bleibt nach dem Aonic-Exit mit Büro und Team in Hamburg. Minimalistisches, teamzentriertes Arbeitsumfeld, persönliche Verwurzelung der Gründer.",
+  "KeyPoints": [
+    "Hamburg als fester Unternehmensstandort, keine Verlagerung",
+    "Schlichtes, auf Effizienz und Team ausgerichtetes Büro",
+    "Alper Eger lebt weiter in Hamburg-Norderstedt"
+  ],
+  "DocumentStructure": [
+    "Office",
+    "Lebensumfeld",
+    "Nach-Exit-Strategie"
+  ],
+  "LinkTarget": "https://exmox.com/",
+  "EntryContext": {
+    "device_type": "research",
+    "capture_method": "public_sources",
+    "workspace_context": "investor-profile",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "Standort",
+    "related_objects": [],
+    "cluster_timespan": "2015-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Standort",
+      "Office",
+      "Aonic",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Standort",
+    "team": "Office",
+    "role": "Research",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:35Z",
+  "LastUpdated": "2025-07-21T11:35Z",
+  "RawExtractedData": null
+}

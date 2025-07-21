@@ -1,0 +1,85 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-historie-20250721T0915Z-cstr01-a1f3e9b2",
+  "ParentUID": "nexus001-mkabs-index-20250721T0900Z-cstr01-b1e7a5c9",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250721T0915Z",
+  "Archetype": "Text",
+  "ObjectType": "CompanyHistory",
+  "Subject": "Historie & Entwicklung Möbel Kabs",
+  "Tags": [
+    "#MöbelKabs",
+    "#Historie",
+    "#Entwicklung",
+    "#FamilyBusiness",
+    "#Mittelstand",
+    "#KabsUniversum"
+  ],
+  "Title": "Historie & Entwicklung von Möbel Kabs (1969–2025)",
+  "Summary": "Von der Gründung 1969 als kleines Hamburger Fachgeschäft über die Expansion zur Kabs PolsterWelt mit 14 Standorten und dem innovativen House of Kabs.",
+  "KeyPoints": [
+    "Gründung 1969 durch Uwe Kabs und Werner Krüger",
+    "Innovatives Inzahlungnahme-Konzept (Alt gegen Neu)",
+    "Wachstum und Spezialisierung auf Polstermöbel",
+    "Generationswechsel 1992 an Robert A. und Jens Uwe Kabs",
+    "Expansion in Norddeutschland, ab 2006 als Kabs PolsterWelt",
+    "2025: House of Kabs als neues Flagship in Hamburg"
+  ],
+  "DocumentStructure": [
+    "Gründung und Innovation",
+    "Wachstum & Spezialisierung",
+    "Generationswechsel",
+    "Expansion",
+    "Aktuelles Flagship-Projekt"
+  ],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "CaseStudyKabs",
+    "related_objects": [],
+    "cluster_timespan": "1969-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T09:15Z",
+  "LastUpdated": "2025-07-21T09:15Z",
+  "RawExtractedData": null
+}

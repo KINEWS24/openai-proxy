@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-exit-20250721T1123Z-cstr02-g5y2l9vb",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 2,
+  "TotalChunks": 5,
+  "UZT_ISO8601_Compact": "20250721T1123Z",
+  "Archetype": "Company",
+  "ObjectType": "ExitCase",
+  "Subject": "exmox – Von der Gründung bis zum 100-Millionen-USD-Exit (2015–2022)",
+  "Tags": [
+    "#exmox",
+    "#AdTech",
+    "#Exit",
+    "#Aonic",
+    "#Bootstrapping",
+    "#Hamburg",
+    "#Acquisition"
+  ],
+  "Title": "exmox – Von der Gründung bis zum 100-Millionen-USD-Exit (2015–2022)",
+  "Summary": "Exmox: Vom Hamburger Gaming-Startup zum internationalen Ad-Tech-Player, erfolgreich ohne Venture Capital, 2022 für 100 Mio $ an Aonic verkauft.",
+  "KeyPoints": [
+    "Ad-Tech/Performance Marketing für Mobile Games",
+    "Globale Reichweite: 250 Mio Nutzer/Monat, 180 Länder",
+    "Wachstum durch eigenes Netzwerk, keine VC-Finanzierung",
+    "2022: Exit an Aonic (Schweden), Alper bleibt als COO"
+  ],
+  "DocumentStructure": [
+    "Gründung",
+    "Wachstum",
+    "Managementwechsel",
+    "Akquisitionen",
+    "Exit"
+  ],
+  "LinkTarget": "https://exmox.com/",
+  "EntryContext": {
+    "device_type": "research",
+    "capture_method": "public_sources",
+    "workspace_context": "investor-profile",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "EntrepreneurProfiles",
+    "related_objects": [],
+    "cluster_timespan": "2015-2022"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Management",
+      "Exit",
+      "Acquisition",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "COO",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T11:23Z",
+  "LastUpdated": "2025-07-21T11:23Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2217Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 8,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2217Z",
+  "Archetype": "Text",
+  "ObjectType": "USP",
+  "Subject": "Das NEXUS-Versprechen – KI für Menschen",
+  "Tags": ["#USP","#KIfürMenschen","#Ownership","#Auditierbarkeit","#Skynet","#Nutzerzentriert","#NEXUS"],
+  "Title": "KERN-USP: NEXUS macht KI zum Tool für echte Menschen",
+  "Summary": "NEXUS schafft Kontrolle, Ownership, Proof, Chronologie und Auditierbarkeit für User – und schützt so vor Kontrollverlust und Intransparenz.",
+  "KeyPoints": [
+    "KI als Werkzeug, nicht Blackbox",
+    "Proof, Chronologie, Data Ownership",
+    "Voll auditierbar und API-offen"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Owner, Product",
+    "role": "Owner, Investor, CTO"
+  },
+  "Access": {
+    "role_access": ["Owner", "Investor", "CTO"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T22:17Z",
+  "LastUpdated": "2025-07-21T22:17Z",
+  "Verification": "OK"
+}

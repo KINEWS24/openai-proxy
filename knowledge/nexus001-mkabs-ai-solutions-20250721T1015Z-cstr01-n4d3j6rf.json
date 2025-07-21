@@ -1,0 +1,104 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-ai-solutions-20250721T1015Z-cstr01-n4d3j6rf",
+  "ParentUID": "nexus001-mkabs-wsrecap-20250721T1011Z-cstr01-m1b9j5hv",
+  "ChunkNr": 14,
+  "TotalChunks": 17,
+  "UZT_ISO8601_Compact": "20250721T1015Z",
+  "Archetype": "JobAd",
+  "ObjectType": "AIJobPosting",
+  "Subject": "AI-Solutions Specialist (m/w/d) – Möbel Kabs (Workshop-Kontext, Juli 2025)",
+  "Tags": [
+    "#KabsPolsterWelt",
+    "#AIJobs",
+    "#Stellenangebot",
+    "#KISpecialist",
+    "#Automatisierung",
+    "#NexusUseCase"
+  ],
+  "Title": "AI-Solutions Specialist (m/w/d) – Möbel Kabs (Workshop-Kontext, Juli 2025)",
+  "Summary": "Innovative KI-Rolle für die unternehmensweite Implementierung, Schulung und Automatisierung von KI-Tools bei Möbel Kabs – mit Fokus auf Praxis, Enablement und Team-Support.",
+  "KeyPoints": [
+    "Identifikation & Implementierung von KI-Lösungen (Text, Bild, Sprache, Automatisierung)",
+    "Eigenständiges Testen & Integrieren moderner Tools (z.B. ChatGPT, Midjourney, Copilot)",
+    "Erstellung interner Toolkits & Schulungen",
+    "Troubleshooting und Know-how-Transfer",
+    "Flexible, moderne Arbeitsbedingungen mit attraktiven Benefits"
+  ],
+  "DocumentStructure": [
+    "Verantwortungsbereich",
+    "Anforderungen",
+    "Nice-to-have-Kompetenzen",
+    "Benefits und Unternehmenskultur"
+  ],
+  "LinkTarget": null,
+  "EntryContext": {
+    "device_type": "workshop",
+    "capture_method": "personal_dialog",
+    "workspace_context": "workshop",
+    "social_context": "consultant"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "KabsAI",
+    "related_objects": [],
+    "cluster_timespan": "2025-07"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "KI-Innovation",
+    "team": "KabsAI",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:15Z",
+  "LastUpdated": "2025-07-21T10:15Z",
+  "RawExtractedData": null
+}
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-wsrecap-20250721T1011Z-cstr01-m1b9j5hv",
+  "ParentUID": "nexus001-mkabs-wsdurchf-20250721T1007Z-cstr01-l2w6n3zt",
+  "ChunkNr": 13,
+  "TotalChunks": 17,
+  "UZT_ISO8601_Compact": "20250721T1011Z",
+  "Archetype": "Mail",
+  "ObjectType": "WorkshopRecap",
+  "Subject": "Workshop-Nachbereitung & nächste Schritte – KI-Workshop Möbel Kabs",
+  "Tags": [
+    "#Workshop",
+    "#Nachbereitung",
+    "#Recap",
+    "#Consulting",
+    "#AI",
+    "#FollowUp"
+  ],
+  "Title": "Workshop-Nachbereitung & nächste Schritte – KI-Workshop Möbel Kabs",
+  "Summary": "Recap, Präsentationsversand, Prompt-Bot-Angebot, Abwicklung und Abstimmung weiterer Gespräche zu KI und AI Solutions Specialist.",
+  "KeyPoints": [
+    "Zusammenfassung und Versand der Unterlagen",
+    "Angebot Prompt-Bot für Team",
+    "Abstimmung Rechnungsadresse",
+    "Folgegespräche zu AI Solutions Specialist"
+ 

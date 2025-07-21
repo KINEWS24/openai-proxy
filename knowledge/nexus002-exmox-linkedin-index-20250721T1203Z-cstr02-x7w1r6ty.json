@@ -1,0 +1,83 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-linkedin-index-20250721T1203Z-cstr02-x7w1r6ty",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 11,
+  "TotalChunks": 11,
+  "UZT_ISO8601_Compact": "20250721T1203Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Subject": "Index-Karte LinkedIn/Netzwerk – Alper Eger",
+  "Tags": [
+    "#AlperEger",
+    "#exmox",
+    "#LinkedIn",
+    "#Index",
+    "#Netzwerk",
+    "#Research"
+  ],
+  "Title": "Index-Karte LinkedIn/Netzwerk – Alper Eger",
+  "Summary": "LinkedIn-Deep-Dive zu Alper Eger: Netzwerk, Empfehlungen, Reputation, Community-Impact, Karriere und Skills auf einen Blick.",
+  "KeyPoints": [
+    "Vollständige Übersicht zu LinkedIn- und Netzwerk-Content",
+    "Reihenfolge: Netzwerk, Berufserfahrung, Reputation, Skills, Community",
+    "Cluster für RAG/Recherche/Investoren-Scoring"
+  ],
+  "DocumentStructure": [
+    "LinkedIn-Network",
+    "Career",
+    "Endorsements",
+    "Skills",
+    "Community"
+  ],
+  "LinkTarget": "https://www.linkedin.com/in/alper-eger/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "linkedin",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr02",
+    "cluster_type": "LinkedIn",
+    "related_objects": [
+      "nexus002-exmox-linkedin-netzwerk-20250721T1142Z-cstr02-h2b5f7qp",
+      "nexus002-exmox-linkedin-career-20250721T1146Z-cstr02-p3j8b4kr",
+      "nexus002-exmox-linkedin-endorsements-20250721T1151Z-cstr02-m7d2k4nf",
+      "nexus002-exmox-linkedin-skills-20250721T1155Z-cstr02-b8z9n2uv",
+      "nexus002-exmox-linkedin-community-20250721T1159Z-cstr02-c1d2f9wj"
+    ],
+    "cluster_timespan": "2010-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Founder",
+      "LinkedIn",
+      "AlperEger",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Research",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T12:03Z",
+  "LastUpdated": "2025-07-21T12:03Z",
+  "RawExtractedData": null
+}

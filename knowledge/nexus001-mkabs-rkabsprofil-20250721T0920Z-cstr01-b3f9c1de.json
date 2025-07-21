@@ -1,0 +1,83 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus001-mkabs-rkabsprofil-20250721T0920Z-cstr01-b3f9c1de",
+  "ParentUID": "nexus001-mkabs-index-20250721T0900Z-cstr01-b1e7a5c9",
+  "ChunkNr": 2,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250721T0920Z",
+  "Archetype": "Text",
+  "ObjectType": "PersonProfile",
+  "Subject": "Robert André Kabs – Unternehmer, Digitalpionier & Investor",
+  "Tags": [
+    "#RobertKabs",
+    "#Profil",
+    "#Geschäftsführung",
+    "#StartupInvestor",
+    "#Digitalisierung",
+    "#Möbelhandel"
+  ],
+  "Title": "Robert André Kabs – Unternehmer, Digitalpionier & Investor",
+  "Summary": "Robert A. Kabs ist seit 1992 geschäftsführender Gesellschafter der Kabs PolsterWelt, Digitalpionier und aktiver Startup-Investor.",
+  "KeyPoints": [
+    "Geschäftsführender Gesellschafter Kabs PolsterWelt seit 1992",
+    "Digitalisierung des Möbelhandels (möbel.de, CEO 2008–2021)",
+    "Startup-Investor via FOLLOW THE RABBIT Ventures (seit 2016)",
+    "Fokus: Marketing, Verkauf, Innovation",
+    "Bekannt als visionärer Mittelstandsunternehmer"
+  ],
+  "DocumentStructure": [
+    "Beruflicher Werdegang",
+    "Positionen & Zuständigkeiten",
+    "Digital- und Investment-Aktivitäten",
+    "Rolle im Mittelstand"
+  ],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "research",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "CaseStudyKabs",
+    "related_objects": [],
+    "cluster_timespan": "1992-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "Research",
+    "team": "extern",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T09:20Z",
+  "LastUpdated": "2025-07-21T09:20Z",
+  "RawExtractedData": null
+}

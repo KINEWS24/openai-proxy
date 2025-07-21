@@ -1,0 +1,79 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus002-exmox-network-graph-20250721T1217Z-cstr03-v1m9b3tw",
+  "ParentUID": "nexus002-exmox-alper-profil-20250721T1120Z-cstr02-d6p7n5rs",
+  "ChunkNr": 12,
+  "TotalChunks": 13,
+  "UZT_ISO8601_Compact": "20250721T1217Z",
+  "Archetype": "NetworkGraph",
+  "ObjectType": "Graph",
+  "Subject": "Netzwerk-Graph – Alper Eger & exmox: Basis-Visualisierung",
+  "Tags": [
+    "#AlperEger",
+    "#Netzwerk",
+    "#LinkedIn",
+    "#Graph",
+    "#Community",
+    "#exmox",
+    "#Mapping"
+  ],
+  "Title": "Netzwerk-Graph – Alper Eger & exmox: Basis-Visualisierung",
+  "Summary": "Visualisierung zentraler Netzwerk-Knoten (exmox, Hamburger Szene, internationale Partner) mit direkter Quellenangabe und Verifizierungs-Referenz.",
+  "KeyPoints": [
+    "Zentrale Person: Alper Eger (Founder/COO exmox)",
+    "Direkte Verbindungen: Caglar Eger, Alejandro Spicker, Hamed Farhadian, Patrick Abrar, etc.",
+    "Querverbindungen zu Goodgame Studios, iQU, Trackier",
+    "Quellen- und Validierungsbasis: LinkedIn-Kontaktlisten, öffentliche Interaktionen"
+  ],
+  "DocumentStructure": [
+    "Netzwerk-Knoten",
+    "Verbindungstyp",
+    "Validierung"
+  ],
+  "LinkTarget": "https://www.linkedin.com/in/alper-eger/",
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "linkedin",
+    "workspace_context": "research",
+    "social_context": "extern"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr03",
+    "cluster_type": "NetworkGraph",
+    "related_objects": [
+      "nexus002-exmox-linkedin-netzwerk-20250721T1142Z-cstr02-h2b5f7qp"
+    ],
+    "cluster_timespan": "2010-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "exmox",
+      "Founder",
+      "Netzwerk",
+      "AlperEger",
+      "Research",
+      "oliver"
+    ],
+    "organization": "exmox",
+    "department": "Management",
+    "team": "Executive",
+    "role": "COO",
+    "person": "alper"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": ["Graph"],
+  "embedded_objects": [],
+  "Created": "2025-07-21T12:17Z",
+  "LastUpdated": "2025-07-21T12:17Z",
+  "RawExtractedData": null
+}

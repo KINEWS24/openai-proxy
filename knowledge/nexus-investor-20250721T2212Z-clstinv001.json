@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2212Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 6,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2212Z",
+  "Archetype": "Text",
+  "ObjectType": "Roadmap",
+  "Subject": "Roadmap und Entwicklungsphasen von NEXUS",
+  "Tags": ["#Roadmap","#Phasenplan","#Scaling","#Enterprise","#Teams","#NEXUS","#Investor","#MCP","#Growth"],
+  "Title": "Roadmap 2026 – Der NEXUS Entwicklungs- und Wachstumspfad",
+  "Summary": "3-Phasen-Plan: Von Individual-Usern über Teams bis zu Enterprises mit MCP, Multi-Language, API und On-Premises.",
+  "KeyPoints": [
+    "Phase 1: Einzeluser, Sofort-Nutzen",
+    "Phase 2: Teams, Projekte, Dashboards",
+    "Phase 3: Enterprise, MCP, Multi-Language"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Strategy, Product",
+    "role": "Owner, CTO, Investor"
+  },
+  "Access": {
+    "role_access": ["Owner", "CTO", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T22:12Z",
+  "LastUpdated": "2025-07-21T22:12Z",
+  "Verification": "OK"
+}

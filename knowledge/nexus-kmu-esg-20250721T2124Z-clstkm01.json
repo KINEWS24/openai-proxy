@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-kmu-esg-20250721T2124Z-clstkm01",
+  "ParentUID": "nexus-kmu-index-20250721T2100Z-root",
+  "ChunkNr": 9,
+  "TotalChunks": 10,
+  "UZT_ISO8601_Compact": "20250721T2124Z",
+  "Archetype": "Text",
+  "ObjectType": "ESG",
+  "Subject": "Nachhaltigkeit & ESG-Reporting",
+  "Tags": ["#Nachhaltigkeit", "#ESG", "#KMU", "#Reporting", "#Transparenz"],
+  "Title": "Nachhaltigkeit, ESG & Reporting einfach gemacht",
+  "Summary": "Pflichten, Fristen und Nachweise für Nachhaltigkeit und ESG werden zentral, aktuell und revisionssicher verwaltet.",
+  "KeyPoints": [
+    "Alle ESG-Nachweise und Zertifikate digital gebündelt",
+    "Transparenz für Kunden und Partner",
+    "Automatische Erinnerungen für Reporting"
+  ],
+  "LinkTarget": "https://nexus-demo/kmu/esg",
+  "Hierarchy": {
+    "organization": "KMU_DE",
+    "department": "GF, Nachhaltigkeit",
+    "role": "QM, Nachhaltigkeit"
+  },
+  "Access": {
+    "role_access": ["GF", "QM", "Nachhaltigkeit"],
+    "person_access": [],
+    "external_access": ["Auditor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "72M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T21:24Z",
+  "LastUpdated": "2025-07-21T21:24Z",
+  "Verification": "OK"
+}

@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus_usps_pitch",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": null,
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "USP & Elevator-Pitch",
+  "Summary": [
+    "NEXUS ist dein zweites Gehirn, proaktiv, GDPR-by-Design, kein Cloud-Zwang."
+  ],
+  "KeyPoints": [
+    "Mitdenkend: Fragt nach, erinnert, verknüpft.",
+    "Highlights: GDPR, Owner-First, kontextuelle Antworten."
+  ],
+  "Tags": ["#Text","#Nexus","#USP","#Elevator","#Pitch","#Denkpartner","#KI","#oliver"],
+  "LinkTarget": "nexus_usps_pitch.md",
+  "ClusterData": {
+    "cluster_id": "clst_value",
+    "cluster_type": "value"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:56Z",
+  "LastUpdated": "2025-07-21T14:56Z"
+}

@@ -1,0 +1,39 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-investor-20250721T2215Z-clstinv001",
+  "ParentUID": "nexus-investor-root-20250721T2145Z",
+  "ChunkNr": 7,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250721T2215Z",
+  "Archetype": "Text",
+  "ObjectType": "Fazit",
+  "Subject": "NEXUS als radikales, userzentriertes KI-System",
+  "Tags": ["#USP","#Gamechanger","#Ownership","#Proof","#Privacy","#Audit","#UserFirst","#NEXUS","#EUAIAct"],
+  "Title": "Warum NEXUS? – Das radikal andere KI-Produkt (Persönliches Fazit)",
+  "Summary": "NEXUS ist das erste System, das KI, Ownership, Proof, Compliance & Privacy voll integriert – mit radikalem Fokus auf Nutzerkontrolle und Zukunftsfähigkeit.",
+  "KeyPoints": [
+    "Nutzerkontrolle & Ownership als USP",
+    "Konsequente Produkt- und KI-Zentrierung",
+    "Vorsprung durch Compliance & Privacy"
+  ],
+  "LinkTarget": null,
+  "Hierarchy": {
+    "organization": "NEXUS",
+    "department": "Strategy, Owner",
+    "role": "Owner, Investor"
+  },
+  "Access": {
+    "role_access": ["Owner", "Investor"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T22:15Z",
+  "LastUpdated": "2025-07-21T22:15Z",
+  "Verification": "OK"
+}
