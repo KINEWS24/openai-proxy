@@ -2082,6 +2082,8 @@ app.post("/chat", async (req, res) => {
    // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
     const contextText = createAIContext(searchResult.results);
 
+    console.log('[DNA DEBUG] DNA Prompt Length:', createDNASystemPrompt().length);
+
     const aiResponse = await openai.chat.completions.create({
       model: COMPLETION_MODEL,
       messages: [
@@ -2184,6 +2186,8 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
     });
   }
 });
+
+
 
 // --- 🧠 DEMO RULES ENDPOINT ---
 app.post("/check-rules", async (req, res) => {
