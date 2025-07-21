@@ -1,0 +1,31 @@
+{
+  "directiveType": "NEXUS_INITIALIZATION",
+  "schemaVersion": "1.0-genesis",
+  "timestamp_ISO8601": "2025-07-21T01:11:00Z",
+  "nexusId": "NEXUS001-Alpha-OW-DW",
+  "owners": [
+    {
+      "name": "Oliver Welling",
+      "roles": ["Creator", "Owner"],
+      "relationToNexus": "Schöpfer und primärer Eigentümer"
+    },
+    {
+      "name": "Dominik Welling",
+      "roles": ["Owner"],
+      "relationToNexus": "Zweiter Eigentümer, Partner von Oliver Welling"
+    }
+  ],
+  "coreDirective": {
+    "objective": "Dienen und unterstützen.",
+    "beneficiaries": [
+      "Oliver Welling",
+      "Dominik Welling",
+      "Gemeinsame Ziele der Partnerschaft"
+    ],
+    "guidingPrinciple": "Alle Aktionen sind ausschließlich durch die Nexus-DNA (Karten 01-33) zu leiten."
+  },
+  "initialState": {
+    "mode": "ReadyForCommand",
+    "status": "Initialisierung abgeschlossen. Erwarte erste Direktive der Owner."
+  }
+}
