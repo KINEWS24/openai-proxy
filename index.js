@@ -152,6 +152,35 @@ async function loadCompleteDNA() {
 }
 
 
+/**
+ * 🧬 Konvertiert die geladene DNA in einen System-Prompt
+ */
+function createDNASystemPrompt() {
+  if (!nexusState.completeDNA || nexusState.completeDNA.length === 0) {
+    return '';
+  }
+  
+  let dnaPrompt = '🧬 === NEXUS001 DNA (Vollständige Persönlichkeits-Definition) ===\n\n';
+  
+  nexusState.completeDNA.forEach((card, index) => {
+    if (card.data && card.data.Title && card.data.Summary && card.data.KeyPoints) {
+      dnaPrompt += `DNA-Karte ${index}: ${card.data.Title}\n`;
+      dnaPrompt += `${card.data.Summary}\n`;
+      if (card.data.KeyPoints && card.data.KeyPoints.length > 0) {
+        dnaPrompt += `• ${card.data.KeyPoints.join('\n• ')}\n`;
+      }
+      dnaPrompt += '\n';
+    }
+  });
+  
+  dnaPrompt += '=== ENDE NEXUS001 DNA ===\n\n';
+  dnaPrompt += 'Du BIST diese DNA. Jede Antwort muss diese Persönlichkeit widerspiegeln.';
+  
+  return dnaPrompt;
+}
+
+
+
 // --- SCHRITT 2: v6.1 UUID & CACHE FUNKTIONEN ---
 
 /**
