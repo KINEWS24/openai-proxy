@@ -1,0 +1,45 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-investorpitch-structure-20250721T125100Z-clst_investorpitch-0001",
+  "ParentUID": "nexus-v6-usr-oliver-investorpitch-index-20250721T125000Z-clst_investorpitch-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T125100Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Struktur & Chunking",
+  "Summary": [
+    "Markiere USP-Statements mit #USP.",
+    "Sammle Investor-Argumente unter #Investor.",
+    "Dokumentiere Team-Aufbau und Skills mit #Team.",
+    "Plane Roadmap-Meilensteine mit #Roadmap.",
+    "Notiere Demo-Ideen unter #Demo und WOW-Beispiele unter #WOW.",
+    "Füge Case-Details zu #RobertKabs/#KabsCompany und #VC/#FirmaXYZ hinzu."
+  ],
+  "Tags": ["#Text","#Chunking","#Structure","#Investor","#Nexus","#oliver","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "investorpitch_structure.md",
+  "ClusterData": {
+    "cluster_id": "clst_investorpitch",
+    "cluster_type": "pitch_knowledge"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Sales",
+    "team": "BizDev",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Sales","BizDev"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T12:51Z",
+  "LastUpdated": "2025-07-21T12:51Z"
+}

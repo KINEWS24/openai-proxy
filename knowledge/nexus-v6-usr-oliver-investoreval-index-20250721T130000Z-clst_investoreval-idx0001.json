@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-investoreval-index-20250721T130000Z-clst_investoreval-idx0001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T130000Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Title": "Investor-Szenario & Optionen Index",
+  "Summary": [
+    "Szenario-Bewertung (UID: nexus-v6-usr-oliver-investoreval-scenario-20250721T130100Z)",
+    "Realistische Investment-Optionen (UID: nexus-v6-usr-oliver-investoreval-options-20250721T130200Z)",
+    "Timeline & Phasenmodell (UID: nexus-v6-usr-oliver-investoreval-timeline-20250721T130300Z)",
+    "Verkaufspunkte & Fazit (UID: nexus-v6-usr-oliver-investoreval-selling-20250721T130400Z)"
+  ],
+  "Tags": ["#Index","#Investor","#Evaluation","#Investment","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "investoreval_index.md",
+  "ClusterData": {
+    "cluster_id": "clst_investoreval",
+    "cluster_type": "investment_analysis",
+    "cluster_timespan": "20250721T130000Z-20250721T130400Z"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Sales",
+    "team": "BizDev",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Sales","BizDev"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T13:00Z",
+  "LastUpdated": "2025-07-21T13:00Z"
+}

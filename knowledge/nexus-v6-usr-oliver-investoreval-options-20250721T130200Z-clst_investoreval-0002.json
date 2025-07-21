@@ -1,0 +1,43 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-investoreval-options-20250721T130200Z-clst_investoreval-0002",
+  "ParentUID": "nexus-v6-usr-oliver-investoreval-index-20250721T130000Z-clst_investoreval-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T130200Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Realistische Investment-Optionen",
+  "Summary": [
+    "Lean Seed (150–250 k €): 6–9 Monate Runway, Pilot-Dev, Mini-Marketing.",
+    "Classic Seed (300–500 k €): 12–15 Monate, Team, B2B-Features, API, Marketing.",
+    "Corporate/Strategic (Kabs Co-Investor ~10 %): Kapital, Netzwerk, Vertrieb.",
+    "Rapid Scale VC (500 k–1 M €): nach 3 Monaten Proof + 2 Kunden, aggressive Skalierung."
+  ],
+  "Tags": ["#Text","#Investor","#Options","#Seed","#VC","#Corporate","#Strategy","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "investoreval_options.md",
+  "ClusterData": {
+    "cluster_id": "clst_investoreval",
+    "cluster_type": "investment_analysis"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Sales",
+    "team": "BizDev",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Sales","BizDev"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T13:02Z",
+  "LastUpdated": "2025-07-21T13:02Z"
+}

@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-kg-financefundcluster-20250721T145800Z-clst_fundcluster-0001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145800Z",
+  "Archetype": "Cluster",
+  "ObjectType": "ClusterCard",
+  "Title": "Finance & Funding Cluster",
+  "Summary": [
+    "Informationen zu Kostenplanung, Einnahmenmodellen und Funding-Szenarien."
+  ],
+  "RelatedCards": [
+    "nexus-v6-usr-oliver-finance-investmentplan-20250721T145550Z-clst_fund-0001",
+    "nexus-v6-usr-oliver-finance-scenarios-20250721T145600Z-clst_fund-0002"
+  ],
+  "Tags": ["#Cluster","#Finance","#Funding","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "kg_financefundcluster.md",
+  "ClusterData": {
+    "cluster_id": "clst_fundcluster",
+    "cluster_type": "knowledge_graph"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Strategy",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Finance"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:58Z",
+  "LastUpdated": "2025-07-21T14:58Z"
+}

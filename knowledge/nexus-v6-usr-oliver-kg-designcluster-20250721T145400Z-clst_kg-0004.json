@@ -1,0 +1,45 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-kg-designcluster-20250721T145400Z-clst_kg-0004",
+  "ParentUID": "nexus-v6-usr-oliver-kg-index-20250721T145000Z-clst_kg-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145400Z",
+  "Archetype": "Cluster",
+  "ObjectType": "ClusterCard",
+  "Title": "Design & UI Tokens Cluster",
+  "Summary": [
+    "Farb- und Designrichtlinien für konsistente UI-Entwicklung.",
+    "Verknüpft Farbpalette und Usage-Guidelines."
+  ],
+  "RelatedCards": [
+    "nexus-v6-usr-oliver-colors-index-20250721T144000Z-clst_colors-idx0001",
+    "nexus-v6-usr-oliver-colors-guidelines-20250721T144060Z-clst_colors-0006"
+  ],
+  "Tags": ["#Cluster","#Design","#Colors","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "kg_designcluster.md",
+  "ClusterData": {
+    "cluster_id": "clst_kg",
+    "cluster_type": "knowledge_graph"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Design",
+    "team": "Core",
+    "role": "Owner",
+  "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Design"],
+  "person_access": ["Oliver Welling"],
+  "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+  "confidentiality_level": "public",
+  "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:54Z",
+  "LastUpdated": "2025-07-21T14:54Z"
+}

@@ -1,0 +1,43 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-investorpitch-livepitch-20250721T125200Z-clst_investorpitch-0002",
+  "ParentUID": "nexus-v6-usr-oliver-investorpitch-index-20250721T125000Z-clst_investorpitch-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T125200Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Live-Pitch Anwendung",
+  "Summary": [
+    "Nexus erkennt Gesprächspartner und Kontext (z.B. #InvestorName).",
+    "Formuliere Fragen wie „Wie bereichert NEXUS [Unternehmen]?“. ",
+    "Empfange kontextsensitive Antworten mit USP, Referenzen, Roadmap.",
+    "Lasse Nexus relevante Cards vorlesen oder zusammenfassen."
+  ],
+  "Tags": ["#Text","#LivePitch","#Demo","#Investor","#Nexus","#oliver","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "investorpitch_livepitch.md",
+  "ClusterData": {
+    "cluster_id": "clst_investorpitch",
+    "cluster_type": "pitch_knowledge"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Sales",
+    "team": "BizDev",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Sales","BizDev"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T12:52Z",
+  "LastUpdated": "2025-07-21T12:52Z"
+}
