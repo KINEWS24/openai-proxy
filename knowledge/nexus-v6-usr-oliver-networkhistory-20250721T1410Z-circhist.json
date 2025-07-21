@@ -1,0 +1,68 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-networkhistory-20250721T1410Z-circhist",
+  "ParentUID": "nexus-v6-usr-oliver-mainprofile-20250721T1400Z-root",
+  "ChunkNr": 3,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250721T1410Z",
+  "Archetype": "NetworkHistory",
+  "ObjectType": "CircleOfTrust",
+  "Subject": "Netzwerk-History 'Circle of Trust' um Oliver Welling",
+  "Tags": ["#Netzwerk","#History","#CircleOfTrust","#Timeline"],
+  "Title": "Netzwerk-Dynamik: 'Circle of Trust' um Oliver Welling",
+  "Summary": "Dynamische History-Card: Wer kam wann in den direkten Circle um Oliver Welling.",
+  "KeyPoints": [
+    "Mapping von Alper Eger: Q3 2024",
+    "Mapping von Robert André Kabs: Q2 2024",
+    "Mapping von Patrick Abrar: Q4 2023"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://kinews24.de/",
+  "MessageContext": null,
+  "DataStructure": {
+    "circle_of_trust": [
+      {"person": "Patrick Abrar", "joined": "2023-11-01"},
+      {"person": "Robert André Kabs", "joined": "2024-05-10"},
+      {"person": "Alper Eger", "joined": "2024-08-15"}
+    ]
+  },
+  "ContentReference": "dynamic_network_history",
+  "EntryContext": {
+    "device_type": "api",
+    "capture_method": "manual",
+    "workspace_context": "networking",
+    "social_context": "private"
+  },
+  "ClusterData": {
+    "cluster_id": "clst_oliver_network",
+    "cluster_type": "network_history",
+    "related_objects": ["nexus-v6-usr-oliver-mainprofile-20250721T1400Z-root"],
+    "cluster_timespan": "2023-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Network", "CircleOfTrust", "oliver"],
+    "organization": "Brain-Two GmbH",
+    "department": "Advisory",
+    "team": "KI",
+    "role": "CEO",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["CEO", "Network"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T14:10Z",
+  "LastUpdated": "2025-07-21T14:10Z",
+  "RawExtractedData": null
+}

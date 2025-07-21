@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-mainprofile-20250721T1400Z-root",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T1400Z",
+  "Archetype": "Person",
+  "ObjectType": "Profile",
+  "Subject": "Oliver Welling – Zentrale Netzwerkfigur KI & Digitalisierung",
+  "Tags": ["#Person","#KI","#Digitalisierung","#Gründer","#Knotenpunkt","#Hamburg","#KINEWS24","#Netzwerk"],
+  "Title": "Oliver Welling – Digitalisierungs- und KI-Pionier, Gründer von KINEWS24.de",
+  "Summary": "Über 35 Jahre Erfahrung, Gründer von KINEWS24.de, zentrale Netzwerkfigur für KI & Digitaltransformation.",
+  "KeyPoints": [
+    "Langjährige Erfahrung als Unternehmer, Berater, Speaker im KI-/Digitalbereich",
+    "Netzwerk-Connector zu Entscheidungsträgern, Investoren, Unternehmen",
+    "Zentrale Knotenfunktion in diversen Projekt- und Branchenclustern"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://kinews24.de/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "Speaker-Profil_Oliver Welling.pdf",
+  "EntryContext": {
+    "device_type": "api",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "network"
+  },
+  "ClusterData": {
+    "cluster_id": "clst_oliver_001",
+    "cluster_type": "person",
+    "related_objects": ["nexus-v6-usr-kabs-robert-20250721T1200Z-root", "nexus-v6-usr-alper-eger-20250721T1330Z-root"],
+    "cluster_timespan": "1985-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Advisory", "KI", "CEO", "oliver"],
+    "organization": "Brain-Two GmbH",
+    "department": "Management",
+    "team": "KI",
+    "role": "Geschäftsführer",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["CEO", "Advisory", "DPO"],
+    "person_access": ["oliver"],
+    "external_access": ["auditor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T14:00Z",
+  "LastUpdated": "2025-07-21T14:00Z",
+  "RawExtractedData": null
+}

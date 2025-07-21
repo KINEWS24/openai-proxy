@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-marketing-display-20250721T120600Z-clst_marketing_concept-0006",
+  "ParentUID": "nexus-v6-usr-oliver-marketing-index-20250721T120000Z-clst_marketing_concept-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T120600Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Darstellung – Nutzererlebnis & Storytelling",
+  "Summary": [
+    "Erster Besuch: Eine Kugel („Genesis Nexus“), Beschriftung „15.340 Gedanken. Wächst jeden Tag.“",
+    "Makro-Animation: Neue Nutzer teilen sich ab, Netzwerk wächst, Zähler aktualisiert sich.",
+    "Mikro-Animation: Zufällige Kugelpulse wie synaptische Impulse.",
+    "Interaktion: Hover-Info: „Aktiv seit 3 Monaten. 850 Karten. Letzte Aktivität vor 3 Min.“",
+    "Fazit: Lebendigkeit, Wachstum, Datenschutz – pure Marken-Metapher."
+  ],
+  "Tags": ["#Marketing","#UX","#Storytelling","#Visualization","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "marketing_display.md",
+  "ClusterData": {
+    "cluster_id": "clst_marketing_concept",
+    "cluster_type": "marketing_concept"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Marketing",
+    "team": "Growth",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Marketing"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T12:06Z",
+  "LastUpdated": "2025-07-21T12:06Z"
+}

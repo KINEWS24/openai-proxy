@@ -1,0 +1,43 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-kg-roadmapcluster-20250721T145459Z-clst_addcluster-0005",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145459Z",
+  "Archetype": "Cluster",
+  "ObjectType": "ClusterCard",
+  "Title": "Roadmap & Phasen Cluster",
+  "Summary": [
+    "Enthält die Roadmap & Phasen-Modell-Definition für Go-to-Market und Pilot."
+  ],
+  "RelatedCards": [
+    "nexus-v6-usr-oliver-roadmap-phasen-20250721T145450Z-clst_addcluster-0001"
+  ],
+  "Tags": ["#Cluster","#Roadmap","#Launch","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "kg_roadmapcluster.md",
+  "ClusterData": {
+    "cluster_id": "clst_addcluster",
+    "cluster_type": "roadmap"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Strategy",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Product"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:54Z",
+  "LastUpdated": "2025-07-21T14:54Z"
+}

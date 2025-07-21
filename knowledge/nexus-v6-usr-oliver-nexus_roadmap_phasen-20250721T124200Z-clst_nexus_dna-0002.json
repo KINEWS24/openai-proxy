@@ -1,0 +1,47 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-nexus_roadmap_phasen-20250721T124200Z-clst_nexus_dna-0002",
+  "ParentUID": "nexus-v6-usr-oliver-nexusdna-index-20250721T124000Z-clst_nexus_dna-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T124200Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Roadmap & Phasen-Modell",
+  "Summary": [
+    "Phase 1: Private Launch („Invite-Only“) mit Wow-Moment-Regeln und Live-Pilot mit Kabs PolsterWelt.",
+    "Phase 2: Nach 4 Wochen: Sprach-Feature und Massive UX.",
+    "Phase 3: Nach 3 Monaten: Team-Features, Business Launch, Rollout."
+  ],
+  "DemoQuestions": [
+    "Wie sieht die Produkt-Roadmap aus?",
+    "Wann ist der nächste Meilenstein?",
+    "Wie nutzt Kabs den Nexus im Pilot?"
+  ],
+  "Tags": ["#Text","#Roadmap","#Launch","#Private","#Testing","#Kabs","#Demo","#phasenmodell","#Team","#oliver"],
+  "LinkTarget": "nexus_roadmap_phasen.md",
+  "ClusterData": {
+    "cluster_id": "clst_nexus_dna",
+    "cluster_type": "nexus_dna"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T12:42Z",
+  "LastUpdated": "2025-07-21T12:42Z"
+}

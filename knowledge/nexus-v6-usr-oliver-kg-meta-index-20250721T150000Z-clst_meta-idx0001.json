@@ -1,0 +1,41 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-kg-meta-index-20250721T150000Z-clst_meta-idx0001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T150000Z",
+  "Archetype": "Index",
+  "ObjectType": "IndexCard",
+  "Title": "Meta-Cluster Index",
+  "Summary": [
+    "Gesamtübersicht aller Cluster-Cards",
+    "Wichtige Verknüpfungen (Kanten) zwischen Clustern"
+  ],
+  "Tags": ["#Index","#MetaCluster","#KnowledgeGraph","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "kg_meta_index.md",
+  "ClusterData": {
+    "cluster_id": "clst_meta",
+    "cluster_type": "knowledge_graph_meta"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Product"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T15:00Z",
+  "LastUpdated": "2025-07-21T15:00Z"
+}

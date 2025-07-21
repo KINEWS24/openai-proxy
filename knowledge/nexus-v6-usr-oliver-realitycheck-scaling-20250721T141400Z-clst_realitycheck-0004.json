@@ -1,0 +1,42 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-realitycheck-scaling-20250721T141400Z-clst_realitycheck-0004",
+  "ParentUID": "nexus-v6-usr-oliver-realitycheck-index-20250721T141000Z-clst_realitycheck-idx0001",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T141400Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Skalierung & „WTF-Effekt“",
+  "Summary": [
+    "Sofortiger Magic Moment mit 3–5 Regeln.",
+    "Monatlich neue Magie → „WTF“ & Community-Hype.",
+    "Erleben → Teilen → Wachsen gemäß SaaS-Best Practice."
+  ],
+  "Tags": ["#Text","#RealityCheck","#Scaling","#WTF","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "realitycheck_scaling.md",
+  "ClusterData": {
+    "cluster_id": "clst_realitycheck",
+    "cluster_type": "reality_check"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Core",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:14Z",
+  "LastUpdated": "2025-07-21T14:14Z"
+}

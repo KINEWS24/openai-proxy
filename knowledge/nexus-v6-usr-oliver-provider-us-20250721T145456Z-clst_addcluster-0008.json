@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-provider-us-20250721T145456Z-clst_addcluster-0008",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145456Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Provider-Liste: USA/International",
+  "Summary": [
+    "Top 10 globale Cloud-Provider für NEXUS."
+  ],
+  "KeyPoints": [
+    "Google, OneDrive, Dropbox, Box, Amazon Drive.",
+    "Apple iCloud bis Zoho WorkDrive."
+  ],
+  "Tags": ["#Text","#Provider","#Cloud","#US","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "provider_us.md",
+  "ClusterData": {
+    "cluster_id": "clst_addcluster",
+    "cluster_type": "provider_list"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Integrations",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Product"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+  "confidentiality_level": "public",
+  "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:55Z",
+  "LastUpdated": "2025-07-21T14:55Z"
+}

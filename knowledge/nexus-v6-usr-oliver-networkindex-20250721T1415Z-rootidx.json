@@ -1,0 +1,80 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-networkindex-20250721T1415Z-rootidx",
+  "ParentUID": null,
+  "ChunkNr": 0,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T1415Z",
+  "Archetype": "NetworkIndex",
+  "ObjectType": "IndexCard",
+  "Subject": "Netzwerk-Index Oliver Welling 2023–2025",
+  "Tags": ["#Netzwerk","#Index","#Cluster","#Mapping","#Meta"],
+  "Title": "Netzwerk-Index: Oliver Welling Netzwerk 2023–2025",
+  "Summary": "Master-Card für das Cluster um Oliver Welling. Übersicht über alle Knoten, Verbindungen, Mappings und History.",
+  "KeyPoints": [
+    "Zentrale Einstiegskarte für das Oliver Welling Netzwerk",
+    "Verlinkung aller zugehörigen Cards (Personen, Verbindungen, Events, History)",
+    "Meta-Daten, Hierarchie, Compliance, dynamisch erweiterbar"
+  ],
+  "DocumentStructure": ["Personen", "Mappings", "Events", "History"],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://kinews24.de/",
+  "MessageContext": null,
+  "DataStructure": {
+    "cluster_id": "clst_oliver_001",
+    "main_node": "oliver",
+    "members": [
+      {"uid": "nexus-v6-usr-oliver-mainprofile-20250721T1400Z-root", "name": "Oliver Welling"},
+      {"uid": "nexus-v6-usr-alper-eger-20250721T1330Z-root", "name": "Alper Eger"},
+      {"uid": "nexus-v6-usr-kabs-robert-20250721T1200Z-root", "name": "Robert André Kabs"},
+      {"uid": "nexus-v6-usr-patrick-abrar-20250721T1215Z-root", "name": "Patrick Abrar"}
+    ],
+    "mapping_cards": [
+      "nexus-v6-usr-oliver-alper-mapping-20250721T1405Z-clstmap"
+    ],
+    "history_card": "nexus-v6-usr-oliver-networkhistory-20250721T1410Z-circhist"
+  },
+  "ContentReference": "Cluster Overview",
+  "EntryContext": {
+    "device_type": "api",
+    "capture_method": "manual",
+    "workspace_context": "networking",
+    "social_context": "public"
+  },
+  "ClusterData": {
+    "cluster_id": "clst_oliver_001",
+    "cluster_type": "network_cluster",
+    "related_objects": [
+      "nexus-v6-usr-oliver-mainprofile-20250721T1400Z-root",
+      "nexus-v6-usr-alper-eger-20250721T1330Z-root",
+      "nexus-v6-usr-kabs-robert-20250721T1200Z-root",
+      "nexus-v6-usr-patrick-abrar-20250721T1215Z-root"
+    ],
+    "cluster_timespan": "2023-2025"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "Network", "Index", "oliver"],
+    "organization": "Brain-Two GmbH",
+    "department": "Advisory",
+    "team": "KI",
+    "role": "CEO",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["CEO", "Network"],
+    "person_access": ["oliver"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T14:15Z",
+  "LastUpdated": "2025-07-21T14:15Z",
+  "RawExtractedData": null
+}

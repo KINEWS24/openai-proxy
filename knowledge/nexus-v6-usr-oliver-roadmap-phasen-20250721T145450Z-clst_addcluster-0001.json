@@ -1,0 +1,47 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-roadmap-phasen-20250721T145450Z-clst_addcluster-0001",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145450Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Roadmap & Phasen-Modell",
+  "Summary": [
+    "Phase 1: Private Launch mit Wow-Moment-Regeln.",
+    "Phase 2: Voice-Feature & Beta-Loop.",
+    "Phase 3: Teams-Features & Business Rollout."
+  ],
+  "KeyPoints": [
+    "Invite-Only Pilot bei Kabs.",
+    "Voice-Integration nach 4 Wochen.",
+    "Team-Rollout nach 3 Monaten."
+  ],
+  "Tags": ["#Text","#Roadmap","#Launch","#Private","#Testing","#Kabs","#Demo","#phasenmodell","#Team","#oliver"],
+  "LinkTarget": "roadmap_phasen.md",
+  "ClusterData": {
+    "cluster_id": "clst_addcluster",
+    "cluster_type": "roadmap"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Strategy",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Product"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:54Z",
+  "LastUpdated": "2025-07-21T14:54Z"
+}

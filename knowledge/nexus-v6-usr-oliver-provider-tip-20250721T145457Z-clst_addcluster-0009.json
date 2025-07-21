@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-provider-tip-20250721T145457Z-clst_addcluster-0009",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145457Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Integrationstipp",
+  "Summary": [
+    "Schnellstart mit Top 5 EU-Providern, Rest per WebDAV/S3."
+  ],
+  "KeyPoints": [
+    "Google, OneDrive, Dropbox, Telekom, Hetzner decken 90 %.",
+    "WebDAV/S3 für weitere Anbieter in Tagen."
+  ],
+  "Tags": ["#Text","#Provider","#Tipp","#Integration","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "provider_tip.md",
+  "ClusterData": {
+    "cluster_id": "clst_addcluster",
+    "cluster_type": "provider_list"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Integrations",
+  "role": "Owner",
+  "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Product"],
+  "person_access": ["Oliver Welling"],
+  "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+  "confidentiality_level": "public",
+  "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:55Z",
+  "LastUpdated": "2025-07-21T14:55Z"
+}

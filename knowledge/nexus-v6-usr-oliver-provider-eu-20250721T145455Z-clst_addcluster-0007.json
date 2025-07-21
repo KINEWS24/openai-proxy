@@ -1,0 +1,44 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-provider-eu-20250721T145455Z-clst_addcluster-0007",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250721T145455Z",
+  "Archetype": "Text",
+  "ObjectType": "InfoCard",
+  "Title": "Provider-Liste: Europa",
+  "Summary": [
+    "Top 10 EU-Cloud-Provider für NEXUS-Anbindung."
+  ],
+  "KeyPoints": [
+    "Google Drive, OneDrive, Dropbox, Telekom, IONOS decken 90 %.",
+    "Weitere über WebDAV/S3 integrierbar."
+  ],
+  "Tags": ["#Text","#Provider","#Cloud","#EU","#Nexus","#klug","#futuresafe","#intelligent"],
+  "LinkTarget": "provider_eu.md",
+  "ClusterData": {
+    "cluster_id": "clst_addcluster",
+    "cluster_type": "provider_list"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Product",
+    "team": "Integrations",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner","Product"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+  "confidentiality_level": "public",
+  "retention_policy": "permanent"
+  },
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:55Z",
+  "LastUpdated": "2025-07-21T14:55Z"
+}
