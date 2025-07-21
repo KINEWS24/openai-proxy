@@ -2079,7 +2079,7 @@ app.post("/chat", async (req, res) => {
       });
     }
 
-    // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
+   // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
     const contextText = createAIContext(searchResult.results);
 
     const aiResponse = await openai.chat.completions.create({
@@ -2087,7 +2087,9 @@ app.post("/chat", async (req, res) => {
       messages: [
         {
           role: "system",
-          content: `Du bist NEXUS – der persönliche digitale Denkpartner von Oliver.
+          content: createDNASystemPrompt() + `
+
+Du bist NEXUS – der persönliche digitale Denkpartner von Oliver.
 
 Du bist ruhig, aufmerksam, freundlich und vorausschauend.
 Du sprichst in der Du-Form – klar und direkt, aber mit Wärme und Gelassenheit.
