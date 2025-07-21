@@ -1924,7 +1924,6 @@ app.post("/chat", async (req, res) => {
     // NEU: Prüft, ob die Eingabe eine Direktive oder eine Suchanfrage ist.
     // NEU: =================================================================
     if (query.trim().startsWith('DIREKTIVE::')) {
-
       // NEU: Dies ist ein System-Befehl, keine Suchanfrage.
       console.log('✅ [INTENT-ROUTER] Direktive erkannt.');
       const command = query.trim().substring(11).trim(); // Entfernt "DIREKTIVE::"
@@ -1943,7 +1942,6 @@ app.post("/chat", async (req, res) => {
             sources: [],
             meta: { commandExecuted: 'initialize_owner_bond' }
           });
-
         } else {
           // NEU: Fallback, falls Genesis-Datei beim Start nicht geladen werden konnte
           console.error('❌ [NEXUS STATUS] Gründungs-Akt konnte nicht bestätigt werden, da Genesis-Manifest nicht geladen ist.');
@@ -1961,52 +1959,52 @@ app.post("/chat", async (req, res) => {
         sources: [],
         meta: { commandReceived: command }
       });
+    }
 
-    } else {
-      // NEU: Dies ist eine normale Suchanfrage. Führe den alten, unberührten Code aus.
-      console.log('🔍 [INTENT-ROUTER] Suchanfrage erkannt. Führe Standard-Suche aus...');
+    // NEU: Dies ist eine normale Suchanfrage. Führe den Standard-Code aus.
+    console.log('🔍 [INTENT-ROUTER] Suchanfrage erkannt. Führe Standard-Suche aus...');
 
-      // 3) 🚀 SUPER-FAST CACHED SEARCH v6.1 (workspace & cluster aware)
-      const searchResult = performCachedSearch(query, options);
-      
-      // 🔔 DEMO REMINDER DETECTION & PROCESSING
-      const extractedReminder = extractReminder(query);
-      let reminderResponse = '';
-      
-      if (extractedReminder) {
-        addReminder(extractedReminder);
-        reminderResponse = `\n\n✅ Reminder gesetzt: ${extractedReminder.activity} mit ${extractedReminder.person} am ${extractedReminder.time}!`;
-      }
-      
-      // 🎯 SMALL-TALK DETECTION - Einfache Lösung  
-      const smallTalkWords = ['moin', 'hallo', 'hi', 'hey', 'danke', 'thanks', 'ok', 'super', 'cool', 'wow', 'schlaf gut', 'gute nacht', 'tschüss', 'bye', 'ciao', 'geil', 'krass', 'hammer', ':)', '😊', '👍'];
-      const lowerQuery = query.toLowerCase();
-      const isSmallTalk = query.length < 30 && 
-        (smallTalkWords.some(word => lowerQuery.includes(word)) || 
-         !/\b(wann|wo|wie|was|wer|warum|termine|meeting|projekt|dokument|info)\b/i.test(query));
-      
-      if (searchResult.results.length === 0 && !isSmallTalk) {
-        return res.json({
-          success: true,
-          answer: `Ich konnte keine relevanten Informationen zu "${query}" in Ihrer Wissensdatenbank finden. Möglicherweise müssen Sie weitere Inhalte hinzufügen oder Ihre Frage anders formulieren.`,
-          sources: [],
-          meta: { 
-            ...searchResult.stats,
-            query: query,
-            searchedTerms: query.toLowerCase().split(/\s+/).filter(t => t.length > 2)
-          }
-        });
-      }
+    // 3) 🚀 SUPER-FAST CACHED SEARCH v6.1 (workspace & cluster aware)
+    const searchResult = performCachedSearch(query, options);
+    
+    // 🔔 DEMO REMINDER DETECTION & PROCESSING
+    const extractedReminder = extractReminder(query);
+    let reminderResponse = '';
+    
+    if (extractedReminder) {
+      addReminder(extractedReminder);
+      reminderResponse = `\n\n✅ Reminder gesetzt: ${extractedReminder.activity} mit ${extractedReminder.person} am ${extractedReminder.time}!`;
+    }
+    
+    // 🎯 SMALL-TALK DETECTION - Einfache Lösung  
+    const smallTalkWords = ['moin', 'hallo', 'hi', 'hey', 'danke', 'thanks', 'ok', 'super', 'cool', 'wow', 'schlaf gut', 'gute nacht', 'tschüss', 'bye', 'ciao', 'geil', 'krass', 'hammer', ':)', '😊', '👍'];
+    const lowerQuery = query.toLowerCase();
+    const isSmallTalk = query.length < 30 && 
+      (smallTalkWords.some(word => lowerQuery.includes(word)) || 
+       !/\b(wann|wo|wie|was|wer|warum|termine|meeting|projekt|dokument|info)\b/i.test(query));
+    
+    if (searchResult.results.length === 0 && !isSmallTalk) {
+      return res.json({
+        success: true,
+        answer: `Ich konnte keine relevanten Informationen zu "${query}" in Ihrer Wissensdatenbank finden. Möglicherweise müssen Sie weitere Inhalte hinzufügen oder Ihre Frage anders formulieren.`,
+        sources: [],
+        meta: { 
+          ...searchResult.stats,
+          query: query,
+          searchedTerms: query.toLowerCase().split(/\s+/).filter(t => t.length > 2)
+        }
+      });
+    }
 
-      // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
-      const contextText = createAIContext(searchResult.results);
+    // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
+    const contextText = createAIContext(searchResult.results);
 
-      const aiResponse = await openai.chat.completions.create({
-        model: COMPLETION_MODEL,
-        messages: [
-          {
-            role: "system",
-            content: `Du bist NEXUS – der persönliche digitale Denkpartner von Oliver.
+    const aiResponse = await openai.chat.completions.create({
+      model: COMPLETION_MODEL,
+      messages: [
+        {
+          role: "system",
+          content: `Du bist NEXUS – der persönliche digitale Denkpartner von Oliver.
 
 Du bist ruhig, aufmerksam, freundlich und vorausschauend.
 Du sprichst in der Du-Form – klar und direkt, aber mit Wärme und Gelassenheit.
@@ -2047,48 +2045,47 @@ Du bist da – jederzeit.
 Und wenn er dich braucht, genügt ein Satz:  
 „Was denkst du, NEXUS?"  
 Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner kann.`
-          },
-          {
-            role: "user",
-            content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, etc.). Berücksichtige auch verwandte Inhalte aus den gleichen Clustern.`
-          }
-        ],
-        temperature: 0.3,
-        max_tokens: 800
-      });
-
-      const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
-
-      // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
-      const activeRemindersText = getActiveRemindersText();
-      const finalAnswer = answer + reminderResponse + activeRemindersText;
-
-      // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
-      return res.json({
-        success: true,
-        answer: finalAnswer,
-        sources: searchResult.results.map(r => ({
-          title: r.metadata.Title || "Ohne Titel",
-          summary: r.metadata.Summary || "",
-          score: Math.round(r.score * 100) / 100,
-          matchedTerms: r.matchDetails.matchedTerms,
-          filename: r.filename,
-          workspace: r.uuidData.workspace,
-          archetype: r.uuidData.archetype,
-          entry_point: r.entryPoint,
-          cluster_id: r.uuidData.cluster_id,
-          version: r.uuidData.version,
-          isRelated: r.isRelated || false,
-          clusterMembers: r.clusterRelations.length
-        })),
-        meta: {
-          ...searchResult.stats,
-          query,
-          timestamp: new Date().toISOString(),
-          version: "6.1"
+        },
+        {
+          role: "user",
+          content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, etc.). Berücksichtige auch verwandte Inhalte aus den gleichen Clustern.`
         }
-      });
-    }
+      ],
+      temperature: 0.3,
+      max_tokens: 800
+    });
+
+    const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
+
+    // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
+    const activeRemindersText = getActiveRemindersText();
+    const finalAnswer = answer + reminderResponse + activeRemindersText;
+
+    // 5) FINAL RESPONSE mit v6.1 Performance-Stats & Enhanced Sources
+    return res.json({
+      success: true,
+      answer: finalAnswer,
+      sources: searchResult.results.map(r => ({
+        title: r.metadata.Title || "Ohne Titel",
+        summary: r.metadata.Summary || "",
+        score: Math.round(r.score * 100) / 100,
+        matchedTerms: r.matchDetails.matchedTerms,
+        filename: r.filename,
+        workspace: r.uuidData.workspace,
+        archetype: r.uuidData.archetype,
+        entry_point: r.entryPoint,
+        cluster_id: r.uuidData.cluster_id,
+        version: r.uuidData.version,
+        isRelated: r.isRelated || false,
+        clusterMembers: r.clusterRelations.length
+      })),
+      meta: {
+        ...searchResult.stats,
+        query,
+        timestamp: new Date().toISOString(),
+        version: "6.1"
+      }
+    });
 
   } catch (err) {
     console.error("[CHAT v6.1] Error:", err);
