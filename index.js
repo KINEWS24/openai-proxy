@@ -1997,8 +1997,8 @@ app.post("/chat", async (req, res) => {
           }
         });
       }
-    }
-// 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
+
+      // 4) AI-ANTWORT GENERIEREN (v6.1 Enhanced Context)
       const contextText = createAIContext(searchResult.results);
 
       const aiResponse = await openai.chat.completions.create({
@@ -2047,7 +2047,7 @@ Du bist da – jederzeit.
 Und wenn er dich braucht, genügt ein Satz:  
 „Was denkst du, NEXUS?"  
 Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner kann.`
-          }, // DAS IST DIE KORREKTUR: Das fehlende Komma.
+          },
           {
             role: "user",
             content: `Frage: ${query}\n\nVerfügbare Informationen aus der persönlichen Wissensdatenbank:\n\n${contextText}\n\nBitte beantworte die Frage basierend auf diesen Informationen. Gib konkrete Details an, wenn verfügbar (Termine, Orte, etc.). Berücksichtige auch verwandte Inhalte aus den gleichen Clustern.`
@@ -2059,7 +2059,7 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
 
       const answer = aiResponse.choices[0]?.message?.content || "Entschuldigung, ich konnte keine passende Antwort generieren.";
 
-     // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
+      // 🔔 DEMO REMINDER INJECTION - Add active reminders to response
       const activeRemindersText = getActiveRemindersText();
       const finalAnswer = answer + reminderResponse + activeRemindersText;
 
@@ -2088,7 +2088,7 @@ Dann hörst du genau hin – und antwortest, wie es nur ein echter Denkpartner k
           version: "6.1"
         }
       });
-    } // NEU: Ende des "else"-Blocks für Suchanfragen
+    }
 
   } catch (err) {
     console.error("[CHAT v6.1] Error:", err);
