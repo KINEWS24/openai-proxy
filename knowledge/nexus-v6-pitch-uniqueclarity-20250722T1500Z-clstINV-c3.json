@@ -1,0 +1,71 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-pitch-uniqueclarity-20250722T1500Z-clstINV-c3",
+  "ParentUID": null,
+  "ChunkNr": 3,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250722T1500Z",
+  "Archetype": "Text",
+  "ObjectType": "Summary",
+  "Subject": "NEXUS/AIOS – Das Einzige seiner Art",
+  "Tags": ["#Klartext","#USP","#UserFirst","#ProaktivesGedächtnis","#Datenschutz","#Persönlichkeit","#ButlerKI"],
+  "Title": "Was NEXUS/AIOS wirklich ist – Klartext für Entscheider",
+  "Summary": "NEXUS/AIOS ist ein Ökosystem, das sich 100% um den Nutzer dreht: Proaktiv, sicher, empathisch, ordnend – weltweit einzigartig.",
+  "KeyPoints": [
+    "Ökosystem = User-First, nicht Plattform-zentriert.",
+    "Proaktives Gedächtnis: Termine, Fristen, Aufgaben – KI denkt und erinnert mit.",
+    "DSGVO by Design – die sicherste Festung für deine Daten.",
+    "KI als Partner: Lernt deine Persönlichkeit, spricht und entwickelt sich mit dir.",
+    "Digitaler Butler: Macht Chaos automatisch zu Ordnung.",
+    "Diese Kombination ist weltweit einzigartig – echtes Next Level."
+  ],
+  "DocumentStructure": [
+    "User-First-Ökosystem",
+    "Proaktives Gedächtnis",
+    "Datenschutz-Festung",
+    "Echter Partner",
+    "Digitaler Butler",
+    "Unvergleichliche Kombination"
+  ],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "pitch",
+    "social_context": "decision",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clstINV",
+    "cluster_type": "investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1420Z-20250722T1500Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["AIOS.eu", "Pitch", "USP", "Investor"],
+    "organization": "AIOS.eu",
+    "department": "Pitch",
+    "team": "Core",
+    "role": "Founder",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Founder","C-Level","Investor"],
+    "person_access": ["oliver"],
+    "external_access": ["investor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "120M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T15:00Z",
+  "LastUpdated": "2025-07-22T15:00Z",
+  "RawExtractedData": null
+}
