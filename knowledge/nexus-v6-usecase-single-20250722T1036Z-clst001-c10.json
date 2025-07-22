@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usecase-single-20250722T1036Z-clst001-c10",
+  "ParentUID": null,
+  "ChunkNr": 10,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250722T1036Z",
+  "Archetype": "Text",
+  "ObjectType": "Usecase",
+  "Subject": "Second Brain für Einzelperson",
+  "Tags": ["#SecondBrain","#Einzelperson","#Memory","#Pattern","#Learning","#UX"],
+  "Title": "NEXUS Usecase – Einzelperson: „Second Brain“",
+  "Summary": "Der Nexus wächst mit und agiert als persönliches, kontextsensitives Gedächtnis – vorausschauend, individuell, lernend.",
+  "KeyPoints": [
+    "Erinnert alle offenen Aufgaben, Projekte, Vorlieben.",
+    "Empfiehlt individuell passende Lerninhalte, Experten, Features.",
+    "Sprache, Humor, Detailgrad: alles individualisiert.",
+    "Langfristige Erinnerungen & gezielte Vorschläge bei Wissenslücken."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "concept",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "cardset",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1000Z-20250722T1037Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "AI", "CTO", "user"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "AI",
+    "role": "CTO",
+    "person": "user"
+  },
+  "Access": {
+    "role_access": ["CTO","AI Lead"],
+    "person_access": ["user"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T10:36Z",
+  "LastUpdated": "2025-07-22T10:36Z",
+  "RawExtractedData": null
+}

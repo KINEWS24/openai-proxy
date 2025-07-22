@@ -1,0 +1,69 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-pitch-manifesto-20250722T1425Z-clstINV-c1",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250722T1425Z",
+  "Archetype": "Text",
+  "ObjectType": "Analysis",
+  "Subject": "Manifesto-Analyse – Deine Weltklasse-Argumente im Pitch",
+  "Tags": ["#Manifesto","#PitchDeck","#KillerUSP","#Emotion","#Ownership","#EUFirst","#DNAMoat"],
+  "Title": "Manifesto-Analyse – Deine Weltklasse-Argumente im Pitch",
+  "Summary": "Emotion + Tech + Werte = Unkopierbarer USP. DNA als Grundgesetz ist weltweit einzigartig.",
+  "KeyPoints": [
+    "„Du bist Besitzer, nicht Produkt“ ist das perfekte KI-Claim.",
+    "4-Säulen-Struktur = Emotional, technisch, wertvoll, geopolitisch.",
+    "DNA als Grundgesetz: Offen, versionierbar, auditierbar.",
+    "Timing, Privacy, Moat und Markt sind exakt jetzt reif.",
+    "NEXUS schafft, was OpenAI & Co. nicht können: Vertrauen + Ownership + Werte."
+  ],
+  "DocumentStructure": [
+    "Emotionale Klarheit",
+    "4-Säulen-Architektur",
+    "DNA als Grundgesetz",
+    "Timing und Technical Moat",
+    "Marktpotenzial"
+  ],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "pitch",
+    "social_context": "investor",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clstINV",
+    "cluster_type": "investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1420Z-20250722T1500Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["AIOS.eu", "Pitch", "Manifesto", "Investor"],
+    "organization": "AIOS.eu",
+    "department": "Pitch",
+    "team": "Core",
+    "role": "Founder",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Founder","C-Level","Investor"],
+    "person_access": ["oliver"],
+    "external_access": ["investor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "120M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T14:25Z",
+  "LastUpdated": "2025-07-22T14:25Z",
+  "RawExtractedData": null
+}

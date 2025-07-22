@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-eu-paradigm-20250722T1201Z-aios-clst002-c1",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250722T1201Z",
+  "Archetype": "Text",
+  "ObjectType": "Vision",
+  "Subject": "Paradigmenwechsel: KI als Ökosystem",
+  "Tags": ["#Paradigmenwechsel","#Infrastruktur","#Eigentum","#Wissen","#DigitalIdentity","#KIOS"],
+  "Title": "NEXUS/AIOS – Paradigmenwechsel: Das erste Ökosystem für echtes KI-Gedächtnis",
+  "Summary": "NEXUS/AIOS ist kein Tool, sondern die Infrastruktur für Identität, Rechte & Wissen – KI wird Eigentum.",
+  "KeyPoints": [
+    "Von Einzellösung zu globaler Infrastruktur für Wissen & Rechte.",
+    "Jeder kann eigenen Assistenten besitzen – interoperabel & souverän.",
+    "Paradigmenwechsel: KI als persönliches und kollektives Betriebssystem."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "vision",
+    "social_context": "team",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "aios-clst002",
+    "cluster_type": "investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1200Z-20250722T1230Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["AIOS.eu", "Founder", "Pitch", "Investors"],
+    "organization": "AIOS.eu",
+    "department": "Vision",
+    "team": "Core",
+    "role": "Founder",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Founder","C-Level"],
+    "person_access": ["oliver"],
+    "external_access": ["investor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "120M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:01Z",
+  "LastUpdated": "2025-07-22T12:01Z",
+  "RawExtractedData": null
+}

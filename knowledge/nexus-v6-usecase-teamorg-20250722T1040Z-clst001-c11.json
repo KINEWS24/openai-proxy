@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usecase-teamorg-20250722T1040Z-clst001-c11",
+  "ParentUID": null,
+  "ChunkNr": 11,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250722T1040Z",
+  "Archetype": "Text",
+  "ObjectType": "Usecase",
+  "Subject": "Kollektiv-Coach & Compliance-Instanz",
+  "Tags": ["#TeamMemory","#Organisation","#Compliance","#Audit","#Learning","#Onboarding"],
+  "Title": "NEXUS Usecase – Team & Organisation: „Kollektiv-Coach & Compliance-Instanz“",
+  "Summary": "Teams und Organisationen erhalten ein kollektives, versioniertes, auditierbares Gedächtnis, das sich aktiv weiterentwickelt.",
+  "KeyPoints": [
+    "Speichert alle Entscheidungen, Meetings, Learnings und offene Punkte.",
+    "Bietet Onboarding, Policy- und Rollenmanagement automatisch.",
+    "Erkennt organisationale Trends und Vorschläge zur Verbesserung.",
+    "Volle Auditierbarkeit und Nachverfolgung jeder Interaktion."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "concept",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "cardset",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1000Z-20250722T1040Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "AI", "CTO", "user"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "AI",
+    "role": "CTO",
+    "person": "user"
+  },
+  "Access": {
+    "role_access": ["CTO","AI Lead"],
+    "person_access": ["user"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T10:40Z",
+  "LastUpdated": "2025-07-22T10:40Z",
+  "RawExtractedData": null
+}

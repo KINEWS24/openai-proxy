@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-kabs-mittelstand-20250722T1705Z-clstKABS-c3",
+  "ParentUID": null,
+  "ChunkNr": 3,
+  "TotalChunks": 6,
+  "UZT_ISO8601_Compact": "20250722T1705Z",
+  "Archetype": "Text",
+  "ObjectType": "USP",
+  "Subject": "NEXUS für den Mittelstand",
+  "Tags": ["#Mittelstand","#Kabs","#USP","#KMU","#KI","#Compliance","#Ownership"],
+  "Title": "Mittelstand, Kabs & NEXUS – Der echte USP für KMU",
+  "Summary": "NEXUS liefert, was Mittelstand sucht: KI, Wissen, Compliance, Flexibilität, Ownership – alles in einem System.",
+  "KeyPoints": [
+    "NEXUS: Alles, was Mittelstand will – ohne Vendor-Lock-in, mit voller Kontrolle.",
+    "Setup, Betrieb, Onboarding, Ownership, Audit – alles in einem System, alles EU-DSGVO-konform.",
+    "Kabs = erster Proofpoint für KI-Infrastruktur im Mittelstand – mit echtem Marktimpact."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "meeting",
+    "social_context": "1on1",
+    "geo_data": "Hamburg"
+  },
+  "ClusterData": {
+    "cluster_id": "clstKABS",
+    "cluster_type": "customer_investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1700Z-20250722T1830Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["Kabs Möbel", "GF", "AI", "Partner", "NEXUS"],
+    "organization": "Kabs Möbel",
+    "department": "GF",
+    "team": "AI",
+    "role": "Partner",
+    "person": "robert kabs"
+  },
+  "Access": {
+    "role_access": ["GF","Partner"],
+    "person_access": ["robert kabs","[dein name]"],
+    "external_access": ["NEXUS Core Team"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T13:05Z",
+  "LastUpdated": "2025-07-22T13:05Z",
+  "RawExtractedData": null
+}

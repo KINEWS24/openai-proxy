@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-kabs-mindshift-20250722T1715Z-clstKABS-c5",
+  "ParentUID": null,
+  "ChunkNr": 5,
+  "TotalChunks": 6,
+  "UZT_ISO8601_Compact": "20250722T1715Z",
+  "Archetype": "Text",
+  "ObjectType": "Change",
+  "Subject": "Der Mindshift für Kabs – KI als Infrastruktur",
+  "Tags": ["#Mindshift","#Betriebssystem","#KIInfrastruktur","#Musterkunde","#Ownership"],
+  "Title": "Der Mindshift für Kabs – Vom Tool zur Infrastruktur, von Innovation zu Ownership",
+  "Summary": "Kabs erkennt: Das echte Investment ist Ownership, Infrastruktur und Zukunft – nicht die nächste KI-App.",
+  "KeyPoints": [
+    "Nach dem Manifesto fragt niemand mehr nach einzelnen Features.",
+    "Kabs wird Mitgestalter eines Standards, nicht SaaS-Kunde.",
+    "Mindshift: Von Tool-Hopping zu echter Wissensinfrastruktur und Ownership.",
+    "NEXUS = Proof für ganze Branche & Mittelstand."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "meeting",
+    "social_context": "1on1",
+    "geo_data": "Hamburg"
+  },
+  "ClusterData": {
+    "cluster_id": "clstKABS",
+    "cluster_type": "customer_investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1700Z-20250722T1830Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["Kabs Möbel", "GF", "AI", "Partner", "NEXUS"],
+    "organization": "Kabs Möbel",
+    "department": "GF",
+    "team": "AI",
+    "role": "Partner",
+    "person": "robert kabs"
+  },
+  "Access": {
+    "role_access": ["GF","Partner"],
+    "person_access": ["robert kabs","[dein name]"],
+    "external_access": ["NEXUS Core Team"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T13:15Z",
+  "LastUpdated": "2025-07-22T13:15Z",
+  "RawExtractedData": null
+}

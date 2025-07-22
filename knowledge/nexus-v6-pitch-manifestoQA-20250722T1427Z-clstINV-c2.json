@@ -1,0 +1,68 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-pitch-manifestoQA-20250722T1427Z-clstINV-c2",
+  "ParentUID": null,
+  "ChunkNr": 2,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250722T1427Z",
+  "Archetype": "Text",
+  "ObjectType": "QnA",
+  "Subject": "Manifesto-Pitch: Killer-Fragen, Argumente & Taktik",
+  "Tags": ["#Pitch","#InvestorQA","#USP","#Moat","#Trust","#DNA","#Timing"],
+  "Title": "Manifesto-Pitch: Killer-Fragen, Argumente & Taktik für Investoren",
+  "Summary": "Vorbereitung für alle Pitch-Fragen: Antworten, Argumente, Moat & Usecases. Vision, Trust und Ownership im Zentrum.",
+  "KeyPoints": [
+    "Killer-Fragen antizipiert: Konkurrenz, DNA, Markt, Souveränität, Businessmodell, Missbrauch.",
+    "Vertrauen und Ownership sind der USP gegen jede Modellgröße.",
+    "Technical Moat: Langzeit-Gedächtnis, DNA-Versionierung, Audit.",
+    "Konkrete Usecases und Timeline als Beweis für Umsetzungsstärke.",
+    "Pitch-Strategie: Emotion → Technik → Vision – schließt mit Killer-Phrase."
+  ],
+  "DocumentStructure": [
+    "Killer-Fragen & Antworten",
+    "Technical Moat & Usecases",
+    "Roadmap/Timeline",
+    "Pitch-Strategie & Abschluss"
+  ],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "pitch",
+    "social_context": "investor",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clstINV",
+    "cluster_type": "investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1420Z-20250722T1500Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["AIOS.eu", "Pitch", "Manifesto", "Investor"],
+    "organization": "AIOS.eu",
+    "department": "Pitch",
+    "team": "Core",
+    "role": "Founder",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Founder","C-Level","Investor"],
+    "person_access": ["oliver"],
+    "external_access": ["investor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "120M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T14:27Z",
+  "LastUpdated": "2025-07-22T14:27Z",
+  "RawExtractedData": null
+}

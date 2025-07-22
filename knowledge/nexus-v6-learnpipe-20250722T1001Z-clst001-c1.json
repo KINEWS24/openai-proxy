@@ -1,0 +1,63 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-learnpipe-20250722T1001Z-clst001-c1",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 7,
+  "UZT_ISO8601_Compact": "20250722T1001Z",
+  "Archetype": "Text",
+  "ObjectType": "Explanation",
+  "Subject": "Nexus Lern-Pipeline",
+  "Tags": ["#Nexus","#Learning","#Memory","#Individual","#Team","#Organisation","#Context","#Ownership"],
+  "Title": "Nexus LERN-Pipeline – Individual → Team → Organisation",
+  "Summary": "Nexus lernt kontinuierlich, von Individualebene bis zur Organisation – immer kontext- und ownerbasiert.",
+  "KeyPoints": [
+    "Startet individuell und wächst mit der User-Interaktion.",
+    "Lernen skaliert über Teams bis zu Organisationen.",
+    "Jede Ebene hat ein eigenes, persistentes Memory.",
+    "Klarer Owner-Fokus und Berechtigungsstruktur.",
+    "Wissenstransfer über explizite Policies und Freigaben."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "design",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "cardset",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1000Z-20250722T1020Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "Product", "AI", "Lead", "user"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "Product",
+    "role": "AI Lead",
+    "person": "user"
+  },
+  "Access": {
+    "role_access": ["AI Lead","IT Admin"],
+    "person_access": ["user"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T10:01Z",
+  "LastUpdated": "2025-07-22T10:01Z",
+  "RawExtractedData": null
+}

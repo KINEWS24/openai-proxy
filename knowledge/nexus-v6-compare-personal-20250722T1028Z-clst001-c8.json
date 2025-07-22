@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-compare-personal-20250722T1028Z-clst001-c8",
+  "ParentUID": null,
+  "ChunkNr": 8,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250722T1028Z",
+  "Archetype": "Text",
+  "ObjectType": "Comparison",
+  "Subject": "Personalisierung & Langzeit-Lernen",
+  "Tags": ["#Personalisierung","#LangzeitLernen","#Behavior","#KI","#UserExperience"],
+  "Title": "Vergleich: Personalisierung & Langzeit-Lernen",
+  "Summary": "NEXUS wächst mit jedem User, KI-Modelle bleiben generisch und haben kein echtes Langzeit-Gedächtnis.",
+  "KeyPoints": [
+    "KI-Modelle bleiben immer 'clean slate' nach jeder Session.",
+    "NEXUS erkennt und lernt langfristige Muster, Vorlieben, Fehler.",
+    "Empfehlungen und Sprache werden über Monate/Jahre individuell.",
+    "Fehlerkultur, Feedback und Meta-Lernen nur in NEXUS wirklich möglich."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "concept",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "cardset",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1000Z-20250722T1030Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "AI", "CTO", "user"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "AI",
+    "role": "CTO",
+    "person": "user"
+  },
+  "Access": {
+    "role_access": ["CTO","AI Lead"],
+    "person_access": ["user"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T10:28Z",
+  "LastUpdated": "2025-07-22T10:28Z",
+  "RawExtractedData": null
+}

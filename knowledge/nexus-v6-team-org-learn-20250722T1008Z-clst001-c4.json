@@ -1,0 +1,63 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-team-org-learn-20250722T1008Z-clst001-c4",
+  "ParentUID": null,
+  "ChunkNr": 4,
+  "TotalChunks": 7,
+  "UZT_ISO8601_Compact": "20250722T1008Z",
+  "Archetype": "Text",
+  "ObjectType": "Example",
+  "Subject": "Team- & Org-Nexus Lernen",
+  "Tags": ["#TeamNexus","#OrgNexus","#Collaboration","#Memory","#Policy","#BestPractice"],
+  "Title": "Team- und Organisations-Lernen – Kollektives Nexus Memory",
+  "Summary": "Kollektives Nexus-Lernen erzeugt organisationale Intelligenz, die dokumentiert, teilt und kontinuierlich wächst.",
+  "KeyPoints": [
+    "Thematische Schwerpunkte, Konflikte, Entwicklungen werden erkannt.",
+    "Automatisiertes, kumulatives Wissen für Onboarding & Retros.",
+    "Trends, Best Practices und Alerts werden organisationsweit geteilt.",
+    "Jeder Transfer ist policy- und consentgesteuert.",
+    "Kollektives Gedächtnis für nachhaltige Wissensentwicklung."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "design",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "cardset",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1000Z-20250722T1020Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "Product", "AI", "Lead", "user"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "Product",
+    "role": "AI Lead",
+    "person": "user"
+  },
+  "Access": {
+    "role_access": ["AI Lead","IT Admin"],
+    "person_access": ["user"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T10:08Z",
+  "LastUpdated": "2025-07-22T10:08Z",
+  "RawExtractedData": null
+}

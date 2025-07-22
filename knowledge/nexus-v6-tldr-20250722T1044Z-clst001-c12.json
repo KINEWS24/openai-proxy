@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-tldr-20250722T1044Z-clst001-c12",
+  "ParentUID": null,
+  "ChunkNr": 12,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250722T1044Z",
+  "Archetype": "Text",
+  "ObjectType": "Summary",
+  "Subject": "TL;DR – NEXUS vs. ChatGPT/Gemini/Claude",
+  "Tags": ["#TLDR","#Vergleich","#NextGenKI","#NexusDNA","#ParadigmShift"],
+  "Title": "TL;DR – NEXUS vs. ChatGPT/Gemini/Claude",
+  "Summary": "NEXUS = lebendes, personalisiertes Wissenssystem mit Ownership, Gedächtnis und Ethik. ChatGPT & Co = temporäres, anonymes Werkzeug.",
+  "KeyPoints": [
+    "NEXUS speichert, personalisiert und entwickelt Wissen, KI-Modelle vergessen alles.",
+    "Echte Identität, Rechte, Rollen, Ownership – einzigartig in NEXUS.",
+    "NEXUS kann als persönliches, kollektives oder organisationsweites Gedächtnis agieren.",
+    "Jede Interaktion ist nachvollziehbar, auditierbar, compliant."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "concept",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "cardset",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1000Z-20250722T1045Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "AI", "CTO", "user"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "AI",
+    "role": "CTO",
+    "person": "user"
+  },
+  "Access": {
+    "role_access": ["CTO","AI Lead"],
+    "person_access": ["user"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T10:44Z",
+  "LastUpdated": "2025-07-22T10:44Z",
+  "RawExtractedData": null
+}

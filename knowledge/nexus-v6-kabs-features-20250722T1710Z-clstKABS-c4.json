@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-kabs-features-20250722T1710Z-clstKABS-c4",
+  "ParentUID": null,
+  "ChunkNr": 4,
+  "TotalChunks": 6,
+  "UZT_ISO8601_Compact": "20250722T1710Z",
+  "Archetype": "Text",
+  "ObjectType": "Features",
+  "Subject": "NEXUS für Kabs – Alles, was ihr braucht",
+  "Tags": ["#Features","#Mittelstand","#Kabs","#JobFit","#AllInOne"],
+  "Title": "NEXUS für Kabs – Alles was ihr wollt, alles was ihr braucht.",
+  "Summary": "NEXUS erfüllt jedes Kabs-KI-Jobprofil – 100% All-In-One, compliant, teamfähig, auditierbar.",
+  "KeyPoints": [
+    "Alle KI-Tools, Automatisierung, Wissen – in einer Plattform.",
+    "Memory, Onboarding, Schulung, Lessons Learned – auto-generiert, teamfähig.",
+    "Audit, Datenschutz, API, Integration, Export – alles out of the box.",
+    "Kollaboration ohne Kontrollverlust, DNA sichert Ownership & Teamspirit."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "meeting",
+    "social_context": "1on1",
+    "geo_data": "Hamburg"
+  },
+  "ClusterData": {
+    "cluster_id": "clstKABS",
+    "cluster_type": "customer_investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1700Z-20250722T1830Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["Kabs Möbel", "GF", "AI", "Partner", "NEXUS"],
+    "organization": "Kabs Möbel",
+    "department": "GF",
+    "team": "AI",
+    "role": "Partner",
+    "person": "robert kabs"
+  },
+  "Access": {
+    "role_access": ["GF","Partner"],
+    "person_access": ["robert kabs","[dein name]"],
+    "external_access": ["NEXUS Core Team"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T13:10Z",
+  "LastUpdated": "2025-07-22T13:10Z",
+  "RawExtractedData": null
+}

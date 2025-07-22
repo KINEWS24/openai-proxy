@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-compare-teamorg-20250722T1032Z-clst001-c9",
+  "ParentUID": null,
+  "ChunkNr": 9,
+  "TotalChunks": 12,
+  "UZT_ISO8601_Compact": "20250722T1032Z",
+  "Archetype": "Text",
+  "ObjectType": "Comparison",
+  "Subject": "Team- & Organisations-Lernen",
+  "Tags": ["#Team","#Organisation","#Collaboration","#KollektivMemory","#KI","#Rollen"],
+  "Title": "Vergleich: Team- und Organisations-Lernen",
+  "Summary": "NEXUS bietet echtes Team-/Orga-Memory mit Rollen, Prozessen und kollaborativem Lernen. KI-Modelle sind Einzelagenten ohne persistentes Gruppengedächtnis.",
+  "KeyPoints": [
+    "KI-Modelle kennen kein Team- oder Organisationskonzept.",
+    "NEXUS schafft strukturierte, rollenbasierte Wissensräume.",
+    "Onboarding, Offboarding, Memory-Scopes und Audits sind Standard.",
+    "Wissenstransfer und -freigabe sind granular steuerbar."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "concept",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "cardset",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1000Z-20250722T1035Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["NEXUS-AG", "IT", "AI", "CTO", "user"],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "AI",
+    "role": "CTO",
+    "person": "user"
+  },
+  "Access": {
+    "role_access": ["CTO","AI Lead"],
+    "person_access": ["user"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "60M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T10:32Z",
+  "LastUpdated": "2025-07-22T10:32Z",
+  "RawExtractedData": null
+}

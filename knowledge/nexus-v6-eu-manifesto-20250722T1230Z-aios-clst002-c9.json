@@ -1,0 +1,82 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-eu-manifesto-20250722T1230Z-aios-clst002-c9",
+  "ParentUID": null,
+  "ChunkNr": 9,
+  "TotalChunks": 9,
+  "UZT_ISO8601_Compact": "20250722T1230Z",
+  "Archetype": "Text",
+  "ObjectType": "Manifesto",
+  "Subject": "NEXUS / AIOS.eu Manifesto",
+  "Tags": [
+    "#Manifesto","#DNAFirst","#Ownership","#Ethik","#KIRevolution","#Europe",
+    "#Privacy","#Transparency","#KIalsPartner","#Souveränität"
+  ],
+  "Title": "NEXUS / AIOS.eu Manifesto – Mensch, DNA, Ownership FIRST",
+  "Summary": "Das Manifest: KI als loyaler Partner, DNA als Verfassung, Wissen als Eigentum – für eine offene, menschliche KI-Ära.",
+  "KeyPoints": [
+    "KI ist Partner, nicht Werkzeug – loyal, individuell, erklärbar.",
+    "Wissen bleibt Eigentum des Menschen – kein Data Harvesting.",
+    "DNA als Grundgesetz: Ethik und Werte sind dokumentiert und versionierbar.",
+    "Privacy & Ethik by Design – jede Aktion ist auditierbar, jeder User souverän.",
+    "Lernen heißt Erinnern – dein Nexus vergisst nichts, was du willst.",
+    "KI lebt Werte, ist nicht beliebig – Haltung, Transparenz, Integrität.",
+    "Europa als Wertebasis – global offen, aber kompromisslos ethisch.",
+    "Kein Abo, kein Lock-In – User besitzt alles, kann alles exportieren/löschen.",
+    "Kollaboration ja, Kontrolle immer – Sharing nach owner rules.",
+    "Die Zukunft beginnt: Mensch, Wissen, KI in einem Ökosystem – DNA und Ownership first."
+  ],
+  "DocumentStructure": [
+    "KI als Partner",
+    "Wissen als Eigentum",
+    "DNA = Grundgesetz",
+    "Privacy & Ethik by Design",
+    "Lernen = Erinnern",
+    "KI lebt Werte",
+    "Europa als Wertebasis",
+    "Digitale Souveränität",
+    "Kollaboration nach Owner-Regeln",
+    "Die Zukunft beginnt jetzt"
+  ],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "vision",
+    "social_context": "founder",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "aios-clst002",
+    "cluster_type": "investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1200Z-20250722T1235Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["AIOS.eu", "Founder", "Pitch", "Investors"],
+    "organization": "AIOS.eu",
+    "department": "Vision",
+    "team": "Core",
+    "role": "Founder",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Founder","C-Level"],
+    "person_access": ["oliver"],
+    "external_access": ["investor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "120M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:30Z",
+  "LastUpdated": "2025-07-22T12:30Z",
+  "RawExtractedData": null
+}

@@ -1,0 +1,62 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-eu-tldr-20250722T1215Z-aios-clst002-c8",
+  "ParentUID": null,
+  "ChunkNr": 8,
+  "TotalChunks": 8,
+  "UZT_ISO8601_Compact": "20250722T1215Z",
+  "Archetype": "Text",
+  "ObjectType": "Summary",
+  "Subject": "TL;DR – KI als Eigentum & Betriebssystem",
+  "Tags": ["#TLDR","#USP","#KIOS","#Eigentum","#Superhirn"],
+  "Title": "TL;DR – Der radikale Unterschied: KI als Eigentum & Betriebssystem",
+  "Summary": "NEXUS/AIOS ist nicht SaaS, sondern das Betriebssystem für Wissen, Identität, Rechte – erstmals als Eigentum.",
+  "KeyPoints": [
+    "KI als Eigentum mit DNA, Rechten und Governance.",
+    "Offen, compliant, auditierbar – nicht Blackbox.",
+    "User und System lernen und wachsen gemeinsam.",
+    "„Personal Knowledge OS Moment“ für die KI-Industrie."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "web",
+    "capture_method": "manual",
+    "workspace_context": "vision",
+    "social_context": "team",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "aios-clst002",
+    "cluster_type": "investor_pitch",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1200Z-20250722T1230Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": ["AIOS.eu", "Founder", "Pitch", "Investors"],
+    "organization": "AIOS.eu",
+    "department": "Vision",
+    "team": "Core",
+    "role": "Founder",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["Founder","C-Level"],
+    "person_access": ["oliver"],
+    "external_access": ["investor"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "confidential",
+    "retention_policy": "120M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T12:15Z",
+  "LastUpdated": "2025-07-22T12:15Z",
+  "RawExtractedData": null
+}
