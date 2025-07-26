@@ -1531,7 +1531,19 @@ async function scrapeUrl(url) {
 
 // --- SCHRITT 6: EXPRESS APP & MIDDLEWARE ---
 const app = express();
-app.use(cors());
+app.use(cors({
+  origin: [
+    'chrome-extension://*',
+    'moz-extension://*',
+    'http://localhost:*',
+    'http://127.0.0.1:*',
+    'https://localhost:*',
+    'https://127.0.0.1:*'
+  ],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With'],
+  credentials: true
+}));
 app.use(express.json({ limit: "15mb" }));
 app.use((req, res, next) => { 
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`); 
