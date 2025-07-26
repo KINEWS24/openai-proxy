@@ -1771,7 +1771,7 @@ app.get('/api/example-questions', (req, res) => {
 });
 
 
-// Text-Analyse - KORRIGIERT
+// Text-Analyse - KORRIGIERT MIT DEBUG
 app.post("/analyze-text", async (req, res) => {
   try {
     const { content, source_url } = req.body;
@@ -1806,8 +1806,22 @@ app.post("/analyze-text", async (req, res) => {
     // 5. Save files to knowledge directory
     const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
     
-    // 5b. Save to local knowledge base
-    await saveToLocalKnowledge(tagsJson, uuid);
+    // 5b. Save to local knowledge base - MIT ERWEITERTEN DEBUG
+    try {
+      console.log('[DEBUG] About to call saveToLocalKnowledge...');
+      console.log('[DEBUG] UUID:', uuid);
+      console.log('[DEBUG] KNOWLEDGE_DIR:', KNOWLEDGE_DIR);
+      console.log('[DEBUG] tagsJson keys:', Object.keys(tagsJson));
+      
+      await saveToLocalKnowledge(tagsJson, uuid);
+      
+      console.log('[DEBUG] ✅ saveToLocalKnowledge completed successfully');
+    } catch (knowledgeError) {
+      console.error('[DEBUG] ❌ saveToLocalKnowledge FAILED:', knowledgeError.message);
+      console.error('[DEBUG] Full knowledge error:', knowledgeError);
+      console.error('[DEBUG] Stack trace:', knowledgeError.stack);
+      // Don't throw - let the main process continue
+    }
     
     // 6. Format extension-compatible response
     const response = formatExtensionResponse(
