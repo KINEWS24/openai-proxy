@@ -1,6 +1,10 @@
 // index.js – ThinkAI Nexus v6.1 COMPLETE EDITION - WORKSPACE INTELLIGENT!
 
 // --- SCHRITT 1: IMPORTS & KONSTANTEN ---
+
+// ENV-VARIABLEN LADEN (für z. B. OPENAI_API_KEY)
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs").promises;
@@ -22,6 +26,7 @@ const KNOWLEDGE_DIR         = path.join(__dirname, "knowledge");
 const CAPTURE_PROMPT_PATH   = path.join(__dirname, "nexus_prompt_v6.1.txt");
 const CLASSIFIER_PROMPT_PATH= path.join(__dirname, "nexus_prompt_classifier_v1.0.txt");
 const CLASSIFIER_OUTPUT_DIR = path.join(__dirname, "classifier-output");
+
 
 // 🧠 DEMO RULES – Spektakuläre Live-Regeln
 const DEMO_RULES = [
