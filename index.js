@@ -70,7 +70,7 @@ const OPENAI_API_KEY        = process.env.OPENAI_API_KEY;
 const SCRAPER_API_KEY       = process.env.SCRAPER_API_KEY;
 const MAX_CONTENT_LENGTH    = 8000;
 const COMPLETION_MODEL      = "gpt-4o";
-const PORT                  = process.env.PORT || 10000;
+const PORT                  = process.env.PORT || 8080;
 
 // Default-Optionen für Chat
 const defaultChatOptions = {
@@ -1097,6 +1097,33 @@ function formatExtensionResponse(mdFilename, tagsFilename, mdContent, tagsConten
   };
 }
 
+/**
+ * 💾 Save Knowledge to Local Server Knowledge Base
+ * @param {object} tagsJson - Tags JSON object  
+ * @param {string} uuid - Generated UUID
+ * @returns {Promise<object>} Save result
+ */
+async function saveToLocalKnowledge(tagsJson, uuid) {
+  try {
+    const knowledgeFilename = `${uuid}.knowledge.json`;
+    const knowledgePath = path.join(KNOWLEDGE_DIR, knowledgeFilename);
+    
+    await fs.writeFile(knowledgePath, JSON.stringify(tagsJson, null, 2), 'utf8');
+    
+    console.log(`[LOCAL-KNOWLEDGE] ✅ Saved: ${knowledgeFilename}`);
+    
+    return {
+      success: true,
+      filename: knowledgeFilename,
+      path: knowledgePath
+    };
+    
+  } catch (error) {
+    console.error('[LOCAL-KNOWLEDGE] ❌ Error:', error);
+    throw error;
+  }
+}
+
 // --- SCHRITT 3: INITIALISIERUNG ---
 
 // NEU: Globale Variable für den Zustand des Nexus
@@ -1744,9 +1771,7 @@ app.get('/api/example-questions', (req, res) => {
 });
 
 
-// --- 🆕 ENHANCED ANALYSE-ENDPOINTS WITH FILE CREATION ---
-
-// Text-Analyse - ENHANCED mit File Creation
+// Text-Analyse - KORRIGIERT
 app.post("/analyze-text", async (req, res) => {
   try {
     const { content, source_url } = req.body;
@@ -1781,6 +1806,9 @@ app.post("/analyze-text", async (req, res) => {
     // 5. Save files to knowledge directory
     const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
     
+    // 5b. Save to local knowledge base
+    await saveToLocalKnowledge(tagsJson, uuid);
+    
     // 6. Format extension-compatible response
     const response = formatExtensionResponse(
       fileInfo.mdFilename,
@@ -1788,6 +1816,10 @@ app.post("/analyze-text", async (req, res) => {
       mdContent,
       tagsJson
     );
+    
+    // ✅ FEHLER-KORREKTUR: Original-Content hinzufügen
+    response.originalContent = limitedContent;
+    response.originalFilename = `${uuid}.original.txt`;
     
     console.log(`[ANALYZE-TEXT] ✅ Created files: ${fileInfo.mdFilename}, ${fileInfo.tagsFilename}`);
     
@@ -1836,13 +1868,16 @@ app.post("/analyze-image", async (req, res) => {
       return res.status(400).json(aiResult);
     }
     
-    // 3. Parse and save
+// 3. Parse and save
     const { mdContent, tagsJson } = parseAIGeneratedContent(aiResult.content);
     tagsJson.Archetype = 'Image'; // Force image archetype
     tagsJson.Properties = { ...tagsJson.Properties, image_url };
     
     const uuid = generateV61UUID('Image', 'work', 'pc');
     const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
+    
+    // 3b. Save to local knowledge base
+    await saveToLocalKnowledge(tagsJson, uuid);
     
     // 4. Response
     const extensionResponse = formatExtensionResponse(
@@ -1898,8 +1933,11 @@ app.post("/analyze-link", async (req, res) => {
       scraped_timestamp: new Date().toISOString()
     };
     
-    const uuid = generateV61UUID('Link', 'work', 'pc');
+const uuid = generateV61UUID('Link', 'work', 'pc');
     const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
+    
+    // 3b. Save to local knowledge base
+    await saveToLocalKnowledge(tagsJson, uuid);
     
     // 4. Response
     const extensionResponse = formatExtensionResponse(
@@ -1961,8 +1999,11 @@ app.post("/analyze-calendar", async (req, res) => {
     // 5. Generate v6.1 UUID for calendar
     const uuid = generateV61UUID('Calendar', 'work', 'pc');
     
-    // 6. Save files to knowledge directory
+// 6. Save files to knowledge directory
     const fileInfo = await saveNexusFiles(mdContent, tagsJson, uuid);
+    
+    // 6b. Save to local knowledge base
+    await saveToLocalKnowledge(tagsJson, uuid);
     
     // 7. Format extension-compatible response
     const response = formatExtensionResponse(
@@ -2358,6 +2399,14 @@ initializeApp()
       console.log(`🧠 Demo Rules: ${DEMO_RULES.length} active rules loaded`);
       console.log(`📁 FILE CREATION: ✅ Extension Support Active`);
       console.log(`✨ Ready for WORKSPACE-INTELLIGENT conversations with LIVE DEMO RULES!`);
+      
+      // 🧠 COUNT LOCAL KNOWLEDGE BASE
+      try {
+        const knowledgeFiles = fsSync.readdirSync(KNOWLEDGE_DIR).filter(f => f.endsWith('.knowledge.json'));
+        console.log(`🧠 Knowledge Base: ${knowledgeFiles.length} Cards loaded`);
+      } catch (error) {
+        console.log(`🧠 Knowledge Base: 0 Cards loaded (directory not accessible)`);
+      }
       
       // Enhanced startup stats
       const enhancedStats = getEnhancedCacheStats();
