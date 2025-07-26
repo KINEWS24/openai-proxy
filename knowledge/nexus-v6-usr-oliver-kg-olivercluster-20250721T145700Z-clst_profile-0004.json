@@ -1,5 +1,8 @@
 {
+  "SchemaVersion": "v6.1",
   "UID": "nexus-v6-usr-oliver-kg-olivercluster-20250721T145700Z-clst_profile-0004",
+  "ObjectType": "Cluster",
+  "Archetype": "ProfileCluster",
   "Tags": [
     "#Cluster",
     "#Person",
@@ -9,23 +12,16 @@
     "#futuresafe",
     "#intelligent"
   ],
-  "OWNER": "Oliver Welling – Oliver Welling Profil-Cluster",
-  "Thema": "Bündelung aller Oliver Welling Profil-Infos",
+  "Owner": "Oliver Welling",
+  "Title": "Oliver Welling Profil-Cluster",
+  "Subject": "Bündelung aller Oliver Welling Profil-Infos",
   "EnthalteneKarten": [
     "nexus-v6-usr-oliver-referenzen-medien-20250721T145610Z-clst_profile-0001",
     "nexus-v6-usr-oliver-workshops-themen-20250721T145620Z-clst_profile-0002",
     "nexus-v6-usr-oliver-kontakt-20250721T145630Z-clst_profile-0003"
   ],
-  "Schlagwörter": [
-    "#Cluster",
-    "#Person",
-    "#Profile",
-    "#Nexus",
-    "#klug",
-    "#futuresafe",
-    "#intelligent"
-  ],
   "LinkTarget": "kg_olivercluster.md",
-  "Verification": "OK"
+  "Verification": "OK",
+  "Created": "2025-07-21T14:57:00Z",
+  "LastUpdated": "2025-07-21T14:57:00Z"
 }
-
