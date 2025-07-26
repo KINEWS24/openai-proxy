@@ -14,8 +14,8 @@
   ],
   "Owner": "Oliver Welling",
   "Title": "Oliver Welling Profil-Cluster",
-  "Subject": "Bündelung aller Oliver Welling Profil-Infos",
-  "EnthalteneKarten": [
+  "Subject": "Bündelung aller Oliver-Welling-Profilinformationen",
+  "IncludedCards": [
     "nexus-v6-usr-oliver-referenzen-medien-20250721T145610Z-clst_profile-0001",
     "nexus-v6-usr-oliver-workshops-themen-20250721T145620Z-clst_profile-0002",
     "nexus-v6-usr-oliver-kontakt-20250721T145630Z-clst_profile-0003"
