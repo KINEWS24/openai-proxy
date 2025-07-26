@@ -13,7 +13,15 @@
     "Erzeuge `nodes[]` mit Anonym-ID, `cardCount`, `lastActivity`.",
     "Ergebnis-JSON (anonymisiert, keine persönlichen Daten)."
   ],
-  "Tags": ["#Tech","#Aggregation","#Anonymisierung","#Privacy","#klug","#futuresafe","#intelligent"],
+  "Tags": [
+    "#Tech",
+    "#Aggregation",
+    "#Anonymisierung",
+    "#Privacy",
+    "#klug",
+    "#futuresafe",
+    "#intelligent"
+  ],
   "LinkTarget": "marketing_tech_agg.md",
   "ClusterData": {
     "cluster_id": "clst_marketing_concept",
@@ -27,7 +35,7 @@
     "person": "Oliver Welling"
   },
   "Access": {
-    "role_access": ["Owner","Marketing"],
+    "role_access": ["Owner", "Marketing"],
     "person_access": ["Oliver Welling"],
     "external_access": ["All"]
   },
@@ -37,6 +45,6 @@
     "retention_policy": "permanent"
   },
   "content_rating": "neutral",
-  "Created": "2025-07-21T12:03Z",
-  "LastUpdated": "2025-07-21T12:03Z"
+  "Created": "2025-07-21T12:03:00Z",
+  "LastUpdated": "2025-07-21T12:03:00Z"
 }
