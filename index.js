@@ -2333,7 +2333,7 @@ app.use("/nexus", nexusRouter);
 // --- SCHRITT 7: SERVER START ---
 initializeApp()
   .then(() => {
-    app.listen(PORT, () => {
+    app.listen(PORT, '0.0.0.0', () => {
       console.log(`🚀 Nexus v6.1 WORKSPACE INTELLIGENT EDITION running on port ${PORT}`);
       console.log(`📊 Knowledge Directory: ${KNOWLEDGE_DIR}`);
       console.log(`🧠 AI Model: ${COMPLETION_MODEL}`);
