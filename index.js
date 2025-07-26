@@ -2,7 +2,7 @@
 
 // --- SCHRITT 1: IMPORTS & KONSTANTEN ---
 
-// ENV-VARIABLEN LADEN (für z. B. OPENAI_API_KEY)
+// ENV-VARIABLEN LADEN (für z. B. OPENAI_API_KEY)
 require("dotenv").config();
 
 const express = require("express");
@@ -21,11 +21,36 @@ const dayjs = require("dayjs");
 // Nexus-All-in-One-Router
 const nexusRouter = require("./modules/nexus");
 
+// 🔍 STARTUP DEBUG - PRÜFE PFADE
+console.log('[STARTUP DEBUG] Current working directory:', process.cwd());
+console.log('[STARTUP DEBUG] Script directory (__dirname):', __dirname);
+
 // Globale Konfigurationen
 const KNOWLEDGE_DIR         = path.join(__dirname, "knowledge");
 const CAPTURE_PROMPT_PATH   = path.join(__dirname, "nexus_prompt_v6.1.txt");
 const CLASSIFIER_PROMPT_PATH= path.join(__dirname, "nexus_prompt_classifier_v1.0.txt");
 const CLASSIFIER_OUTPUT_DIR = path.join(__dirname, "classifier-output");
+
+// 🔍 PFAD DEBUG
+console.log('[STARTUP DEBUG] KNOWLEDGE_DIR will be:', KNOWLEDGE_DIR);
+
+// 🔧 KNOWLEDGE_DIR EXISTENCE CHECK & CREATE
+try {
+  if (fsSync.existsSync(KNOWLEDGE_DIR)) {
+    console.log('[STARTUP DEBUG] ✅ KNOWLEDGE_DIR exists:', KNOWLEDGE_DIR);
+    
+    // Zähle existierende .knowledge.json Dateien
+    const knowledgeFiles = fsSync.readdirSync(KNOWLEDGE_DIR).filter(f => f.endsWith('.knowledge.json'));
+    console.log('[STARTUP DEBUG] 📁 Found', knowledgeFiles.length, '.knowledge.json files');
+  } else {
+    console.log('[STARTUP DEBUG] ❌ KNOWLEDGE_DIR does NOT exist!');
+    console.log('[STARTUP DEBUG] 🔧 Creating directory:', KNOWLEDGE_DIR);
+    fsSync.mkdirSync(KNOWLEDGE_DIR, { recursive: true });
+    console.log('[STARTUP DEBUG] ✅ Directory created successfully');
+  }
+} catch (error) {
+  console.error('[STARTUP DEBUG] ❌ Error with KNOWLEDGE_DIR:', error.message);
+}
 
 
 // 🧠 DEMO RULES – Spektakuläre Live-Regeln
