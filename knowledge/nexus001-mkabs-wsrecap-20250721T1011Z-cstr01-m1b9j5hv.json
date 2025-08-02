@@ -23,4 +23,49 @@
     "Angebot Prompt-Bot für Team",
     "Abstimmung Rechnungsadresse",
     "Folgegespräche zu AI Solutions Specialist"
- 
+  ],
+  "LinkTarget": null,
+  "EntryContext": {
+    "device_type": "workshop",
+    "capture_method": "personal_dialog",
+    "workspace_context": "workshop",
+    "social_context": "consultant"
+  },
+  "ClusterData": {
+    "cluster_id": "cstr01",
+    "cluster_type": "KabsAI",
+    "related_objects": [],
+    "cluster_timespan": "2025-07"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Möbel Kabs",
+      "Research",
+      "extern",
+      "KI-Workshop",
+      "Consultant",
+      "oliver"
+    ],
+    "organization": "Möbel Kabs",
+    "department": "KI-Innovation",
+    "team": "KabsAI",
+    "role": "Consultant",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": ["OWNER"],
+    "person_access": ["oliver", "dominik"],
+    "external_access": []
+  },
+  "GDPR": {
+    "dpo_approval": false,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-21T10:11Z",
+  "LastUpdated": "2025-07-21T10:11Z",
+  "RawExtractedData": null
+}

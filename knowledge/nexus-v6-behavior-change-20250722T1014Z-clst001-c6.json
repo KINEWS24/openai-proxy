@@ -5,5 +5,24 @@
   "ChunkNr": 6,
   "TotalChunks": 7,
   "UZT_ISO8601_Compact": "20250722T1014Z",
-  "Archetype":
-  }
+  "Archetype": "BehaviorChange",
+  "ObjectType": "ChangePattern",
+  "Subject": "Verhaltensänderung im KI-Einsatz – Nutzerinteraktion",
+  "Title": "Nutzerverhalten im Wandel durch KI-Nutzung",
+  "Summary": "Diese Einheit beschreibt die beobachteten Veränderungen im Verhalten von Mitarbeitenden bei der kontinuierlichen Zusammenarbeit mit KI-Systemen – insbesondere im Hinblick auf Vertrauen, Initiative, Lernbereitschaft und Abhängigkeit.",
+  "KeyPoints": [
+    "Zunahme an Vertrauen in KI-basierte Antworten",
+    "Abnahme der manuellen Rechercheaktivität",
+    "Erhöhte Bereitschaft zur Automatisierung von Aufgaben",
+    "Wachsende Tendenz zur Unselbstständigkeit in Routineentscheidungen"
+  ],
+  "Tags": [
+    "#Verhaltensänderung",
+    "#KI",
+    "#HumanAIInteraction",
+    "#Arbeitswelt",
+    "#Vertrauen"
+  ],
+  "Created": "2025-07-22T10:14:00Z",
+  "LastUpdated": "2025-07-22T10:14:00Z"
+}

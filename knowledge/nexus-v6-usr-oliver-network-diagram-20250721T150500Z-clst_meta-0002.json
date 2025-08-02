@@ -1,5 +1,3 @@
-
-```json
 {
   "SchemaVersion": "v6.1",
   "UID": "nexus-v6-usr-oliver-network-diagram-20250721T150500Z-clst_meta-0002",
@@ -13,7 +11,16 @@
   "Summary": [
     "Mermaid-Graph aller thematischen Cluster und ihrer Verbindungen."
   ],
-  "Tags": ["#Visualization","#Network","#Mermaid","#MetaCluster","#Nexus","#klug","#futuresafe","#intelligent"],
+  "Tags": [
+    "#Visualization",
+    "#Network",
+    "#Mermaid",
+    "#MetaCluster",
+    "#Nexus",
+    "#klug",
+    "#futuresafe",
+    "#intelligent"
+  ],
   "LinkTarget": "network_diagram.md",
   "ClusterData": {
     "cluster_id": "clst_meta",
@@ -27,7 +34,7 @@
     "person": "Oliver Welling"
   },
   "Access": {
-    "role_access": ["Owner","Product"],
+    "role_access": ["Owner", "Product"],
     "person_access": ["Oliver Welling"],
     "external_access": ["All"]
   },
@@ -37,6 +44,6 @@
     "retention_policy": "permanent"
   },
   "content_rating": "neutral",
-  "Created": "2025-07-21T15:05Z",
-  "LastUpdated": "2025-07-21T15:05Z"
+  "Created": "2025-07-21T15:05:00Z",
+  "LastUpdated": "2025-07-21T15:05:00Z"
 }

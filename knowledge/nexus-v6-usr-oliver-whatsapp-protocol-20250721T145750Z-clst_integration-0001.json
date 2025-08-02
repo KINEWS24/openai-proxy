@@ -1,11 +1,47 @@
-4. **Auto-Chunking:**  
-- ROOT-Card + Tages-Child-Cards  
-- Media-Cards für Bilder/Videos  
-5. **Tags & Metadaten:** #WhatsApp, #Image, #Chat, #Demo  
-6. **Speichern:** Fertige `.md`/`.json` in `knowledge`-Verzeichnis  
-
-Schlagwörter: #Text #WhatsApp #Protocol #Integration #Ingestion #Nexus #Demo
-
-LinkTarget: whatsapp_protocol.md  
-
-Verification: OK
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-whatsapp-protocol-20250721T145750Z-clst_integration-0001",
+  "Archetype": "Protocol",
+  "ObjectType": "ChatIngestion",
+  "Title": "WhatsApp-Protokoll – Demo Ingestion",
+  "Summary": [
+    "ROOT-Card mit Überblick",
+    "Child-Cards für Tagesverläufe",
+    "Media-Cards für Bilder/Videos"
+  ],
+  "Tags": [
+    "#Text",
+    "#WhatsApp",
+    "#Protocol",
+    "#Integration",
+    "#Ingestion",
+    "#Nexus",
+    "#Demo"
+  ],
+  "LinkTarget": "whatsapp_protocol.md",
+  "ClusterData": {
+    "cluster_id": "clst_integration",
+    "cluster_type": "whatsapp_ingestion"
+  },
+  "Hierarchy": {
+    "organization": "NEXUS-AG",
+    "department": "Integration",
+    "team": "Demo",
+    "role": "Owner",
+    "person": "Oliver Welling"
+  },
+  "Access": {
+    "role_access": ["Owner", "Demo"],
+    "person_access": ["Oliver Welling"],
+    "external_access": ["All"]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "Verification": "OK",
+  "content_rating": "neutral",
+  "Created": "2025-07-21T14:57:50Z",
+  "LastUpdated": "2025-07-21T14:57:50Z"
+}
