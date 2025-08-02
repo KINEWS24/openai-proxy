@@ -1,0 +1,90 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-techcrunch-article-20250729T0600Z-clst001-1a2b3c4d",
+  "ParentUID": "nexus-v6-usr-techcrunch-article-20250729T0600Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250729T0600Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Adobe Introduces AI-Powered Features in Photoshop",
+  "Tags": [
+    "#Adobe",
+    "#Photoshop",
+    "#AI",
+    "#ImageEditing",
+    "#TechCrunch",
+    "#2025",
+    "#Team"
+  ],
+  "Title": "Adobe Introduces AI-Powered Features in Photoshop",
+  "Summary": "Adobe adds new AI-powered image-editing features to Photoshop.",
+  "KeyPoints": [
+    "Adobe introduces Generative Upscale, Harmonize, and improved object-removal features.",
+    "Generative Upscale enhances images up to 8 megapixels.",
+    "Harmonize blends new objects into existing images by adjusting color, lighting, and shadows.",
+    "Improved object-removal tool focuses on removing objects without unwanted artifacts."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://techcrunch.com/2025/07/29/adobe-adds-new-ai-powered-image-editing-features-to-photoshop/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "https://techcrunch.com/2025/07/29/adobe-adds-new-ai-powered-image-editing-features-to-photoshop/",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250729T0600Z-20250729T1800Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "TechCrunch",
+      "Editorial",
+      "Technology",
+      "AI",
+      "Ivan Mehta"
+    ],
+    "organization": "TechCrunch",
+    "department": "Editorial",
+    "team": "Technology",
+    "role": "Journalist",
+    "person": "Ivan Mehta"
+  },
+  "Access": {
+    "role_access": [
+      "Journalist",
+      "Editor"
+    ],
+    "person_access": [
+      "Ivan Mehta"
+    ],
+    "external_access": [
+      "public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-29T06:00Z",
+  "LastUpdated": "2025-07-29T06:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-29T17:05:24.023Z",
+  "Erfassung_Timestamp": "2025-07-29T17:05:24.023Z",
+  "Properties": {
+    "source_url": "https://techcrunch.com/2025/07/29/adobe-adds-new-ai-powered-image-editing-features-to-photoshop/"
+  }
+}

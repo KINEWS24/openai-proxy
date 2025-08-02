@@ -1,0 +1,88 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-meta-news-20250725T1358Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-meta-news-20250725T1358Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250725T1358Z",
+  "Archetype": "Text",
+  "ObjectType": "NewsArticle",
+  "Subject": "Meta names Shengjia Zhao as chief scientist of AI superintelligence unit",
+  "Tags": [
+    "#AI",
+    "#Meta",
+    "#Leadership",
+    "#ShengjiaZhao",
+    "#MSL",
+    "#2025",
+    "#Team"
+  ],
+  "Title": "Meta names Shengjia Zhao as chief scientist of AI superintelligence unit",
+  "Summary": "Meta appoints Shengjia Zhao as Chief Scientist of Meta Superintelligence Labs, highlighting his contributions to AI advancements.",
+  "KeyPoints": [
+    "Shengjia Zhao appointed as Chief Scientist of Meta Superintelligence Labs (MSL).",
+    "Zhao's contributions to OpenAI include ChatGPT, GPT-4, and AI reasoning model o1.",
+    "Zhao co-founded MSL and has been leading since its inception.",
+    "Alexandr Wang, former CEO of Scale AI, leads MSL."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250725T1300Z-20250725T1400Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Meta",
+      "AI",
+      "Leadership",
+      "MSL"
+    ],
+    "organization": "Meta",
+    "department": "AI",
+    "team": "MSL",
+    "role": "Chief Scientist",
+    "person": "Shengjia Zhao"
+  },
+  "Access": {
+    "role_access": [
+      "AI Researchers",
+      "Meta Leadership"
+    ],
+    "person_access": [
+      "Shengjia Zhao",
+      "Alexandr Wang"
+    ],
+    "external_access": [
+      "Tech Journalists",
+      "AI Community"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "24M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-25T13:58Z",
+  "LastUpdated": "2025-07-25T13:58Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-26T17:55:23.459Z",
+  "Erfassung_Timestamp": "2025-07-26T17:55:23.459Z"
+}

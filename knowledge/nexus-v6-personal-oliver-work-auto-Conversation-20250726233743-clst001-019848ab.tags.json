@@ -1,0 +1,20 @@
+{
+  "Title": "Conversation: mache eine tabelle der letzten drei einträge...",
+  "Summary": "Learning from user interaction about mache",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction"
+  ],
+  "KeyPoints": [],
+  "UZT_ISO8601": "2025-07-26T21:37:43.658Z",
+  "LearningScore": 0.4,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.4,
+    "entities_extracted": 0,
+    "patterns_found": 0,
+    "original_query": "mache eine tabelle der letzten drei einträge"
+  }
+}

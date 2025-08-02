@@ -1,0 +1,90 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-anthony-techcrunch-article-20250727T0739Z-clst001-abc123",
+  "ParentUID": "nexus-v6-usr-anthony-techcrunch-article-20250727T0739Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250727T0739Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "DOGE's AI Tool for Federal Deregulation",
+  "Tags": [
+    "#AI",
+    "#Government",
+    "#Regulations",
+    "#DOGE",
+    "#TechCrunch",
+    "#2025",
+    "#Team"
+  ],
+  "Title": "DOGE's AI Tool for Federal Deregulation",
+  "Summary": "DOGE has developed an AI tool aimed at reducing federal regulations by half.",
+  "KeyPoints": [
+    "DOGE's AI tool targets 200,000 federal regulations.",
+    "The goal is to eliminate half by the first anniversary of Trump's return.",
+    "The tool has been used at the Department of Housing and Urban Development.",
+    "White House praises DOGE team but no plan is approved yet."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://techcrunch.com/2025/07/27/doge-has-built-an-ai-tool-to-slash-federal-regulations/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "doge-ai-tool-article",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250727T0700Z-20250727T0800Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "TechCrunch",
+      "News",
+      "AI",
+      "Government",
+      "Anthony Ha"
+    ],
+    "organization": "TechCrunch",
+    "department": "News",
+    "team": "AI",
+    "role": "Journalist",
+    "person": "Anthony Ha"
+  },
+  "Access": {
+    "role_access": [
+      "Journalist",
+      "Editor"
+    ],
+    "person_access": [
+      "Anthony Ha"
+    ],
+    "external_access": [
+      "public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-27T07:39Z",
+  "LastUpdated": "2025-07-27T07:39Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T15:51:47.376Z",
+  "Erfassung_Timestamp": "2025-07-27T15:51:47.376Z",
+  "Properties": {
+    "source_url": "https://techcrunch.com/2025/07/27/doge-has-built-an-ai-tool-to-slash-federal-regulations/"
+  }
+}

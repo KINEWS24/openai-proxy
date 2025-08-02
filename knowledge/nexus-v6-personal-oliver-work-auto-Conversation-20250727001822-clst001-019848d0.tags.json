@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: zeige eine liste der letzten 5 artikel, die wir ne...",
+  "Summary": "Learning from user interaction about zeige",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Hier",
+    "#Artikel",
+    "#Wissensdatenbank",
+    "#Warum",
+    "#Zusammenfassung",
+    "#Die",
+    "#Welt",
+    "#Big",
+    "#Tech",
+    "#Struktur"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: zeige",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T22:18:22.419Z",
+  "LearningScore": 1.2,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 1.2,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "zeige eine liste der letzten 5 artikel, die wir neu haben"
+  }
+}

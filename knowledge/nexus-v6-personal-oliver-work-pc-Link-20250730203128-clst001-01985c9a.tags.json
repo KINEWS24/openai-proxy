@@ -1,0 +1,91 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-techcrunch-article-20250730T0800Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-techcrunch-article-20250730T0800Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250730T0800Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "UC Berkeley dropouts raise $28 million for AI startup",
+  "Tags": [
+    "#AI",
+    "#Startup",
+    "#Funding",
+    "#MarketingAutomation",
+    "#TechCrunch",
+    "#2025",
+    "#Team"
+  ],
+  "Title": "How 2 UC Berkeley dropouts raised $28 million for their AI marketing automation startup",
+  "Summary": "Two UC Berkeley dropouts founded AI marketing automation startup Conversion and raised $28 million in Series A funding.",
+  "KeyPoints": [
+    "Two UC Berkeley dropouts founded AI marketing automation startup Conversion.",
+    "Raised $28 million Series A led by Abstract, with True Ventures and HOF Capital.",
+    "Co-founders Neil Tewari and James Jiao started the company after using HubSpot.",
+    "Conducted 160 customer interviews with marketing VPs.",
+    "Conversion integrates AI to automate marketing tasks."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://techcrunch.com/2025/07/30/how-2-uc-berkeley-dropouts-raised-28-million-for-their-ai-marketing-automation-startup/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "techcrunch-article",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "article",
+    "related_objects": [],
+    "cluster_timespan": "20250730T0800Z-20250730T0900Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "TechCrunch",
+      "Editorial",
+      "AI",
+      "Startup"
+    ],
+    "organization": "TechCrunch",
+    "department": "Editorial",
+    "team": "AI",
+    "role": "Editor",
+    "person": "Julie Bort"
+  },
+  "Access": {
+    "role_access": [
+      "Editor",
+      "Journalist"
+    ],
+    "person_access": [
+      "Julie Bort"
+    ],
+    "external_access": [
+      "public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-30T08:00Z",
+  "LastUpdated": "2025-07-30T08:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-30T18:31:28.596Z",
+  "Erfassung_Timestamp": "2025-07-30T18:31:28.596Z",
+  "Properties": {
+    "source_url": "https://techcrunch.com/2025/07/30/how-2-uc-berkeley-dropouts-raised-28-million-for-their-ai-marketing-automation-startup/",
+    "content_hash": "689f632c85ac53ff75d5f9e13926c72c"
+  }
+}

@@ -1,0 +1,94 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-ai-news-20250730T0000Z-clst001-abc12345",
+  "ParentUID": "nexus-v6-usr-ai-news-20250730T0000Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250730T0000Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Alibaba Cloud's Wan2.2 AI model set to launch",
+  "Tags": [
+    "#AI",
+    "#VideoGeneration",
+    "#OpenSource",
+    "#Alibaba",
+    "#Wan2.2",
+    "#TechnologyNews",
+    "#2025",
+    "#Team"
+  ],
+  "Title": "Ali Wan 2.2 Launch: Open-Source Video Generation AI",
+  "Summary": "Alibaba Cloud's Wan2.2 AI model is set to launch, challenging OpenAI's Sora with open-source video generation advancements.",
+  "KeyPoints": [
+    "Wan2.2 is an upgraded version of Wan2.1, promising breakthroughs in performance and efficiency.",
+    "Supports higher resolutions and longer video generation with reduced time.",
+    "Enhancements in text-to-video, image-to-video, and video-to-audio capabilities.",
+    "Multi-language and artistic style expansion.",
+    "Hardware optimization for broader accessibility.",
+    "Open-source under Apache 2.0 license, available on Alibaba Cloud ModelScope and Hugging Face."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://news.aibase.com/news/19949",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "https://news.aibase.com/news/19949",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "news",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250730T0000Z-20250730T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "AIbase",
+      "News",
+      "Technology",
+      "AI",
+      "VideoGeneration"
+    ],
+    "organization": "AIbase",
+    "department": "News",
+    "team": "Technology",
+    "role": "Editor",
+    "person": "john_doe"
+  },
+  "Access": {
+    "role_access": [
+      "Editor",
+      "Journalist"
+    ],
+    "person_access": [
+      "john_doe",
+      "jane_smith"
+    ],
+    "external_access": [
+      "public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-30T00:00Z",
+  "LastUpdated": "2025-07-30T00:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-30T13:36:16.926Z",
+  "Erfassung_Timestamp": "2025-07-30T13:36:16.926Z",
+  "Properties": {
+    "source_url": "https://news.aibase.com/news/19949"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "Title": "Wissenschaft: Enhanced Summary",
+  "Summary": "AlphaEarth Foundations ist ein neues KI-Modell, das Erdbeobachtungsdaten integriert, um eine einheitliche Datenrepräsentation zu schaffen, die die globale Kartierung und Überwachung revolutioniert.",
+  "Tags": [
+    "#AI",
+    "#AlphaEarth",
+    "#EarthObservation",
+    "#Mapping",
+    "#DeepMind",
+    "#2025",
+    "#Team",
+    "#Call",
+    "#Telefonat",
+    "#Meeting"
+  ],
+  "Archetype": "Link",
+  "UZT_ISO8601": "2025-08-01T19:03:46.813Z",
+  "Erfassung_Timestamp": "2025-08-01T19:03:46.813Z",
+  "Properties": {
+    "content_hash": "10a57b9d6288013c94bec0ef7fab11af",
+    "source_url": "https://deepmind.google/discover/blog/alphaearth-foundations-helps-map-our-planet-in-unprecedented-detail/?utm_source=futuretools.io&utm_medium=newspage",
+    "enhanced_summary": true
+  }
+}

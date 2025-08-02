@@ -1,0 +1,35 @@
+{
+  "Title": "Conversation: Was habe ich über das Meeting mit Dominik gelernt?...",
+  "Summary": "Learning from user interaction about meeting",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Was",
+    "#Meeting",
+    "#Dominik",
+    "#Basierend",
+    "#Informationen",
+    "#Wissensdatenbank",
+    "#Klare",
+    "#Ziele",
+    "#Aufgabenverteilung",
+    "#Nach",
+    "#Pattern_QuestionAsker",
+    "#Pattern_MeetingOriented"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: meeting",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T20:24:24.990Z",
+  "LearningScore": 1.3,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 1.3,
+    "entities_extracted": 10,
+    "patterns_found": 2,
+    "original_query": "Was habe ich über das Meeting mit Dominik gelernt?"
+  }
+}

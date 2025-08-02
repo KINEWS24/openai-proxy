@@ -1,0 +1,34 @@
+{
+  "Title": "Conversation: liste meine termine auf...",
+  "Summary": "Learning from user interaction about liste",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Aktuell",
+    "#Termine",
+    "#Informationen",
+    "#Wissensdatenbank",
+    "#Wenn",
+    "#Zugang",
+    "#Kalender",
+    "#Quelle",
+    "#Falls",
+    "#Art",
+    "#Pattern_MeetingOriented"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: liste",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-27T07:35:38.053Z",
+  "LearningScore": 0.9,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.9,
+    "entities_extracted": 10,
+    "patterns_found": 1,
+    "original_query": "liste meine termine auf"
+  }
+}

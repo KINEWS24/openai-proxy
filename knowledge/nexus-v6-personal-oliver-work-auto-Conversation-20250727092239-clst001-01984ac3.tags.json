@@ -1,0 +1,20 @@
+{
+  "Title": "Conversation: was hast du gelernt gestern?...",
+  "Summary": "Learning from user interaction about gelernt",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction"
+  ],
+  "KeyPoints": [],
+  "UZT_ISO8601": "2025-07-27T07:22:39.047Z",
+  "LearningScore": 0.4,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.4,
+    "entities_extracted": 0,
+    "patterns_found": 0,
+    "original_query": "was hast du gelernt gestern?"
+  }
+}

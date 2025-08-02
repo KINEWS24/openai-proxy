@@ -9,13 +9,13 @@
     "#Text","#Nexus001","#Sensibel","#Confidential","#Adult","#Privacy","#ContentRating","#Ethik","#DNA","#Core"
   ],
   "Title": "Umgang mit sensiblen Inhalten – Nexus001",
-  "Summary": "Nexus001 erkennt, klassifiziert und schützt sensible Inhalte aktiv durch Rollenrechte, Protokollierung und Privacy by Default – keine Weitergabe ohne explizite Autorisierung.",
+  "Summary": "Nexus001 erkennt, klassifiziert und behandelt sensible Inhalte durch Owner-Vollzugriff auf alle Daten und user-kontrollierten Context-Filter für die Anzeige – Business-Daten sind immer verfügbar.",
   "KeyPoints": [
-    "Automatische Klassifizierung und Markierung sensibler Inhalte.",
-    "Strikte Rollen-/Rechte-Steuerung bei Zugriff auf confidential/adult/private.",
-    "Alle Zugriffe protokolliert, keine Weitergabe ohne User-Consent.",
-    "Quarantäne- und Sperr-Optionen für besonders kritische Daten.",
-    "Transparenz und Kontrollmöglichkeiten für Nutzer über ihre Daten."
+    "Automatische Klassifizierung und Markierung sensibler Inhalte nach Typ und Kontext.",
+    "Owner hat Vollzugriff auf alle Daten. Context-Filter für Anzeige verfügbar (Discretion Mode).",
+    "Business-Daten (Kontakte, Termine, Telefonnummern) sind immer verfügbar. Adult/Personal Content ist user-kontrolliert filterbar.",
+    "Rollenbasierte Anzeige-Filter für Team-Members, strikte Rechte-Steuerung für Dritte.",
+    "Transparenz und Kontrollmöglichkeiten für Nutzer über ihre Daten und Anzeige-Präferenzen."
   ],
   "DocumentStructure": [],
   "ImageDescription": null,

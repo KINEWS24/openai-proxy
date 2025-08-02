@@ -1,0 +1,93 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-queer-news-20250725T1043Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-queer-news-20250725T1000Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250725T1043Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Neue Staffel 'South Park': Trump steigt mit dem Teufel ins Bett",
+  "Tags": [
+    "#SouthPark",
+    "#DonaldTrump",
+    "#Satire",
+    "#ComedyCentral",
+    "#TVSeries",
+    "#2025",
+    "#Team"
+  ],
+  "Title": "Neue Staffel 'South Park': Trump steigt mit dem Teufel ins Bett – Weißes Haus ist irritiert",
+  "Summary": "Die 27. Staffel von 'South Park' startet mit einer Episode, in der Donald Trump mit dem Teufel ins Bett steigt, was für Aufsehen sorgt.",
+  "KeyPoints": [
+    "'South Park' beginnt die 27. Staffel mit einer Episode, in der Donald Trump mit dem Teufel ins Bett steigt.",
+    "Die Episode greift aktuelle Themen auf, darunter Trumps Verbindung zu den Epstein-Akten.",
+    "Das Weiße Haus kritisiert die Episode als irrelevant.",
+    "Ein neuer Mega-Deal zwischen den 'South Park'-Machern und Paramount Global wurde bekannt gegeben."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://www.queer.de/detail.php?article_id=54469",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "https://www.queer.de/detail.php?article_id=54469",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "news",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250725T1000Z-20250725T1100Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Queer Communications GmbH",
+      "Editorial",
+      "News",
+      "Entertainment",
+      "TV",
+      "Reporter"
+    ],
+    "organization": "Queer Communications GmbH",
+    "department": "Editorial",
+    "team": "News",
+    "role": "Reporter",
+    "person": "dk"
+  },
+  "Access": {
+    "role_access": [
+      "Editor",
+      "Reporter"
+    ],
+    "person_access": [
+      "dk",
+      "spot"
+    ],
+    "external_access": [
+      "auditor"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-25T10:43Z",
+  "LastUpdated": "2025-07-25T10:43Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T14:52:29.305Z",
+  "Erfassung_Timestamp": "2025-07-27T14:52:29.305Z",
+  "Properties": {
+    "source_url": "https://www.queer.de/detail.php?article_id=54469",
+    "scraped_timestamp": "2025-07-27T14:52:29.305Z"
+  }
+}

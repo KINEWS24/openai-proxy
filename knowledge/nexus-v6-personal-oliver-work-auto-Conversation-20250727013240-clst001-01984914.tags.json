@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: Erstelle eine Liste mit Strichen: - Punkt eins - P...",
+  "Summary": "Learning from user interaction about erstelle",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Erstelle",
+    "#Liste",
+    "#Strichen",
+    "#Punkt",
+    "#Hier",
+    "#Struktur",
+    "#Ownership",
+    "#Privacy",
+    "#Zeit",
+    "#Generalisten"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: erstelle",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T23:32:40.664Z",
+  "LearningScore": 1.6,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 1.6,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "Erstelle eine Liste mit Strichen: - Punkt eins - Punkt zwei   - Punkt drei"
+  }
+}

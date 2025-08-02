@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: ich suche hierzu etwas:...",
+  "Summary": "Learning from user interaction about suche",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Gerne",
+    "#Hier",
+    "#Informationen",
+    "#Wissensdatenbank",
+    "#Frage",
+    "#Value",
+    "#Proposition",
+    "#Individuum",
+    "#Fristen",
+    "#Kalender"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: suche",
+    "Connected knowledge from 10 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T23:07:19.020Z",
+  "LearningScore": 0.9,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.9,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "ich suche hierzu etwas:"
+  }
+}

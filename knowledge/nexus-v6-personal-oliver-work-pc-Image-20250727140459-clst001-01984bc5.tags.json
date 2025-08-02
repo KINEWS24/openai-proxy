@@ -1,0 +1,92 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-nxu-04567-desc-20231013T0000Z-clst001-abc123",
+  "ParentUID": "nexus-v6-usr-nxu-04567-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20231013T0000Z",
+  "Archetype": "Image",
+  "ObjectType": "Description",
+  "Subject": "Beschreibung eines versunkenen Wracks mit Anomalien",
+  "Tags": [
+    "#Wrack",
+    "#Meeresforschung",
+    "#Anomalien",
+    "#Lichtemissionen",
+    "#MagnetischeAnomalien",
+    "#AkustischePhänomene",
+    "#Team"
+  ],
+  "Title": "Beschreibung von NXU-04567",
+  "Summary": "NXU-04567 ist ein versunkenes Wrack in 50 Metern Tiefe, bedeckt mit Meeresorganismen und weist Anomalien auf.",
+  "KeyPoints": [
+    "NXU-04567 ist ein versunkenes Wrack in 50 Metern Tiefe.",
+    "Bedeckt mit Meeresorganismen wie Pfahlmuscheln und Korallen.",
+    "Anomalien: Lichtemissionen, magnetische Störungen, akustische Signale."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "research",
+    "social_context": "team",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "research",
+    "related_objects": [],
+    "cluster_timespan": "20231013T0000Z-20231013T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "NEXUS-AG",
+      "Research",
+      "Marine",
+      "Exploration",
+      "Lead",
+      "dr_smith"
+    ],
+    "organization": "NEXUS-AG",
+    "department": "Research",
+    "team": "Marine",
+    "role": "Lead",
+    "person": "dr_smith"
+  },
+  "Access": {
+    "role_access": [
+      "Lead",
+      "Researcher"
+    ],
+    "person_access": [
+      "dr_smith",
+      "jane_doe"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2023-10-13T00:00Z",
+  "LastUpdated": "2023-10-13T00:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T12:04:59.256Z",
+  "Erfassung_Timestamp": "2025-07-27T12:04:59.256Z",
+  "Properties": {
+    "image_url": "https://www.n-tv.de/img/incoming/origs25927456/0282799680-w0-h0/069d774c4db1a382f8ca19caa3703706.jpg"
+  }
+}

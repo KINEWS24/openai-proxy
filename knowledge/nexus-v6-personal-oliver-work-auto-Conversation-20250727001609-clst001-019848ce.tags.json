@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: ja, zeige mir die liste der letzten 5 learnings vo...",
+  "Summary": "Learning from user interaction about zeige",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Hier",
+    "#Liste",
+    "#Learnings",
+    "#Understanding",
+    "#User",
+    "#Interaction",
+    "#Nexus",
+    "#Ich",
+    "#Nutzer",
+    "#Fragen"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: zeige",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T22:16:09.221Z",
+  "LearningScore": 0.7,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.7,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "ja, zeige mir die liste der letzten 5 learnings von dir, bitte"
+  }
+}

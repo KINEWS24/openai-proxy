@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: erstelle eine liste der letzten einträge, die du g...",
+  "Summary": "Learning from user interaction about erstelle",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Hier",
+    "#Liste",
+    "#Eintr",
+    "#Warum",
+    "#Zusammenfassung",
+    "#Die",
+    "#Welt",
+    "#Big",
+    "#Tech",
+    "#Struktur"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: erstelle",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T21:42:00.440Z",
+  "LearningScore": 0.7,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.7,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "erstelle eine liste der letzten einträge, die du gelernt hast"
+  }
+}

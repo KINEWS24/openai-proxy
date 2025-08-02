@@ -1,0 +1,92 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-carlsquare-company-20231010T1200Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-carlsquare-company-20231010T1200Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20231010T1200Z",
+  "Archetype": "Link",
+  "ObjectType": "CompanyOverview",
+  "Subject": "Überblick über Carlsquare als führende Tech-Investmentbank",
+  "Tags": [
+    "#CorporateFinance",
+    "#TechInvestment",
+    "#Carlsquare",
+    "#GlobalReach",
+    "#M&A",
+    "#Team"
+  ],
+  "Title": "Carlsquare Unternehmensübersicht",
+  "Summary": "Carlsquare ist eine führende Tech-Investmentbank, die strategische Transaktionen für Tech-Unternehmen unterstützt und global präsent ist.",
+  "KeyPoints": [
+    "Carlsquare ist eine führende Tech-Investmentbank.",
+    "Unterstützung bei strategischen Transaktionen für Tech-Unternehmen.",
+    "Globale Präsenz mit 13 Standorten in 8 Ländern.",
+    "Fokus auf den menschlichen Faktor in M&A-Transaktionen."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://carlsquare.com/de/die-firma/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "https://carlsquare.com/de/die-firma/",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "team",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "company",
+    "related_objects": [],
+    "cluster_timespan": "20231010T1200Z-20231010T1230Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Carlsquare",
+      "Corporate",
+      "Finance",
+      "M&A",
+      "Team",
+      "Public"
+    ],
+    "organization": "Carlsquare",
+    "department": "Corporate",
+    "team": "Finance",
+    "role": "M&A",
+    "person": "Public"
+  },
+  "Access": {
+    "role_access": [
+      "M&A",
+      "Finance"
+    ],
+    "person_access": [
+      "Public"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2023-10-10T12:00Z",
+  "LastUpdated": "2023-10-10T12:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-31T14:20:01.665Z",
+  "Erfassung_Timestamp": "2025-07-31T14:20:01.665Z",
+  "Properties": {
+    "source_url": "https://carlsquare.com/de/die-firma/",
+    "content_hash": "9eff73ba1829cfca701f891634064abb"
+  }
+}

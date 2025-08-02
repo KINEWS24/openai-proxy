@@ -1,0 +1,93 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-techcrunch-article-20250723T1625Z-clst001-abc123",
+  "ParentUID": "nexus-v6-usr-techcrunch-article-20250723T1600Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250723T1625Z",
+  "Archetype": "Text",
+  "ObjectType": "Article",
+  "Subject": "Overview of Trump's executive order banning 'woke AI'.",
+  "Tags": [
+    "#AI",
+    "#Trump",
+    "#ExecutiveOrder",
+    "#TechPolicy",
+    "#2025",
+    "#USPolitics",
+    "#Team",
+    "#Call",
+    "#Telefonat",
+    "#Meeting"
+  ],
+  "Title": "Politik: Enhanced Summary",
+  "Summary": "Ein von Trump unterzeichnetes Dekret verbietet 'woke AI' und fordert ideologische Neutralität in KI-Modellen, die von der US-Regierung genutzt werden. Dies könnte die Entwicklung von KI in den USA beeinflussen.",
+  "KeyPoints": [
+    "Trump's order bans AI models that aren't 'ideologically neutral.'",
+    "The order criticizes diversity, equity, and inclusion (DEI) as 'destructive.'",
+    "It aims to shift AI priorities towards infrastructure and national security."
+  ],
+  "DocumentStructure": [],
+  "LinkTarget": "https://techcrunch.com/2025/07/23/trumps-anti-woke-ai-order-could-reshape-how-us-tech-companies-train-their-models/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "techcrunch_article_20250723",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250723T1600Z-20250723T1800Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "TechCrunch",
+      "News",
+      "AI",
+      "Policy",
+      "Reporter",
+      "Rebecca Bellan"
+    ],
+    "organization": "TechCrunch",
+    "department": "News",
+    "team": "AI",
+    "role": "Reporter",
+    "person": "Rebecca Bellan"
+  },
+  "Access": {
+    "role_access": [
+      "Reporter",
+      "Editor"
+    ],
+    "person_access": [
+      "Rebecca Bellan"
+    ],
+    "external_access": [
+      "public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-23T16:25Z",
+  "LastUpdated": "2025-07-23T16:25Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-31T21:11:29.126Z",
+  "Erfassung_Timestamp": "2025-07-31T21:11:29.126Z",
+  "Properties": {
+    "content_hash": "6e44d0813afc4191b03cccd236410b9e",
+    "source_url": "https://techcrunch.com/2025/07/23/trumps-anti-woke-ai-order-could-reshape-how-us-tech-companies-train-their-models/",
+    "enhanced_summary": true
+  }
+}

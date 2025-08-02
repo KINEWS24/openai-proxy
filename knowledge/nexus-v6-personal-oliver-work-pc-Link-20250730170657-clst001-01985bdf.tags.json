@@ -1,0 +1,97 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-work-mobile-txt-20250728T0000Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-oliver-work-mobile-txt-20250728T0000Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250728T0000Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Einführung in Wan 2.2",
+  "Tags": [
+    "#AI",
+    "#VideoGeneration",
+    "#Alibaba",
+    "#Wan2.2",
+    "#OpenSource",
+    "#Technology",
+    "#Dominik",
+    "#Claude",
+    "#Partner",
+    "#Oliver",
+    "#Team"
+  ],
+  "Title": "Einführung in Wan 2.2",
+  "Summary": "Überblick über Wan 2.2, Alibabas neuestes Open-Source-Video-Generator-Tool.",
+  "KeyPoints": [
+    "Wan 2.2 ist ein Open-Source-Text-zu-Video- und Bild-zu-Video-AI-Modell.",
+    "Bietet native 1080p Videoqualität und erweiterte visuelle Effekte.",
+    "Verbesserte LoRA-Steuerungen und Bewegungskontrolle.",
+    "Geeignet für Kurzfilme, Trailer und soziale Medien."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://www.vadoo.tv/wan-2-2",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "wan-2-2-introduction",
+  "EntryContext": {
+    "device_type": "mobile",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "project",
+    "related_objects": [],
+    "cluster_timespan": "20250728T0000Z-20250728T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "NEXUS-AG",
+      "IT",
+      "Dev",
+      "AI",
+      "CTO",
+      "oliver"
+    ],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "Dev",
+    "role": "CTO",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": [
+      "CTO",
+      "Finance"
+    ],
+    "person_access": [
+      "oliver",
+      "dominik"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-28T00:00Z",
+  "LastUpdated": "2025-07-28T00:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-30T15:06:57.806Z",
+  "Erfassung_Timestamp": "2025-07-30T15:06:57.806Z",
+  "Properties": {
+    "source_url": "https://www.vadoo.tv/wan-2-2"
+  }
+}

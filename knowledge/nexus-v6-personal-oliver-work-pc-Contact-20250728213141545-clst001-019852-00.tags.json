@@ -1,0 +1,31 @@
+{
+  "Title": "Kontakt: Dr. Anne Wilmers",
+  "Summary": "Kontakt aus Email-Thread extrahiert: Dr. Anne Wilmers (Wilmers Kommunikation Institut für Training, Coaching und Supervision) - Tel: 0761-76 777 11",
+  "Archetype": "Contact",
+  "Contact": {
+    "name": "Dr. Anne Wilmers",
+    "email": "anne.wilmers@wilmers-kommunikation.de",
+    "company": "Wilmers Kommunikation Institut für Training, Coaching und Supervision",
+    "phone": "0761-76 777 11",
+    "address": "Basler Landstr. 113, 79111 Freiburg",
+    "position": null
+  },
+  "Properties": {
+    "source": "email_thread",
+    "is_owner": false,
+    "extraction_method": "ai_batch",
+    "capture_timestamp": "2025-07-28T19:31:41.532Z",
+    "phone_extracted": true,
+    "email_extracted": true
+  },
+  "Tags": [
+    "#Kontakt",
+    "#Email",
+    "#WilmersKommunikationInstitutfürTraining,CoachingundSupervision",
+    "#Telefon",
+    "Dr.AnneWilmers"
+  ],
+  "SearchableContactData": "Dr. Anne Wilmers anne.wilmers@wilmers-kommunikation.de 0761-76 777 11 Wilmers Kommunikation Institut für Training, Coaching und Supervision",
+  "UZT_ISO8601": "2025-07-28T19:31:41.532Z",
+  "Erfassung_Timestamp": "2025-07-28T19:31:41.532Z"
+}

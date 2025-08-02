@@ -1,0 +1,93 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-google-gemini-20250801T0000Z-clst001-1a2b3c4d",
+  "ParentUID": "nexus-v6-usr-google-gemini-20250801T0000Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 5,
+  "UZT_ISO8601_Compact": "20250801T0000Z",
+  "Archetype": "Link",
+  "ObjectType": "BlogPost",
+  "Subject": "Einführung von Deep Think in der Gemini App",
+  "Tags": [
+    "#Gemini",
+    "#DeepThink",
+    "#AI",
+    "#Google",
+    "#Release2025",
+    "#Team",
+    "#Privat",
+    "#Personal"
+  ],
+  "Title": "Einführung von Deep Think in der Gemini App",
+  "Summary": "Deep Think wird in der Gemini App für Google AI Ultra-Abonnenten eingeführt, basierend auf dem erfolgreichen IMO-Wettbewerbsmodell.",
+  "KeyPoints": [
+    "Deep Think wird in der Gemini App für Google AI Ultra-Abonnenten eingeführt.",
+    "Das Modell basiert auf dem erfolgreichen IMO-Wettbewerbsmodell.",
+    "Verbesserte Leistung und Benutzerfreundlichkeit im Vergleich zur ursprünglichen Ankündigung."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://blog.google/products/gemini/gemini-2-5-deep-think/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "gemini-2-5-deep-think",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "release",
+    "related_objects": [],
+    "cluster_timespan": "20250801T0000Z-20250801T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "Google",
+      "AI",
+      "Gemini",
+      "Release",
+      "DeepThink"
+    ],
+    "organization": "Google",
+    "department": "AI",
+    "team": "Gemini",
+    "role": "Release",
+    "person": null
+  },
+  "Access": {
+    "role_access": [
+      "AI Team",
+      "Product Managers"
+    ],
+    "person_access": [
+      "john.doe",
+      "jane.smith"
+    ],
+    "external_access": [
+      "press",
+      "analysts"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-08-01T00:00Z",
+  "LastUpdated": "2025-08-01T00:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-08-01T13:21:38.498Z",
+  "Erfassung_Timestamp": "2025-08-01T13:21:38.498Z",
+  "Properties": {
+    "source_url": "https://blog.google/products/gemini/gemini-2-5-deep-think/",
+    "content_hash": "c978bd71b40f96a56891c706175f3ad6"
+  }
+}

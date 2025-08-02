@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: \"Erstelle mir eine Liste mit: - Erstes Element   -...",
+  "Summary": "Learning from user interaction about \"erstelle",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Erstelle",
+    "#Liste",
+    "#Erstes",
+    "#Element",
+    "#Zweites",
+    "#Drittes",
+    "#Hier",
+    "#Das",
+    "#Thema",
+    "#Warum"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: \"erstelle",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T23:31:36.162Z",
+  "LearningScore": 1.1,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 1.1,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "\"Erstelle mir eine Liste mit: - Erstes Element   - Zweites Element - Drittes Element\""
+  }
+}

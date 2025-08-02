@@ -1,0 +1,20 @@
+{
+  "Title": "Conversation: wer ist robert krabs?...",
+  "Summary": "Learning from user interaction about robert",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction"
+  ],
+  "KeyPoints": [],
+  "UZT_ISO8601": "2025-07-26T22:24:10.386Z",
+  "LearningScore": 0.4,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.4,
+    "entities_extracted": 0,
+    "patterns_found": 0,
+    "original_query": "wer ist robert krabs?"
+  }
+}

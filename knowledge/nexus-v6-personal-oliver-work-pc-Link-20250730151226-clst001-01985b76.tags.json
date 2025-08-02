@@ -1,0 +1,88 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-news-ai-20250730T0000Z-clst002-abc12345",
+  "ParentUID": "nexus-v6-usr-news-ai-20250730T0000Z-clst002-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250730T0000Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Alibaba Cloud's upcoming release of the video generation AI model Wan2.2",
+  "Tags": [
+    "#AI",
+    "#VideoGeneration",
+    "#OpenSource",
+    "#Alibaba",
+    "#Wan2.2",
+    "#Technology",
+    "#Team"
+  ],
+  "Title": "Ali Wan 2.2 Launch Announcement",
+  "Summary": "Alibaba Cloud's upcoming release of the video generation AI model Wan2.2, which promises significant advancements in performance and functionality.",
+  "KeyPoints": [
+    "Wan2.2 is an upgrade from Wan2.1, expected to improve video generation speed and quality.",
+    "New features include Text-to-Video (T2V), Image-to-Video (I2V), and Video-to-Audio (V2A).",
+    "Supports higher resolutions and more languages, with reduced hardware requirements.",
+    "Continues to use the Apache 2.0 license, available on Alibaba Cloud ModelScope and Hugging Face."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://news.aibase.com/news/19949",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "news_article",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "automated",
+    "workspace_context": "news",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst002",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250730T0000Z-20250730T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "AIbase",
+      "News",
+      "Technology",
+      "Editorial",
+      "Journalist"
+    ],
+    "organization": "AIbase",
+    "department": "News",
+    "team": "Technology",
+    "role": "Journalist",
+    "person": null
+  },
+  "Access": {
+    "role_access": [
+      "Journalist",
+      "Editor"
+    ],
+    "person_access": [],
+    "external_access": [
+      "Public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-30T00:00Z",
+  "LastUpdated": "2025-07-30T00:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-30T13:12:26.666Z",
+  "Erfassung_Timestamp": "2025-07-30T13:12:26.666Z",
+  "Properties": {
+    "source_url": "https://news.aibase.com/news/19949"
+  }
+}

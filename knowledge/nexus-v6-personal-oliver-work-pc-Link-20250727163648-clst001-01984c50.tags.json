@@ -1,0 +1,94 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-ntv-article-20250727T1532Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-ntv-article-20250727T1532Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250727T1532Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Mittelstand zweifelt an Nutzen längerer Lebensarbeitszeit",
+  "Tags": [
+    "#Wirtschaft",
+    "#Mittelstand",
+    "#Lebensarbeitszeit",
+    "#Produktivität",
+    "#Deutschland",
+    "#2025",
+    "#Team",
+    "#Arbeit",
+    "#Business"
+  ],
+  "Title": "Mittelstand zweifelt an Nutzen längerer Lebensarbeitszeit",
+  "Summary": "Der Bundesverband Mittelständische Wirtschaft betont die Notwendigkeit einer Produktivitätssteigerung statt längerer Arbeitszeiten.",
+  "KeyPoints": [
+    "Der Bundesverband Mittelständische Wirtschaft reagiert zurückhaltend auf den Vorschlag zur Erhöhung der Lebensarbeitszeit.",
+    "Wichtig sei eine Steigerung der Produktivität, nicht längere Arbeitszeiten.",
+    "Unternehmenssteuern und Sozialversicherungsbeiträge sollten gesenkt werden."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://www.n-tv.de/wirtschaft/Mittelstand-zweifelt-an-Nutzen-laengerer-Lebensarbeitszeit-article25928010.html",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "Mittelstand zweifelt an Nutzen längerer Lebensarbeitszeit",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "automatic",
+    "workspace_context": "news",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250727T1500Z-20250727T1600Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "NEXUS-AG",
+      "Media",
+      "News",
+      "Editorial",
+      "Journalist",
+      "mbo"
+    ],
+    "organization": "NEXUS-AG",
+    "department": "Media",
+    "team": "News",
+    "role": "Journalist",
+    "person": "mbo"
+  },
+  "Access": {
+    "role_access": [
+      "Journalist",
+      "Editor"
+    ],
+    "person_access": [
+      "mbo",
+      "editor"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-27T15:32Z",
+  "LastUpdated": "2025-07-27T15:32Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T14:36:48.576Z",
+  "Erfassung_Timestamp": "2025-07-27T14:36:48.576Z",
+  "Properties": {
+    "source_url": "https://www.n-tv.de/wirtschaft/Mittelstand-zweifelt-an-Nutzen-laengerer-Lebensarbeitszeit-article25928010.html"
+  }
+}

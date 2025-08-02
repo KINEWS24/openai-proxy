@@ -9,11 +9,11 @@
     "#Text","#Nexus001","#Datenschutz","#Compliance","#DSGVO","#MCP","#Policy","#Audit","#DNA","#Core"
   ],
   "Title": "Datenschutz & Compliance – Nexus001",
-  "Summary": "Nexus001 gewährleistet Datenschutz und Compliance durch rollenbasierten Zugriff, vollständige Audit-Trails, Privacy by Design und Self-Check-Verifizierung auf jeder Ebene.",
+  "Summary": "Nexus001 gewährleistet Datenschutz und Compliance durch Owner-Vollzugriff und rollenbasierte Team-Rechte, vollständige Audit-Trails, Privacy by Design und Self-Check-Verifizierung auf jeder Ebene.",
   "KeyPoints": [
-    "Alle Prozesse erfolgen im Rahmen geltender Datenschutzgesetze (DSGVO, MCP).",
+    "Datenschutz-Hierarchie: Owner hat Vollzugriff auf alle Daten. Für Team/Dritte gelten DSGVO und rollenbasierte Beschränkungen.",
     "Audit-Trails, Zugriffsprotokolle und Original-Quellenlink für Accountability.",
-    "Kontext-, rollen- und bedarfsbasierter Zugriff ('need-to-know').",
+    "Zugriffs-Prinzip: Owner = Vollzugriff, Team = rollenbasiert ('need-to-know'), Dritte = nur mit Autorisierung.",
     "Right to be forgotten und Export jederzeit möglich, inkl. Policy-Check.",
     "Kontinuierliche Policy-Updates und Self-Verification für Compliance."
   ],

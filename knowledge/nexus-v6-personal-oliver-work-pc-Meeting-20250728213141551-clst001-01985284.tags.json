@@ -1,0 +1,33 @@
+{
+  "Title": "Meeting: Gespräch mit dem Herrn der an KI interessiert ist",
+  "Summary": "Gespräch mit dem Herrn der an KI interessiert ist am 2025-05-06 um null",
+  "Archetype": "Meeting",
+  "Meeting": {
+    "title": "Gespräch mit dem Herrn der an KI interessiert ist",
+    "date": "2025-05-06",
+    "time": null,
+    "zoom_link": null,
+    "location": null,
+    "attendees": [
+      "Oliver",
+      "Dr. Anne Wilmers"
+    ],
+    "requirements": []
+  },
+  "Properties": {
+    "source": "email_thread",
+    "meeting_type": "extracted",
+    "related_contacts": [
+      "nexus-v6-personal-oliver-work-pc-Contact-20250728213141545-clst001-019852-00"
+    ],
+    "capture_timestamp": "2025-07-28T19:31:41.550Z"
+  },
+  "Tags": [
+    "#Meeting",
+    "#Termin",
+    "#Email",
+    "#KI"
+  ],
+  "UZT_ISO8601": "2025-05-06Tnull:00.000Z",
+  "Erfassung_Timestamp": "2025-07-28T19:31:41.551Z"
+}

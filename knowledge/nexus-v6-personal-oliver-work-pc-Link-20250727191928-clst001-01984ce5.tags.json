@@ -1,0 +1,94 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-zoom-meeting-20231010T1200Z-clst002-abc123",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20231010T1200Z",
+  "Archetype": "Link",
+  "ObjectType": "Meeting",
+  "Subject": "Zoom meeting for project launch",
+  "Tags": [
+    "#Meeting",
+    "#Zoom",
+    "#Launch",
+    "#Dominik",
+    "#Claude",
+    "#Partner",
+    "#Oliver",
+    "#Team",
+    "#Essen",
+    "#Treffen"
+  ],
+  "Title": "Launch Meeting - Zoom",
+  "Summary": "Zoom meeting for project launch",
+  "KeyPoints": [
+    "Meeting Platform: Zoom",
+    "Meeting Link: Launch Meeting"
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://us02web.zoom.us/j/7814776080?pwd=bVVCLzNqNVRTdHl4RmNRQTlJM1VkUT09&omn=87519127974",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "Zoom Meeting Link",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "group",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst002",
+    "cluster_type": "meeting",
+    "related_objects": [],
+    "cluster_timespan": "20231010T1200Z-20231010T1300Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "NEXUS-AG",
+      "IT",
+      "Dev",
+      "AI",
+      "CTO",
+      "oliver"
+    ],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "Dev",
+    "role": "CTO",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": [
+      "CTO",
+      "Project Manager"
+    ],
+    "person_access": [
+      "oliver",
+      "dominik"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2023-10-10T12:00Z",
+  "LastUpdated": "2023-10-10T12:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T17:19:28.689Z",
+  "Erfassung_Timestamp": "2025-07-27T17:19:28.689Z",
+  "Properties": {
+    "source_url": "https://us02web.zoom.us/j/7814776080?pwd=bVVCLzNqNVRTdHl4RmNRQTlJM1VkUT09&omn=87519127974"
+  }
+}

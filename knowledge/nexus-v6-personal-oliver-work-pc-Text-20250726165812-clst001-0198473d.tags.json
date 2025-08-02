@@ -1,0 +1,92 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-oliver-work-text-20231013T0000Z-clst002-a1b2c3d4",
+  "ParentUID": null,
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20231013T0000Z",
+  "Archetype": "Text",
+  "ObjectType": "Article",
+  "Subject": "Sam Altman warns there’s no legal confidentiality when using ChatGPT as a therapist.",
+  "Tags": [
+    "#Text",
+    "#ChatGPT",
+    "#Confidentiality",
+    "#Therapy",
+    "#SamAltman",
+    "#2023",
+    "#Oliver",
+    "#Team",
+    "#Call",
+    "#Telefonat",
+    "#Meeting"
+  ],
+  "Title": "Sam Altman Warns About ChatGPT Confidentiality",
+  "Summary": "Sam Altman warns there’s no legal confidentiality when using ChatGPT as a therapist.",
+  "KeyPoints": [
+    "Sam Altman issued a warning.",
+    "No legal confidentiality with ChatGPT as a therapist.",
+    "Implications for privacy and data security."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": null,
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": null,
+  "EntryContext": {
+    "device_type": "unknown",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst002",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20231013T0000Z-20231013T2359Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "NEXUS-AG",
+      "IT",
+      "Dev",
+      "AI",
+      "CTO",
+      "oliver"
+    ],
+    "organization": "NEXUS-AG",
+    "department": "IT",
+    "team": "Dev",
+    "role": "CTO",
+    "person": "oliver"
+  },
+  "Access": {
+    "role_access": [
+      "CTO",
+      "Legal"
+    ],
+    "person_access": [
+      "oliver"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "internal",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2023-10-13T00:00Z",
+  "LastUpdated": "2023-10-13T00:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-26T14:58:12.604Z",
+  "Erfassung_Timestamp": "2025-07-26T14:58:12.604Z"
+}

@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: liste die 5 letzten artikel auf, die du gelernt ha...",
+  "Summary": "Learning from user interaction about liste",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Hier",
+    "#Artikel",
+    "#Meta",
+    "#Appoints",
+    "#Shengjia",
+    "#Zhao",
+    "#Chief",
+    "#Scientist",
+    "#Zusammenfassung",
+    "#Der"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: liste",
+    "Connected knowledge from 15 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T22:23:14.368Z",
+  "LearningScore": 0.7,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.7,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "liste die 5 letzten artikel auf, die du gelernt hast"
+  }
+}

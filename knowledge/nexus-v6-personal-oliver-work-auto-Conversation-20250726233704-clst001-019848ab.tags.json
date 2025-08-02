@@ -1,0 +1,33 @@
+{
+  "Title": "Conversation: erszeuige eine liste der letzten einträge, die du ...",
+  "Summary": "Learning from user interaction about erszeuige",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Hier",
+    "#Eintr",
+    "#Warum",
+    "#Zusammenfassung",
+    "#Die",
+    "#Welt",
+    "#Big",
+    "#Tech",
+    "#Struktur",
+    "#Ownership"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: erszeuige",
+    "Connected knowledge from 10 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T21:37:04.545Z",
+  "LearningScore": 0.7,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.7,
+    "entities_extracted": 10,
+    "patterns_found": 0,
+    "original_query": "erszeuige eine liste der letzten einträge, die du gelernt hast"
+  }
+}

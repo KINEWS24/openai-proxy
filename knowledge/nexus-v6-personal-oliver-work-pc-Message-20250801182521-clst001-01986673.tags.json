@@ -1,0 +1,22 @@
+{
+  "Title": "Recht: Enhanced Summary",
+  "Tags": [
+    "#Erfasst",
+    "#Team",
+    "#Office",
+    "#Call",
+    "#Telefonat",
+    "#Meeting",
+    "#Privat",
+    "#Personal"
+  ],
+  "Archetype": "Message",
+  "UZT_ISO8601": "2025-08-01T16:25:21.710Z",
+  "Erfassung_Timestamp": "2025-08-01T16:25:21.710Z",
+  "Summary": "Ein Gericht in Georgia hob ein Urteil auf, das auf falschen, möglicherweise KI-generierten Fallzitaten basierte. Experten warnen, dass solche Fehler häufiger werden könnten, wenn Richter nicht besser im Umgang mit KI geschult werden.",
+  "Properties": {
+    "content_hash": "9f9485d2e457eb15a9e09282fa32771b",
+    "source_url": "https://arstechnica.com/tech-policy/2025/07/its-frighteningly-likely-many-us-courts-will-overlook-ai-errors-expert-says/",
+    "enhanced_summary": true
+  }
+}

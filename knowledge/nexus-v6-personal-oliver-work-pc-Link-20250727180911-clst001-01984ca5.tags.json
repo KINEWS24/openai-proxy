@@ -1,0 +1,93 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-techcrunch-article-20250725T0422Z-clst001-1a2b3c4d",
+  "ParentUID": "nexus-v6-usr-techcrunch-article-20250725T0400Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 2,
+  "UZT_ISO8601_Compact": "20250725T0422Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Google Tests Vibe-Coding App Opal",
+  "Tags": [
+    "#AI",
+    "#Google",
+    "#VibeCoding",
+    "#Opal",
+    "#TechCrunch",
+    "#2025",
+    "#Team",
+    "#Call",
+    "#Telefonat",
+    "#Meeting"
+  ],
+  "Title": "Google Tests Vibe-Coding App Opal",
+  "Summary": "Google is testing a new vibe-coding app called Opal.",
+  "KeyPoints": [
+    "Google is experimenting with a vibe-coding tool named Opal.",
+    "Opal allows users to create mini web apps using text prompts.",
+    "The app is available through Google Labs in the U.S.",
+    "Users can publish and share their apps online."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://techcrunch.com/2025/07/25/google-is-testing-a-vibe-coding-app-called-opal/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "google-vibe-coding-opal",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250725T0400Z-20250725T0500Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "TechCrunch",
+      "Editorial",
+      "AI",
+      "Reporter",
+      "ivan"
+    ],
+    "organization": "TechCrunch",
+    "department": "Editorial",
+    "team": "AI",
+    "role": "Reporter",
+    "person": "ivan"
+  },
+  "Access": {
+    "role_access": [
+      "Editor",
+      "Reporter"
+    ],
+    "person_access": [
+      "ivan"
+    ],
+    "external_access": [
+      "public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-25T04:22Z",
+  "LastUpdated": "2025-07-25T04:22Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T16:09:11.984Z",
+  "Erfassung_Timestamp": "2025-07-27T16:09:11.984Z",
+  "Properties": {
+    "source_url": "https://techcrunch.com/2025/07/25/google-is-testing-a-vibe-coding-app-called-opal/"
+  }
+}

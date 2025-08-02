@@ -1,0 +1,20 @@
+{
+  "Title": "Conversation: liste mir die zeitlinie der halbleiter der us auf...",
+  "Summary": "Learning from user interaction about liste",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction"
+  ],
+  "KeyPoints": [],
+  "UZT_ISO8601": "2025-07-26T23:06:28.127Z",
+  "LearningScore": 0.4,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.4,
+    "entities_extracted": 0,
+    "patterns_found": 0,
+    "original_query": "liste mir die zeitlinie der halbleiter der us auf"
+  }
+}

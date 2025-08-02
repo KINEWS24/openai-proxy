@@ -1,0 +1,34 @@
+{
+  "Title": "Conversation: hey nexus, wie geht´s dir?  liste deine letzten 5 ...",
+  "Summary": "Learning from user interaction about nexus,",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Hallo",
+    "#Danke",
+    "#Mir",
+    "#Hier",
+    "#Learnings",
+    "#Form",
+    "#Tabelle",
+    "#Lernfeld",
+    "#Lektion",
+    "#Nutzerzentrierung",
+    "#Pattern_QuestionAsker"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: nexus,",
+    "Connected knowledge from 11 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T22:06:54.041Z",
+  "LearningScore": 0.7,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 0.7,
+    "entities_extracted": 10,
+    "patterns_found": 1,
+    "original_query": "hey nexus, wie geht´s dir?  liste deine letzten 5 learnings in einer tabelle auf"
+  }
+}

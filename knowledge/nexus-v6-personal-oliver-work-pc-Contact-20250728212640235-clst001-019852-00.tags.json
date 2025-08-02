@@ -1,0 +1,30 @@
+{
+  "Title": "Kontakt: Hallo Oliver",
+  "Summary": "Kontakt aus Email-Thread extrahiert: Hallo Oliver",
+  "Archetype": "Contact",
+  "Contact": {
+    "name": "Hallo Oliver",
+    "email": "anne.wilmers@wilmers-kommunikation.de",
+    "company": null,
+    "phone": null,
+    "address": null,
+    "position": null
+  },
+  "Properties": {
+    "source": "email_thread",
+    "is_owner": true,
+    "extraction_method": "ai_batch",
+    "capture_timestamp": "2025-07-28T19:26:40.222Z",
+    "phone_extracted": false,
+    "email_extracted": true
+  },
+  "Tags": [
+    "#Kontakt",
+    "#Email",
+    "#Owner",
+    "HalloOliver"
+  ],
+  "SearchableContactData": "Hallo Oliver anne.wilmers@wilmers-kommunikation.de",
+  "UZT_ISO8601": "2025-07-28T19:26:40.222Z",
+  "Erfassung_Timestamp": "2025-07-28T19:26:40.222Z"
+}

@@ -1,0 +1,71 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-techcrunch-article-20250731T1000Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-techcrunch-article-20250731T1000Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250731T1000Z",
+  "Archetype": "Text",
+  "ObjectType": "Article",
+  "Subject": "Quora’s Poe Releases Developer API",
+  "Tags": [
+    "#AI",
+    "#API",
+    "#Quora",
+    "#Poe",
+    "#TechCrunch",
+    "#2025",
+    "#Team"
+  ],
+  "Title": "Technologie: Enhanced Summary",
+  "Summary": "Quora's Poe hat eine API veröffentlicht, die es Entwicklern ermöglicht, auf eine Vielzahl von KI-Modellen zuzugreifen, ohne zusätzliche Gebühren zu zahlen. Die Nutzung wird über ein Punktesystem abgerechnet.",
+  "KeyPoints": [
+    "Poe's API allows access to different AI models without a separate fee.",
+    "Usage is tracked via Poe’s point-based subscription plans.",
+    "Developers can power tools with OpenAI-compatible chat completion APIs."
+  ],
+  "LinkTarget": "https://techcrunch.com/2025/07/31/quoras-poe-is-releasing-an-api-for-developers-to-easily-access-a-boquet-of-models/",
+  "Hierarchy": {
+    "hierarchy_path": [
+      "TechCrunch",
+      "Articles",
+      "AI",
+      "2025"
+    ],
+    "organization": "TechCrunch",
+    "department": "Articles",
+    "team": "AI",
+    "role": "Author",
+    "person": "Ivan Mehta"
+  },
+  "Access": {
+    "role_access": [
+      "Editor",
+      "Author"
+    ],
+    "person_access": [
+      "Ivan Mehta"
+    ],
+    "external_access": [
+      "Public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-31T10:00Z",
+  "LastUpdated": "2025-07-31T10:00Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-31T20:06:37.705Z",
+  "Erfassung_Timestamp": "2025-07-31T20:06:37.705Z",
+  "Properties": {
+    "content_hash": "f53dc1e28eb88860049731b50300dba4",
+    "source_url": "https://techcrunch.com/2025/07/31/quoras-poe-is-releasing-an-api-for-developers-to-easily-access-a-boquet-of-models/",
+    "enhanced_summary": true
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-openai-oracle-deal-20250722T1336Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-openai-oracle-deal-20250722T1300Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 3,
+  "UZT_ISO8601_Compact": "20250722T1336Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "OpenAI's $30B Annual Deal with Oracle for Data Center Services",
+  "Tags": [
+    "#AI",
+    "#DataCenters",
+    "#Enterprise",
+    "#OpenAI",
+    "#Oracle",
+    "#Stargate",
+    "#TechCrunch",
+    "#Team"
+  ],
+  "Title": "OpenAI's $30B Annual Deal with Oracle for Data Center Services",
+  "Summary": "OpenAI has agreed to a $30 billion per year deal with Oracle for data center services as part of the Stargate project.",
+  "KeyPoints": [
+    "OpenAI signed a $30 billion per year contract with Oracle for data center services.",
+    "The deal is part of the Stargate project, a $500 billion data-center-building initiative.",
+    "The data center will be built at the Stargate I site in Abilene, Texas.",
+    "Oracle's capital expenditures are expected to reach $25 billion this year."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://techcrunch.com/2025/07/22/openai-agreed-to-pay-oracle-30b-a-year-for-data-center-services/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "OpenAI Oracle Deal Article",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250722T1300Z-20250722T1400Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "TechCrunch",
+      "News",
+      "Enterprise",
+      "AI",
+      "OpenAI"
+    ],
+    "organization": "TechCrunch",
+    "department": "News",
+    "team": "Enterprise",
+    "role": "Editor",
+    "person": "Julie Bort"
+  },
+  "Access": {
+    "role_access": [
+      "Editor",
+      "Journalist"
+    ],
+    "person_access": [
+      "Julie Bort"
+    ],
+    "external_access": [
+      "public"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-22T13:36Z",
+  "LastUpdated": "2025-07-22T13:36Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T14:40:30.858Z",
+  "Erfassung_Timestamp": "2025-07-27T14:40:30.858Z",
+  "Properties": {
+    "source_url": "https://techcrunch.com/2025/07/22/openai-agreed-to-pay-oracle-30b-a-year-for-data-center-services/"
+  }
+}

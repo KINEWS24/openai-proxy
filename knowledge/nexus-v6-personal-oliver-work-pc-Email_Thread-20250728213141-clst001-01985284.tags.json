@@ -1,0 +1,34 @@
+{
+  "Title": "Email-Thread: Vorbereitung für ein Gespräch über HR-Themen",
+  "Summary": "Anne Wilmers bittet Oliver Welling, ihr 1-2 Seiten zu schicken, die sie bei einem Gespräch am nächsten Tag vorzeigen kann. Das Gespräch dreht sich um HR-Themen.",
+  "Archetype": "Email_Thread",
+  "Thread": {
+    "topic": "Vorbereitung für ein Gespräch über HR-Themen",
+    "summary": "Anne Wilmers bittet Oliver Welling, ihr 1-2 Seiten zu schicken, die sie bei einem Gespräch am nächsten Tag vorzeigen kann. Das Gespräch dreht sich um HR-Themen.",
+    "action_items": [
+      "Oliver Welling soll Anne Wilmers 1-2 Seiten schicken, die sie erzählen kann, was ihr Institut macht, insbesondere bzgl. HR."
+    ],
+    "participant_count": 1,
+    "related_contacts": [
+      "nexus-v6-personal-oliver-work-pc-Contact-20250728213141545-clst001-019852-00"
+    ],
+    "related_meetings": [
+      "nexus-v6-personal-oliver-work-pc-Meeting-20250728213141551-clst001-01985284"
+    ]
+  },
+  "Properties": {
+    "source": "email_thread",
+    "thread_type": "business_communication",
+    "visualization_ready": true,
+    "contact_count": 1,
+    "meeting_count": 1,
+    "capture_timestamp": "2025-07-28T19:31:41.553Z"
+  },
+  "Tags": [
+    "#EmailThread",
+    "#Kommunikation",
+    "#Konversation"
+  ],
+  "UZT_ISO8601": "2025-07-28T19:31:41.553Z",
+  "Erfassung_Timestamp": "2025-07-28T19:31:41.553Z"
+}

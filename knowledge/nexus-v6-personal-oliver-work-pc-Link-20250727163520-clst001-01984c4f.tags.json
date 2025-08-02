@@ -1,0 +1,99 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-article-20250727T1432Z-clst001-1a2b3c4d",
+  "ParentUID": "nexus-v6-usr-article-20250727T1400Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 5,
+  "UZT_ISO8601_Compact": "20250727T1432Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Jerome Powell steht im Kreuzfeuer von Donald Trump und dessen Anhängern, bleibt jedoch standhaft.",
+  "Tags": [
+    "#Politics",
+    "#JeromePowell",
+    "#DonaldTrump",
+    "#Fed",
+    "#Economy",
+    "#2025",
+    "#Dominik",
+    "#Claude",
+    "#Partner",
+    "#Chef",
+    "#Team",
+    "#Essen",
+    "#Treffen",
+    "#Meeting"
+  ],
+  "Title": "Dauerattacken gegen Fed-Chef: Jerome Powell: Der Anti-Trump ergibt sich nicht",
+  "Summary": "Jerome Powell wird von Donald Trump angegriffen, bleibt jedoch standhaft.",
+  "KeyPoints": [
+    "Jerome Powell wird von Donald Trump angegriffen, bleibt jedoch standhaft.",
+    "Trump versucht, Powell öffentlich bloßzustellen, scheitert jedoch.",
+    "Powell widerspricht Trump offen und bleibt einer der wenigen, die dies tun."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://www.n-tv.de/politik/Jerome-Powell-Der-Anti-Trump-ergibt-sich-nicht-article25927828.html",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "Jerome-Powell-Der-Anti-Trump-ergibt-sich-nicht-article25927828.html",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "solo",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250727T1400Z-20250727T1800Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "NEXUS-AG",
+      "Media",
+      "News",
+      "Politics",
+      "Editor",
+      "stephanie"
+    ],
+    "organization": "NEXUS-AG",
+    "department": "Media",
+    "team": "News",
+    "role": "Editor",
+    "person": "stephanie"
+  },
+  "Access": {
+    "role_access": [
+      "Editor",
+      "Journalist"
+    ],
+    "person_access": [
+      "stephanie",
+      "dominik"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "36M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-27T14:32Z",
+  "LastUpdated": "2025-07-27T14:32Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-27T14:35:20.450Z",
+  "Erfassung_Timestamp": "2025-07-27T14:35:20.450Z",
+  "Properties": {
+    "source_url": "https://www.n-tv.de/politik/Jerome-Powell-Der-Anti-Trump-ergibt-sich-nicht-article25927828.html"
+  }
+}

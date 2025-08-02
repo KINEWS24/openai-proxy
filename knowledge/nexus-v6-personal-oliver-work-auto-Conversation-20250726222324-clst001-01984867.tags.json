@@ -1,0 +1,38 @@
+{
+  "Title": "Conversation: Ich plane morgen ein wichtiges Meeting mit meinem ...",
+  "Summary": "Learning from user interaction about plane",
+  "Archetype": "Conversation",
+  "Tags": [
+    "#Conversation",
+    "#Learning",
+    "#UserInteraction",
+    "#Ich",
+    "#Meeting",
+    "#Gesch",
+    "#Dominik",
+    "#Uhr",
+    "#Projekt",
+    "#Welche",
+    "#Unterlagen",
+    "#Infos",
+    "#Trends",
+    "#Pattern_MorningPerson",
+    "#Pattern_DetailedCommunicator",
+    "#Pattern_QuestionAsker",
+    "#Pattern_MeetingOriented",
+    "#Pattern_ProjectFocused"
+  ],
+  "KeyPoints": [
+    "User asked detailed question about: plane",
+    "Connected knowledge from 10 sources"
+  ],
+  "UZT_ISO8601": "2025-07-26T20:23:24.380Z",
+  "LearningScore": 2.1999999999999997,
+  "Properties": {
+    "conversation_type": "user_chat",
+    "learning_value": 2.1999999999999997,
+    "entities_extracted": 10,
+    "patterns_found": 5,
+    "original_query": "Ich plane morgen ein wichtiges Meeting mit meinem Geschäftspartner Dominik um 14 Uhr über unser neues KI-Projekt. Welche Unterlagen und Präsentationen sollte ich dafür vorbereiten? Außerdem brauche ich noch Infos über aktuelle AI-Trends"
+  }
+}

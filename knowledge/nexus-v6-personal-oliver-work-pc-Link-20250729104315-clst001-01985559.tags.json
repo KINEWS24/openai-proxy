@@ -1,0 +1,102 @@
+{
+  "SchemaVersion": "v6.1",
+  "UID": "nexus-v6-usr-anthropic-article-20250728T1518Z-clst001-a1b2c3d4",
+  "ParentUID": "nexus-v6-usr-anthropic-article-20250728T1500Z-clst001-rootuid",
+  "ChunkNr": 1,
+  "TotalChunks": 1,
+  "UZT_ISO8601_Compact": "20250728T1518Z",
+  "Archetype": "Link",
+  "ObjectType": "Article",
+  "Subject": "Anthropic führt wöchentliche Nutzungsbeschränkungen für Claude ein",
+  "Tags": [
+    "#Article",
+    "#AI",
+    "#Anthropic",
+    "#Claude",
+    "#RateLimits",
+    "#2025",
+    "#VentureBeat",
+    "#Dominik",
+    "#KI",
+    "#Team",
+    "#Treffen",
+    "#Meeting",
+    "#Essen",
+    "#Call",
+    "#Telefonat"
+  ],
+  "Title": "Anthropic throttles Claude rate limits, devs call foul",
+  "Summary": "Anthropic führt wöchentliche Nutzungsbeschränkungen für Claude ein, was bei Entwicklern auf Kritik stößt.",
+  "KeyPoints": [
+    "Anthropic führt wöchentliche Nutzungsbeschränkungen für Claude ein, um die Systemkapazität zu schützen.",
+    "Die Beschränkungen betreffen nur 5% der Nutzer, die Claude intensiv nutzen.",
+    "Entwickler kritisieren die Maßnahme, da sie die Nutzungsmöglichkeiten einschränkt.",
+    "Anthropic plant, langfristige Nutzungsmöglichkeiten in der Zukunft zu unterstützen.",
+    "Unternehmen müssen möglicherweise zusätzliche Nutzungskapazitäten kaufen."
+  ],
+  "DocumentStructure": [],
+  "ImageDescription": null,
+  "AudioVideoSummary": null,
+  "LinkTarget": "https://venturebeat.com/ai/anthropic-throttles-claude-rate-limits-devs-call-foul/",
+  "MessageContext": null,
+  "DataStructure": null,
+  "ContentReference": "anthropic-article-20250728",
+  "EntryContext": {
+    "device_type": "desktop",
+    "capture_method": "manual",
+    "workspace_context": "work",
+    "social_context": "public",
+    "geo_data": null
+  },
+  "ClusterData": {
+    "cluster_id": "clst001",
+    "cluster_type": "news",
+    "related_objects": [],
+    "cluster_timespan": "20250728T1500Z-20250728T1600Z"
+  },
+  "Hierarchy": {
+    "hierarchy_path": [
+      "NEXUS-AG",
+      "Media",
+      "News",
+      "AI",
+      "Reporter",
+      "emilia"
+    ],
+    "organization": "NEXUS-AG",
+    "department": "Media",
+    "team": "News",
+    "role": "Reporter",
+    "person": "emilia"
+  },
+  "Access": {
+    "role_access": [
+      "Reporter",
+      "Editor"
+    ],
+    "person_access": [
+      "emilia",
+      "john"
+    ],
+    "external_access": [
+      "auditor",
+      "DPO"
+    ]
+  },
+  "GDPR": {
+    "dpo_approval": true,
+    "confidentiality_level": "public",
+    "retention_policy": "12M"
+  },
+  "content_rating": "neutral",
+  "related_modalities": [],
+  "embedded_objects": [],
+  "Created": "2025-07-28T15:18Z",
+  "LastUpdated": "2025-07-28T15:18Z",
+  "RawExtractedData": null,
+  "UZT_ISO8601": "2025-07-29T08:43:15.280Z",
+  "Erfassung_Timestamp": "2025-07-29T08:43:15.280Z",
+  "Properties": {
+    "source_url": "https://venturebeat.com/ai/anthropic-throttles-claude-rate-limits-devs-call-foul/"
+  }
+}

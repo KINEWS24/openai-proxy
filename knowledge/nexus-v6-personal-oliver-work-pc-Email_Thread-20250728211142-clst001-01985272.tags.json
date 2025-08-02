@@ -1,0 +1,30 @@
+{
+  "Title": "Email-Thread: Email-Kommunikation",
+  "Summary": "Email-Thread empfangen",
+  "Archetype": "Email_Thread",
+  "Thread": {
+    "topic": "Email-Kommunikation",
+    "summary": "Email-Thread empfangen",
+    "action_items": [],
+    "participant_count": 1,
+    "related_contacts": [
+      "nexus-v6-personal-oliver-work-pc-Contact-20250728211142920-clst001-019852-00"
+    ],
+    "related_meetings": []
+  },
+  "Properties": {
+    "source": "email_thread",
+    "thread_type": "business_communication",
+    "visualization_ready": true,
+    "contact_count": 1,
+    "meeting_count": 0,
+    "capture_timestamp": "2025-07-28T19:11:42.927Z"
+  },
+  "Tags": [
+    "#EmailThread",
+    "#Kommunikation",
+    "#Konversation"
+  ],
+  "UZT_ISO8601": "2025-07-28T19:11:42.927Z",
+  "Erfassung_Timestamp": "2025-07-28T19:11:42.927Z"
+}
