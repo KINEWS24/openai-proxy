@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash('cat \"\"C:\\Users\\olive\\nexus\\index.html\"\" | head -50')",
+      "Bash(node:*)",
+      "Bash(curl:*)"
+    ],
+    "deny": []
+  }
+}

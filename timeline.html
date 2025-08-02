@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Timeline</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .header h1 {
+            color: #2c3e50;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: linear-gradient(135deg, #a8a8a8, #7a7a7a);
+            box-shadow: 0 4px 15px rgba(168, 168, 168, 0.4);
+        }
+
+        .btn.secondary:hover {
+            box-shadow: 0 6px 20px rgba(168, 168, 168, 0.6);
+        }
+
+        select, input {
+            padding: 0.5rem 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        select:focus, input:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.9rem;
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .timeline-container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+            position: relative;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .timeline-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item.today {
+            transform: scale(1.05);
+        }
+
+        .timeline-item.today .timeline-content {
+            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            color: white;
+            box-shadow: 0 10px 30px rgba(255, 216, 155, 0.4);
+        }
+
+        .timeline-item:nth-child(odd) {
+            text-align: right;
+            padding-right: calc(50% + 2rem);
+        }
+
+        .timeline-item:nth-child(even) {
+            text-align: left;
+            padding-left: calc(50% + 2rem);
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::after {
+            content: '';
+            position: absolute;
+            right: -15px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-left-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::after {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 20px;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+            border-right-color: rgba(255, 255, 255, 0.95);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: 50%;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.8), 0 0 20px rgba(102, 126, 234, 0.4);
+            z-index: 10;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-item.today .timeline-marker {
+            width: 30px;
+            height: 30px;
+            background: linear-gradient(135deg, #ffd89b, #19547b);
+            box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 216, 155, 0.6);
+        }
+
+        .timeline-date {
+            font-size: 0.9rem;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 0.5rem;
+            line-height: 1.4;
+        }
+
+        .timeline-summary {
+            color: #5a6c7d;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .archetype-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .archetype-text { background: #e8f5e8; color: #2d5a2d; }
+        .archetype-image { background: #ffeaa7; color: #8b5a00; }
+        .archetype-link { background: #a8e6cf; color: #2d5a3d; }
+        .archetype-message { background: #dda0dd; color: #6b2c6b; }
+        .archetype-document { background: #87ceeb; color: #1e4d5b; }
+
+        .loading {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: white;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #d32f2f;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 2rem;
+            text-align: center;
+        }
+
+        .load-more {
+            text-align: center;
+            margin: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+            
+            .controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .timeline::before {
+                left: 2rem;
+            }
+
+            .timeline-item {
+                text-align: left !important;
+                padding-left: 4rem !important;
+                padding-right: 0 !important;
+            }
+
+            .timeline-content::after {
+                left: -15px !important;
+                right: auto !important;
+                border-left-color: transparent !important;
+                border-right-color: rgba(255, 255, 255, 0.95) !important;
+            }
+
+            .timeline-marker {
+                left: 2rem !important;
+            }
+
+            .stats {
+                gap: 1rem;
+            }
+        }
+
+        .today-indicator {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            background: linear-gradient(135deg, #ffd89b, #19547b);
+            color: white;
+            padding: 1rem;
+            border-radius: 50%;
+            box-shadow: 0 4px 20px rgba(255, 216, 155, 0.4);
+            cursor: pointer;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .today-indicator:hover {
+            transform: translateY(-50%) scale(1.1);
+            box-shadow: 0 6px 25px rgba(255, 216, 155, 0.6);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 Nexus Timeline</h1>
+        <div class="controls">
+            <div class="control-group">
+                <button class="btn" onclick="scrollToToday()">📅 Today</button>
+                <button class="btn secondary" onclick="loadMore()">Load More</button>
+                <button class="btn secondary" onclick="refreshTimeline()">🔄 Refresh</button>
+            </div>
+            <div class="control-group">
+                <label>Show:</label>
+                <select id="limitSelect" onchange="changeLimitAndReload()">
+                    <option value="10">10 entries</option>
+                    <option value="25">25 entries</option>
+                    <option value="50">50 entries</option>
+                    <option value="100">100 entries</option>
+                    <option value="all">All entries</option>
+                </select>
+            </div>
+            <div class="control-group">
+                <label>Filter:</label>
+                <select id="archetypeFilter" onchange="filterEntries()">
+                    <option value="">All Types</option>
+                    <option value="text">Text</option>
+                    <option value="image">Image</option>
+                    <option value="link">Link</option>
+                    <option value="message">Message</option>
+                    <option value="document">Document</option>
+                </select>
+            </div>
+        </div>
+        <div class="stats" id="stats">
+            <div class="stat">Loading...</div>
+        </div>
+    </div>
+
+    <div class="timeline-container">
+        <div id="timeline" class="timeline">
+            <div class="loading">
+                <div class="loading-spinner"></div>
+                <p>Loading timeline data...</p>
+            </div>
+        </div>
+        <div class="load-more" id="loadMoreContainer" style="display: none;">
+            <button class="btn" onclick="loadMore()">Load More Entries</button>
+        </div>
+    </div>
+
+    <div class="today-indicator" onclick="scrollToToday()" title="Scroll to Today">
+        📅
+    </div>
+
+    <script>
+        let timelineData = [];
+        let displayedData = [];
+        let currentLimit = 10;
+        let currentOffset = 0;
+        let allData = [];
+        let todayEntry = null;
+
+        async function loadTimeline(limit = 10, offset = 0, filters = {}) {
+            try {
+                let url = '/visualize/timeline';
+                const params = new URLSearchParams();
+                
+                if (limit) params.append('limit', limit);
+                if (offset) params.append('offset', offset);
+                if (filters.archetype) params.append('archetype', filters.archetype);
+                if (filters.workspace) params.append('workspace', filters.workspace);
+                
+                if (params.toString()) {
+                    url += '?' + params.toString();
+                }
+                
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to load timeline');
+                }
+
+                if (offset === 0) {
+                    // Initial load
+                    allData = data.timeline_data || [];
+                } else {
+                    // Append for pagination
+                    allData = allData.concat(data.timeline_data || []);
+                }
+                
+                updateStats(data.stats);
+                
+                // Find today's entries
+                const today = new Date().toISOString().split('T')[0];
+                todayEntry = allData.find(item => 
+                    new Date(item.start).toISOString().split('T')[0] === today
+                );
+
+                return {
+                    data: data.timeline_data || [],
+                    hasMore: data.pagination?.has_more || false,
+                    nextOffset: data.pagination?.next_offset || null
+                };
+                
+            } catch (error) {
+                console.error('Error loading timeline:', error);
+                document.getElementById('timeline').innerHTML = 
+                    `<div class="error">Error loading timeline: ${error.message}</div>`;
+                return { data: [], hasMore: false, nextOffset: null };
+            }
+        }
+
+        async function displayInitialEntries() {
+            currentOffset = 0;
+            displayedData = [];
+            
+            // Show initial entries based on limit
+            const limitSelect = document.getElementById('limitSelect');
+            const limit = limitSelect.value === 'all' ? null : parseInt(limitSelect.value);
+            
+            const result = await loadTimeline(limit, 0, getCurrentFilters());
+            displayedData = result.data;
+            currentOffset = result.data.length;
+            
+            renderTimeline();
+            
+            // Show/hide load more button based on API response
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            if (result.hasMore && limitSelect.value !== 'all') {
+                loadMoreContainer.style.display = 'block';
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+            
+            // Auto-scroll to today after a brief delay to allow rendering
+            setTimeout(() => {
+                if (todayEntry) {
+                    scrollToToday();
+                }
+            }, 1000);
+        }
+
+        async function loadMoreEntries() {
+            const limitSelect = document.getElementById('limitSelect');
+            if (limitSelect.value === 'all') return;
+            
+            const limit = 10; // Always load 10 more entries
+            const result = await loadTimeline(limit, currentOffset, getCurrentFilters());
+            
+            if (result.data.length > 0) {
+                displayedData = displayedData.concat(result.data);
+                currentOffset += result.data.length;
+                renderTimeline();
+            }
+            
+            // Update load more button visibility
+            const loadMoreContainer = document.getElementById('loadMoreContainer');
+            if (result.hasMore) {
+                loadMoreContainer.style.display = 'block';
+            } else {
+                loadMoreContainer.style.display = 'none';
+            }
+        }
+
+        function getCurrentFilters() {
+            return {
+                archetype: document.getElementById('archetypeFilter').value || null,
+                workspace: null // Add workspace filter later if needed
+            };
+        }
+
+        function renderTimeline() {
+            const timeline = document.getElementById('timeline');
+            const filteredData = getFilteredData();
+            
+            if (filteredData.length === 0) {
+                timeline.innerHTML = '<div class="loading"><p>No entries found</p></div>';
+                return;
+            }
+
+            const timelineHTML = filteredData.map(item => {
+                const date = new Date(item.start);
+                const isToday = item.isToday;
+                const archetype = (item.archetype || 'unknown').toLowerCase();
+                
+                return `
+                    <div class="timeline-item ${isToday ? 'today' : ''}" data-date="${item.start}" data-archetype="${archetype}">
+                        <div class="timeline-marker"></div>
+                        <div class="timeline-content">
+                            <div class="timeline-date">
+                                ${formatDate(date)}
+                                <span class="archetype-badge archetype-${archetype}">${item.archetype || 'Unknown'}</span>
+                            </div>
+                            <div class="timeline-title">${escapeHtml(item.content)}</div>
+                            ${item.title ? `<div class="timeline-summary">${escapeHtml(item.title)}</div>` : ''}
+                            ${item.tags && item.tags.length > 0 ? `
+                                <div class="timeline-tags">
+                                    ${item.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            timeline.innerHTML = timelineHTML;
+            
+            // Animate entries into view
+            setTimeout(() => {
+                const items = timeline.querySelectorAll('.timeline-item');
+                items.forEach((item, index) => {
+                    setTimeout(() => {
+                        item.classList.add('visible');
+                    }, index * 100);
+                });
+            }, 100);
+        }
+
+        function getFilteredData() {
+            // Since filtering is now done server-side, just return displayed data
+            return displayedData;
+        }
+
+        async function filterEntries() {
+            // Reload with new filters
+            document.getElementById('timeline').innerHTML = 
+                '<div class="loading"><div class="loading-spinner"></div><p>Applying filters...</p></div>';
+            await displayInitialEntries();
+        }
+
+        async function changeLimitAndReload() {
+            document.getElementById('timeline').innerHTML = 
+                '<div class="loading"><div class="loading-spinner"></div><p>Loading entries...</p></div>';
+            await displayInitialEntries();
+        }
+
+        async function loadMore() {
+            await loadMoreEntries();
+        }
+
+        async function refreshTimeline() {
+            document.getElementById('timeline').innerHTML = 
+                '<div class="loading"><div class="loading-spinner"></div><p>Refreshing timeline...</p></div>';
+            await displayInitialEntries();
+        }
+
+        function scrollToToday() {
+            const todayElement = document.querySelector('.timeline-item.today');
+            if (todayElement) {
+                todayElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+                
+                // Highlight effect
+                todayElement.style.transform = 'scale(1.1)';
+                setTimeout(() => {
+                    todayElement.style.transform = 'scale(1.05)';
+                }, 300);
+            } else {
+                // If no today entry, scroll to top
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            }
+        }
+
+        function updateStats(stats) {
+            const statsContainer = document.getElementById('stats');
+            if (!stats) {
+                statsContainer.innerHTML = '<div class="stat">No stats available</div>';
+                return;
+            }
+
+            statsContainer.innerHTML = `
+                <div class="stat">📊 Total: ${stats.total_entries || 0}</div>
+                <div class="stat">📅 Today: ${stats.today_entries || 0}</div>
+                <div class="stat">🕐 Cache: ${stats.cache_age_minutes || 0}m</div>
+                <div class="stat">📁 Files: ${stats.total_files || 0}</div>
+            `;
+        }
+
+        function formatDate(date) {
+            const options = { 
+                year: 'numeric', 
+                month: 'short', 
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            };
+            return date.toLocaleDateString('en-US', options);
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Smooth scrolling improvements
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Improved mouse wheel handling
+            let isScrolling = false;
+            
+            window.addEventListener('wheel', function(e) {
+                if (isScrolling) return;
+                
+                isScrolling = true;
+                setTimeout(() => {
+                    isScrolling = false;
+                }, 100);
+            }, { passive: true });
+
+            // Load timeline on page load
+            await displayInitialEntries();
+        });
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 't' || e.key === 'T') {
+                scrollToToday();
+            } else if (e.key === 'r' || e.key === 'R') {
+                refreshTimeline();
+            }
+        });
+    </script>
+</body>
+</html>

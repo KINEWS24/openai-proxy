@@ -3080,6 +3080,10 @@ ${analysisData.action_items && analysisData.action_items.length > 0
 const app = express();
 app.use(cors());
 app.use(express.json({ limit: "15mb" }));
+
+// Serve static files (for timeline.html and other assets)
+app.use(express.static(__dirname));
+
 app.use((req, res, next) => { 
   console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`); 
   next(); 
@@ -3093,8 +3097,14 @@ app.get("/", (req, res) => {
     status: "OK", 
     message: "Nexus v6.1 WORKSPACE INTELLIGENT EDITION Ready!", 
     version: "6.1",
-    performance: enhancedStats
+    performance: enhancedStats,
+    timeline_url: "/timeline.html"
   });
+});
+
+// Timeline UI Route
+app.get("/timeline", (req, res) => {
+  res.redirect("/timeline.html");
 });
 
 // --- v6.1 ENHANCED CACHE MANAGEMENT ENDPOINTS ---
@@ -4157,6 +4167,14 @@ app.get("/visualize/timeline", async (req, res) => {
   try {
     console.log('[TIMELINE] 📊 Building timeline visualization...');
     
+    // Parse query parameters for pagination and filtering
+    const limit = req.query.limit ? parseInt(req.query.limit) : null;
+    const offset = req.query.offset ? parseInt(req.query.offset) : 0;
+    const archetype = req.query.archetype || null;
+    const workspace = req.query.workspace || null;
+    
+    console.log(`[TIMELINE] 🎯 Query params: limit=${limit}, offset=${offset}, archetype=${archetype}, workspace=${workspace}`);
+    
     // 🚀 NEW: Cache-Refresh wenn Timeline leer oder veraltet
     const cacheAge = lastCacheUpdate ? (Date.now() - new Date(lastCacheUpdate).getTime()) / 1000 / 60 : 999;
     console.log(`[TIMELINE] 🔍 Cache-Status: ${knowledgeCache.size} Einträge, Alter: ${Math.round(cacheAge)} Minuten`);
@@ -4263,19 +4281,44 @@ app.get("/visualize/timeline", async (req, res) => {
       });
     }
     
-    // Sortiere nach Datum (chronologisch - älteste zuerst)
-    timelineData.sort((a, b) => new Date(a.start) - new Date(b.start));
+    // Sortiere nach Datum (neueste zuerst für bessere UX)
+    timelineData.sort((a, b) => new Date(b.start) - new Date(a.start));
     
- // 🔧 FIXED: Timeline zeigt ALLE Einträge (komplette Wissensmanagement-Übersicht)
-    // Keine Filterung oder Begrenzung - Timeline soll alles anzeigen
-    let limitedData = timelineData; // Alle Daten verwenden (bereits nach Datum sortiert)
+    // Apply filters
+    let filteredData = timelineData;
+    
+    if (archetype) {
+      filteredData = filteredData.filter(item => 
+        item.archetype && item.archetype.toLowerCase() === archetype.toLowerCase()
+      );
+      console.log(`[TIMELINE] 🎭 Filtered by archetype '${archetype}': ${filteredData.length} entries`);
+    }
+    
+    if (workspace) {
+      filteredData = filteredData.filter(item => 
+        item.workspace && item.workspace.toLowerCase() === workspace.toLowerCase()
+      );
+      console.log(`[TIMELINE] 🏢 Filtered by workspace '${workspace}': ${filteredData.length} entries`);
+    }
+    
+    // Apply pagination if limit is specified
+    let limitedData = filteredData;
+    let hasMore = false;
+    
+    if (limit && limit > 0) {
+      const endIndex = offset + limit;
+      limitedData = filteredData.slice(offset, endIndex);
+      hasMore = endIndex < filteredData.length;
+      console.log(`[TIMELINE] 📄 Paginated: showing ${limitedData.length} of ${filteredData.length} (offset: ${offset}, limit: ${limit})`);
+    }
     
     console.log(`[TIMELINE] 📊 Timeline-Debug:`);
     console.log(`  📁 Dateien verarbeitet: ${totalProcessed}`);
     console.log(`  📅 Heute: ${todayCount} Einträge`);
     console.log(`  📅 Gestern: ${yesterdayCount} Einträge`);
     console.log(`  📊 Timeline-Einträge: ${timelineData.length}`);
-    console.log(`  🎯 Angezeigte Einträge: ${limitedData.length}`);
+    console.log(`  🎯 Gefilterte Einträge: ${filteredData.length}`);
+    console.log(`  📄 Angezeigte Einträge: ${limitedData.length}`);
     console.log(`  🕐 Neuester Eintrag: ${limitedData[0]?.start} (${limitedData[0]?.content})`);
     console.log(`  🕐 Ältester Eintrag: ${limitedData[limitedData.length-1]?.start}`);
     
@@ -4283,10 +4326,22 @@ app.get("/visualize/timeline", async (req, res) => {
       success: true,
       timeline_data: limitedData,
       total_entries: timelineData.length,
+      filtered_entries: filteredData.length,
+      pagination: {
+        offset: offset,
+        limit: limit,
+        has_more: hasMore,
+        next_offset: hasMore ? offset + limit : null
+      },
+      filters: {
+        archetype: archetype,
+        workspace: workspace
+      },
       stats: {
         total_files: knowledgeCache.size,
         files_processed: totalProcessed,
         files_with_timestamps: timelineData.length,
+        filtered: filteredData.length,
         displayed: limitedData.length,
         today_entries: todayCount,
         yesterday_entries: yesterdayCount,
