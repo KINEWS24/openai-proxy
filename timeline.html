@@ -939,28 +939,59 @@
             await displayInitialEntries();
         }
 
-        async function setTimelineView(days) {
-            currentTimelineView = days;
+        function initializeTimelineViewButtons() {
+            // Set the default button state based on currentTimelineView
+            const buttonText = currentTimelineView === 3 ? '3 Days' : 
+                              currentTimelineView === 7 ? '1 Week' : 
+                              currentTimelineView === 30 ? '1 Month' : 'All Time';
             
-            // Update button states
+            // Reset all timeline view buttons to secondary style
             document.querySelectorAll('.control-group button').forEach(btn => {
                 if (btn.textContent.includes('Days') || btn.textContent.includes('Week') || 
                     btn.textContent.includes('Month') || btn.textContent.includes('All Time')) {
                     btn.classList.remove('btn');
                     btn.classList.add('btn', 'secondary');
+                    btn.style.background = '';
                 }
             });
             
-            // Highlight active button
+            // Highlight the default active button (All Time)
+            document.querySelectorAll('.control-group button').forEach(btn => {
+                if (btn.textContent === buttonText) {
+                    btn.classList.remove('secondary');
+                    btn.classList.add('btn');
+                    btn.style.background = '';
+                }
+            });
+        }
+
+        async function setTimelineView(days) {
+            currentTimelineView = days;
+            
+            // Reset all timeline view buttons to secondary style
+            document.querySelectorAll('.control-group button').forEach(btn => {
+                if (btn.textContent.includes('Days') || btn.textContent.includes('Week') || 
+                    btn.textContent.includes('Month') || btn.textContent.includes('All Time')) {
+                    // Reset to secondary button style
+                    btn.classList.remove('btn');
+                    btn.classList.add('btn', 'secondary');
+                    // Remove any inline styles
+                    btn.style.background = '';
+                }
+            });
+            
+            // Highlight only the active button
             const buttonText = days === 3 ? '3 Days' : 
                               days === 7 ? '1 Week' : 
                               days === 30 ? '1 Month' : 'All Time';
             
             document.querySelectorAll('.control-group button').forEach(btn => {
                 if (btn.textContent === buttonText) {
+                    // Set to primary orange button style
                     btn.classList.remove('secondary');
                     btn.classList.add('btn');
-                    btn.style.background = '#FF6B35';
+                    // Remove inline background to let CSS handle it
+                    btn.style.background = '';
                 }
             });
 
@@ -1109,6 +1140,9 @@
 
             // Load timeline on page load
             await displayInitialEntries();
+            
+            // Initialize timeline view buttons to show correct default state
+            initializeTimelineViewButtons();
             
             // Initialize navigation buttons after content loads
             setTimeout(updateNavigationButtons, 1500);

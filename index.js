@@ -4746,6 +4746,121 @@ app.post("/debug/rebuild-cache", async (req, res) => {
   }
 });
 
+// --- DASHBOARD API ENDPOINT ---
+app.get('/api/dashboard', async (req, res) => {
+  try {
+    const dashboardData = await generateDashboardData();
+    res.json({
+      success: true,
+      dashboard_data: dashboardData,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('[DASHBOARD] Error generating dashboard data:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+async function generateDashboardData() {
+  const now = new Date();
+  const today = now.toISOString().split('T')[0]; // YYYY-MM-DD format
+  
+  // Initialize data structures
+  const topTags = new Map();
+  const todayStats = {};
+  const archetypeStats = {};
+  const workspaceStats = { work: 0, personal: 0 };
+  const clusterActivity = new Map();
+  
+  // Process all knowledge files
+  for (const [filename, metadata] of knowledgeCache.entries()) {
+    try {
+      // Process tags for top tags
+      if (metadata.Tags && Array.isArray(metadata.Tags)) {
+        metadata.Tags.forEach(tag => {
+          const cleanTag = tag.replace(/^#/, ''); // Remove # prefix if present
+          topTags.set(cleanTag, (topTags.get(cleanTag) || 0) + 1);
+        });
+      }
+      
+      // Process archetype stats
+      const archetype = metadata.Archetype || 'Unknown';
+      archetypeStats[archetype] = (archetypeStats[archetype] || 0) + 1;
+      
+      // Process today's stats (check both UZT_ISO8601 and Created fields)
+      const entryDate = metadata.UZT_ISO8601 || metadata.Created || metadata.Erfassung_Timestamp;
+      if (entryDate) {
+        const entryDateStr = new Date(entryDate).toISOString().split('T')[0];
+        if (entryDateStr === today) {
+          todayStats[archetype] = (todayStats[archetype] || 0) + 1;
+        }
+      }
+      
+      // Process workspace stats
+      if (metadata.EntryContext && metadata.EntryContext.workspace_context) {
+        const workspace = metadata.EntryContext.workspace_context.toLowerCase();
+        if (workspace === 'work') {
+          workspaceStats.work++;
+        } else if (workspace === 'personal' || workspace === 'privat') {
+          workspaceStats.personal++;
+        }
+      }
+      
+      // Process cluster activity
+      if (metadata.ClusterData && metadata.ClusterData.cluster_id) {
+        const clusterId = metadata.ClusterData.cluster_id;
+        const clusterType = metadata.ClusterData.cluster_type || 'unknown';
+        
+        if (!clusterActivity.has(clusterId)) {
+          clusterActivity.set(clusterId, {
+            cluster_id: clusterId,
+            cluster_type: clusterType,
+            object_count: 0,
+            last_activity: entryDate || now.toISOString()
+          });
+        }
+        
+        const cluster = clusterActivity.get(clusterId);
+        cluster.object_count++;
+        
+        // Update last activity if this entry is newer
+        if (entryDate && new Date(entryDate) > new Date(cluster.last_activity)) {
+          cluster.last_activity = entryDate;
+        }
+      }
+      
+    } catch (error) {
+      console.error(`[DASHBOARD] Error processing file ${filename}:`, error);
+    }
+  }
+  
+  // Convert and sort data for response
+  const topTagsArray = Array.from(topTags.entries())
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 15); // Top 15 tags
+  
+  const activeClustersArray = Array.from(clusterActivity.values())
+    .sort((a, b) => new Date(b.last_activity) - new Date(a.last_activity))
+    .slice(0, 5); // Top 5 most recent clusters
+  
+  return {
+    top_tags: topTagsArray,
+    today_stats: todayStats,
+    archetype_stats: archetypeStats,
+    workspace_stats: workspaceStats,
+    active_clusters: activeClustersArray,
+    cache_stats: {
+      total_files: knowledgeCache.size,
+      cache_age_minutes: getCacheAgeMinutes(),
+      last_updated: lastCacheUpdate?.toISOString()
+    }
+  };
+}
+
 
 // --- SCHRITT 7: SERVER START ---
 initializeApp()

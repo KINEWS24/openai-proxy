@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #1E293B;
+            color: #FFFFFF;
+            overflow-x: hidden;
+        }
+
+        .header {
+            background: #334155;
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #475569;
+        }
+
+        .header h1 {
+            color: #FFFFFF;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: #475569;
+            color: #94A3B8;
+            box-shadow: 0 4px 15px rgba(71, 85, 105, 0.4);
+        }
+
+        .btn.secondary:hover {
+            background: #64748B;
+            color: #FFFFFF;
+            box-shadow: 0 6px 20px rgba(71, 85, 105, 0.6);
+        }
+
+        .btn.success {
+            background: #10B981;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn.success:hover {
+            background: #059669;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
+        }
+
+        .dashboard-container {
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: 2rem;
+            min-height: 80vh;
+        }
+
+        .dashboard-card {
+            background: #334155;
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid #475569;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+            border-color: #FF6B35;
+        }
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #475569;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+        }
+
+        .card-subtitle {
+            font-size: 0.9rem;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        .card-content {
+            flex: 1;
+        }
+
+        /* Top Tags Section */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+        }
+
+        .tag-pill {
+            background: #475569;
+            color: #FFFFFF;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border: 1px solid #64748B;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .tag-pill:hover {
+            background: #FF6B35;
+            border-color: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+
+        .tag-count {
+            background: #FF6B35;
+            color: #FFFFFF;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 10px;
+            margin-left: 0.5rem;
+        }
+
+        /* Heute Focus Section */
+        .heute-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .heute-stat {
+            text-align: center;
+            padding: 1rem;
+            background: #475569;
+            border-radius: 10px;
+            border: 1px solid #64748B;
+        }
+
+        .heute-stat-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .heute-stat-count {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #FF6B35;
+            margin-bottom: 0.25rem;
+        }
+
+        .heute-stat-label {
+            font-size: 0.8rem;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        .countdown-container {
+            background: #1E293B;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #475569;
+        }
+
+        .countdown-timer {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #10B981;
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown-label {
+            font-size: 0.85rem;
+            color: #94A3B8;
+        }
+
+        /* Active Cluster Section */
+        .cluster-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .cluster-item {
+            background: #475569;
+            border-radius: 10px;
+            padding: 1rem;
+            border: 1px solid #64748B;
+            transition: all 0.3s ease;
+        }
+
+        .cluster-item:hover {
+            background: #525F73;
+            border-color: #FF6B35;
+        }
+
+        .cluster-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .cluster-id {
+            font-weight: 700;
+            color: #FFFFFF;
+            font-size: 0.9rem;
+        }
+
+        .cluster-count {
+            background: #FF6B35;
+            color: #FFFFFF;
+            font-size: 0.7rem;
+            padding: 0.2rem 0.6rem;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .cluster-type {
+            font-size: 0.8rem;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        /* Archetype Stats Section */
+        .archetype-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .archetype-item {
+            background: #475569;
+            border-radius: 10px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #64748B;
+            transition: all 0.3s ease;
+        }
+
+        .archetype-item:hover {
+            background: #525F73;
+            transform: scale(1.05);
+        }
+
+        .archetype-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .archetype-count {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #FF6B35;
+            margin-bottom: 0.25rem;
+        }
+
+        .archetype-label {
+            font-size: 0.8rem;
+            color: #94A3B8;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Quick Actions Section */
+        .quick-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .quick-btn {
+            background: #FF6B35;
+            color: #FFFFFF;
+            border: none;
+            padding: 1.2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+        }
+
+        .quick-btn:hover {
+            background: #E55A2B;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.6);
+        }
+
+        .quick-btn-icon {
+            font-size: 1.2rem;
+        }
+
+        /* Workspace Status Section */
+        .workspace-overview {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .workspace-chart {
+            display: flex;
+            height: 100px;
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid #475569;
+        }
+
+        .workspace-segment {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .workspace-segment:hover {
+            filter: brightness(1.2);
+        }
+
+        .workspace-work {
+            background: #FF6B35;
+        }
+
+        .workspace-personal {
+            background: #10B981;
+        }
+
+        .workspace-legend {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+
+        .legend-work {
+            background: #FF6B35;
+        }
+
+        .legend-personal {
+            background: #10B981;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #94A3B8;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid #FF6B35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .error {
+            background: rgba(255, 0, 0, 0.1);
+            color: #FF6B6B;
+            padding: 1rem;
+            border-radius: 10px;
+            margin: 1rem 0;
+            text-align: center;
+            border: 1px solid rgba(255, 0, 0, 0.3);
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-grid {
+                grid-template-columns: 1fr;
+                grid-template-rows: repeat(6, auto);
+                gap: 1rem;
+            }
+            
+            .dashboard-container {
+                padding: 1rem;
+            }
+            
+            .archetype-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .heute-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 NEXUS Dashboard</h1>
+        <div class="controls">
+            <div class="control-group">
+                <a href="/timeline.html" class="btn">📊 Timeline</a>
+                <a href="/dashboard.html" class="btn success">📈 Dashboard</a>
+                <a href="/interface.html" class="btn secondary">🏠 Home</a>
+                <button class="btn secondary" onclick="refreshDashboard()">🔄 Refresh</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="dashboard-container">
+        <div class="dashboard-grid">
+            <!-- Top Tags Section -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🏷️</span>
+                        Top Tags
+                    </div>
+                    <div class="card-subtitle" id="tagsCount">Loading...</div>
+                </div>
+                <div class="card-content">
+                    <div class="tags-container" id="topTags">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading top tags...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Heute Focus Section -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">📅</span>
+                        Heute Focus
+                    </div>
+                    <div class="card-subtitle" id="todayDate">Loading...</div>
+                </div>
+                <div class="card-content">
+                    <div class="heute-stats" id="todayStats">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading today's data...</p>
+                        </div>
+                    </div>
+                    <div class="countdown-container">
+                        <div class="countdown-timer" id="countdown">--:--:--</div>
+                        <div class="countdown-label">Time until end of day</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Active Cluster Section -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">🔗</span>
+                        Active Clusters
+                    </div>
+                    <div class="card-subtitle" id="clustersCount">Loading...</div>
+                </div>
+                <div class="card-content">
+                    <div class="cluster-list" id="activeClusters">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading clusters...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Archetype Stats Section -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">📊</span>
+                        Archetype Stats
+                    </div>
+                    <div class="card-subtitle" id="archetypeTotal">Loading...</div>
+                </div>
+                <div class="card-content">
+                    <div class="archetype-grid" id="archetypeStats">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading archetype data...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions Section -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">⚡</span>
+                        Quick Actions
+                    </div>
+                    <div class="card-subtitle">Navigate & Create</div>
+                </div>
+                <div class="card-content">
+                    <div class="quick-actions">
+                        <a href="/timeline.html" class="quick-btn">
+                            <span class="quick-btn-icon">📊</span>
+                            View Timeline
+                        </a>
+                        <button class="quick-btn" onclick="newEntry()">
+                            <span class="quick-btn-icon">➕</span>
+                            New Entry
+                        </button>
+                        <button class="quick-btn" onclick="searchKnowledge()">
+                            <span class="quick-btn-icon">🔍</span>
+                            Search Knowledge
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Workspace Status Section -->
+            <div class="dashboard-card">
+                <div class="card-header">
+                    <div class="card-title">
+                        <span class="card-icon">💼</span>
+                        Workspace Status
+                    </div>
+                    <div class="card-subtitle" id="workspaceTotal">Loading...</div>
+                </div>
+                <div class="card-content">
+                    <div class="workspace-overview" id="workspaceStatus">
+                        <div class="loading">
+                            <div class="loading-spinner"></div>
+                            <p>Loading workspace data...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let dashboardData = null;
+        let countdownInterval = null;
+
+        // Archetype icons mapping
+        const archetypeIcons = {
+            'link': '🔗',
+            'text': '📝',
+            'image': '🖼️',
+            'message': '💬',
+            'document': '📄',
+            'video': '🎥',
+            'audio': '🎵',
+            'unknown': '❓'
+        };
+
+        async function loadDashboardData() {
+            try {
+                const response = await fetch('/api/dashboard');
+                const data = await response.json();
+                
+                if (!data.success) {
+                    throw new Error(data.error || 'Failed to load dashboard data');
+                }
+
+                dashboardData = data.dashboard_data;
+                renderDashboard();
+                
+            } catch (error) {
+                console.error('Error loading dashboard:', error);
+                showError('Error loading dashboard data: ' + error.message);
+            }
+        }
+
+        function renderDashboard() {
+            if (!dashboardData) return;
+
+            renderTopTags();
+            renderHeuteFocus();
+            renderActiveClusters();
+            renderArchetypeStats();
+            renderWorkspaceStatus();
+            startCountdown();
+        }
+
+        function renderTopTags() {
+            const container = document.getElementById('topTags');
+            const countElement = document.getElementById('tagsCount');
+            
+            if (!dashboardData.top_tags || dashboardData.top_tags.length === 0) {
+                container.innerHTML = '<p class="loading">No tags found</p>';
+                countElement.textContent = '0 Tags';
+                return;
+            }
+
+            const tagsHtml = dashboardData.top_tags.slice(0, 10).map(tag => `
+                <div class="tag-pill" onclick="searchTag('${escapeHtml(tag.tag)}')">
+                    ${escapeHtml(tag.tag)}
+                    <span class="tag-count">${tag.count}</span>
+                </div>
+            `).join('');
+
+            container.innerHTML = tagsHtml;
+            countElement.textContent = `${dashboardData.top_tags.length} Tags`;
+        }
+
+        function renderHeuteFocus() {
+            const container = document.getElementById('todayStats');
+            const dateElement = document.getElementById('todayDate');
+            
+            const today = new Date();
+            dateElement.textContent = today.toLocaleDateString('en-US', { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+
+            if (!dashboardData.today_stats) {
+                container.innerHTML = '<div class="loading">No data for today</div>';
+                return;
+            }
+
+            const stats = dashboardData.today_stats;
+            const statsHtml = Object.entries(stats).map(([archetype, count]) => `
+                <div class="heute-stat">
+                    <div class="heute-stat-icon">${archetypeIcons[archetype.toLowerCase()] || '❓'}</div>
+                    <div class="heute-stat-count">${count}</div>
+                    <div class="heute-stat-label">${archetype}</div>
+                </div>
+            `).join('');
+
+            container.innerHTML = statsHtml;
+        }
+
+        function renderActiveClusters() {
+            const container = document.getElementById('activeClusters');
+            const countElement = document.getElementById('clustersCount');
+            
+            if (!dashboardData.active_clusters || dashboardData.active_clusters.length === 0) {
+                container.innerHTML = '<div class="loading">No active clusters</div>';
+                countElement.textContent = '0 Clusters';
+                return;
+            }
+
+            const clustersHtml = dashboardData.active_clusters.slice(0, 3).map(cluster => `
+                <div class="cluster-item">
+                    <div class="cluster-header">
+                        <div class="cluster-id">${escapeHtml(cluster.cluster_id)}</div>
+                        <div class="cluster-count">${cluster.object_count}</div>
+                    </div>
+                    <div class="cluster-type">${escapeHtml(cluster.cluster_type)}</div>
+                </div>
+            `).join('');
+
+            container.innerHTML = clustersHtml;
+            countElement.textContent = `${dashboardData.active_clusters.length} Active`;
+        }
+
+        function renderArchetypeStats() {
+            const container = document.getElementById('archetypeStats');
+            const totalElement = document.getElementById('archetypeTotal');
+            
+            if (!dashboardData.archetype_stats) {
+                container.innerHTML = '<div class="loading">No archetype data</div>';
+                totalElement.textContent = '0 Total';
+                return;
+            }
+
+            const stats = dashboardData.archetype_stats;
+            const total = Object.values(stats).reduce((sum, count) => sum + count, 0);
+            
+            const statsHtml = Object.entries(stats).map(([archetype, count]) => `
+                <div class="archetype-item">
+                    <div class="archetype-icon">${archetypeIcons[archetype.toLowerCase()] || '❓'}</div>
+                    <div class="archetype-count">${count}</div>
+                    <div class="archetype-label">${archetype}</div>
+                </div>
+            `).join('');
+
+            container.innerHTML = statsHtml;
+            totalElement.textContent = `${total} Total`;
+        }
+
+        function renderWorkspaceStatus() {
+            const container = document.getElementById('workspaceStatus');
+            const totalElement = document.getElementById('workspaceTotal');
+            
+            if (!dashboardData.workspace_stats) {
+                container.innerHTML = '<div class="loading">No workspace data</div>';
+                totalElement.textContent = '0 Entries';
+                return;
+            }
+
+            const stats = dashboardData.workspace_stats;
+            const total = stats.work + stats.personal;
+            const workPercent = total > 0 ? (stats.work / total * 100) : 50;
+            const personalPercent = total > 0 ? (stats.personal / total * 100) : 50;
+
+            const workspaceHtml = `
+                <div class="workspace-chart">
+                    <div class="workspace-segment workspace-work" style="flex: ${workPercent}">
+                        ${stats.work} Work
+                    </div>
+                    <div class="workspace-segment workspace-personal" style="flex: ${personalPercent}">
+                        ${stats.personal} Personal
+                    </div>
+                </div>
+                <div class="workspace-legend">
+                    <div class="legend-item">
+                        <div class="legend-color legend-work"></div>
+                        <span>Work (${Math.round(workPercent)}%)</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color legend-personal"></div>
+                        <span>Personal (${Math.round(personalPercent)}%)</span>
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = workspaceHtml;
+            totalElement.textContent = `${total} Total`;
+        }
+
+        function startCountdown() {
+            if (countdownInterval) {
+                clearInterval(countdownInterval);
+            }
+
+            function updateCountdown() {
+                const now = new Date();
+                const endOfDay = new Date();
+                endOfDay.setHours(23, 59, 59, 999);
+                
+                const timeLeft = endOfDay - now;
+                
+                if (timeLeft <= 0) {
+                    document.getElementById('countdown').textContent = '00:00:00';
+                    return;
+                }
+                
+                const hours = Math.floor(timeLeft / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                
+                document.getElementById('countdown').textContent = 
+                    `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            updateCountdown();
+            countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        function searchTag(tag) {
+            // Implement tag search functionality
+            alert(`🔍 Search functionality for tag "${tag}" would be implemented here.\n\nThis would open a search interface filtered by this hashtag.`);
+        }
+
+        function newEntry() {
+            alert('➕ New Entry creation interface would be opened here.\n\nThis would provide a form to create new knowledge entries.');
+        }
+
+        function searchKnowledge() {
+            alert('🔍 Knowledge search interface would be opened here.\n\nThis would provide semantic search across the entire knowledge base.');
+        }
+
+        async function refreshDashboard() {
+            // Show loading state
+            document.querySelectorAll('.card-content').forEach(container => {
+                if (!container.querySelector('.loading')) {
+                    container.innerHTML = '<div class="loading"><div class="loading-spinner"></div><p>Refreshing...</p></div>';
+                }
+            });
+            
+            await loadDashboardData();
+        }
+
+        function showError(message) {
+            document.querySelectorAll('.card-content').forEach(container => {
+                container.innerHTML = `<div class="error">${escapeHtml(message)}</div>`;
+            });
+        }
+
+        function escapeHtml(text) {
+            if (typeof text !== 'string') return text;
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        // Initialize dashboard on page load
+        document.addEventListener('DOMContentLoaded', async function() {
+            await loadDashboardData();
+        });
+
+        // Refresh dashboard every 5 minutes
+        setInterval(loadDashboardData, 5 * 60 * 1000);
+    </script>
+</body>
+</html>
