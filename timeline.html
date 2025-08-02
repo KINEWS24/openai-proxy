@@ -134,186 +134,194 @@
         }
 
         .timeline-container {
-            max-width: 1200px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-            position: relative;
+            width: 100%;
+            margin: 2rem 0;
+            padding: 0;
+            overflow-x: auto;
+            overflow-y: hidden;
         }
 
         .timeline {
+            display: flex;
+            min-width: 100%;
+            padding: 1rem;
+            gap: 2rem;
             position: relative;
-            padding: 2rem 0;
         }
 
         .timeline::before {
             content: '';
             position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 4px;
+            left: 0;
+            right: 0;
+            top: 60px;
+            height: 4px;
             background: #FF6B35;
-            transform: translateX(-50%);
             border-radius: 2px;
             box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
+            z-index: 1;
         }
 
-        .timeline-item {
+        .date-column {
+            flex: 0 0 300px;
+            display: flex;
+            flex-direction: column;
             position: relative;
-            margin: 1rem 0;
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
         }
 
-        .timeline-item.visible {
+        .date-column.visible {
             opacity: 1;
             transform: translateY(0);
         }
 
-        .timeline-item.today {
-            transform: scale(1.05);
+        .date-column.today {
+            flex: 0 0 320px;
         }
 
-        .timeline-item.today .timeline-content {
-            background: #10B981;
-            color: white;
-            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
-            border: 2px solid #059669;
-        }
-
-        .timeline-item:nth-child(odd) {
-            text-align: right;
-            padding-right: calc(50% + 2rem);
-        }
-
-        .timeline-item:nth-child(even) {
-            text-align: left;
-            padding-left: calc(50% + 2rem);
-        }
-
-        .timeline-content {
+        .date-header {
             background: #334155;
-            backdrop-filter: blur(10px);
-            padding: 0.75rem;
+            border: 2px solid #475569;
             border-radius: 12px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+            padding: 1rem;
+            text-align: center;
+            margin-bottom: 1rem;
             position: relative;
-            transition: all 0.3s ease;
-            border: 1px solid #475569;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
-            border-color: #FF6B35;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content::after {
-            content: '';
-            position: absolute;
-            right: -15px;
-            top: 15px;
-            width: 0;
-            height: 0;
-            border: 15px solid transparent;
-            border-left-color: #334155;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content::after {
-            content: '';
-            position: absolute;
-            left: -15px;
-            top: 15px;
-            width: 0;
-            height: 0;
-            border: 15px solid transparent;
-            border-right-color: #334155;
-        }
-
-        .timeline-marker {
-            position: absolute;
-            left: 50%;
-            top: 15px;
-            width: 16px;
-            height: 16px;
-            background: #FF6B35;
-            border-radius: 50%;
-            transform: translateX(-50%);
-            box-shadow: 0 0 0 4px #1E293B, 0 0 20px rgba(255, 107, 53, 0.4);
             z-index: 10;
             transition: all 0.3s ease;
         }
 
-        .timeline-item.today .timeline-marker {
-            width: 24px;
-            height: 24px;
+        .date-column.today .date-header {
             background: #10B981;
-            box-shadow: 0 0 0 6px #1E293B, 0 0 30px rgba(16, 185, 129, 0.6);
+            border-color: #059669;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4);
         }
 
-        .timeline-date {
+        .date-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.25rem;
+        }
+
+        .date-subtitle {
             font-size: 0.8rem;
+            color: #94A3B8;
+            font-weight: 500;
+        }
+
+        .date-column.today .date-subtitle {
+            color: #FFFFFF;
+        }
+
+        .entries-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .timeline-entry {
+            background: #334155;
+            backdrop-filter: blur(10px);
+            padding: 0.75rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            transition: all 0.3s ease;
+            border: 1px solid #475569;
+            cursor: pointer;
+        }
+
+        .timeline-entry:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+            border-color: #FF6B35;
+        }
+
+        .date-column.today .timeline-entry {
+            border-color: #10B981;
+        }
+
+        .date-column.today .timeline-entry:hover {
+            border-color: #059669;
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        .entry-time {
+            font-size: 0.7rem;
             color: #FF6B35;
             font-weight: 600;
             margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.25rem;
         }
 
-        .timeline-title {
-            font-size: 1.0rem;
+        .entry-title {
+            font-size: 0.9rem;
             font-weight: 700;
             color: #FFFFFF;
             margin-bottom: 0.25rem;
             line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .timeline-summary {
+        .entry-summary {
             color: #94A3B8;
-            line-height: 1.4;
+            line-height: 1.3;
             margin-bottom: 0.5rem;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
 
-        .timeline-source-link {
+        .entry-source-link {
             color: #FF6B35;
             text-decoration: none;
-            font-size: 0.8rem;
+            font-size: 0.7rem;
             font-weight: 600;
             transition: all 0.3s ease;
+            display: inline-block;
+            margin-bottom: 0.5rem;
         }
 
-        .timeline-source-link:hover {
+        .entry-source-link:hover {
             color: #E55A2B;
             text-decoration: underline;
         }
 
-        .timeline-tags {
+        .entry-tags {
             display: flex;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 0.25rem;
         }
 
-        .tag {
+        .entry-tag {
             background: #475569;
             color: #94A3B8;
-            padding: 0.2rem 0.6rem;
-            border-radius: 6px;
-            font-size: 0.7rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 4px;
+            font-size: 0.6rem;
             font-weight: 500;
             border: 1px solid #64748B;
         }
 
-        .archetype-badge {
+        .entry-archetype {
             display: inline-block;
-            padding: 0.2rem 0.6rem;
-            border-radius: 10px;
-            font-size: 0.75rem;
+            padding: 0.15rem 0.4rem;
+            border-radius: 6px;
+            font-size: 0.6rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.3px;
         }
 
         .archetype-text { background: #10B981; color: #FFFFFF; }
@@ -357,6 +365,57 @@
             margin: 2rem 0;
         }
 
+        /* Horizontal scrolling styles */
+        .timeline-container::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .timeline-container::-webkit-scrollbar-track {
+            background: #334155;
+            border-radius: 4px;
+        }
+
+        .timeline-container::-webkit-scrollbar-thumb {
+            background: #FF6B35;
+            border-radius: 4px;
+        }
+
+        .timeline-container::-webkit-scrollbar-thumb:hover {
+            background: #E55A2B;
+        }
+
+        /* Date markers on timeline line */
+        .date-marker {
+            position: absolute;
+            top: 52px;
+            width: 16px;
+            height: 16px;
+            background: #FF6B35;
+            border-radius: 50%;
+            border: 4px solid #1E293B;
+            z-index: 10;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .date-column.today .date-marker {
+            background: #10B981;
+            width: 20px;
+            height: 20px;
+            border-width: 4px;
+        }
+
+        /* No entries message */
+        .no-entries {
+            text-align: center;
+            color: #94A3B8;
+            font-style: italic;
+            padding: 2rem;
+            background: #334155;
+            border-radius: 8px;
+            border: 1px dashed #475569;
+        }
+
         @media (max-width: 768px) {
             .header {
                 padding: 1rem;
@@ -367,25 +426,12 @@
                 gap: 0.5rem;
             }
 
-            .timeline::before {
-                left: 2rem;
+            .date-column {
+                flex: 0 0 250px;
             }
 
-            .timeline-item {
-                text-align: left !important;
-                padding-left: 4rem !important;
-                padding-right: 0 !important;
-            }
-
-            .timeline-content::after {
-                left: -15px !important;
-                right: auto !important;
-                border-left-color: transparent !important;
-                border-right-color: rgba(255, 255, 255, 0.95) !important;
-            }
-
-            .timeline-marker {
-                left: 2rem !important;
+            .timeline {
+                gap: 1rem;
             }
 
             .stats {
@@ -604,45 +650,118 @@
                 return;
             }
 
-            const timelineHTML = filteredData.map(item => {
-                const date = new Date(item.start);
-                const isToday = item.isToday;
-                const archetype = (item.archetype || 'unknown').toLowerCase();
-                
-                const sourceUrl = item.source_url || item.url || null;
-                
-                return `
-                    <div class="timeline-item ${isToday ? 'today' : ''}" data-date="${item.start}" data-archetype="${archetype}">
-                        <div class="timeline-marker"></div>
-                        <div class="timeline-content">
-                            <div class="timeline-date">
-                                ${formatDate(date)}
-                                <span class="archetype-badge archetype-${archetype}">${item.archetype || 'Unknown'}</span>
+            // Group entries by date
+            const groupedByDate = groupEntriesByDate(filteredData);
+            
+            const timelineHTML = Object.keys(groupedByDate)
+                .sort((a, b) => new Date(b) - new Date(a)) // Sort dates descending (newest first)
+                .map(dateKey => {
+                    const entries = groupedByDate[dateKey];
+                    const date = new Date(dateKey);
+                    const isToday = isDateToday(date);
+                    
+                    return `
+                        <div class="date-column ${isToday ? 'today' : ''}" data-date="${dateKey}">
+                            <div class="date-header">
+                                <div class="date-title">${formatDateHeader(date)}</div>
+                                <div class="date-subtitle">${entries.length} ${entries.length === 1 ? 'Entry' : 'Entries'}</div>
+                                <div class="date-marker"></div>
                             </div>
-                            <div class="timeline-title">${escapeHtml(item.content)}</div>
-                            ${item.title ? `<div class="timeline-summary">${escapeHtml(item.title)}</div>` : ''}
-                            ${sourceUrl ? `<div><a href="${escapeHtml(sourceUrl)}" target="_blank" class="timeline-source-link">📎 View Source</a></div>` : ''}
-                            ${item.tags && item.tags.length > 0 ? `
-                                <div class="timeline-tags">
-                                    ${item.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
-                                </div>
-                            ` : ''}
+                            <div class="entries-container">
+                                ${entries.map(entry => renderEntry(entry)).join('')}
+                            </div>
                         </div>
-                    </div>
-                `;
-            }).join('');
+                    `;
+                }).join('');
 
             timeline.innerHTML = timelineHTML;
             
-            // Animate entries into view
+            // Animate columns into view
             setTimeout(() => {
-                const items = timeline.querySelectorAll('.timeline-item');
-                items.forEach((item, index) => {
+                const columns = timeline.querySelectorAll('.date-column');
+                columns.forEach((column, index) => {
                     setTimeout(() => {
-                        item.classList.add('visible');
-                    }, index * 100);
+                        column.classList.add('visible');
+                    }, index * 150);
                 });
             }, 100);
+        }
+
+        function groupEntriesByDate(entries) {
+            const groups = {};
+            
+            entries.forEach(entry => {
+                const date = new Date(entry.start);
+                const dateKey = date.toISOString().split('T')[0]; // YYYY-MM-DD format
+                
+                if (!groups[dateKey]) {
+                    groups[dateKey] = [];
+                }
+                groups[dateKey].push(entry);
+            });
+            
+            // Sort entries within each date group by time (newest first)
+            Object.keys(groups).forEach(dateKey => {
+                groups[dateKey].sort((a, b) => new Date(b.start) - new Date(a.start));
+            });
+            
+            return groups;
+        }
+
+        function renderEntry(entry) {
+            const date = new Date(entry.start);
+            const archetype = (entry.archetype || 'unknown').toLowerCase();
+            const sourceUrl = entry.source_url || entry.url || null;
+            
+            return `
+                <div class="timeline-entry" data-archetype="${archetype}">
+                    <div class="entry-time">
+                        ${formatTime(date)}
+                        <span class="entry-archetype archetype-${archetype}">${entry.archetype || 'Unknown'}</span>
+                    </div>
+                    <div class="entry-title">${escapeHtml(entry.content)}</div>
+                    ${entry.title ? `<div class="entry-summary">${escapeHtml(entry.title)}</div>` : ''}
+                    ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" class="entry-source-link">📎 View Source</a>` : ''}
+                    ${entry.tags && entry.tags.length > 0 ? `
+                        <div class="entry-tags">
+                            ${entry.tags.slice(0, 3).map(tag => `<span class="entry-tag">${escapeHtml(tag)}</span>`).join('')}
+                            ${entry.tags.length > 3 ? `<span class="entry-tag">+${entry.tags.length - 3}</span>` : ''}
+                        </div>
+                    ` : ''}
+                </div>
+            `;
+        }
+
+        function isDateToday(date) {
+            const today = new Date();
+            return date.toDateString() === today.toDateString();
+        }
+
+        function formatDateHeader(date) {
+            const today = new Date();
+            const yesterday = new Date(today);
+            yesterday.setDate(yesterday.getDate() - 1);
+            
+            if (date.toDateString() === today.toDateString()) {
+                return 'Today';
+            } else if (date.toDateString() === yesterday.toDateString()) {
+                return 'Yesterday';
+            } else {
+                const options = { 
+                    weekday: 'short',
+                    month: 'short', 
+                    day: 'numeric'
+                };
+                return date.toLocaleDateString('en-US', options);
+            }
+        }
+
+        function formatTime(date) {
+            return date.toLocaleTimeString('en-US', { 
+                hour: '2-digit', 
+                minute: '2-digit',
+                hour12: false
+            });
         }
 
         function getFilteredData() {
@@ -704,22 +823,30 @@
         }
 
         function scrollToToday() {
-            const todayElement = document.querySelector('.timeline-item.today');
-            if (todayElement) {
-                todayElement.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'center'
+            const todayColumn = document.querySelector('.date-column.today');
+            if (todayColumn) {
+                // Scroll horizontally to today's column
+                const timelineContainer = document.querySelector('.timeline-container');
+                const columnRect = todayColumn.getBoundingClientRect();
+                const containerRect = timelineContainer.getBoundingClientRect();
+                
+                const scrollLeft = timelineContainer.scrollLeft + columnRect.left - containerRect.left - 50;
+                
+                timelineContainer.scrollTo({
+                    left: scrollLeft,
+                    behavior: 'smooth'
                 });
                 
                 // Highlight effect
-                todayElement.style.transform = 'scale(1.1)';
+                todayColumn.style.transform = 'scale(1.05)';
                 setTimeout(() => {
-                    todayElement.style.transform = 'scale(1.05)';
-                }, 300);
+                    todayColumn.style.transform = 'scale(1.0)';
+                }, 500);
             } else {
-                // If no today entry, scroll to top
-                window.scrollTo({
-                    top: 0,
+                // If no today column, scroll to the leftmost position
+                const timelineContainer = document.querySelector('.timeline-container');
+                timelineContainer.scrollTo({
+                    left: 0,
                     behavior: 'smooth'
                 });
             }
