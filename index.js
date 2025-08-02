@@ -4266,6 +4266,16 @@ app.get("/visualize/timeline", async (req, res) => {
       // Parse UUID für v6.1 Infos
       const uuidData = parseNexusUUID(filename);
       
+      // Extract source_url from Properties or other fields
+      let sourceUrl = null;
+      if (metadata.Properties && metadata.Properties.source_url) {
+        sourceUrl = metadata.Properties.source_url;
+      } else if (metadata.LinkTarget) {
+        sourceUrl = metadata.LinkTarget;
+      } else if (metadata.ContentReference) {
+        sourceUrl = metadata.ContentReference;
+      }
+
       timelineData.push({
         id: filename,
         content: metadata.Title || metadata.Subject || 'Unbekannter Eintrag',
@@ -4277,6 +4287,7 @@ app.get("/visualize/timeline", async (req, res) => {
         archetype: uuidData.archetype,
         workspace: uuidData.workspace,
         tags: metadata.Tags || [],
+        source_url: sourceUrl,
         isToday: entryDate.getTime() === today.getTime(),
         debugInfo: {
           originalTimestamp: timestamp,

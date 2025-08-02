@@ -322,6 +322,60 @@
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .entry-archetype.clickable {
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .entry-archetype.clickable:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .archetype-link.clickable:hover {
+            background: #FF6B35;
+            color: #FFFFFF;
+        }
+
+        /* Tooltip for showing URL on hover */
+        .entry-archetype[data-url]:hover::after {
+            content: attr(data-url);
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1E293B;
+            color: #FFFFFF;
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
+            font-weight: 500;
+            white-space: nowrap;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            z-index: 1000;
+            border: 1px solid #FF6B35;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            letter-spacing: normal;
+            text-transform: none;
+        }
+
+        .entry-archetype[data-url]:hover::before {
+            content: '';
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            transform: translateX(-50%) translateY(4px);
+            width: 0;
+            height: 0;
+            border: 4px solid transparent;
+            border-top-color: #FF6B35;
+            z-index: 1000;
         }
 
         .archetype-text { background: #10B981; color: #FFFFFF; }
@@ -713,15 +767,31 @@
             const archetype = (entry.archetype || 'unknown').toLowerCase();
             const sourceUrl = entry.source_url || entry.url || null;
             
+            // Check if this is a LINK archetype with a source URL
+            const isClickableLink = archetype === 'link' && sourceUrl;
+            
+            // Create archetype badge - clickable if it's a link with URL
+            let archetypeBadge;
+            if (isClickableLink) {
+                // Truncate URL for tooltip display
+                const displayUrl = sourceUrl.length > 60 ? sourceUrl.substring(0, 60) + '...' : sourceUrl;
+                archetypeBadge = `<span class="entry-archetype archetype-${archetype} clickable" 
+                                       data-url="${escapeHtml(sourceUrl)}" 
+                                       onclick="openLinkUrl('${escapeHtml(sourceUrl)}')" 
+                                       title="Click to open: ${escapeHtml(displayUrl)}">${entry.archetype || 'Unknown'}</span>`;
+            } else {
+                archetypeBadge = `<span class="entry-archetype archetype-${archetype}">${entry.archetype || 'Unknown'}</span>`;
+            }
+            
             return `
                 <div class="timeline-entry" data-archetype="${archetype}">
                     <div class="entry-time">
                         ${formatTime(date)}
-                        <span class="entry-archetype archetype-${archetype}">${entry.archetype || 'Unknown'}</span>
+                        ${archetypeBadge}
                     </div>
                     <div class="entry-title">${escapeHtml(entry.content)}</div>
                     ${entry.title ? `<div class="entry-summary">${escapeHtml(entry.title)}</div>` : ''}
-                    ${sourceUrl ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" class="entry-source-link">📎 View Source</a>` : ''}
+                    ${sourceUrl && !isClickableLink ? `<a href="${escapeHtml(sourceUrl)}" target="_blank" class="entry-source-link">📎 View Source</a>` : ''}
                     ${entry.tags && entry.tags.length > 0 ? `
                         <div class="entry-tags">
                             ${entry.tags.slice(0, 3).map(tag => `<span class="entry-tag">${escapeHtml(tag)}</span>`).join('')}
@@ -730,6 +800,19 @@
                     ` : ''}
                 </div>
             `;
+        }
+
+        function openLinkUrl(url) {
+            if (url && url.trim()) {
+                // Validate URL format
+                try {
+                    const validUrl = url.startsWith('http://') || url.startsWith('https://') ? url : 'https://' + url;
+                    window.open(validUrl, '_blank', 'noopener,noreferrer');
+                } catch (error) {
+                    console.error('Invalid URL:', url);
+                    alert('Invalid URL format: ' + url);
+                }
+            }
         }
 
         function isDateToday(date) {
