@@ -881,8 +881,10 @@
             const container = document.getElementById('todayStats');
             const dateElement = document.getElementById('todayDate');
             
+            // Use German timezone (MESZ/MEZ)
             const today = new Date();
-            dateElement.textContent = today.toLocaleDateString('en-US', { 
+            const germanTime = new Date(today.toLocaleString("en-US", {timeZone: "Europe/Berlin"}));
+            dateElement.textContent = germanTime.toLocaleDateString('de-DE', { 
                 weekday: 'long', 
                 year: 'numeric', 
                 month: 'long', 
@@ -919,7 +921,7 @@
             const clustersHtml = dashboardData.active_clusters.slice(0, 3).map(cluster => `
                 <div class="cluster-item">
                     <div class="cluster-header">
-                        <div class="cluster-id">${escapeHtml(cluster.cluster_id)}</div>
+                        <div class="cluster-id">${escapeHtml(cluster.cluster_display_name || cluster.cluster_id)}</div>
                         <div class="cluster-count">${cluster.object_count}</div>
                     </div>
                     <div class="cluster-type">${escapeHtml(cluster.cluster_type)}</div>
@@ -1001,14 +1003,22 @@
             }
 
             function updateCountdown() {
+                // Use German timezone (MESZ/MEZ) for countdown
                 const now = new Date();
-                const endOfDay = new Date();
+                const germanNow = new Date(now.toLocaleString("en-US", {timeZone: "Europe/Berlin"}));
+                
+                // Create end of day in German timezone
+                const endOfDay = new Date(germanNow);
                 endOfDay.setHours(23, 59, 59, 999);
                 
-                const timeLeft = endOfDay - now;
+                const timeLeft = endOfDay - germanNow;
                 
                 if (timeLeft <= 0) {
                     document.getElementById('countdown').textContent = '00:00:00';
+                    // Reset for next day
+                    setTimeout(() => {
+                        startCountdown();
+                    }, 1000);
                     return;
                 }
                 
@@ -1059,24 +1069,42 @@
         });
 
         function searchTag(tag) {
-            const content = `
-                <h3>🔍 Tag Search</h3>
-                <p>Search functionality for tag <strong>"${escapeHtml(tag)}"</strong></p>
-                <p>This would open a search interface filtered by this hashtag, showing all knowledge entries that contain this tag.</p>
-                <ul>
-                    <li>Filter timeline by selected tag</li>
-                    <li>Show related entries and connections</li>
-                    <li>Export search results</li>
-                    <li>Save search as favorite</li>
-                </ul>
-            `;
+            // Redirect to sidebar chat with tag search query
+            const searchQuery = `Show me all entries with tag "${tag}"`;
+            const encodedQuery = encodeURIComponent(searchQuery);
             
-            const actions = `
-                <button class="panel-btn" onclick="closePanel()">Open Search</button>
-                <button class="panel-btn secondary" onclick="closePanel()">Cancel</button>
-            `;
-            
-            showPanel('Tag Search', content, actions);
+            // Try to open in sidebar (if supported) or new tab
+            try {
+                // Attempt to use Claude Code's sidebar integration
+                if (window.parent && window.parent !== window) {
+                    // We're in an iframe, try to communicate with parent
+                    window.parent.postMessage({
+                        type: 'claude-search',
+                        query: searchQuery,
+                        tag: tag
+                    }, '*');
+                } else {
+                    // Open Claude.ai chat with the search query
+                    const claudeUrl = `https://claude.ai/chat?q=${encodedQuery}`;
+                    window.open(claudeUrl, '_blank', 'noopener,noreferrer');
+                }
+            } catch (error) {
+                console.error('Failed to open chat search:', error);
+                // Fallback to showing the panel
+                const content = `
+                    <h3>🔍 Tag Search</h3>
+                    <p>Search for tag <strong>"${escapeHtml(tag)}"</strong></p>
+                    <p>Query: <code>${escapeHtml(searchQuery)}</code></p>
+                    <p>This would open Claude's sidebar chat with the tag search query.</p>
+                `;
+                
+                const actions = `
+                    <button class="panel-btn" onclick="window.open('https://claude.ai/chat?q=${encodedQuery}', '_blank'); closePanel()">Open in Claude</button>
+                    <button class="panel-btn secondary" onclick="closePanel()">Cancel</button>
+                `;
+                
+                showPanel('Tag Search', content, actions);
+            }
         }
 
         function newEntry() {

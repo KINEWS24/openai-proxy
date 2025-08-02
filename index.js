@@ -4815,8 +4815,29 @@ async function generateDashboardData() {
         const clusterType = metadata.ClusterData.cluster_type || 'unknown';
         
         if (!clusterActivity.has(clusterId)) {
+          // Extract meaningful cluster name from JSON data
+          let clusterDisplayName = clusterId; // fallback to original ID
+          
+          // Try to extract meaningful name from various fields
+          if (metadata.Subject && metadata.Subject.length > 0) {
+            clusterDisplayName = metadata.Subject;
+          } else if (metadata.Title && metadata.Title.length > 0) {
+            clusterDisplayName = metadata.Title;
+          } else if (metadata.Hierarchy && metadata.Hierarchy.organization) {
+            clusterDisplayName = `${metadata.Hierarchy.organization} Project`;
+          } else if (clusterType !== 'unknown') {
+            // Convert cluster_type to readable format
+            clusterDisplayName = clusterType.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+          }
+          
+          // Truncate if too long
+          if (clusterDisplayName.length > 50) {
+            clusterDisplayName = clusterDisplayName.substring(0, 47) + '...';
+          }
+          
           clusterActivity.set(clusterId, {
             cluster_id: clusterId,
+            cluster_display_name: clusterDisplayName,
             cluster_type: clusterType,
             object_count: 0,
             last_activity: entryDate || now.toISOString()
