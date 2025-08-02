@@ -708,7 +708,7 @@
             const groupedByDate = groupEntriesByDate(filteredData);
             
             const timelineHTML = Object.keys(groupedByDate)
-                .sort((a, b) => new Date(b) - new Date(a)) // Sort dates descending (newest first)
+                .sort((a, b) => new Date(a) - new Date(b)) // Sort dates ascending (oldest first on left, newest on right)
                 .map(dateKey => {
                     const entries = groupedByDate[dateKey];
                     const date = new Date(dateKey);
