@@ -4263,8 +4263,8 @@ app.get("/visualize/timeline", async (req, res) => {
       });
     }
     
-    // Sortiere nach Datum (neueste zuerst)
-    timelineData.sort((a, b) => new Date(b.start) - new Date(a.start));
+    // Sortiere nach Datum (chronologisch - älteste zuerst)
+    timelineData.sort((a, b) => new Date(a.start) - new Date(b.start));
     
  // 🔧 FIXED: Timeline zeigt ALLE Einträge (komplette Wissensmanagement-Übersicht)
     // Keine Filterung oder Begrenzung - Timeline soll alles anzeigen
