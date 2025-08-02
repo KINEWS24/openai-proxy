@@ -133,12 +133,21 @@
             font-weight: 600;
         }
 
-        .timeline-container {
+        .timeline-wrapper {
+            position: relative;
             width: 100%;
             margin: 2rem 0;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .timeline-container {
+            flex: 1;
             padding: 0;
             overflow-x: auto;
             overflow-y: hidden;
+            scroll-behavior: smooth;
         }
 
         .timeline {
@@ -514,6 +523,50 @@
             transform: translateY(-50%) scale(1.1);
             box-shadow: 0 6px 25px rgba(16, 185, 129, 0.6);
         }
+
+        .timeline-nav-btn {
+            background: #334155;
+            color: #FFFFFF;
+            border: 2px solid #475569;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            font-size: 1.5rem;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .timeline-nav-btn:hover {
+            background: #FF6B35;
+            border-color: #E55A2B;
+            color: #FFFFFF;
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+        }
+
+        .timeline-nav-btn:active {
+            transform: scale(0.95);
+        }
+
+        .timeline-nav-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .timeline-nav-btn:disabled:hover {
+            background: #334155;
+            border-color: #475569;
+            color: #94A3B8;
+            transform: none;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -559,16 +612,24 @@
         </div>
     </div>
 
-    <div class="timeline-container">
-        <div id="timeline" class="timeline">
-            <div class="loading">
-                <div class="loading-spinner"></div>
-                <p>Loading timeline data...</p>
+    <div class="timeline-wrapper">
+        <button class="timeline-nav-btn timeline-nav-left" onclick="scrollTimelineLeft()" title="Scroll Left">
+            ←
+        </button>
+        <div class="timeline-container">
+            <div id="timeline" class="timeline">
+                <div class="loading">
+                    <div class="loading-spinner"></div>
+                    <p>Loading timeline data...</p>
+                </div>
+            </div>
+            <div class="load-more" id="loadMoreContainer" style="display: none;">
+                <button class="btn" onclick="loadMore()">Load More Entries</button>
             </div>
         </div>
-        <div class="load-more" id="loadMoreContainer" style="display: none;">
-            <button class="btn" onclick="loadMore()">Load More Entries</button>
-        </div>
+        <button class="timeline-nav-btn timeline-nav-right" onclick="scrollTimelineRight()" title="Scroll Right">
+            →
+        </button>
     </div>
 
     <div class="today-indicator" onclick="scrollToToday()" title="Scroll to Today">
@@ -738,6 +799,9 @@
                         column.classList.add('visible');
                     }, index * 150);
                 });
+                
+                // Update navigation buttons after animation
+                setTimeout(updateNavigationButtons, columns.length * 150 + 200);
             }, 100);
         }
 
@@ -905,6 +969,45 @@
             await displayInitialEntries();
         }
 
+        function scrollTimelineLeft() {
+            const timelineContainer = document.querySelector('.timeline-container');
+            const scrollAmount = 320; // Width of one date column + gap
+            
+            timelineContainer.scrollTo({
+                left: timelineContainer.scrollLeft - scrollAmount,
+                behavior: 'smooth'
+            });
+            
+            updateNavigationButtons();
+        }
+
+        function scrollTimelineRight() {
+            const timelineContainer = document.querySelector('.timeline-container');
+            const scrollAmount = 320; // Width of one date column + gap
+            
+            timelineContainer.scrollTo({
+                left: timelineContainer.scrollLeft + scrollAmount,
+                behavior: 'smooth'
+            });
+            
+            updateNavigationButtons();
+        }
+
+        function updateNavigationButtons() {
+            const timelineContainer = document.querySelector('.timeline-container');
+            const leftBtn = document.querySelector('.timeline-nav-left');
+            const rightBtn = document.querySelector('.timeline-nav-right');
+            
+            if (timelineContainer && leftBtn && rightBtn) {
+                // Disable left button if at start
+                leftBtn.disabled = timelineContainer.scrollLeft <= 0;
+                
+                // Disable right button if at end
+                const maxScroll = timelineContainer.scrollWidth - timelineContainer.clientWidth;
+                rightBtn.disabled = timelineContainer.scrollLeft >= maxScroll - 5; // 5px tolerance
+            }
+        }
+
         function scrollToToday() {
             const todayColumn = document.querySelector('.date-column.today');
             if (todayColumn) {
@@ -924,14 +1027,16 @@
                 todayColumn.style.transform = 'scale(1.05)';
                 setTimeout(() => {
                     todayColumn.style.transform = 'scale(1.0)';
+                    updateNavigationButtons();
                 }, 500);
             } else {
-                // If no today column, scroll to the leftmost position
+                // If no today column, scroll to the rightmost position (newest entries)
                 const timelineContainer = document.querySelector('.timeline-container');
                 timelineContainer.scrollTo({
-                    left: 0,
+                    left: timelineContainer.scrollWidth,
                     behavior: 'smooth'
                 });
+                setTimeout(updateNavigationButtons, 500);
             }
         }
 
@@ -967,22 +1072,46 @@
             return div.innerHTML;
         }
 
-        // Smooth scrolling improvements
+        // Horizontal mouse wheel scrolling and smooth scrolling improvements
         document.addEventListener('DOMContentLoaded', async function() {
-            // Improved mouse wheel handling
+            const timelineContainer = document.querySelector('.timeline-container');
             let isScrolling = false;
             
-            window.addEventListener('wheel', function(e) {
-                if (isScrolling) return;
-                
-                isScrolling = true;
-                setTimeout(() => {
-                    isScrolling = false;
-                }, 100);
-            }, { passive: true });
+            // Horizontal mouse wheel scrolling
+            timelineContainer.addEventListener('wheel', function(e) {
+                // Check if we're over the timeline container
+                if (e.deltaY !== 0) {
+                    e.preventDefault();
+                    
+                    // Convert vertical scroll to horizontal
+                    const scrollAmount = e.deltaY * 2; // Multiply for faster scrolling
+                    
+                    timelineContainer.scrollTo({
+                        left: timelineContainer.scrollLeft + scrollAmount,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Update navigation buttons after scroll
+                    setTimeout(updateNavigationButtons, 100);
+                }
+            }, { passive: false });
+            
+            // Update navigation buttons on scroll events
+            timelineContainer.addEventListener('scroll', function() {
+                if (!isScrolling) {
+                    isScrolling = true;
+                    setTimeout(() => {
+                        updateNavigationButtons();
+                        isScrolling = false;
+                    }, 100);
+                }
+            });
 
             // Load timeline on page load
             await displayInitialEntries();
+            
+            // Initialize navigation buttons after content loads
+            setTimeout(updateNavigationButtons, 1500);
         });
 
         // Keyboard shortcuts
@@ -991,6 +1120,12 @@
                 scrollToToday();
             } else if (e.key === 'r' || e.key === 'R') {
                 refreshTimeline();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                scrollTimelineLeft();
+            } else if (e.key === 'ArrowRight') {
+                e.preventDefault();
+                scrollTimelineRight();
             }
         });
     </script>
