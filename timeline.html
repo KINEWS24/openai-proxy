@@ -13,24 +13,24 @@
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: #333;
+            background: #1E293B;
+            color: #FFFFFF;
             overflow-x: hidden;
         }
 
         .header {
-            background: rgba(255, 255, 255, 0.95);
+            background: #334155;
             backdrop-filter: blur(10px);
             padding: 1rem 2rem;
-            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            border-bottom: 1px solid #475569;
         }
 
         .header h1 {
-            color: #2c3e50;
+            color: #FFFFFF;
             font-size: 2rem;
             font-weight: 700;
             text-align: center;
@@ -52,20 +52,21 @@
         }
 
         .btn {
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            background: #FF6B35;
             color: white;
             border: none;
             padding: 0.75rem 1.5rem;
-            border-radius: 25px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
         }
 
         .btn:hover {
+            background: #E55A2B;
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
         }
 
         .btn:active {
@@ -73,27 +74,46 @@
         }
 
         .btn.secondary {
-            background: linear-gradient(135deg, #a8a8a8, #7a7a7a);
-            box-shadow: 0 4px 15px rgba(168, 168, 168, 0.4);
+            background: #475569;
+            color: #94A3B8;
+            box-shadow: 0 4px 15px rgba(71, 85, 105, 0.4);
         }
 
         .btn.secondary:hover {
-            box-shadow: 0 6px 20px rgba(168, 168, 168, 0.6);
+            background: #64748B;
+            color: #FFFFFF;
+            box-shadow: 0 6px 20px rgba(71, 85, 105, 0.6);
+        }
+
+        .btn.success {
+            background: #10B981;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn.success:hover {
+            background: #059669;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.6);
         }
 
         select, input {
             padding: 0.5rem 1rem;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 15px;
-            background: rgba(255, 255, 255, 0.9);
+            border: 2px solid #64748B;
+            border-radius: 8px;
+            background: #334155;
+            color: #FFFFFF;
             font-size: 0.9rem;
             transition: all 0.3s ease;
         }
 
         select:focus, input:focus {
             outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+            border-color: #FF6B35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+
+        select option {
+            background: #334155;
+            color: #FFFFFF;
         }
 
         .stats {
@@ -105,11 +125,11 @@
         }
 
         .stat {
-            background: rgba(255, 255, 255, 0.2);
+            background: #475569;
             padding: 0.5rem 1rem;
-            border-radius: 15px;
+            border-radius: 8px;
             font-size: 0.9rem;
-            color: #2c3e50;
+            color: #94A3B8;
             font-weight: 600;
         }
 
@@ -132,15 +152,15 @@
             top: 0;
             bottom: 0;
             width: 4px;
-            background: linear-gradient(180deg, #667eea, #764ba2);
+            background: #FF6B35;
             transform: translateX(-50%);
             border-radius: 2px;
-            box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+            box-shadow: 0 0 20px rgba(255, 107, 53, 0.3);
         }
 
         .timeline-item {
             position: relative;
-            margin: 2rem 0;
+            margin: 1rem 0;
             opacity: 0;
             transform: translateY(30px);
             transition: all 0.6s ease;
@@ -156,9 +176,10 @@
         }
 
         .timeline-item.today .timeline-content {
-            background: linear-gradient(135deg, #ffd89b 0%, #19547b 100%);
+            background: #10B981;
             color: white;
-            box-shadow: 0 10px 30px rgba(255, 216, 155, 0.4);
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.4);
+            border: 2px solid #059669;
         }
 
         .timeline-item:nth-child(odd) {
@@ -172,85 +193,101 @@
         }
 
         .timeline-content {
-            background: rgba(255, 255, 255, 0.95);
+            background: #334155;
             backdrop-filter: blur(10px);
-            padding: 1.5rem;
-            border-radius: 20px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            padding: 0.75rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
             position: relative;
             transition: all 0.3s ease;
+            border: 1px solid #475569;
         }
 
         .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+            border-color: #FF6B35;
         }
 
         .timeline-item:nth-child(odd) .timeline-content::after {
             content: '';
             position: absolute;
             right: -15px;
-            top: 20px;
+            top: 15px;
             width: 0;
             height: 0;
             border: 15px solid transparent;
-            border-left-color: rgba(255, 255, 255, 0.95);
+            border-left-color: #334155;
         }
 
         .timeline-item:nth-child(even) .timeline-content::after {
             content: '';
             position: absolute;
             left: -15px;
-            top: 20px;
+            top: 15px;
             width: 0;
             height: 0;
             border: 15px solid transparent;
-            border-right-color: rgba(255, 255, 255, 0.95);
+            border-right-color: #334155;
         }
 
         .timeline-marker {
             position: absolute;
             left: 50%;
-            top: 20px;
-            width: 20px;
-            height: 20px;
-            background: linear-gradient(135deg, #667eea, #764ba2);
+            top: 15px;
+            width: 16px;
+            height: 16px;
+            background: #FF6B35;
             border-radius: 50%;
             transform: translateX(-50%);
-            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.8), 0 0 20px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 0 0 4px #1E293B, 0 0 20px rgba(255, 107, 53, 0.4);
             z-index: 10;
             transition: all 0.3s ease;
         }
 
         .timeline-item.today .timeline-marker {
-            width: 30px;
-            height: 30px;
-            background: linear-gradient(135deg, #ffd89b, #19547b);
-            box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 216, 155, 0.6);
+            width: 24px;
+            height: 24px;
+            background: #10B981;
+            box-shadow: 0 0 0 6px #1E293B, 0 0 30px rgba(16, 185, 129, 0.6);
         }
 
         .timeline-date {
-            font-size: 0.9rem;
-            color: #667eea;
+            font-size: 0.8rem;
+            color: #FF6B35;
             font-weight: 600;
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.25rem;
             display: flex;
             align-items: center;
             gap: 0.5rem;
         }
 
         .timeline-title {
-            font-size: 1.2rem;
+            font-size: 1.0rem;
             font-weight: 700;
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            line-height: 1.4;
+            color: #FFFFFF;
+            margin-bottom: 0.25rem;
+            line-height: 1.3;
         }
 
         .timeline-summary {
-            color: #5a6c7d;
-            line-height: 1.6;
-            margin-bottom: 1rem;
+            color: #94A3B8;
+            line-height: 1.4;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+
+        .timeline-source-link {
+            color: #FF6B35;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-source-link:hover {
+            color: #E55A2B;
+            text-decoration: underline;
         }
 
         .timeline-tags {
@@ -260,12 +297,13 @@
         }
 
         .tag {
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 12px;
-            font-size: 0.8rem;
+            background: #475569;
+            color: #94A3B8;
+            padding: 0.2rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.7rem;
             font-weight: 500;
+            border: 1px solid #64748B;
         }
 
         .archetype-badge {
@@ -278,11 +316,11 @@
             letter-spacing: 0.5px;
         }
 
-        .archetype-text { background: #e8f5e8; color: #2d5a2d; }
-        .archetype-image { background: #ffeaa7; color: #8b5a00; }
-        .archetype-link { background: #a8e6cf; color: #2d5a3d; }
-        .archetype-message { background: #dda0dd; color: #6b2c6b; }
-        .archetype-document { background: #87ceeb; color: #1e4d5b; }
+        .archetype-text { background: #10B981; color: #FFFFFF; }
+        .archetype-image { background: #FF6B35; color: #FFFFFF; }
+        .archetype-link { background: #475569; color: #94A3B8; }
+        .archetype-message { background: #8B5CF6; color: #FFFFFF; }
+        .archetype-document { background: #06B6D4; color: #FFFFFF; }
 
         .loading {
             text-align: center;
@@ -360,11 +398,11 @@
             top: 50%;
             right: 2rem;
             transform: translateY(-50%);
-            background: linear-gradient(135deg, #ffd89b, #19547b);
+            background: #10B981;
             color: white;
             padding: 1rem;
             border-radius: 50%;
-            box-shadow: 0 4px 20px rgba(255, 216, 155, 0.4);
+            box-shadow: 0 4px 20px rgba(16, 185, 129, 0.4);
             cursor: pointer;
             z-index: 1000;
             transition: all 0.3s ease;
@@ -372,8 +410,9 @@
         }
 
         .today-indicator:hover {
+            background: #059669;
             transform: translateY(-50%) scale(1.1);
-            box-shadow: 0 6px 25px rgba(255, 216, 155, 0.6);
+            box-shadow: 0 6px 25px rgba(16, 185, 129, 0.6);
         }
     </style>
 </head>
@@ -382,12 +421,19 @@
         <h1>🧬 Nexus Timeline</h1>
         <div class="controls">
             <div class="control-group">
-                <button class="btn" onclick="scrollToToday()">📅 Today</button>
+                <button class="btn success" onclick="scrollToToday()">📅 Today</button>
                 <button class="btn secondary" onclick="loadMore()">Load More</button>
                 <button class="btn secondary" onclick="refreshTimeline()">🔄 Refresh</button>
             </div>
             <div class="control-group">
-                <label>Show:</label>
+                <label style="color: #94A3B8;">Timeline View:</label>
+                <button class="btn secondary" onclick="setTimelineView(3)">3 Days</button>
+                <button class="btn secondary" onclick="setTimelineView(7)">1 Week</button>
+                <button class="btn secondary" onclick="setTimelineView(30)">1 Month</button>
+                <button class="btn secondary" onclick="setTimelineView(0)">All Time</button>
+            </div>
+            <div class="control-group">
+                <label style="color: #94A3B8;">Show:</label>
                 <select id="limitSelect" onchange="changeLimitAndReload()">
                     <option value="10">10 entries</option>
                     <option value="25">25 entries</option>
@@ -397,7 +443,7 @@
                 </select>
             </div>
             <div class="control-group">
-                <label>Filter:</label>
+                <label style="color: #94A3B8;">Filter:</label>
                 <select id="archetypeFilter" onchange="filterEntries()">
                     <option value="">All Types</option>
                     <option value="text">Text</option>
@@ -436,6 +482,7 @@
         let currentOffset = 0;
         let allData = [];
         let todayEntry = null;
+        let currentTimelineView = 0; // 0 = all time, other numbers = days
 
         async function loadTimeline(limit = 10, offset = 0, filters = {}) {
             try {
@@ -446,6 +493,7 @@
                 if (offset) params.append('offset', offset);
                 if (filters.archetype) params.append('archetype', filters.archetype);
                 if (filters.workspace) params.append('workspace', filters.workspace);
+                if (currentTimelineView > 0) params.append('days', currentTimelineView);
                 
                 if (params.toString()) {
                     url += '?' + params.toString();
@@ -561,6 +609,8 @@
                 const isToday = item.isToday;
                 const archetype = (item.archetype || 'unknown').toLowerCase();
                 
+                const sourceUrl = item.source_url || item.url || null;
+                
                 return `
                     <div class="timeline-item ${isToday ? 'today' : ''}" data-date="${item.start}" data-archetype="${archetype}">
                         <div class="timeline-marker"></div>
@@ -571,6 +621,7 @@
                             </div>
                             <div class="timeline-title">${escapeHtml(item.content)}</div>
                             ${item.title ? `<div class="timeline-summary">${escapeHtml(item.title)}</div>` : ''}
+                            ${sourceUrl ? `<div><a href="${escapeHtml(sourceUrl)}" target="_blank" class="timeline-source-link">📎 View Source</a></div>` : ''}
                             ${item.tags && item.tags.length > 0 ? `
                                 <div class="timeline-tags">
                                     ${item.tags.map(tag => `<span class="tag">${escapeHtml(tag)}</span>`).join('')}
@@ -619,6 +670,36 @@
         async function refreshTimeline() {
             document.getElementById('timeline').innerHTML = 
                 '<div class="loading"><div class="loading-spinner"></div><p>Refreshing timeline...</p></div>';
+            await displayInitialEntries();
+        }
+
+        async function setTimelineView(days) {
+            currentTimelineView = days;
+            
+            // Update button states
+            document.querySelectorAll('.control-group button').forEach(btn => {
+                if (btn.textContent.includes('Days') || btn.textContent.includes('Week') || 
+                    btn.textContent.includes('Month') || btn.textContent.includes('All Time')) {
+                    btn.classList.remove('btn');
+                    btn.classList.add('btn', 'secondary');
+                }
+            });
+            
+            // Highlight active button
+            const buttonText = days === 3 ? '3 Days' : 
+                              days === 7 ? '1 Week' : 
+                              days === 30 ? '1 Month' : 'All Time';
+            
+            document.querySelectorAll('.control-group button').forEach(btn => {
+                if (btn.textContent === buttonText) {
+                    btn.classList.remove('secondary');
+                    btn.classList.add('btn');
+                    btn.style.background = '#FF6B35';
+                }
+            });
+
+            document.getElementById('timeline').innerHTML = 
+                '<div class="loading"><div class="loading-spinner"></div><p>Loading timeline view...</p></div>';
             await displayInitialEntries();
         }
 

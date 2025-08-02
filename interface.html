@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS - Workspace Intelligence</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #1E293B;
+            color: #FFFFFF;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .logo-section h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 4px 20px rgba(255, 107, 53, 0.3);
+        }
+
+        .logo-section .subtitle {
+            font-size: 1.2rem;
+            color: #94A3B8;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+
+        .logo-section .tagline {
+            font-size: 0.9rem;
+            color: #FF6B35;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #E55A2B;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn.secondary {
+            background: #334155;
+            color: #94A3B8;
+            box-shadow: 0 6px 20px rgba(51, 65, 85, 0.4);
+        }
+
+        .btn.secondary:hover {
+            background: #475569;
+            color: #FFFFFF;
+            box-shadow: 0 10px 30px rgba(71, 85, 105, 0.6);
+        }
+
+        .btn.success {
+            background: #10B981;
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+        }
+
+        .btn.success:hover {
+            background: #059669;
+            box-shadow: 0 10px 30px rgba(16, 185, 129, 0.6);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 3rem;
+        }
+
+        .feature-card {
+            background: #334155;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #475569;
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .feature-card:hover {
+            background: #3F4B5C;
+            border-color: #FF6B35;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-card .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #FFFFFF;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #94A3B8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-card .btn {
+            font-size: 0.9rem;
+            padding: 0.75rem 1.5rem;
+        }
+
+        .stats-bar {
+            background: #334155;
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid #475569;
+            max-width: 1200px;
+            width: 100%;
+            margin-bottom: 2rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            text-align: center;
+        }
+
+        .stat-item h4 {
+            color: #FF6B35;
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-item p {
+            color: #94A3B8;
+            font-weight: 600;
+        }
+
+        .footer {
+            background: #334155;
+            padding: 2rem;
+            text-align: center;
+            border-top: 1px solid #475569;
+            margin-top: auto;
+        }
+
+        .footer p {
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .logo-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <div class="logo-section">
+            <h1>🧬 NEXUS</h1>
+            <div class="subtitle">Workspace Intelligence System</div>
+            <div class="tagline">Knowledge • Over • Time</div>
+        </div>
+
+        <div class="action-buttons">
+            <a href="/timeline.html" class="btn">📊 Timeline</a>
+            <button class="btn secondary" onclick="showOptions()">⚙️ Optionen</button>
+            <button class="btn success" onclick="showReady()">✅ Bereit</button>
+            <button class="btn secondary" onclick="showDashboard()">📈 Dashboard</button>
+        </div>
+
+        <div class="stats-bar" id="statsBar">
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <h4 id="totalFiles">-</h4>
+                    <p>Knowledge Files</p>
+                </div>
+                <div class="stat-item">
+                    <h4 id="todayEntries">-</h4>
+                    <p>Today's Entries</p>
+                </div>
+                <div class="stat-item">
+                    <h4 id="cacheAge">-</h4>
+                    <p>Cache Age (min)</p>
+                </div>
+                <div class="stat-item">
+                    <h4 id="systemStatus">🟢</h4>
+                    <p>System Status</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="icon">📊</div>
+                <h3>Timeline View</h3>
+                <p>Visualisiere deine Knowledge-Base chronologisch mit intelligenter Filterung und Navigation.</p>
+                <a href="/timeline.html" class="btn">Zur Timeline</a>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🧠</div>
+                <h3>Smart Analytics</h3>
+                <p>Analysiere Patterns, Trends und Verbindungen in deinen Wissensbeständen.</p>
+                <button class="btn secondary" onclick="showAnalytics()">Analytics</button>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">🔍</div>
+                <h3>Intelligent Search</h3>
+                <p>Durchsuche deine gesamte Knowledge-Base mit KI-basierter semantischer Suche.</p>
+                <button class="btn secondary" onclick="showSearch()">Suche</button>
+            </div>
+
+            <div class="feature-card">
+                <div class="icon">⚡</div>
+                <h3>Workspace Tools</h3>
+                <p>Manage Workspaces, Cluster und Entry Points für optimale Organisation.</p>
+                <button class="btn secondary" onclick="showWorkspaces()">Workspaces</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>&copy; 2025 NEXUS v6.1 - Workspace Intelligent Edition | Knowledge Sovereignty Achieved</p>
+    </div>
+
+    <script>
+        // Load system stats
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/status');
+                const data = await response.json();
+                
+                if (data.performance) {
+                    document.getElementById('totalFiles').textContent = data.performance.knowledge_files || '-';
+                    document.getElementById('cacheAge').textContent = Math.round(data.performance.cache_age_minutes || 0);
+                }
+
+                // Load timeline stats for today's entries
+                const timelineResponse = await fetch('/visualize/timeline?limit=1');
+                const timelineData = await timelineResponse.json();
+                
+                if (timelineData.stats) {
+                    document.getElementById('todayEntries').textContent = timelineData.stats.today_entries || '0';
+                }
+
+                document.getElementById('systemStatus').textContent = '🟢';
+                
+            } catch (error) {
+                console.error('Error loading stats:', error);
+                document.getElementById('systemStatus').textContent = '🔴';
+            }
+        }
+
+        function showOptions() {
+            alert('⚙️ Optionen-Menü würde hier geöffnet werden.\n\nVerfügbare Optionen:\n• Timeline-Einstellungen\n• Cache-Management\n• Workspace-Konfiguration\n• System-Einstellungen');
+        }
+
+        function showReady() {
+            alert('✅ System ist bereit!\n\nStatus: Alle Systeme funktional\n• Knowledge-Cache: Aktiv\n• Timeline: Verfügbar\n• Search-Index: Bereit\n• API-Endpoints: Online');
+        }
+
+        function showDashboard() {
+            alert('📈 Dashboard würde hier geöffnet werden.\n\nVerfügbare Dashboards:\n• System-Übersicht\n• Performance-Metriken\n• Cache-Status\n• Workspace-Analytics');
+        }
+
+        function showAnalytics() {
+            alert('🧠 Analytics-Modul würde hier geöffnet werden.\n\nVerfügbare Analysen:\n• Trend-Analyse\n• Content-Clustering\n• Workspace-Performance\n• Zeitbasierte Patterns');
+        }
+
+        function showSearch() {
+            alert('🔍 Search-Interface würde hier geöffnet werden.\n\nFeatures:\n• Semantische Suche\n• Filter nach Archetype\n• Workspace-Filter\n• Timeline-Integration');
+        }
+
+        function showWorkspaces() {
+            alert('⚡ Workspace-Management würde hier geöffnet werden.\n\nFunktionen:\n• Workspace-Übersicht\n• Cluster-Management\n• Entry Point-Konfiguration\n• Performance-Monitoring');
+        }
+
+        // Load stats on page load
+        document.addEventListener('DOMContentLoaded', loadStats);
+
+        // Refresh stats every 30 seconds
+        setInterval(loadStats, 30000);
+    </script>
+</body>
+</html>

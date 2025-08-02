@@ -3089,8 +3089,13 @@ app.use((req, res, next) => {
   next(); 
 });
 
-// Health Check (v6.1 Enhanced)
+// Main Interface Route
 app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, 'interface.html'));
+});
+
+// API Health Check (v6.1 Enhanced)
+app.get("/api/status", (req, res) => {
   const enhancedStats = getEnhancedCacheStats();
   
   res.json({ 
@@ -4172,8 +4177,9 @@ app.get("/visualize/timeline", async (req, res) => {
     const offset = req.query.offset ? parseInt(req.query.offset) : 0;
     const archetype = req.query.archetype || null;
     const workspace = req.query.workspace || null;
+    const days = req.query.days ? parseInt(req.query.days) : null;
     
-    console.log(`[TIMELINE] 🎯 Query params: limit=${limit}, offset=${offset}, archetype=${archetype}, workspace=${workspace}`);
+    console.log(`[TIMELINE] 🎯 Query params: limit=${limit}, offset=${offset}, archetype=${archetype}, workspace=${workspace}, days=${days}`);
     
     // 🚀 NEW: Cache-Refresh wenn Timeline leer oder veraltet
     const cacheAge = lastCacheUpdate ? (Date.now() - new Date(lastCacheUpdate).getTime()) / 1000 / 60 : 999;
@@ -4299,6 +4305,15 @@ app.get("/visualize/timeline", async (req, res) => {
         item.workspace && item.workspace.toLowerCase() === workspace.toLowerCase()
       );
       console.log(`[TIMELINE] 🏢 Filtered by workspace '${workspace}': ${filteredData.length} entries`);
+    }
+
+    if (days && days > 0) {
+      const cutoffDate = new Date();
+      cutoffDate.setDate(cutoffDate.getDate() - days);
+      filteredData = filteredData.filter(item => 
+        new Date(item.start) >= cutoffDate
+      );
+      console.log(`[TIMELINE] 📅 Filtered by last ${days} days: ${filteredData.length} entries`);
     }
     
     // Apply pagination if limit is specified
