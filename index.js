@@ -4855,7 +4855,7 @@ async function generateDashboardData() {
     active_clusters: activeClustersArray,
     cache_stats: {
       total_files: knowledgeCache.size,
-      cache_age_minutes: getCacheAgeMinutes(),
+      cache_age_minutes: Math.round(lastCacheUpdate ? (Date.now() - new Date(lastCacheUpdate).getTime()) / 1000 / 60 : 0),
       last_updated: lastCacheUpdate?.toISOString()
     }
   };

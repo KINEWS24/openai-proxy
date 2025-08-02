@@ -640,6 +640,177 @@
         </div>
     </div>
 
+    <!-- Modern Slide-in Panel System -->
+    <div class="panel-overlay" id="panelOverlay">
+        <div class="slide-panel" id="slidePanel">
+            <div class="panel-header">
+                <div class="panel-title" id="panelTitle">Information</div>
+                <button class="panel-close" onclick="closePanel()">✕</button>
+            </div>
+            <div class="panel-content" id="panelContent">
+                <!-- Content will be dynamically inserted here -->
+            </div>
+            <div class="panel-actions" id="panelActions">
+                <!-- Action buttons will be added here if needed -->
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Modern Slide-in Panel with Glassmorphism */
+        .panel-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .panel-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .slide-panel {
+            position: absolute;
+            right: -500px;
+            top: 0;
+            width: 500px;
+            height: 100%;
+            background: rgba(51, 65, 85, 0.95);
+            backdrop-filter: blur(15px);
+            border-left: 1px solid #475569;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .panel-overlay.active .slide-panel {
+            right: 0;
+        }
+
+        .panel-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 2rem;
+            border-bottom: 1px solid #475569;
+            background: rgba(71, 85, 105, 0.5);
+        }
+
+        .panel-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+        }
+
+        .panel-close {
+            background: none;
+            border: none;
+            color: #94A3B8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .panel-close:hover {
+            background: #FF6B35;
+            color: #FFFFFF;
+            transform: scale(1.1);
+        }
+
+        .panel-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            color: #FFFFFF;
+            line-height: 1.6;
+        }
+
+        .panel-content h3 {
+            color: #FF6B35;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .panel-content p {
+            margin-bottom: 1rem;
+            color: #94A3B8;
+        }
+
+        .panel-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .panel-content li {
+            margin-bottom: 0.5rem;
+            color: #94A3B8;
+        }
+
+        .panel-actions {
+            padding: 2rem;
+            border-top: 1px solid #475569;
+            background: rgba(71, 85, 105, 0.3);
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        .panel-btn {
+            background: #FF6B35;
+            color: #FFFFFF;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+        }
+
+        .panel-btn:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .panel-btn.secondary {
+            background: #475569;
+            color: #94A3B8;
+            box-shadow: 0 4px 15px rgba(71, 85, 105, 0.4);
+        }
+
+        .panel-btn.secondary:hover {
+            background: #64748B;
+            color: #FFFFFF;
+            box-shadow: 0 6px 20px rgba(71, 85, 105, 0.6);
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .slide-panel {
+                width: 100%;
+                right: -100%;
+            }
+        }
+    </style>
+
     <script>
         let dashboardData = null;
         let countdownInterval = null;
@@ -853,17 +1024,103 @@
             countdownInterval = setInterval(updateCountdown, 1000);
         }
 
+        // Modern Panel System Functions
+        function showPanel(title, content, actions = null) {
+            document.getElementById('panelTitle').textContent = title;
+            document.getElementById('panelContent').innerHTML = content;
+            
+            const actionsContainer = document.getElementById('panelActions');
+            if (actions) {
+                actionsContainer.innerHTML = actions;
+                actionsContainer.style.display = 'flex';
+            } else {
+                actionsContainer.style.display = 'none';
+            }
+            
+            document.getElementById('panelOverlay').classList.add('active');
+        }
+
+        function closePanel() {
+            document.getElementById('panelOverlay').classList.remove('active');
+        }
+
+        // Close panel when clicking on overlay
+        document.getElementById('panelOverlay').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePanel();
+            }
+        });
+
+        // Close panel with Escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closePanel();
+            }
+        });
+
         function searchTag(tag) {
-            // Implement tag search functionality
-            alert(`🔍 Search functionality for tag "${tag}" would be implemented here.\n\nThis would open a search interface filtered by this hashtag.`);
+            const content = `
+                <h3>🔍 Tag Search</h3>
+                <p>Search functionality for tag <strong>"${escapeHtml(tag)}"</strong></p>
+                <p>This would open a search interface filtered by this hashtag, showing all knowledge entries that contain this tag.</p>
+                <ul>
+                    <li>Filter timeline by selected tag</li>
+                    <li>Show related entries and connections</li>
+                    <li>Export search results</li>
+                    <li>Save search as favorite</li>
+                </ul>
+            `;
+            
+            const actions = `
+                <button class="panel-btn" onclick="closePanel()">Open Search</button>
+                <button class="panel-btn secondary" onclick="closePanel()">Cancel</button>
+            `;
+            
+            showPanel('Tag Search', content, actions);
         }
 
         function newEntry() {
-            alert('➕ New Entry creation interface would be opened here.\n\nThis would provide a form to create new knowledge entries.');
+            const content = `
+                <h3>➕ New Entry Creation</h3>
+                <p>Create a new knowledge entry in your NEXUS system.</p>
+                <p>This interface would provide a comprehensive form to create new knowledge entries with all metadata fields.</p>
+                <ul>
+                    <li>Content input with rich text editor</li>
+                    <li>Archetype selection (Text, Link, Image, etc.)</li>
+                    <li>Tag management and suggestions</li>
+                    <li>Workspace and cluster assignment</li>
+                    <li>Automatic metadata generation</li>
+                </ul>
+            `;
+            
+            const actions = `
+                <button class="panel-btn" onclick="closePanel()">Create Entry</button>
+                <button class="panel-btn secondary" onclick="closePanel()">Cancel</button>
+            `;
+            
+            showPanel('New Entry', content, actions);
         }
 
         function searchKnowledge() {
-            alert('🔍 Knowledge search interface would be opened here.\n\nThis would provide semantic search across the entire knowledge base.');
+            const content = `
+                <h3>🔍 Knowledge Search</h3>
+                <p>Semantic search across your entire knowledge base.</p>
+                <p>This would provide advanced search capabilities using AI-powered semantic understanding of your content.</p>
+                <ul>
+                    <li>Natural language query processing</li>
+                    <li>Semantic similarity matching</li>
+                    <li>Filter by archetype, workspace, clusters</li>
+                    <li>Timeline-based search constraints</li>
+                    <li>Export and save search results</li>
+                </ul>
+            `;
+            
+            const actions = `
+                <button class="panel-btn" onclick="closePanel()">Open Search</button>
+                <button class="panel-btn secondary" onclick="closePanel()">Cancel</button>
+            `;
+            
+            showPanel('Knowledge Search', content, actions);
         }
 
         async function refreshDashboard() {
