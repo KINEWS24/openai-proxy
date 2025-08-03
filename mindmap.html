@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEXUS Mindmap</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #1E293B;
+            color: #FFFFFF;
+            overflow: hidden;
+        }
+
+        .header {
+            background: #334155;
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid #475569;
+        }
+
+        .header h1 {
+            color: #FFFFFF;
+            font-size: 2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .controls + .controls {
+            margin-top: 1rem;
+        }
+
+        .control-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn:hover {
+            background: #E55A2B;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 107, 53, 0.6);
+        }
+
+        .btn:active {
+            transform: translateY(0);
+        }
+
+        .btn.secondary {
+            background: #475569;
+            color: #94A3B8;
+            box-shadow: 0 4px 15px rgba(71, 85, 105, 0.4);
+        }
+
+        .btn.secondary:hover {
+            background: #64748B;
+            color: #FFFFFF;
+            box-shadow: 0 6px 20px rgba(71, 85, 105, 0.6);
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .search-input {
+            padding: 0.5rem 1rem;
+            border: 2px solid #64748B;
+            border-radius: 8px;
+            background: rgba(51, 65, 85, 0.8);
+            backdrop-filter: blur(10px);
+            color: #FFFFFF;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            min-width: 200px;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #FF6B35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.2);
+        }
+
+        .search-input::placeholder {
+            color: #94A3B8;
+        }
+
+        .mindmap-container {
+            position: relative;
+            width: 100vw;
+            height: calc(100vh - 180px);
+            background: #1E293B;
+            overflow: hidden;
+        }
+
+        #mindmapCanvas {
+            display: block;
+            cursor: grab;
+            width: 100%;
+            height: 100%;
+        }
+
+        #mindmapCanvas:active {
+            cursor: grabbing;
+        }
+
+        .stats-overlay {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(51, 65, 85, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #475569;
+            border-radius: 12px;
+            padding: 1rem;
+            min-width: 200px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .stats-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .stats-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+            font-size: 0.9rem;
+        }
+
+        .stats-label {
+            color: #94A3B8;
+        }
+
+        .stats-value {
+            color: #FF6B35;
+            font-weight: 600;
+        }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .loading-content {
+            background: #334155;
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            border: 1px solid #475569;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #475569;
+            border-top: 4px solid #FF6B35;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 1rem;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .tooltip {
+            position: absolute;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(15px);
+            border: 1px solid #FF6B35;
+            border-radius: 8px;
+            padding: 0.75rem;
+            pointer-events: none;
+            font-size: 0.85rem;
+            max-width: 250px;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .tooltip.visible {
+            opacity: 1;
+        }
+
+        .tooltip-title {
+            color: #FFFFFF;
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+        }
+
+        .tooltip-details {
+            color: #94A3B8;
+            font-size: 0.8rem;
+        }
+
+        .detail-panel {
+            position: absolute;
+            right: -400px;
+            top: 0;
+            width: 400px;
+            height: 100%;
+            background: rgba(51, 65, 85, 0.95);
+            backdrop-filter: blur(15px);
+            border-left: 1px solid #475569;
+            box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            z-index: 200;
+        }
+
+        .detail-panel.visible {
+            right: 0;
+        }
+
+        .detail-header {
+            padding: 2rem;
+            border-bottom: 1px solid #475569;
+            background: rgba(71, 85, 105, 0.5);
+        }
+
+        .detail-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #FFFFFF;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-subtitle {
+            color: #94A3B8;
+            font-size: 0.9rem;
+        }
+
+        .detail-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+
+        .detail-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: #94A3B8;
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .detail-close:hover {
+            background: #FF6B35;
+            color: #FFFFFF;
+        }
+
+        .filter-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-btn {
+            background: #475569;
+            color: #94A3B8;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(71, 85, 105, 0.3);
+        }
+
+        .filter-btn:hover {
+            background: #64748B;
+            color: #FFFFFF;
+            transform: translateY(-1px);
+        }
+
+        .filter-btn.active {
+            background: #FF6B35;
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
+        }
+
+        .reset-hint {
+            position: absolute;
+            bottom: 1rem;
+            left: 1rem;
+            background: rgba(51, 65, 85, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            color: #94A3B8;
+            border: 1px solid #475569;
+        }
+
+        @media (max-width: 768px) {
+            .controls {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .detail-panel {
+                width: 100%;
+                right: -100%;
+            }
+            
+            .stats-overlay {
+                position: relative;
+                top: 0;
+                right: 0;
+                margin: 1rem;
+                width: calc(100% - 2rem);
+            }
+            
+            .search-input {
+                min-width: 150px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🧬 NEXUS Mindmap</h1>
+        <div class="controls">
+            <div class="control-group">
+                <a href="/dashboard.html" class="btn secondary">📈 Dashboard</a>
+                <a href="/timeline.html" class="btn secondary">📊 Timeline</a>
+                <a href="/interface.html" class="btn secondary">🏠 Home</a>
+                <a href="/knowledge-graph.html" class="btn secondary">🧬 Knowledge Graph</a>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="control-group">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="🔍 Search nodes..." id="searchInput">
+                    <button class="btn secondary" onclick="resetView()">🎯 Reset View</button>
+                    <button class="btn secondary" onclick="refreshMindmap()">🔄 Refresh</button>
+                </div>
+            </div>
+            <div class="control-group">
+                <div class="filter-controls">
+                    <span style="color: #94A3B8; font-size: 0.9rem;">Filters:</span>
+                    <button class="filter-btn active" onclick="toggleFilter('themes')" data-filter="themes">🏷️ Themes</button>
+                    <button class="filter-btn active" onclick="toggleFilter('tags')" data-filter="tags">📌 Tags</button>
+                    <button class="filter-btn active" onclick="toggleFilter('connections')" data-filter="connections">🔗 Connections</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mindmap-container">
+        <canvas id="mindmapCanvas"></canvas>
+        
+        <div class="stats-overlay">
+            <div class="stats-title">Mindmap Statistics</div>
+            <div class="stats-item">
+                <span class="stats-label">Nodes:</span>
+                <span class="stats-value" id="nodeCount">0</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-label">Connections:</span>
+                <span class="stats-value" id="connectionCount">0</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-label">Zoom:</span>
+                <span class="stats-value" id="zoomLevel">100%</span>
+            </div>
+            <div class="stats-item">
+                <span class="stats-label">Active Filters:</span>
+                <span class="stats-value" id="activeFilters">3</span>
+            </div>
+        </div>
+
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-content">
+                <div class="loading-spinner"></div>
+                <h3 style="color: #FFFFFF; margin-bottom: 0.5rem;">Loading NEXUS Mindmap</h3>
+                <p style="color: #94A3B8;">Building knowledge universe...</p>
+            </div>
+        </div>
+
+        <div class="tooltip" id="tooltip">
+            <div class="tooltip-title" id="tooltipTitle"></div>
+            <div class="tooltip-details" id="tooltipDetails"></div>
+        </div>
+
+        <div class="detail-panel" id="detailPanel">
+            <button class="detail-close" onclick="closeDetailPanel()">✕</button>
+            <div class="detail-header">
+                <div class="detail-title" id="detailTitle">Node Details</div>
+                <div class="detail-subtitle" id="detailSubtitle">Information</div>
+            </div>
+            <div class="detail-content" id="detailContent">
+                <div id="nodeDetails">
+                    <!-- Node details will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <div class="reset-hint">
+            💡 Double-click canvas to reset view • Space to center • ESC to close panels
+        </div>
+    </div>
+
+    <script>
+        // Global variables
+        let canvas, ctx;
+        let nodes = [];
+        let links = [];
+        let animationFrame;
+        let isDragging = false;
+        let dragNode = null;
+        let isPanning = false;
+        let mouseX = 0, mouseY = 0;
+        let lastPanX = 0, lastPanY = 0;
+        let viewport = { x: 0, y: 0, zoom: 1 };
+        let hoveredNode = null;
+        let selectedNode = null;
+        let searchTerm = '';
+        let activeFilters = new Set(['themes', 'tags', 'connections']);
+        let originalData = null;
+
+        // Initialize the mindmap
+        document.addEventListener('DOMContentLoaded', function() {
+            canvas = document.getElementById('mindmapCanvas');
+            ctx = canvas.getContext('2d');
+            
+            // Set canvas size
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+            
+            // Add event listeners
+            canvas.addEventListener('mousemove', handleMouseMove);
+            canvas.addEventListener('mousedown', handleMouseDown);
+            canvas.addEventListener('mouseup', handleMouseUp);
+            canvas.addEventListener('click', handleClick);
+            canvas.addEventListener('dblclick', handleDoubleClick);
+            canvas.addEventListener('mouseleave', handleMouseLeave);
+            canvas.addEventListener('wheel', handleWheel);
+            
+            // Search functionality
+            document.getElementById('searchInput').addEventListener('input', handleSearch);
+            
+            // Keyboard shortcuts
+            document.addEventListener('keydown', handleKeyDown);
+            
+            // Load initial data
+            loadMindmap();
+        });
+
+        function resizeCanvas() {
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            
+            if (nodes.length > 0) {
+                render();
+            }
+        }
+
+        async function loadMindmap() {
+            showLoading(true);
+            
+            try {
+                const response = await fetch('/visualize/mindmap');
+                const data = await response.json();
+                
+                if (data.success) {
+                    originalData = data.mindmap_data;
+                    processData(originalData);
+                    centerView();
+                    updateStats();
+                    startAnimation();
+                } else {
+                    console.error('Failed to load mindmap:', data.error);
+                    showError('Failed to load mindmap data');
+                }
+            } catch (error) {
+                console.error('Error loading mindmap:', error);
+                showError('Network error loading mindmap');
+            } finally {
+                showLoading(false);
+            }
+        }
+
+        function processData(data) {
+            // Process nodes with NEXUS styling
+            nodes = data.nodes.map((node, index) => {
+                const centralThemes = ['AI', 'NEXUS', 'Innovation', 'Technology', 'Future'];
+                const isCentral = centralThemes.some(theme => 
+                    node.id.toLowerCase().includes(theme.toLowerCase()) || 
+                    node.label.toLowerCase().includes(theme.toLowerCase())
+                );
+                
+                return {
+                    ...node,
+                    x: node.x || (canvas.width / 2 + (Math.random() - 0.5) * 600),
+                    y: node.y || (canvas.height / 2 + (Math.random() - 0.5) * 400),
+                    vx: 0,
+                    vy: 0,
+                    radius: Math.max(8, Math.min(25, (node.value || 1) * 3)),
+                    color: isCentral ? '#FF6B35' : '#334155',
+                    strokeColor: isCentral ? '#E55A2B' : '#475569',
+                    glowColor: isCentral ? 'rgba(255, 107, 53, 0.4)' : 'rgba(51, 65, 85, 0.4)',
+                    visible: true,
+                    highlighted: false
+                };
+            });
+
+            // Process links
+            links = data.links.map(link => ({
+                ...link,
+                visible: true,
+                opacity: 0.6,
+                width: Math.max(1, Math.min(4, (link.value || 1) * 2))
+            }));
+        }
+
+        function centerView() {
+            // Center viewport on the mindmap
+            const bounds = getBounds();
+            const centerX = (bounds.minX + bounds.maxX) / 2;
+            const centerY = (bounds.minY + bounds.maxY) / 2;
+            
+            viewport.x = canvas.width / 2 - centerX;
+            viewport.y = canvas.height / 2 - centerY;
+            viewport.zoom = 1;
+        }
+
+        function getBounds() {
+            if (nodes.length === 0) return { minX: 0, maxX: 0, minY: 0, maxY: 0 };
+            
+            let minX = Infinity, maxX = -Infinity;
+            let minY = Infinity, maxY = -Infinity;
+            
+            nodes.forEach(node => {
+                minX = Math.min(minX, node.x - node.radius);
+                maxX = Math.max(maxX, node.x + node.radius);
+                minY = Math.min(minY, node.y - node.radius);
+                maxY = Math.max(maxY, node.y + node.radius);
+            });
+            
+            return { minX, maxX, minY, maxY };
+        }
+
+        function showLoading(show) {
+            const overlay = document.getElementById('loadingOverlay');
+            overlay.style.display = show ? 'flex' : 'none';
+        }
+
+        function showError(message) {
+            console.error(message);
+            // Could add a toast notification here
+        }
+
+        function updateStats() {
+            const visibleNodes = nodes.filter(n => n.visible).length;
+            const visibleConnections = links.filter(l => l.visible).length;
+            
+            document.getElementById('nodeCount').textContent = visibleNodes;
+            document.getElementById('connectionCount').textContent = visibleConnections;
+            document.getElementById('zoomLevel').textContent = Math.round(viewport.zoom * 100) + '%';
+            document.getElementById('activeFilters').textContent = activeFilters.size;
+        }
+
+        function startAnimation() {
+            if (animationFrame) {
+                cancelAnimationFrame(animationFrame);
+            }
+            
+            // Fade in animation
+            const fadeStart = Date.now();
+            const fadeDuration = 800;
+            
+            function animate() {
+                const elapsed = Date.now() - fadeStart;
+                const progress = Math.min(elapsed / fadeDuration, 1);
+                const alpha = progress;
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                // Apply physics simulation for natural movement
+                simulatePhysics();
+                
+                // Draw with fade effect
+                drawMindmap(alpha);
+                
+                if (progress < 1) {
+                    animationFrame = requestAnimationFrame(animate);
+                } else {
+                    // Switch to normal rendering
+                    startRenderLoop();
+                }
+            }
+            
+            animate();
+        }
+
+        function startRenderLoop() {
+            function renderLoop() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                simulatePhysics();
+                drawMindmap(1);
+                animationFrame = requestAnimationFrame(renderLoop);
+            }
+            renderLoop();
+        }
+
+        function simulatePhysics() {
+            // Simple physics simulation for natural node movement
+            const damping = 0.9;
+            const repulsion = 100;
+            const attraction = 0.1;
+            
+            // Reset forces
+            nodes.forEach(node => {
+                node.fx = 0;
+                node.fy = 0;
+            });
+            
+            // Node repulsion
+            for (let i = 0; i < nodes.length; i++) {
+                for (let j = i + 1; j < nodes.length; j++) {
+                    const nodeA = nodes[i];
+                    const nodeB = nodes[j];
+                    
+                    const dx = nodeB.x - nodeA.x;
+                    const dy = nodeB.y - nodeA.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance > 0 && distance < repulsion) {
+                        const force = repulsion / (distance * distance);
+                        const fx = (dx / distance) * force;
+                        const fy = (dy / distance) * force;
+                        
+                        nodeA.fx -= fx;
+                        nodeA.fy -= fy;
+                        nodeB.fx += fx;
+                        nodeB.fy += fy;
+                    }
+                }
+            }
+            
+            // Link attraction
+            links.forEach(link => {
+                const source = nodes.find(n => n.id === link.source);
+                const target = nodes.find(n => n.id === link.target);
+                
+                if (source && target) {
+                    const dx = target.x - source.x;
+                    const dy = target.y - source.y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (distance > 0) {
+                        const force = attraction * distance;
+                        const fx = (dx / distance) * force;
+                        const fy = (dy / distance) * force;
+                        
+                        source.fx += fx;
+                        source.fy += fy;
+                        target.fx -= fx;
+                        target.fy -= fy;
+                    }
+                }
+            });
+            
+            // Apply forces
+            nodes.forEach(node => {
+                if (!node.fixed) {
+                    node.vx = (node.vx + node.fx * 0.01) * damping;
+                    node.vy = (node.vy + node.fy * 0.01) * damping;
+                    node.x += node.vx;
+                    node.y += node.vy;
+                }
+            });
+        }
+
+        function drawMindmap(alpha = 1) {
+            ctx.save();
+            ctx.globalAlpha = alpha;
+            
+            // Draw connections first
+            drawConnections();
+            
+            // Draw nodes
+            drawNodes();
+            
+            ctx.restore();
+        }
+
+        function drawConnections() {
+            links.forEach(link => {
+                if (!link.visible) return;
+                
+                const source = nodes.find(n => n.id === link.source);
+                const target = nodes.find(n => n.id === link.target);
+                
+                if (!source || !target || !source.visible || !target.visible) return;
+                
+                const sourceX = (source.x * viewport.zoom) + viewport.x;
+                const sourceY = (source.y * viewport.zoom) + viewport.y;
+                const targetX = (target.x * viewport.zoom) + viewport.x;
+                const targetY = (target.y * viewport.zoom) + viewport.y;
+                
+                // Skip if outside canvas
+                if ((sourceX < -50 || sourceX > canvas.width + 50) && 
+                    (targetX < -50 || targetX > canvas.width + 50)) return;
+                
+                ctx.save();
+                
+                // Animate connections
+                const time = Date.now() * 0.001;
+                const flowAlpha = 0.3 + 0.2 * Math.sin(time + link.source.length);
+                
+                ctx.globalAlpha = link.opacity * flowAlpha;
+                ctx.strokeStyle = '#64748B';
+                ctx.lineWidth = link.width * viewport.zoom;
+                ctx.lineCap = 'round';
+                
+                // Add glow effect for strong connections
+                if (link.value > 3) {
+                    ctx.shadowColor = '#FF6B35';
+                    ctx.shadowBlur = 10 * viewport.zoom;
+                }
+                
+                ctx.beginPath();
+                ctx.moveTo(sourceX, sourceY);
+                ctx.lineTo(targetX, targetY);
+                ctx.stroke();
+                
+                ctx.restore();
+            });
+        }
+
+        function drawNodes() {
+            nodes.forEach(node => {
+                if (!node.visible) return;
+                
+                const x = (node.x * viewport.zoom) + viewport.x;
+                const y = (node.y * viewport.zoom) + viewport.y;
+                const radius = node.radius * viewport.zoom;
+                
+                // Skip if outside canvas
+                if (x + radius < -50 || x - radius > canvas.width + 50 ||
+                    y + radius < -50 || y - radius > canvas.height + 50) return;
+                
+                ctx.save();
+                
+                // Highlight effect
+                if (node.highlighted || hoveredNode === node) {
+                    ctx.shadowColor = node.glowColor;
+                    ctx.shadowBlur = 20 * viewport.zoom;
+                    ctx.globalAlpha = 1;
+                } else {
+                    ctx.globalAlpha = 0.9;
+                }
+                
+                // Draw node background with glassmorphism
+                ctx.fillStyle = node.color;
+                ctx.beginPath();
+                ctx.arc(x, y, radius, 0, 2 * Math.PI);
+                ctx.fill();
+                
+                // Draw border
+                ctx.strokeStyle = node.strokeColor;
+                ctx.lineWidth = 2 * viewport.zoom;
+                ctx.stroke();
+                
+                // Reset shadow
+                ctx.shadowBlur = 0;
+                
+                // Draw text
+                if (radius > 8) {
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = `${Math.min(radius / 3, 12) * viewport.zoom}px -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    
+                    let text = node.label || node.id;
+                    const maxWidth = radius * 1.6;
+                    while (ctx.measureText(text).width > maxWidth && text.length > 3) {
+                        text = text.slice(0, -4) + '...';
+                    }
+                    
+                    ctx.fillText(text, x, y);
+                }
+                
+                // Draw connection count badge for important nodes
+                if (node.connections > 5) {
+                    const badgeRadius = Math.min(radius / 3, 8) * viewport.zoom;
+                    const badgeX = x + radius - badgeRadius;
+                    const badgeY = y - radius + badgeRadius;
+                    
+                    ctx.beginPath();
+                    ctx.arc(badgeX, badgeY, badgeRadius, 0, 2 * Math.PI);
+                    ctx.fillStyle = '#10B981';
+                    ctx.fill();
+                    ctx.strokeStyle = '#FFFFFF';
+                    ctx.lineWidth = 1 * viewport.zoom;
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.font = `${Math.min(badgeRadius, 6) * viewport.zoom}px -apple-system`;
+                    ctx.fillText(node.connections.toString(), badgeX, badgeY);
+                }
+                
+                ctx.restore();
+            });
+        }
+
+        function render() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            drawMindmap();
+        }
+
+        // Event handlers
+        function handleMouseMove(event) {
+            const rect = canvas.getBoundingClientRect();
+            mouseX = event.clientX - rect.left;
+            mouseY = event.clientY - rect.top;
+            
+            if (isDragging && dragNode) {
+                dragNode.x = (mouseX - viewport.x) / viewport.zoom;
+                dragNode.y = (mouseY - viewport.y) / viewport.zoom;
+                dragNode.fixed = true;
+                return;
+            }
+            
+            if (isPanning) {
+                const deltaX = mouseX - lastPanX;
+                const deltaY = mouseY - lastPanY;
+                
+                viewport.x += deltaX;
+                viewport.y += deltaY;
+                
+                lastPanX = mouseX;
+                lastPanY = mouseY;
+                return;
+            }
+            
+            const node = getNodeAtPosition(mouseX, mouseY);
+            
+            if (node !== hoveredNode) {
+                hoveredNode = node;
+                
+                if (node) {
+                    showTooltip(node, mouseX, mouseY);
+                    canvas.style.cursor = 'pointer';
+                    highlightConnectedNodes(node);
+                } else {
+                    hideTooltip();
+                    canvas.style.cursor = 'grab';
+                    clearHighlights();
+                }
+            } else if (node) {
+                updateTooltipPosition(mouseX, mouseY);
+            }
+        }
+
+        function handleMouseDown(event) {
+            const node = getNodeAtPosition(mouseX, mouseY);
+            if (node) {
+                isDragging = true;
+                dragNode = node;
+                canvas.style.cursor = 'grabbing';
+            } else {
+                isPanning = true;
+                lastPanX = mouseX;
+                lastPanY = mouseY;
+                canvas.style.cursor = 'grabbing';
+            }
+        }
+
+        function handleMouseUp(event) {
+            if (dragNode) {
+                dragNode.fixed = false;
+            }
+            
+            isDragging = false;
+            dragNode = null;
+            isPanning = false;
+            canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
+        }
+
+        function handleClick(event) {
+            if (isDragging || isPanning) return;
+            
+            const node = getNodeAtPosition(mouseX, mouseY);
+            if (node) {
+                selectedNode = node;
+                showDetailPanel(node);
+            }
+        }
+
+        function handleDoubleClick(event) {
+            resetView();
+        }
+
+        function handleMouseLeave() {
+            hoveredNode = null;
+            hideTooltip();
+            clearHighlights();
+            canvas.style.cursor = 'grab';
+        }
+
+        function handleWheel(event) {
+            event.preventDefault();
+            
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+            
+            const minZoom = 0.5;
+            const maxZoom = 3.0;
+            const zoomSpeed = 0.1;
+            
+            const zoomDelta = event.deltaY > 0 ? -zoomSpeed : zoomSpeed;
+            const newZoom = Math.max(minZoom, Math.min(maxZoom, viewport.zoom + zoomDelta));
+            
+            if (newZoom !== viewport.zoom) {
+                const zoomFactor = newZoom / viewport.zoom;
+                
+                viewport.x = mouseX - (mouseX - viewport.x) * zoomFactor;
+                viewport.y = mouseY - (mouseY - viewport.y) * zoomFactor;
+                viewport.zoom = newZoom;
+                
+                updateStats();
+            }
+        }
+
+        function handleSearch(event) {
+            searchTerm = event.target.value.toLowerCase();
+            applyFilters();
+        }
+
+        function handleKeyDown(event) {
+            switch (event.key) {
+                case ' ':
+                    event.preventDefault();
+                    centerView();
+                    break;
+                case 'Escape':
+                    closeDetailPanel();
+                    hideTooltip();
+                    break;
+                case 'r':
+                    if (event.ctrlKey || event.metaKey) {
+                        event.preventDefault();
+                        refreshMindmap();
+                    }
+                    break;
+            }
+        }
+
+        function getNodeAtPosition(x, y) {
+            for (let i = nodes.length - 1; i >= 0; i--) {
+                const node = nodes[i];
+                if (!node.visible) continue;
+                
+                const nodeX = (node.x * viewport.zoom) + viewport.x;
+                const nodeY = (node.y * viewport.zoom) + viewport.y;
+                const radius = node.radius * viewport.zoom;
+                
+                const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
+                if (distance <= radius) {
+                    return node;
+                }
+            }
+            return null;
+        }
+
+        function highlightConnectedNodes(centerNode) {
+            clearHighlights();
+            
+            const connectedIds = new Set();
+            
+            links.forEach(link => {
+                if (link.source === centerNode.id) {
+                    connectedIds.add(link.target);
+                } else if (link.target === centerNode.id) {
+                    connectedIds.add(link.source);
+                }
+            });
+            
+            nodes.forEach(node => {
+                node.highlighted = connectedIds.has(node.id);
+            });
+        }
+
+        function clearHighlights() {
+            nodes.forEach(node => {
+                node.highlighted = false;
+            });
+        }
+
+        function showTooltip(node, x, y) {
+            const tooltip = document.getElementById('tooltip');
+            const title = document.getElementById('tooltipTitle');
+            const details = document.getElementById('tooltipDetails');
+            
+            title.textContent = node.label || node.id;
+            
+            const connectionCount = links.filter(l => 
+                l.source === node.id || l.target === node.id
+            ).length;
+            
+            details.textContent = `${connectionCount} connections • ${node.type || 'Node'} • Weight: ${node.value || 1}`;
+            
+            updateTooltipPosition(x, y);
+            tooltip.classList.add('visible');
+        }
+
+        function updateTooltipPosition(x, y) {
+            const tooltip = document.getElementById('tooltip');
+            const rect = canvas.getBoundingClientRect();
+            
+            let left = rect.left + x + 10;
+            let top = rect.top + y - 10;
+            
+            if (left + tooltip.offsetWidth > window.innerWidth) {
+                left = rect.left + x - tooltip.offsetWidth - 10;
+            }
+            if (top + tooltip.offsetHeight > window.innerHeight) {
+                top = rect.top + y - tooltip.offsetHeight - 10;
+            }
+            
+            tooltip.style.left = left + 'px';
+            tooltip.style.top = top + 'px';
+        }
+
+        function hideTooltip() {
+            const tooltip = document.getElementById('tooltip');
+            tooltip.classList.remove('visible');
+        }
+
+        function showDetailPanel(node) {
+            const panel = document.getElementById('detailPanel');
+            const title = document.getElementById('detailTitle');
+            const subtitle = document.getElementById('detailSubtitle');
+            const content = document.getElementById('nodeDetails');
+            
+            title.textContent = node.label || node.id;
+            
+            const connectionCount = links.filter(l => 
+                l.source === node.id || l.target === node.id
+            ).length;
+            
+            subtitle.textContent = `${connectionCount} connections • ${node.type || 'Node'}`;
+            
+            // Build detailed content
+            const detailsHTML = `
+                <div style="margin-bottom: 1rem;">
+                    <h4 style="color: #FF6B35; margin-bottom: 0.5rem;">Node Information</h4>
+                    <div style="background: #475569; padding: 1rem; border-radius: 8px;">
+                        <p><strong>ID:</strong> ${node.id}</p>
+                        <p><strong>Label:</strong> ${node.label || 'N/A'}</p>
+                        <p><strong>Type:</strong> ${node.type || 'Unknown'}</p>
+                        <p><strong>Weight:</strong> ${node.value || 1}</p>
+                        <p><strong>Connections:</strong> ${connectionCount}</p>
+                    </div>
+                </div>
+                <div>
+                    <h4 style="color: #FF6B35; margin-bottom: 0.5rem;">Connected Nodes</h4>
+                    <div id="connectedNodes" style="max-height: 300px; overflow-y: auto;">
+                        ${getConnectedNodesHTML(node)}
+                    </div>
+                </div>
+            `;
+            
+            content.innerHTML = detailsHTML;
+            panel.classList.add('visible');
+        }
+
+        function getConnectedNodesHTML(centerNode) {
+            const connectedNodes = [];
+            
+            links.forEach(link => {
+                let connectedId = null;
+                if (link.source === centerNode.id) {
+                    connectedId = link.target;
+                } else if (link.target === centerNode.id) {
+                    connectedId = link.source;
+                }
+                
+                if (connectedId) {
+                    const connectedNode = nodes.find(n => n.id === connectedId);
+                    if (connectedNode) {
+                        connectedNodes.push({
+                            node: connectedNode,
+                            strength: link.value || 1
+                        });
+                    }
+                }
+            });
+            
+            if (connectedNodes.length === 0) {
+                return '<p style="color: #94A3B8; text-align: center;">No connections</p>';
+            }
+            
+            return connectedNodes
+                .sort((a, b) => b.strength - a.strength)
+                .map(({ node, strength }) => `
+                    <div style="background: #334155; padding: 0.75rem; border-radius: 6px; margin-bottom: 0.5rem; cursor: pointer; transition: all 0.3s ease;" 
+                         onclick="focusNode('${node.id}')"
+                         onmouseover="this.style.background='#404756'"
+                         onmouseout="this.style.background='#334155'">
+                        <div style="font-weight: 600; color: #FFFFFF; margin-bottom: 0.25rem;">${node.label || node.id}</div>
+                        <div style="font-size: 0.8rem; color: #94A3B8;">Strength: ${strength} • ${node.type || 'Node'}</div>
+                    </div>
+                `).join('');
+        }
+
+        function closeDetailPanel() {
+            const panel = document.getElementById('detailPanel');
+            panel.classList.remove('visible');
+            selectedNode = null;
+        }
+
+        function focusNode(nodeId) {
+            const node = nodes.find(n => n.id === nodeId);
+            if (node) {
+                // Center viewport on node
+                viewport.x = canvas.width / 2 - (node.x * viewport.zoom);
+                viewport.y = canvas.height / 2 - (node.y * viewport.zoom);
+                
+                // Highlight the node temporarily
+                node.highlighted = true;
+                setTimeout(() => {
+                    node.highlighted = false;
+                }, 2000);
+            }
+        }
+
+        function toggleFilter(filterType) {
+            const btn = document.querySelector(`[data-filter="${filterType}"]`);
+            
+            if (activeFilters.has(filterType)) {
+                activeFilters.delete(filterType);
+                btn.classList.remove('active');
+            } else {
+                activeFilters.add(filterType);
+                btn.classList.add('active');
+            }
+            
+            applyFilters();
+        }
+
+        function applyFilters() {
+            // Apply search and filter logic
+            nodes.forEach(node => {
+                let visible = true;
+                
+                // Search filter
+                if (searchTerm) {
+                    const searchableText = `${node.id} ${node.label || ''} ${node.type || ''}`.toLowerCase();
+                    visible = visible && searchableText.includes(searchTerm);
+                }
+                
+                // Type filters
+                if (!activeFilters.has('themes') && node.type === 'theme') visible = false;
+                if (!activeFilters.has('tags') && node.type === 'tag') visible = false;
+                
+                node.visible = visible;
+            });
+            
+            // Filter connections based on visible nodes
+            links.forEach(link => {
+                const sourceVisible = nodes.find(n => n.id === link.source)?.visible;
+                const targetVisible = nodes.find(n => n.id === link.target)?.visible;
+                link.visible = activeFilters.has('connections') && sourceVisible && targetVisible;
+            });
+            
+            updateStats();
+        }
+
+        function resetView() {
+            centerView();
+            updateStats();
+        }
+
+        function refreshMindmap() {
+            loadMindmap();
+        }
+
+        // Initialize
+        console.log('🧬 NEXUS Mindmap initialized');
+    </script>
+</body>
+</html>
