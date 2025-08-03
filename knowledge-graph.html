@@ -411,6 +411,10 @@
                 <span class="stats-label">Objects:</span>
                 <span class="stats-value" id="totalObjects">0</span>
             </div>
+            <div class="stats-item">
+                <span class="stats-label">Connections:</span>
+                <span class="stats-value" id="connectionCount">0</span>
+            </div>
         </div>
 
         <div class="loading-overlay" id="loadingOverlay">
@@ -445,6 +449,7 @@
         let canvas, ctx;
         let currentLayer = 'themen';
         let nodes = [];
+        let connections = [];
         let animationFrame;
         let isDragging = false;
         let dragNode = null;
@@ -491,6 +496,8 @@
                 
                 if (data.success) {
                     nodes = data.nodes;
+                    connections = data.connections || [];
+                    centerNodes();
                     updateStats();
                     startAnimation();
                 } else {
@@ -515,12 +522,27 @@
             console.error(message);
         }
 
+        function centerNodes() {
+            if (nodes.length === 0) return;
+            
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            const offsetX = centerX - 400;
+            const offsetY = centerY - 300;
+            
+            nodes.forEach(node => {
+                node.x += offsetX;
+                node.y += offsetY;
+            });
+        }
+
         function updateStats() {
             document.getElementById('nodeCount').textContent = nodes.length;
             document.getElementById('currentLayer').textContent = currentLayer.charAt(0).toUpperCase() + currentLayer.slice(1);
             
             const totalObjects = nodes.reduce((sum, node) => sum + node.count, 0);
             document.getElementById('totalObjects').textContent = totalObjects;
+            document.getElementById('connectionCount').textContent = connections.length;
         }
 
         function switchLayer(layer) {
@@ -553,6 +575,11 @@
                 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
+                // Draw connections with fade
+                ctx.globalAlpha = alpha;
+                drawConnections();
+                ctx.globalAlpha = 1;
+                
                 nodes.forEach(node => {
                     drawNode(node, alpha);
                 });
@@ -583,6 +610,11 @@
                 
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 
+                // Draw connections with fade
+                ctx.globalAlpha = alpha;
+                drawConnections();
+                ctx.globalAlpha = 1;
+                
                 nodes.forEach(node => {
                     drawNode(node, alpha);
                 });
@@ -601,12 +633,63 @@
         function render() {
             ctx.clearRect(0, 0, canvas.width, canvas.height);
             
+            // Draw connections first (behind bubbles)
+            drawConnections();
+            
             nodes.forEach(node => {
                 const isHovered = hoveredNode === node;
                 const alpha = isHovered ? 1 : 0.9;
                 const scale = isHovered ? 1.2 : 1;
                 
                 drawNode(node, alpha, scale);
+            });
+        }
+
+        function drawConnections() {
+            if (!connections || connections.length === 0) return;
+            
+            const nodeMap = new Map();
+            nodes.forEach(node => nodeMap.set(node.id, node));
+            
+            connections.forEach(connection => {
+                const sourceNode = nodeMap.get(connection.source);
+                const targetNode = nodeMap.get(connection.target);
+                
+                if (!sourceNode || !targetNode) return;
+                
+                const sourceX = sourceNode.x + viewport.x;
+                const sourceY = sourceNode.y + viewport.y;
+                const targetX = targetNode.x + viewport.x;
+                const targetY = targetNode.y + viewport.y;
+                
+                // Skip if both nodes are outside canvas
+                if ((sourceX < -100 || sourceX > canvas.width + 100) && 
+                    (targetX < -100 || targetX > canvas.width + 100)) return;
+                if ((sourceY < -100 || sourceY > canvas.height + 100) && 
+                    (targetY < -100 || targetY > canvas.height + 100)) return;
+                
+                // Calculate line properties based on strength
+                const strength = connection.strength;
+                const lineWidth = Math.max(1, Math.min(4, strength * 4));
+                const alpha = Math.max(0.2, Math.min(0.6, strength * 0.6));
+                
+                ctx.save();
+                ctx.globalAlpha = alpha;
+                ctx.strokeStyle = `rgba(255, 107, 53, ${alpha})`;
+                ctx.lineWidth = lineWidth;
+                
+                // Add subtle pulse for strongest connections
+                if (strength > 0.8) {
+                    const pulse = 0.8 + 0.2 * Math.sin(Date.now() * 0.003);
+                    ctx.globalAlpha = alpha * pulse;
+                }
+                
+                ctx.beginPath();
+                ctx.moveTo(sourceX, sourceY);
+                ctx.lineTo(targetX, targetY);
+                ctx.stroke();
+                
+                ctx.restore();
             });
         }
 

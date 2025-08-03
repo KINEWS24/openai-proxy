@@ -5115,13 +5115,112 @@ async function generateKnowledgeGraph(layer, limit) {
       };
     });
   
-  // For Phase 1, minimal connections (future enhancement)
-  // const connections = generateConnections(nodes);
+  // Phase 2A: Generate intelligent connections
+  const connections = generateConnections(nodes, nodeMap);
   
   return {
     nodes,
-    connections: [] // Phase 1: No connections yet
+    connections
   };
+}
+
+function generateConnections(nodes, nodeMap) {
+  const connections = [];
+  const maxConnections = 150;
+  
+  // Only process top 99 largest bubbles for performance
+  const topNodes = nodes
+    .sort((a, b) => b.count - a.count)
+    .slice(0, 99);
+  
+  for (let i = 0; i < topNodes.length; i++) {
+    for (let j = i + 1; j < topNodes.length; j++) {
+      const nodeA = topNodes[i];
+      const nodeB = topNodes[j];
+      
+      const strength = calculateConnectionStrength(nodeA, nodeB, nodeMap);
+      
+      if (strength >= 0.3 && connections.length < maxConnections) {
+        connections.push({
+          source: nodeA.id,
+          target: nodeB.id,
+          strength: Math.round(strength * 100) / 100,
+          type: getConnectionType(nodeA, nodeB, nodeMap)
+        });
+      }
+    }
+  }
+  
+  return connections;
+}
+
+function calculateConnectionStrength(nodeA, nodeB, nodeMap) {
+  const nodeAData = nodeMap.get(nodeA.id);
+  const nodeB_Data = nodeMap.get(nodeB.id);
+  
+  if (!nodeAData || !nodeB_Data) return 0;
+  
+  let sharedTags = 0;
+  let sharedPersons = 0;
+  let timeProximity = 0;
+  
+  // Calculate shared elements across all objects in both nodes
+  const allObjectsA = new Set();
+  const allObjectsB = new Set();
+  const allTagsA = new Set();
+  const allTagsB = new Set();
+  const allPersonsA = new Set();
+  const allPersonsB = new Set();
+  const allTimesA = new Set();
+  const allTimesB = new Set();
+  
+  // Collect data from all objects in nodeA
+  nodeAData.objects.forEach(filename => {
+    const metadata = knowledgeCache.get(filename);
+    if (metadata) {
+      allObjectsA.add(filename);
+      if (metadata.Tags) metadata.Tags.forEach(tag => allTagsA.add(tag.replace(/^#/, '')));
+      if (metadata.Hierarchy && metadata.Hierarchy.person) allPersonsA.add(metadata.Hierarchy.person);
+      if (metadata.Created) allTimesA.add(metadata.Created.substring(0, 10)); // Date only
+    }
+  });
+  
+  // Collect data from all objects in nodeB
+  nodeB_Data.objects.forEach(filename => {
+    const metadata = knowledgeCache.get(filename);
+    if (metadata) {
+      allObjectsB.add(filename);
+      if (metadata.Tags) metadata.Tags.forEach(tag => allTagsB.add(tag.replace(/^#/, '')));
+      if (metadata.Hierarchy && metadata.Hierarchy.person) allPersonsB.add(metadata.Hierarchy.person);
+      if (metadata.Created) allTimesB.add(metadata.Created.substring(0, 10)); // Date only
+    }
+  });
+  
+  // Count shared elements
+  allTagsA.forEach(tag => { if (allTagsB.has(tag)) sharedTags++; });
+  allPersonsA.forEach(person => { if (allPersonsB.has(person)) sharedPersons++; });
+  allTimesA.forEach(time => { if (allTimesB.has(time)) timeProximity++; });
+  
+  // Apply connection strength formula
+  const rawStrength = (sharedTags * 2) + (sharedPersons * 3) + (timeProximity * 1);
+  
+  // Normalize to 0.1-1.0 scale
+  const maxPossible = Math.max(nodeAData.count, nodeB_Data.count) * 6; // Theoretical max
+  const normalized = Math.min(Math.max(rawStrength / maxPossible, 0.1), 1.0);
+  
+  return normalized;
+}
+
+function getConnectionType(nodeA, nodeB, nodeMap) {
+  const nodeAData = nodeMap.get(nodeA.id);
+  const nodeB_Data = nodeMap.get(nodeB.id);
+  
+  if (!nodeAData || !nodeB_Data) return 'unknown';
+  
+  // Simple heuristic for connection type
+  if (nodeAData.type === 'tag' && nodeB_Data.type === 'tag') return 'tags';
+  if (nodeAData.type === 'person' || nodeB_Data.type === 'person') return 'persons';
+  return 'time';
 }
 
 
