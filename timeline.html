@@ -904,7 +904,9 @@
         }
 
         function formatTime(date) {
-            return date.toLocaleTimeString('en-US', { 
+            // Convert to German timezone (MESZ/MEZ)
+            const germanTime = new Date(date.toLocaleString("en-US", {timeZone: "Europe/Berlin"}));
+            return germanTime.toLocaleTimeString('de-DE', { 
                 hour: '2-digit', 
                 minute: '2-digit',
                 hour12: false

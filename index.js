@@ -4793,9 +4793,14 @@ async function generateDashboardData() {
       // Process today's stats (check both UZT_ISO8601 and Created fields)
       const entryDate = metadata.UZT_ISO8601 || metadata.Created || metadata.Erfassung_Timestamp;
       if (entryDate) {
-        const entryDateStr = new Date(entryDate).toISOString().split('T')[0];
-        if (entryDateStr === today) {
-          todayStats[archetype] = (todayStats[archetype] || 0) + 1;
+        try {
+          const entryDateStr = new Date(entryDate).toISOString().split('T')[0];
+          if (entryDateStr === today) {
+            todayStats[archetype] = (todayStats[archetype] || 0) + 1;
+          }
+        } catch (dateError) {
+          console.warn(`[DASHBOARD] Skipping file ${filename} - Invalid timestamp: ${entryDate}`);
+          // Skip this file and continue processing others
         }
       }
       
@@ -4848,8 +4853,14 @@ async function generateDashboardData() {
         cluster.object_count++;
         
         // Update last activity if this entry is newer
-        if (entryDate && new Date(entryDate) > new Date(cluster.last_activity)) {
-          cluster.last_activity = entryDate;
+        if (entryDate) {
+          try {
+            if (new Date(entryDate) > new Date(cluster.last_activity)) {
+              cluster.last_activity = entryDate;
+            }
+          } catch (dateError) {
+            // Skip invalid date update, keep existing last_activity
+          }
         }
       }
       
