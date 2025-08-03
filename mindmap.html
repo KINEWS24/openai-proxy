@@ -449,7 +449,6 @@
                 <button class="view-btn" onclick="switchView('circle')" data-view="circle">🎯 Circle</button>
                 <button class="view-btn" onclick="switchView('tree')" data-view="tree">📊 Tree</button>
                 <button class="view-btn" onclick="switchView('grid')" data-view="grid">🗂️ Grid</button>
-                <button class="view-btn" onclick="switchView('timeline')" data-view="timeline">⏱️ Timeline</button>
                 <button class="view-btn" onclick="switchView('cluster')" data-view="cluster">🎨 Cluster</button>
             </div>
         </div>
@@ -505,7 +504,7 @@
         </div>
 
         <div class="reset-hint">
-            💡 Double-click: reset view • Space: center • ESC: close panels • 1-9: switch views • Drag: pan/move nodes
+            💡 Double-click: reset view • Space: center • ESC: close panels • 1-8: switch views • Drag: pan/move nodes
         </div>
     </div>
 
@@ -528,7 +527,7 @@
         let originalData = null;
         let currentView = 'network';
         let viewTransitioning = false;
-        let targetZoom = 1.5;
+        let targetZoom = 2.0;
 
         // Initialize the mindmap
         document.addEventListener('DOMContentLoaded', function() {
@@ -819,9 +818,6 @@
                 case 'grid':
                     layoutGridView(centerX, centerY);
                     break;
-                case 'timeline':
-                    layoutTimelineView(centerX, centerY);
-                    break;
                 case 'cluster':
                     layoutClusterView(centerX, centerY);
                     break;
@@ -872,14 +868,17 @@
             
             buildLevels(startNode);
             
-            // Position nodes
-            const levelWidth = 300;
-            const nodeSpacing = 80;
+            // Position nodes with proper centering
+            const levelWidth = 250;
+            const nodeSpacing = 60;
+            const totalWidth = levels.size * levelWidth;
+            const startX = (canvas.width / 2) - (totalWidth / 2);
             
             levels.forEach((levelNodes, level) => {
-                const startY = centerY - (levelNodes.length * nodeSpacing) / 2;
+                const totalHeight = levelNodes.length * nodeSpacing;
+                const startY = (canvas.height / 2) - (totalHeight / 2);
                 levelNodes.forEach((node, index) => {
-                    node.x = (centerX - (levels.size * levelWidth) / 2) + (level * levelWidth);
+                    node.x = startX + (level * levelWidth);
                     node.y = startY + (index * nodeSpacing);
                     node.fixed = true;
                 });
@@ -888,31 +887,37 @@
 
         // 3. 🔄 PROCESS VIEW
         function layoutProcessView(centerX, centerY) {
-            // Flowchart layout with directional flow
+            // Flowchart layout with directional flow and proper centering
             const processNodes = nodes.filter(n => n.color === '#FF6B35');
             const supportNodes = nodes.filter(n => n.color !== '#FF6B35');
             
+            // Calculate total width and center properly
+            const processWidth = Math.max(processNodes.length * 120, 400);
+            const startX = (canvas.width / 2) - (processWidth / 2);
+            
             // Main process flow (horizontal)
             processNodes.forEach((node, index) => {
-                node.x = centerX - 200 + (index * 120);
-                node.y = centerY - 100;
+                node.x = startX + (index * 120);
+                node.y = (canvas.height / 2) - 100;
                 node.fixed = true;
             });
             
-            // Support nodes (vertical branches)
+            // Support nodes (vertical branches) - centered under each process
             supportNodes.forEach((node, index) => {
-                const parentProcess = processNodes[index % processNodes.length];
+                const parentProcess = processNodes[index % processNodes.length] || processNodes[0];
+                const branchIndex = Math.floor(index / processNodes.length);
                 node.x = parentProcess.x;
-                node.y = parentProcess.y + 80 + (Math.floor(index / processNodes.length) * 60);
+                node.y = parentProcess.y + 80 + (branchIndex * 60);
                 node.fixed = true;
             });
         }
 
         // 4. ☁️ CLOUD VIEW
         function layoutCloudView(centerX, centerY) {
-            // Tag cloud with size-based positioning
+            // Tag cloud with size-based positioning and proper centering
             const sortedNodes = [...nodes].sort((a, b) => b.radius - a.radius);
             const positions = [];
+            const cloudRadius = Math.min(canvas.width, canvas.height) * 0.3;
             
             sortedNodes.forEach(node => {
                 let placed = false;
@@ -920,19 +925,26 @@
                 
                 while (!placed && attempts < 100) {
                     const angle = Math.random() * 2 * Math.PI;
-                    const distance = Math.random() * 300 + node.radius;
-                    const x = centerX + Math.cos(angle) * distance;
-                    const y = centerY + Math.sin(angle) * distance;
+                    const distance = Math.random() * cloudRadius;
+                    const x = (canvas.width / 2) + Math.cos(angle) * distance;
+                    const y = (canvas.height / 2) + Math.sin(angle) * distance;
                     
-                    // Check for overlaps
+                    // Check for overlaps and canvas boundaries
                     let hasOverlap = false;
-                    for (let pos of positions) {
-                        const dx = x - pos.x;
-                        const dy = y - pos.y;
-                        const minDistance = node.radius + pos.radius + 20;
-                        if (Math.sqrt(dx * dx + dy * dy) < minDistance) {
-                            hasOverlap = true;
-                            break;
+                    if (x - node.radius < 50 || x + node.radius > canvas.width - 50 ||
+                        y - node.radius < 50 || y + node.radius > canvas.height - 50) {
+                        hasOverlap = true;
+                    }
+                    
+                    if (!hasOverlap) {
+                        for (let pos of positions) {
+                            const dx = x - pos.x;
+                            const dy = y - pos.y;
+                            const minDistance = node.radius + pos.radius + 15;
+                            if (Math.sqrt(dx * dx + dy * dy) < minDistance) {
+                                hasOverlap = true;
+                                break;
+                            }
                         }
                     }
                     
@@ -953,25 +965,26 @@
             const centralNode = nodes.find(n => n.color === '#FF6B35') || nodes[0];
             const otherNodes = nodes.filter(n => n !== centralNode);
             
-            // Central node
-            centralNode.x = centerX;
-            centralNode.y = centerY;
+            // Central node - perfectly centered
+            centralNode.x = canvas.width / 2;
+            centralNode.y = canvas.height / 2;
             centralNode.fixed = true;
             
-            // Arrange others in concentric circles
+            // Arrange others in concentric circles with better spacing
             const rings = Math.ceil(Math.sqrt(otherNodes.length));
+            const maxRadius = Math.min(canvas.width, canvas.height) * 0.35;
             let nodeIndex = 0;
             
-            for (let ring = 1; ring <= rings; ring++) {
-                const radius = ring * 120;
+            for (let ring = 1; ring <= rings && nodeIndex < otherNodes.length; ring++) {
+                const radius = (ring / rings) * maxRadius;
                 const nodesInRing = Math.ceil(otherNodes.length / rings);
                 const angleStep = (2 * Math.PI) / nodesInRing;
                 
                 for (let i = 0; i < nodesInRing && nodeIndex < otherNodes.length; i++) {
-                    const angle = i * angleStep;
+                    const angle = i * angleStep + (ring * 0.2); // Slight rotation per ring
                     const node = otherNodes[nodeIndex];
-                    node.x = centerX + Math.cos(angle) * radius;
-                    node.y = centerY + Math.sin(angle) * radius;
+                    node.x = (canvas.width / 2) + Math.cos(angle) * radius;
+                    node.y = (canvas.height / 2) + Math.sin(angle) * radius;
                     node.fixed = true;
                     nodeIndex++;
                 }
@@ -983,8 +996,13 @@
             const rootNode = nodes.find(n => n.color === '#FF6B35') || nodes[0];
             const tree = buildTree(rootNode);
             
-            // Position tree nodes
-            positionTreeNode(tree, centerX, centerY - 200, 0, canvas.width);
+            // Position tree nodes with proper centering
+            const treeWidth = canvas.width * 0.8;
+            const treeHeight = canvas.height * 0.8;
+            const startX = (canvas.width - treeWidth) / 2;
+            const startY = (canvas.height - treeHeight) / 2;
+            
+            positionTreeNode(tree, canvas.width / 2, startY, startX, startX + treeWidth);
         }
 
         function buildTree(rootNode) {
@@ -1037,44 +1055,25 @@
         function layoutGridView(centerX, centerY) {
             const cols = Math.ceil(Math.sqrt(nodes.length));
             const rows = Math.ceil(nodes.length / cols);
-            const cellWidth = 120;
-            const cellHeight = 80;
+            const cellWidth = Math.min(120, (canvas.width * 0.8) / cols);
+            const cellHeight = Math.min(80, (canvas.height * 0.8) / rows);
             
-            const startX = centerX - (cols * cellWidth) / 2;
-            const startY = centerY - (rows * cellHeight) / 2;
+            const totalWidth = cols * cellWidth;
+            const totalHeight = rows * cellHeight;
+            const startX = (canvas.width - totalWidth) / 2;
+            const startY = (canvas.height - totalHeight) / 2;
             
             nodes.forEach((node, index) => {
                 const col = index % cols;
                 const row = Math.floor(index / cols);
                 
-                node.x = startX + col * cellWidth;
-                node.y = startY + row * cellHeight;
+                node.x = startX + (col * cellWidth) + (cellWidth / 2);
+                node.y = startY + (row * cellHeight) + (cellHeight / 2);
                 node.fixed = true;
             });
         }
 
-        // 8. ⏱️ TIMELINE VIEW
-        function layoutTimelineView(centerX, centerY) {
-            // Sort nodes by creation time or connection count
-            const sortedNodes = [...nodes].sort((a, b) => {
-                // Use connection count as proxy for temporal importance
-                const aConnections = links.filter(l => l.source === a.id || l.target === a.id).length;
-                const bConnections = links.filter(l => l.source === b.id || l.target === b.id).length;
-                return aConnections - bConnections;
-            });
-            
-            const timelineWidth = Math.min(canvas.width - 200, 800);
-            const startX = centerX - timelineWidth / 2;
-            const stepX = timelineWidth / (sortedNodes.length - 1);
-            
-            sortedNodes.forEach((node, index) => {
-                node.x = startX + (index * stepX);
-                node.y = centerY + (Math.random() - 0.5) * 200; // Some vertical variance
-                node.fixed = true;
-            });
-        }
-
-        // 9. 🎨 CLUSTER VIEW
+        // 8. 🎨 CLUSTER VIEW
         function layoutClusterView(centerX, centerY) {
             // Group nodes by color/type
             const clusters = new Map();
@@ -1087,14 +1086,15 @@
             
             const clusterCenters = [];
             const numClusters = clusters.size;
+            const maxRadius = Math.min(canvas.width, canvas.height) * 0.3;
             
-            // Calculate cluster center positions
+            // Calculate cluster center positions with proper canvas centering
             for (let i = 0; i < numClusters; i++) {
                 const angle = (i / numClusters) * 2 * Math.PI;
-                const radius = 200;
+                const radius = maxRadius;
                 clusterCenters.push({
-                    x: centerX + Math.cos(angle) * radius,
-                    y: centerY + Math.sin(angle) * radius
+                    x: (canvas.width / 2) + Math.cos(angle) * radius,
+                    y: (canvas.height / 2) + Math.sin(angle) * radius
                 });
             }
             
@@ -1102,7 +1102,7 @@
             let clusterIndex = 0;
             clusters.forEach((clusterNodes, color) => {
                 const center = clusterCenters[clusterIndex];
-                const clusterRadius = Math.min(80, Math.sqrt(clusterNodes.length) * 20);
+                const clusterRadius = Math.min(60, Math.sqrt(clusterNodes.length) * 15);
                 
                 clusterNodes.forEach((node, index) => {
                     const angle = (index / clusterNodes.length) * 2 * Math.PI;
@@ -1489,8 +1489,7 @@
                 case '5': switchView('circle'); break;
                 case '6': switchView('tree'); break;
                 case '7': switchView('grid'); break;
-                case '8': switchView('timeline'); break;
-                case '9': switchView('cluster'); break;
+                case '8': switchView('cluster'); break;
             }
         }
 
