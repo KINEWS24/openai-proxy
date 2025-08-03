@@ -340,6 +340,41 @@
             box-shadow: 0 4px 12px rgba(255, 107, 53, 0.4);
         }
 
+        .view-btn {
+            background: #475569;
+            color: #94A3B8;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.75rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(71, 85, 105, 0.3);
+            margin: 0 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .view-btn:hover {
+            background: #64748B;
+            color: #FFFFFF;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(71, 85, 105, 0.5);
+        }
+
+        .view-btn.active {
+            background: #FF6B35;
+            color: #FFFFFF;
+            box-shadow: 0 4px 12px rgba(255, 107, 53, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .view-transition {
+            pointer-events: none;
+            opacity: 0.7;
+        }
+
         .reset-hint {
             position: absolute;
             bottom: 1rem;
@@ -393,17 +428,29 @@
             <div class="control-group">
                 <div class="search-container">
                     <input type="text" class="search-input" placeholder="🔍 Search nodes..." id="searchInput">
-                    <button class="btn secondary" onclick="resetView()">🎯 Reset View</button>
+                    <button class="btn secondary" onclick="resetView()">🎯 Reset</button>
                     <button class="btn secondary" onclick="refreshMindmap()">🔄 Refresh</button>
                 </div>
-            </div>
-            <div class="control-group">
                 <div class="filter-controls">
                     <span style="color: #94A3B8; font-size: 0.9rem;">Filters:</span>
                     <button class="filter-btn active" onclick="toggleFilter('themes')" data-filter="themes">🏷️ Themes</button>
                     <button class="filter-btn active" onclick="toggleFilter('tags')" data-filter="tags">📌 Tags</button>
                     <button class="filter-btn active" onclick="toggleFilter('connections')" data-filter="connections">🔗 Connections</button>
                 </div>
+            </div>
+        </div>
+        <div class="controls">
+            <div class="control-group">
+                <span style="color: #94A3B8; font-size: 0.9rem; margin-right: 0.5rem;">VIEW MODES:</span>
+                <button class="view-btn active" onclick="switchView('network')" data-view="network">🕸️ Network</button>
+                <button class="view-btn" onclick="switchView('hierarchy')" data-view="hierarchy">🌳 Hierarchy</button>
+                <button class="view-btn" onclick="switchView('process')" data-view="process">🔄 Process</button>
+                <button class="view-btn" onclick="switchView('cloud')" data-view="cloud">☁️ Cloud</button>
+                <button class="view-btn" onclick="switchView('circle')" data-view="circle">🎯 Circle</button>
+                <button class="view-btn" onclick="switchView('tree')" data-view="tree">📊 Tree</button>
+                <button class="view-btn" onclick="switchView('grid')" data-view="grid">🗂️ Grid</button>
+                <button class="view-btn" onclick="switchView('timeline')" data-view="timeline">⏱️ Timeline</button>
+                <button class="view-btn" onclick="switchView('cluster')" data-view="cluster">🎨 Cluster</button>
             </div>
         </div>
     </div>
@@ -458,7 +505,7 @@
         </div>
 
         <div class="reset-hint">
-            💡 Double-click canvas to reset view • Space to center • ESC to close panels
+            💡 Double-click: reset view • Space: center • ESC: close panels • 1-9: switch views • Drag: pan/move nodes
         </div>
     </div>
 
@@ -473,12 +520,15 @@
         let isPanning = false;
         let mouseX = 0, mouseY = 0;
         let lastPanX = 0, lastPanY = 0;
-        let viewport = { x: 0, y: 0, zoom: 1 };
+        let viewport = { x: 0, y: 0, zoom: 0.8 };
         let hoveredNode = null;
         let selectedNode = null;
         let searchTerm = '';
         let activeFilters = new Set(['themes', 'tags', 'connections']);
         let originalData = null;
+        let currentView = 'network';
+        let viewTransitioning = false;
+        let targetZoom = 1.5;
 
         // Initialize the mindmap
         document.addEventListener('DOMContentLoaded', function() {
@@ -544,35 +594,51 @@
         }
 
         function processData(data) {
-            // Process nodes with NEXUS styling
+            // Process nodes with enhanced NEXUS styling and better distribution
             nodes = data.nodes.map((node, index) => {
-                const centralThemes = ['AI', 'NEXUS', 'Innovation', 'Technology', 'Future'];
+                const centralThemes = ['AI', 'NEXUS', 'Innovation', 'Technology', 'Future', 'Core', 'Main'];
                 const isCentral = centralThemes.some(theme => 
                     node.id.toLowerCase().includes(theme.toLowerCase()) || 
-                    node.label.toLowerCase().includes(theme.toLowerCase())
+                    (node.label && node.label.toLowerCase().includes(theme.toLowerCase()))
                 );
+                
+                // Calculate connection count for importance-based sizing
+                const connectionCount = data.links.filter(link => 
+                    link.source === node.id || link.target === node.id
+                ).length;
+                
+                // Better initial distribution - spiral layout
+                const angle = (index / data.nodes.length) * 4 * Math.PI;
+                const radius = Math.sqrt(index) * 30 + 100;
+                const baseX = canvas.width / 2 + Math.cos(angle) * radius;
+                const baseY = canvas.height / 2 + Math.sin(angle) * radius;
                 
                 return {
                     ...node,
-                    x: node.x || (canvas.width / 2 + (Math.random() - 0.5) * 600),
-                    y: node.y || (canvas.height / 2 + (Math.random() - 0.5) * 400),
+                    x: node.x || baseX,
+                    y: node.y || baseY,
+                    originalX: baseX,
+                    originalY: baseY,
                     vx: 0,
                     vy: 0,
-                    radius: Math.max(8, Math.min(25, (node.value || 1) * 3)),
+                    radius: Math.max(8, Math.min(25, 8 + connectionCount * 2)),
                     color: isCentral ? '#FF6B35' : '#334155',
                     strokeColor: isCentral ? '#E55A2B' : '#475569',
                     glowColor: isCentral ? 'rgba(255, 107, 53, 0.4)' : 'rgba(51, 65, 85, 0.4)',
                     visible: true,
-                    highlighted: false
+                    highlighted: false,
+                    fixed: false,
+                    connections: connectionCount,
+                    type: node.type || (isCentral ? 'central' : 'secondary')
                 };
             });
 
-            // Process links
+            // Process links with enhanced styling
             links = data.links.map(link => ({
                 ...link,
                 visible: true,
-                opacity: 0.6,
-                width: Math.max(1, Math.min(4, (link.value || 1) * 2))
+                opacity: 0.4 + (link.value || 1) * 0.2,
+                width: Math.max(1, Math.min(4, (link.value || 1) * 1.5))
             }));
         }
 
@@ -582,9 +648,38 @@
             const centerX = (bounds.minX + bounds.maxX) / 2;
             const centerY = (bounds.minY + bounds.maxY) / 2;
             
-            viewport.x = canvas.width / 2 - (centerX * 1.8);
-            viewport.y = canvas.height / 2 - (centerY * 1.8);
-            viewport.zoom = 1.8;
+            viewport.x = canvas.width / 2 - (centerX * viewport.zoom);
+            viewport.y = canvas.height / 2 - (centerY * viewport.zoom);
+        }
+
+        function animateToTargetZoom() {
+            const startZoom = viewport.zoom;
+            const startTime = Date.now();
+            const duration = 2000; // 2 seconds
+            
+            function animate() {
+                const elapsed = Date.now() - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+                
+                // Smooth easing function
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                
+                const bounds = getBounds();
+                const centerX = (bounds.minX + bounds.maxX) / 2;
+                const centerY = (bounds.minY + bounds.maxY) / 2;
+                
+                viewport.zoom = startZoom + (targetZoom - startZoom) * easeProgress;
+                viewport.x = canvas.width / 2 - (centerX * viewport.zoom);
+                viewport.y = canvas.height / 2 - (centerY * viewport.zoom);
+                
+                updateStats();
+                
+                if (progress < 1) {
+                    requestAnimationFrame(animate);
+                }
+            }
+            
+            animate();
         }
 
         function getBounds() {
@@ -628,6 +723,11 @@
                 cancelAnimationFrame(animationFrame);
             }
             
+            // Start zoom animation after a brief delay
+            setTimeout(() => {
+                animateToTargetZoom();
+            }, 300);
+            
             // Fade in animation
             const fadeStart = Date.now();
             const fadeDuration = 800;
@@ -659,18 +759,373 @@
         function startRenderLoop() {
             function renderLoop() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
-                simulatePhysics();
+                if (currentView === 'network') {
+                    simulatePhysics();
+                }
                 drawMindmap(1);
                 animationFrame = requestAnimationFrame(renderLoop);
             }
             renderLoop();
         }
 
+        // VIEW MODE SYSTEM - THE BEAST MINDMAP 9 VIEWS
+        function switchView(newView) {
+            if (viewTransitioning || currentView === newView) return;
+            
+            viewTransitioning = true;
+            canvas.classList.add('view-transition');
+            
+            // Update active button
+            document.querySelectorAll('.view-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.view === newView) {
+                    btn.classList.add('active');
+                }
+            });
+            
+            // Smooth transition
+            setTimeout(() => {
+                currentView = newView;
+                layoutNodes(newView);
+                viewTransitioning = false;
+                canvas.classList.remove('view-transition');
+            }, 150);
+        }
+
+        function layoutNodes(viewType) {
+            const bounds = getBounds();
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            switch (viewType) {
+                case 'network':
+                    layoutNetworkView();
+                    break;
+                case 'hierarchy':
+                    layoutHierarchyView(centerX, centerY);
+                    break;
+                case 'process':
+                    layoutProcessView(centerX, centerY);
+                    break;
+                case 'cloud':
+                    layoutCloudView(centerX, centerY);
+                    break;
+                case 'circle':
+                    layoutCircleView(centerX, centerY);
+                    break;
+                case 'tree':
+                    layoutTreeView(centerX, centerY);
+                    break;
+                case 'grid':
+                    layoutGridView(centerX, centerY);
+                    break;
+                case 'timeline':
+                    layoutTimelineView(centerX, centerY);
+                    break;
+                case 'cluster':
+                    layoutClusterView(centerX, centerY);
+                    break;
+            }
+        }
+
+        // 1. 🕸️ NETWORK VIEW (Enhanced Current)
+        function layoutNetworkView() {
+            // Keep existing physics-based layout but optimize initial positions
+            nodes.forEach((node, index) => {
+                if (!node.originalX) {
+                    node.originalX = node.x;
+                    node.originalY = node.y;
+                }
+                // Restore original physics positions with slight randomization
+                node.x = node.originalX + (Math.random() - 0.5) * 50;
+                node.y = node.originalY + (Math.random() - 0.5) * 50;
+                node.fixed = false;
+            });
+        }
+
+        // 2. 🌳 HIERARCHY VIEW
+        function layoutHierarchyView(centerX, centerY) {
+            const levels = new Map();
+            const processed = new Set();
+            const startNode = nodes.find(n => n.color === '#FF6B35') || nodes[0];
+            
+            // Build hierarchy levels
+            function buildLevels(node, level = 0) {
+                if (processed.has(node.id)) return;
+                processed.add(node.id);
+                
+                if (!levels.has(level)) levels.set(level, []);
+                levels.get(level).push(node);
+                
+                // Find connected nodes
+                links.forEach(link => {
+                    const connectedId = link.source === node.id ? link.target : 
+                                      link.target === node.id ? link.source : null;
+                    if (connectedId && !processed.has(connectedId)) {
+                        const connectedNode = nodes.find(n => n.id === connectedId);
+                        if (connectedNode) {
+                            buildLevels(connectedNode, level + 1);
+                        }
+                    }
+                });
+            }
+            
+            buildLevels(startNode);
+            
+            // Position nodes
+            const levelWidth = 300;
+            const nodeSpacing = 80;
+            
+            levels.forEach((levelNodes, level) => {
+                const startY = centerY - (levelNodes.length * nodeSpacing) / 2;
+                levelNodes.forEach((node, index) => {
+                    node.x = (centerX - (levels.size * levelWidth) / 2) + (level * levelWidth);
+                    node.y = startY + (index * nodeSpacing);
+                    node.fixed = true;
+                });
+            });
+        }
+
+        // 3. 🔄 PROCESS VIEW
+        function layoutProcessView(centerX, centerY) {
+            // Flowchart layout with directional flow
+            const processNodes = nodes.filter(n => n.color === '#FF6B35');
+            const supportNodes = nodes.filter(n => n.color !== '#FF6B35');
+            
+            // Main process flow (horizontal)
+            processNodes.forEach((node, index) => {
+                node.x = centerX - 200 + (index * 120);
+                node.y = centerY - 100;
+                node.fixed = true;
+            });
+            
+            // Support nodes (vertical branches)
+            supportNodes.forEach((node, index) => {
+                const parentProcess = processNodes[index % processNodes.length];
+                node.x = parentProcess.x;
+                node.y = parentProcess.y + 80 + (Math.floor(index / processNodes.length) * 60);
+                node.fixed = true;
+            });
+        }
+
+        // 4. ☁️ CLOUD VIEW
+        function layoutCloudView(centerX, centerY) {
+            // Tag cloud with size-based positioning
+            const sortedNodes = [...nodes].sort((a, b) => b.radius - a.radius);
+            const positions = [];
+            
+            sortedNodes.forEach(node => {
+                let placed = false;
+                let attempts = 0;
+                
+                while (!placed && attempts < 100) {
+                    const angle = Math.random() * 2 * Math.PI;
+                    const distance = Math.random() * 300 + node.radius;
+                    const x = centerX + Math.cos(angle) * distance;
+                    const y = centerY + Math.sin(angle) * distance;
+                    
+                    // Check for overlaps
+                    let hasOverlap = false;
+                    for (let pos of positions) {
+                        const dx = x - pos.x;
+                        const dy = y - pos.y;
+                        const minDistance = node.radius + pos.radius + 20;
+                        if (Math.sqrt(dx * dx + dy * dy) < minDistance) {
+                            hasOverlap = true;
+                            break;
+                        }
+                    }
+                    
+                    if (!hasOverlap) {
+                        node.x = x;
+                        node.y = y;
+                        node.fixed = true;
+                        positions.push({ x, y, radius: node.radius });
+                        placed = true;
+                    }
+                    attempts++;
+                }
+            });
+        }
+
+        // 5. 🎯 CIRCLE VIEW
+        function layoutCircleView(centerX, centerY) {
+            const centralNode = nodes.find(n => n.color === '#FF6B35') || nodes[0];
+            const otherNodes = nodes.filter(n => n !== centralNode);
+            
+            // Central node
+            centralNode.x = centerX;
+            centralNode.y = centerY;
+            centralNode.fixed = true;
+            
+            // Arrange others in concentric circles
+            const rings = Math.ceil(Math.sqrt(otherNodes.length));
+            let nodeIndex = 0;
+            
+            for (let ring = 1; ring <= rings; ring++) {
+                const radius = ring * 120;
+                const nodesInRing = Math.ceil(otherNodes.length / rings);
+                const angleStep = (2 * Math.PI) / nodesInRing;
+                
+                for (let i = 0; i < nodesInRing && nodeIndex < otherNodes.length; i++) {
+                    const angle = i * angleStep;
+                    const node = otherNodes[nodeIndex];
+                    node.x = centerX + Math.cos(angle) * radius;
+                    node.y = centerY + Math.sin(angle) * radius;
+                    node.fixed = true;
+                    nodeIndex++;
+                }
+            }
+        }
+
+        // 6. 📊 TREE VIEW
+        function layoutTreeView(centerX, centerY) {
+            const rootNode = nodes.find(n => n.color === '#FF6B35') || nodes[0];
+            const tree = buildTree(rootNode);
+            
+            // Position tree nodes
+            positionTreeNode(tree, centerX, centerY - 200, 0, canvas.width);
+        }
+
+        function buildTree(rootNode) {
+            const visited = new Set();
+            
+            function buildNode(node) {
+                if (visited.has(node.id)) return null;
+                visited.add(node.id);
+                
+                const children = [];
+                links.forEach(link => {
+                    const childId = link.source === node.id ? link.target : 
+                                   link.target === node.id ? link.source : null;
+                    if (childId && !visited.has(childId)) {
+                        const childNode = nodes.find(n => n.id === childId);
+                        if (childNode) {
+                            const childTree = buildNode(childNode);
+                            if (childTree) children.push(childTree);
+                        }
+                    }
+                });
+                
+                return { node, children };
+            }
+            
+            return buildNode(rootNode);
+        }
+
+        function positionTreeNode(tree, x, y, minX, maxX) {
+            if (!tree) return;
+            
+            tree.node.x = x;
+            tree.node.y = y;
+            tree.node.fixed = true;
+            
+            if (tree.children.length > 0) {
+                const width = maxX - minX;
+                const childWidth = width / tree.children.length;
+                
+                tree.children.forEach((child, index) => {
+                    const childX = minX + (index + 0.5) * childWidth;
+                    positionTreeNode(child, childX, y + 120, 
+                                   minX + index * childWidth, 
+                                   minX + (index + 1) * childWidth);
+                });
+            }
+        }
+
+        // 7. 🗂️ GRID VIEW
+        function layoutGridView(centerX, centerY) {
+            const cols = Math.ceil(Math.sqrt(nodes.length));
+            const rows = Math.ceil(nodes.length / cols);
+            const cellWidth = 120;
+            const cellHeight = 80;
+            
+            const startX = centerX - (cols * cellWidth) / 2;
+            const startY = centerY - (rows * cellHeight) / 2;
+            
+            nodes.forEach((node, index) => {
+                const col = index % cols;
+                const row = Math.floor(index / cols);
+                
+                node.x = startX + col * cellWidth;
+                node.y = startY + row * cellHeight;
+                node.fixed = true;
+            });
+        }
+
+        // 8. ⏱️ TIMELINE VIEW
+        function layoutTimelineView(centerX, centerY) {
+            // Sort nodes by creation time or connection count
+            const sortedNodes = [...nodes].sort((a, b) => {
+                // Use connection count as proxy for temporal importance
+                const aConnections = links.filter(l => l.source === a.id || l.target === a.id).length;
+                const bConnections = links.filter(l => l.source === b.id || l.target === b.id).length;
+                return aConnections - bConnections;
+            });
+            
+            const timelineWidth = Math.min(canvas.width - 200, 800);
+            const startX = centerX - timelineWidth / 2;
+            const stepX = timelineWidth / (sortedNodes.length - 1);
+            
+            sortedNodes.forEach((node, index) => {
+                node.x = startX + (index * stepX);
+                node.y = centerY + (Math.random() - 0.5) * 200; // Some vertical variance
+                node.fixed = true;
+            });
+        }
+
+        // 9. 🎨 CLUSTER VIEW
+        function layoutClusterView(centerX, centerY) {
+            // Group nodes by color/type
+            const clusters = new Map();
+            
+            nodes.forEach(node => {
+                const key = node.color;
+                if (!clusters.has(key)) clusters.set(key, []);
+                clusters.get(key).push(node);
+            });
+            
+            const clusterCenters = [];
+            const numClusters = clusters.size;
+            
+            // Calculate cluster center positions
+            for (let i = 0; i < numClusters; i++) {
+                const angle = (i / numClusters) * 2 * Math.PI;
+                const radius = 200;
+                clusterCenters.push({
+                    x: centerX + Math.cos(angle) * radius,
+                    y: centerY + Math.sin(angle) * radius
+                });
+            }
+            
+            // Position nodes within clusters
+            let clusterIndex = 0;
+            clusters.forEach((clusterNodes, color) => {
+                const center = clusterCenters[clusterIndex];
+                const clusterRadius = Math.min(80, Math.sqrt(clusterNodes.length) * 20);
+                
+                clusterNodes.forEach((node, index) => {
+                    const angle = (index / clusterNodes.length) * 2 * Math.PI;
+                    const distance = Math.random() * clusterRadius;
+                    
+                    node.x = center.x + Math.cos(angle) * distance;
+                    node.y = center.y + Math.sin(angle) * distance;
+                    node.fixed = true;
+                });
+                
+                clusterIndex++;
+            });
+        }
+
         function simulatePhysics() {
-            // Simple physics simulation for natural node movement
-            const damping = 0.9;
-            const repulsion = 100;
-            const attraction = 0.1;
+            // Enhanced physics simulation for natural node movement
+            const damping = 0.92;
+            const repulsion = 120;
+            const attraction = 0.08;
+            const centerForce = 0.002;
+            
+            // Only apply physics in network view
+            if (currentView !== 'network') return;
             
             // Reset forces
             nodes.forEach(node => {
@@ -678,7 +1133,22 @@
                 node.fy = 0;
             });
             
-            // Node repulsion
+            // Center attraction to prevent nodes from drifting too far
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            nodes.forEach(node => {
+                const dx = centerX - node.x;
+                const dy = centerY - node.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+                
+                if (distance > 300) { // Only apply if far from center
+                    node.fx += dx * centerForce;
+                    node.fy += dy * centerForce;
+                }
+            });
+            
+            // Node repulsion with improved stability
             for (let i = 0; i < nodes.length; i++) {
                 for (let j = i + 1; j < nodes.length; j++) {
                     const nodeA = nodes[i];
@@ -687,9 +1157,10 @@
                     const dx = nodeB.x - nodeA.x;
                     const dy = nodeB.y - nodeA.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
+                    const minDistance = (nodeA.radius + nodeB.radius) * 2;
                     
                     if (distance > 0 && distance < repulsion) {
-                        const force = repulsion / (distance * distance);
+                        const force = Math.min(repulsion / (distance * distance), 2);
                         const fx = (dx / distance) * force;
                         const fy = (dy / distance) * force;
                         
@@ -701,18 +1172,19 @@
                 }
             }
             
-            // Link attraction
+            // Link attraction with optimal distance
             links.forEach(link => {
                 const source = nodes.find(n => n.id === link.source);
                 const target = nodes.find(n => n.id === link.target);
                 
-                if (source && target) {
+                if (source && target && !source.fixed && !target.fixed) {
                     const dx = target.x - source.x;
                     const dy = target.y - source.y;
                     const distance = Math.sqrt(dx * dx + dy * dy);
+                    const optimalDistance = 100;
                     
                     if (distance > 0) {
-                        const force = attraction * distance;
+                        const force = attraction * (distance - optimalDistance);
                         const fx = (dx / distance) * force;
                         const fy = (dy / distance) * force;
                         
@@ -724,11 +1196,11 @@
                 }
             });
             
-            // Apply forces
+            // Apply forces with velocity limits
             nodes.forEach(node => {
                 if (!node.fixed) {
-                    node.vx = (node.vx + node.fx * 0.01) * damping;
-                    node.vy = (node.vy + node.fy * 0.01) * damping;
+                    node.vx = Math.max(-5, Math.min(5, (node.vx + node.fx * 0.01) * damping));
+                    node.vy = Math.max(-5, Math.min(5, (node.vy + node.fy * 0.01) * damping));
                     node.x += node.vx;
                     node.y += node.vy;
                 }
@@ -1009,6 +1481,16 @@
                         refreshMindmap();
                     }
                     break;
+                // View switching shortcuts (1-9)
+                case '1': switchView('network'); break;
+                case '2': switchView('hierarchy'); break;
+                case '3': switchView('process'); break;
+                case '4': switchView('cloud'); break;
+                case '5': switchView('circle'); break;
+                case '6': switchView('tree'); break;
+                case '7': switchView('grid'); break;
+                case '8': switchView('timeline'); break;
+                case '9': switchView('cluster'); break;
             }
         }
 
