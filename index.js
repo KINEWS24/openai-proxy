@@ -4893,6 +4893,237 @@ async function generateDashboardData() {
   };
 }
 
+// --- KNOWLEDGE GRAPH API ENDPOINT ---
+app.get('/api/knowledge-graph', async (req, res) => {
+  try {
+    const layer = req.query.layer || 'themen';
+    const limit = parseInt(req.query.limit) || 100;
+    
+    const graphData = await generateKnowledgeGraph(layer, limit);
+    res.json({
+      success: true,
+      layer: layer,
+      nodes: graphData.nodes,
+      connections: graphData.connections,
+      timestamp: new Date().toISOString()
+    });
+  } catch (error) {
+    console.error('[KNOWLEDGE-GRAPH] Error generating graph data:', error);
+    res.status(500).json({ 
+      success: false, 
+      error: error.message 
+    });
+  }
+});
+
+async function generateKnowledgeGraph(layer, limit) {
+  const nodeMap = new Map();
+  const connections = [];
+  
+  // Layer-specific colors within NEXUS palette
+  const layerColors = {
+    'themen': '#FF6B35',    // Orange for topics/tags
+    'termine': '#10B981',   // Green for appointments/deadlines
+    'projekte': '#FF6B35',  // Orange for projects
+    'personen': '#94A3B8',  // Gray for people
+    'org': '#475569'        // Dark gray for organizations
+  };
+  
+  // Process all knowledge files based on layer
+  for (const [filename, metadata] of knowledgeCache.entries()) {
+    try {
+      let nodeKey, nodeLabel, nodeType;
+      
+      switch (layer) {
+        case 'themen':
+          // Group by tags
+          if (metadata.Tags && Array.isArray(metadata.Tags)) {
+            metadata.Tags.forEach(tag => {
+              const cleanTag = tag.replace(/^#/, '');
+              nodeKey = `tag_${cleanTag}`;
+              nodeLabel = cleanTag;
+              nodeType = 'tag';
+              
+              if (!nodeMap.has(nodeKey)) {
+                nodeMap.set(nodeKey, {
+                  id: nodeKey,
+                  label: nodeLabel,
+                  type: nodeType,
+                  count: 0,
+                  objects: [],
+                  color: layerColors[layer]
+                });
+              }
+              
+              const node = nodeMap.get(nodeKey);
+              node.count++;
+              node.objects.push(filename);
+            });
+          }
+          break;
+          
+        case 'termine':
+          // Group by date/time
+          const entryDate = metadata.UZT_ISO8601 || metadata.Created || metadata.Erfassung_Timestamp;
+          if (entryDate) {
+            try {
+              const date = new Date(entryDate);
+              const monthYear = date.toISOString().substring(0, 7); // YYYY-MM
+              nodeKey = `date_${monthYear}`;
+              nodeLabel = date.toLocaleDateString('de-DE', { year: 'numeric', month: 'long' });
+              nodeType = 'date';
+              
+              if (!nodeMap.has(nodeKey)) {
+                nodeMap.set(nodeKey, {
+                  id: nodeKey,
+                  label: nodeLabel,
+                  type: nodeType,
+                  count: 0,
+                  objects: [],
+                  color: layerColors[layer]
+                });
+              }
+              
+              const node = nodeMap.get(nodeKey);
+              node.count++;
+              node.objects.push(filename);
+            } catch (dateError) {
+              // Skip invalid dates
+            }
+          }
+          break;
+          
+        case 'projekte':
+          // Group by cluster_id
+          if (metadata.ClusterData && metadata.ClusterData.cluster_id) {
+            const clusterId = metadata.ClusterData.cluster_id;
+            nodeKey = `project_${clusterId}`;
+            
+            // Use meaningful name if available
+            let displayName = clusterId;
+            if (metadata.Subject && metadata.Subject.length > 0) {
+              displayName = metadata.Subject;
+            } else if (metadata.Title && metadata.Title.length > 0) {
+              displayName = metadata.Title;
+            } else if (metadata.Hierarchy && metadata.Hierarchy.organization) {
+              displayName = `${metadata.Hierarchy.organization} Project`;
+            }
+            
+            // Truncate if too long
+            if (displayName.length > 30) {
+              displayName = displayName.substring(0, 27) + '...';
+            }
+            
+            nodeLabel = displayName;
+            nodeType = 'project';
+            
+            if (!nodeMap.has(nodeKey)) {
+              nodeMap.set(nodeKey, {
+                id: nodeKey,
+                label: nodeLabel,
+                type: nodeType,
+                count: 0,
+                objects: [],
+                color: layerColors[layer]
+              });
+            }
+            
+            const node = nodeMap.get(nodeKey);
+            node.count++;
+            node.objects.push(filename);
+          }
+          break;
+          
+        case 'personen':
+          // Group by person
+          if (metadata.Hierarchy && metadata.Hierarchy.person) {
+            const person = metadata.Hierarchy.person;
+            nodeKey = `person_${person}`;
+            nodeLabel = person.charAt(0).toUpperCase() + person.slice(1);
+            nodeType = 'person';
+            
+            if (!nodeMap.has(nodeKey)) {
+              nodeMap.set(nodeKey, {
+                id: nodeKey,
+                label: nodeLabel,
+                type: nodeType,
+                count: 0,
+                objects: [],
+                color: layerColors[layer]
+              });
+            }
+            
+            const node = nodeMap.get(nodeKey);
+            node.count++;
+            node.objects.push(filename);
+          }
+          break;
+          
+        case 'org':
+          // Group by organization
+          if (metadata.Hierarchy && metadata.Hierarchy.organization) {
+            const org = metadata.Hierarchy.organization;
+            nodeKey = `org_${org}`;
+            nodeLabel = org;
+            nodeType = 'organization';
+            
+            if (!nodeMap.has(nodeKey)) {
+              nodeMap.set(nodeKey, {
+                id: nodeKey,
+                label: nodeLabel,
+                type: nodeType,
+                count: 0,
+                objects: [],
+                color: layerColors[layer]
+              });
+            }
+            
+            const node = nodeMap.get(nodeKey);
+            node.count++;
+            node.objects.push(filename);
+          }
+          break;
+      }
+      
+    } catch (error) {
+      console.error(`[KNOWLEDGE-GRAPH] Error processing file ${filename}:`, error);
+    }
+  }
+  
+  // Convert to array and calculate positions
+  const nodes = Array.from(nodeMap.values())
+    .sort((a, b) => b.count - a.count)
+    .slice(0, limit)
+    .map((node, index) => {
+      // Calculate bubble size (5-50px radius based on count)
+      const maxCount = Math.max(...Array.from(nodeMap.values()).map(n => n.count));
+      const minSize = 15;
+      const maxSize = 50;
+      const size = minSize + ((node.count / maxCount) * (maxSize - minSize));
+      
+      // Generate positions in a circular layout for now
+      const angle = (index / nodeMap.size) * 2 * Math.PI;
+      const radius = 200 + (index % 3) * 100;
+      const x = 400 + radius * Math.cos(angle);
+      const y = 300 + radius * Math.sin(angle);
+      
+      return {
+        ...node,
+        size: Math.round(size),
+        x: Math.round(x),
+        y: Math.round(y)
+      };
+    });
+  
+  // For Phase 1, minimal connections (future enhancement)
+  // const connections = generateConnections(nodes);
+  
+  return {
+    nodes,
+    connections: [] // Phase 1: No connections yet
+  };
+}
+
 
 // --- SCHRITT 7: SERVER START ---
 initializeApp()
