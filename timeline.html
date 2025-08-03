@@ -45,6 +45,10 @@
             flex-wrap: wrap;
         }
 
+        .controls + .controls {
+            margin-top: 1rem;
+        }
+
         .control-group {
             display: flex;
             align-items: center;
@@ -61,6 +65,10 @@
             font-weight: 600;
             transition: all 0.3s ease;
             box-shadow: 0 4px 15px rgba(255, 107, 53, 0.4);
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
         }
 
         .btn:hover {
@@ -572,6 +580,14 @@
 <body>
     <div class="header">
         <h1>🧬 Nexus Timeline</h1>
+        <div class="controls">
+            <div class="control-group">
+                <a href="/timeline.html" class="btn secondary">📊 Timeline</a>
+                <a href="/dashboard.html" class="btn secondary">📈 Dashboard</a>
+                <a href="/interface.html" class="btn secondary">🏠 Home</a>
+                <a href="/knowledge-graph.html" class="btn secondary">🧬 Knowledge Graph</a>
+            </div>
+        </div>
         <div class="controls">
             <div class="control-group">
                 <button class="btn success" onclick="scrollToToday()">📅 Today</button>
