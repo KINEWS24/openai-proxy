@@ -5116,7 +5116,7 @@ async function generateKnowledgeGraph(layer, limit) {
     });
   
   // Phase 2A: Generate intelligent connections
-  const connections = generateConnections(nodes, nodeMap);
+  connections = generateConnections(nodes, nodeMap);
   
   return {
     nodes,
