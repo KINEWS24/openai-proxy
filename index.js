@@ -4918,7 +4918,7 @@ app.get('/api/knowledge-graph', async (req, res) => {
 
 async function generateKnowledgeGraph(layer, limit) {
   const nodeMap = new Map();
-  const connections = [];
+  let connections = [];
   
   // Layer-specific colors within NEXUS palette
   const layerColors = {
