@@ -582,9 +582,9 @@
             const centerX = (bounds.minX + bounds.maxX) / 2;
             const centerY = (bounds.minY + bounds.maxY) / 2;
             
-            viewport.x = canvas.width / 2 - centerX;
-            viewport.y = canvas.height / 2 - centerY;
-            viewport.zoom = 1;
+            viewport.x = canvas.width / 2 - (centerX * 1.8);
+            viewport.y = canvas.height / 2 - (centerY * 1.8);
+            viewport.zoom = 1.8;
         }
 
         function getBounds() {
@@ -970,8 +970,8 @@
             const mouseX = event.clientX - rect.left;
             const mouseY = event.clientY - rect.top;
             
-            const minZoom = 0.5;
-            const maxZoom = 3.0;
+            const minZoom = 0.3;
+            const maxZoom = 4.0;
             const zoomSpeed = 0.1;
             
             const zoomDelta = event.deltaY > 0 ? -zoomSpeed : zoomSpeed;
