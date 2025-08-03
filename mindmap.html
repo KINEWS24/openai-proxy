@@ -519,7 +519,7 @@
         let isPanning = false;
         let mouseX = 0, mouseY = 0;
         let lastPanX = 0, lastPanY = 0;
-        let viewport = { x: 0, y: 0, zoom: 0.8 };
+        let viewport = { x: 0, y: 0, zoom: 0.8, centerX: 0, centerY: 0 };
         let hoveredNode = null;
         let selectedNode = null;
         let searchTerm = '';
@@ -534,9 +534,16 @@
             canvas = document.getElementById('mindmapCanvas');
             ctx = canvas.getContext('2d');
             
-            // Set canvas size
+            // Set canvas size and initialize viewport center
             resizeCanvas();
             window.addEventListener('resize', resizeCanvas);
+            
+            // Ensure canvas dimensions are available for calculations
+            setTimeout(() => {
+                const rect = canvas.getBoundingClientRect();
+                viewport.centerX = rect.width / 2;
+                viewport.centerY = rect.height / 2;
+            }, 10);
             
             // Add event listeners
             canvas.addEventListener('mousemove', handleMouseMove);
@@ -561,6 +568,10 @@
             const rect = canvas.getBoundingClientRect();
             canvas.width = rect.width;
             canvas.height = rect.height;
+            
+            // Update viewport center for accurate positioning
+            viewport.centerX = canvas.width / 2;
+            viewport.centerY = canvas.height / 2;
             
             if (nodes.length > 0) {
                 render();
@@ -606,11 +617,13 @@
                     link.source === node.id || link.target === node.id
                 ).length;
                 
-                // Better initial distribution - spiral layout
+                // Better initial distribution - spiral layout using viewport center or fallback
                 const angle = (index / data.nodes.length) * 4 * Math.PI;
                 const radius = Math.sqrt(index) * 30 + 100;
-                const baseX = canvas.width / 2 + Math.cos(angle) * radius;
-                const baseY = canvas.height / 2 + Math.sin(angle) * radius;
+                const centerX = viewport.centerX || (canvas.width / 2) || 400;
+                const centerY = viewport.centerY || (canvas.height / 2) || 300;
+                const baseX = centerX + Math.cos(angle) * radius;
+                const baseY = centerY + Math.sin(angle) * radius;
                 
                 return {
                     ...node,
@@ -792,9 +805,14 @@
         }
 
         function layoutNodes(viewType) {
-            const bounds = getBounds();
-            const centerX = canvas.width / 2;
-            const centerY = canvas.height / 2;
+            // Ensure we have accurate canvas dimensions
+            const rect = canvas.getBoundingClientRect();
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            
+            // Update viewport center for consistent positioning
+            viewport.centerX = centerX;
+            viewport.centerY = centerY;
             
             switch (viewType) {
                 case 'network':
@@ -868,15 +886,15 @@
             
             buildLevels(startNode);
             
-            // Position nodes with proper centering
+            // Position nodes with proper centering using viewport center
             const levelWidth = 250;
             const nodeSpacing = 60;
             const totalWidth = levels.size * levelWidth;
-            const startX = (canvas.width / 2) - (totalWidth / 2);
+            const startX = viewport.centerX - (totalWidth / 2);
             
             levels.forEach((levelNodes, level) => {
                 const totalHeight = levelNodes.length * nodeSpacing;
-                const startY = (canvas.height / 2) - (totalHeight / 2);
+                const startY = viewport.centerY - (totalHeight / 2);
                 levelNodes.forEach((node, index) => {
                     node.x = startX + (level * levelWidth);
                     node.y = startY + (index * nodeSpacing);
@@ -891,14 +909,14 @@
             const processNodes = nodes.filter(n => n.color === '#FF6B35');
             const supportNodes = nodes.filter(n => n.color !== '#FF6B35');
             
-            // Calculate total width and center properly
+            // Calculate total width and center properly using viewport center
             const processWidth = Math.max(processNodes.length * 120, 400);
-            const startX = (canvas.width / 2) - (processWidth / 2);
+            const startX = viewport.centerX - (processWidth / 2);
             
             // Main process flow (horizontal)
             processNodes.forEach((node, index) => {
                 node.x = startX + (index * 120);
-                node.y = (canvas.height / 2) - 100;
+                node.y = viewport.centerY - 100;
                 node.fixed = true;
             });
             
@@ -917,7 +935,7 @@
             // Tag cloud with size-based positioning and proper centering
             const sortedNodes = [...nodes].sort((a, b) => b.radius - a.radius);
             const positions = [];
-            const cloudRadius = Math.min(canvas.width, canvas.height) * 0.3;
+            const cloudRadius = Math.min(viewport.centerX * 2, viewport.centerY * 2) * 0.3;
             
             sortedNodes.forEach(node => {
                 let placed = false;
@@ -926,13 +944,13 @@
                 while (!placed && attempts < 100) {
                     const angle = Math.random() * 2 * Math.PI;
                     const distance = Math.random() * cloudRadius;
-                    const x = (canvas.width / 2) + Math.cos(angle) * distance;
-                    const y = (canvas.height / 2) + Math.sin(angle) * distance;
+                    const x = viewport.centerX + Math.cos(angle) * distance;
+                    const y = viewport.centerY + Math.sin(angle) * distance;
                     
                     // Check for overlaps and canvas boundaries
                     let hasOverlap = false;
-                    if (x - node.radius < 50 || x + node.radius > canvas.width - 50 ||
-                        y - node.radius < 50 || y + node.radius > canvas.height - 50) {
+                    if (x - node.radius < 50 || x + node.radius > (viewport.centerX * 2) - 50 ||
+                        y - node.radius < 50 || y + node.radius > (viewport.centerY * 2) - 50) {
                         hasOverlap = true;
                     }
                     
@@ -965,14 +983,14 @@
             const centralNode = nodes.find(n => n.color === '#FF6B35') || nodes[0];
             const otherNodes = nodes.filter(n => n !== centralNode);
             
-            // Central node - perfectly centered
-            centralNode.x = canvas.width / 2;
-            centralNode.y = canvas.height / 2;
+            // Central node - perfectly centered using viewport center
+            centralNode.x = viewport.centerX;
+            centralNode.y = viewport.centerY;
             centralNode.fixed = true;
             
             // Arrange others in concentric circles with better spacing
             const rings = Math.ceil(Math.sqrt(otherNodes.length));
-            const maxRadius = Math.min(canvas.width, canvas.height) * 0.35;
+            const maxRadius = Math.min(viewport.centerX * 2, viewport.centerY * 2) * 0.35;
             let nodeIndex = 0;
             
             for (let ring = 1; ring <= rings && nodeIndex < otherNodes.length; ring++) {
@@ -983,8 +1001,8 @@
                 for (let i = 0; i < nodesInRing && nodeIndex < otherNodes.length; i++) {
                     const angle = i * angleStep + (ring * 0.2); // Slight rotation per ring
                     const node = otherNodes[nodeIndex];
-                    node.x = (canvas.width / 2) + Math.cos(angle) * radius;
-                    node.y = (canvas.height / 2) + Math.sin(angle) * radius;
+                    node.x = viewport.centerX + Math.cos(angle) * radius;
+                    node.y = viewport.centerY + Math.sin(angle) * radius;
                     node.fixed = true;
                     nodeIndex++;
                 }
@@ -996,13 +1014,13 @@
             const rootNode = nodes.find(n => n.color === '#FF6B35') || nodes[0];
             const tree = buildTree(rootNode);
             
-            // Position tree nodes with proper centering
-            const treeWidth = canvas.width * 0.8;
-            const treeHeight = canvas.height * 0.8;
-            const startX = (canvas.width - treeWidth) / 2;
-            const startY = (canvas.height - treeHeight) / 2;
+            // Position tree nodes with proper centering using viewport center
+            const treeWidth = viewport.centerX * 2 * 0.8;
+            const treeHeight = viewport.centerY * 2 * 0.8;
+            const startX = (viewport.centerX * 2 - treeWidth) / 2;
+            const startY = (viewport.centerY * 2 - treeHeight) / 2;
             
-            positionTreeNode(tree, canvas.width / 2, startY, startX, startX + treeWidth);
+            positionTreeNode(tree, viewport.centerX, startY, startX, startX + treeWidth);
         }
 
         function buildTree(rootNode) {
@@ -1055,13 +1073,13 @@
         function layoutGridView(centerX, centerY) {
             const cols = Math.ceil(Math.sqrt(nodes.length));
             const rows = Math.ceil(nodes.length / cols);
-            const cellWidth = Math.min(120, (canvas.width * 0.8) / cols);
-            const cellHeight = Math.min(80, (canvas.height * 0.8) / rows);
+            const cellWidth = Math.min(120, (viewport.centerX * 2 * 0.8) / cols);
+            const cellHeight = Math.min(80, (viewport.centerY * 2 * 0.8) / rows);
             
             const totalWidth = cols * cellWidth;
             const totalHeight = rows * cellHeight;
-            const startX = (canvas.width - totalWidth) / 2;
-            const startY = (canvas.height - totalHeight) / 2;
+            const startX = (viewport.centerX * 2 - totalWidth) / 2;
+            const startY = (viewport.centerY * 2 - totalHeight) / 2;
             
             nodes.forEach((node, index) => {
                 const col = index % cols;
@@ -1086,15 +1104,15 @@
             
             const clusterCenters = [];
             const numClusters = clusters.size;
-            const maxRadius = Math.min(canvas.width, canvas.height) * 0.3;
+            const maxRadius = Math.min(viewport.centerX * 2, viewport.centerY * 2) * 0.3;
             
-            // Calculate cluster center positions with proper canvas centering
+            // Calculate cluster center positions with proper canvas centering using viewport center
             for (let i = 0; i < numClusters; i++) {
                 const angle = (i / numClusters) * 2 * Math.PI;
                 const radius = maxRadius;
                 clusterCenters.push({
-                    x: (canvas.width / 2) + Math.cos(angle) * radius,
-                    y: (canvas.height / 2) + Math.sin(angle) * radius
+                    x: viewport.centerX + Math.cos(angle) * radius,
+                    y: viewport.centerY + Math.sin(angle) * radius
                 });
             }
             
