@@ -456,6 +456,8 @@
         let mouseX = 0, mouseY = 0;
         let viewport = { x: 0, y: 0, zoom: 1 };
         let hoveredNode = null;
+        let isPanning = false;
+        let lastPanX = 0, lastPanY = 0;
 
         // Initialize the knowledge graph
         document.addEventListener('DOMContentLoaded', function() {
@@ -472,6 +474,7 @@
             canvas.addEventListener('mouseup', handleMouseUp);
             canvas.addEventListener('click', handleClick);
             canvas.addEventListener('mouseleave', handleMouseLeave);
+            canvas.addEventListener('wheel', handleWheel);
             
             // Load initial data
             loadKnowledgeGraph();
@@ -657,10 +660,10 @@
                 
                 if (!sourceNode || !targetNode) return;
                 
-                const sourceX = sourceNode.x + viewport.x;
-                const sourceY = sourceNode.y + viewport.y;
-                const targetX = targetNode.x + viewport.x;
-                const targetY = targetNode.y + viewport.y;
+                const sourceX = (sourceNode.x * viewport.zoom) + viewport.x;
+                const sourceY = (sourceNode.y * viewport.zoom) + viewport.y;
+                const targetX = (targetNode.x * viewport.zoom) + viewport.x;
+                const targetY = (targetNode.y * viewport.zoom) + viewport.y;
                 
                 // Skip if both nodes are outside canvas
                 if ((sourceX < -100 || sourceX > canvas.width + 100) && 
@@ -694,8 +697,8 @@
         }
 
         function drawNode(node, alpha = 1, scale = 1) {
-            const x = node.x + viewport.x;
-            const y = node.y + viewport.y;
+            const x = (node.x * viewport.zoom) + viewport.x;
+            const y = (node.y * viewport.zoom) + viewport.y;
             const radius = node.size * scale * viewport.zoom;
             
             // Skip if outside canvas
@@ -769,8 +772,8 @@
         function getNodeAtPosition(x, y) {
             for (let i = nodes.length - 1; i >= 0; i--) {
                 const node = nodes[i];
-                const nodeX = node.x + viewport.x;
-                const nodeY = node.y + viewport.y;
+                const nodeX = (node.x * viewport.zoom) + viewport.x;
+                const nodeY = (node.y * viewport.zoom) + viewport.y;
                 const radius = node.size * viewport.zoom;
                 
                 const distance = Math.sqrt((x - nodeX) ** 2 + (y - nodeY) ** 2);
@@ -787,8 +790,27 @@
             mouseY = event.clientY - rect.top;
             
             if (isDragging && dragNode) {
-                dragNode.x = mouseX - viewport.x;
-                dragNode.y = mouseY - viewport.y;
+                dragNode.x = (mouseX - viewport.x) / viewport.zoom;
+                dragNode.y = (mouseY - viewport.y) / viewport.zoom;
+                render();
+                return;
+            }
+            
+            if (isPanning) {
+                const deltaX = mouseX - lastPanX;
+                const deltaY = mouseY - lastPanY;
+                
+                // Apply pan limits to prevent going too far
+                const maxPanDistance = 2000;
+                const newX = viewport.x + deltaX;
+                const newY = viewport.y + deltaY;
+                
+                viewport.x = Math.max(-maxPanDistance, Math.min(maxPanDistance, newX));
+                viewport.y = Math.max(-maxPanDistance, Math.min(maxPanDistance, newY));
+                
+                lastPanX = mouseX;
+                lastPanY = mouseY;
+                
                 render();
                 return;
             }
@@ -819,17 +841,24 @@
                 isDragging = true;
                 dragNode = node;
                 canvas.style.cursor = 'grabbing';
+            } else {
+                // Start panning
+                isPanning = true;
+                lastPanX = mouseX;
+                lastPanY = mouseY;
+                canvas.style.cursor = 'grabbing';
             }
         }
 
         function handleMouseUp(event) {
             isDragging = false;
             dragNode = null;
+            isPanning = false;
             canvas.style.cursor = hoveredNode ? 'pointer' : 'grab';
         }
 
         function handleClick(event) {
-            if (isDragging) return;
+            if (isDragging || isPanning) return;
             
             const node = getNodeAtPosition(mouseX, mouseY);
             if (node) {
@@ -842,6 +871,34 @@
             hideTooltip();
             canvas.style.cursor = 'grab';
             render();
+        }
+
+        function handleWheel(event) {
+            event.preventDefault();
+            
+            const rect = canvas.getBoundingClientRect();
+            const mouseX = event.clientX - rect.left;
+            const mouseY = event.clientY - rect.top;
+            
+            // Zoom limits
+            const minZoom = 0.5;
+            const maxZoom = 3.0;
+            const zoomSpeed = 0.1;
+            
+            // Calculate zoom direction
+            const zoomDelta = event.deltaY > 0 ? -zoomSpeed : zoomSpeed;
+            const newZoom = Math.max(minZoom, Math.min(maxZoom, viewport.zoom + zoomDelta));
+            
+            if (newZoom !== viewport.zoom) {
+                // Zoom towards mouse position
+                const zoomFactor = newZoom / viewport.zoom;
+                
+                viewport.x = mouseX - (mouseX - viewport.x) * zoomFactor;
+                viewport.y = mouseY - (mouseY - viewport.y) * zoomFactor;
+                viewport.zoom = newZoom;
+                
+                render();
+            }
         }
 
         function showTooltip(node, x, y) {
