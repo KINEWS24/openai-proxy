@@ -5090,22 +5090,95 @@ async function generateKnowledgeGraph(layer, limit) {
     }
   }
   
+  // Special handling for Themen layer: split very large tag groups
+  if (layer === 'themen') {
+    const largeTagThreshold = 50;
+    const nodesToSplit = [];
+    
+    for (const [key, node] of nodeMap.entries()) {
+      if (node.count > largeTagThreshold) {
+        // Split large tag group into smaller clusters
+        const chunksNeeded = Math.ceil(node.count / largeTagThreshold);
+        const chunkSize = Math.ceil(node.objects.length / chunksNeeded);
+        
+        for (let i = 0; i < chunksNeeded; i++) {
+          const startIdx = i * chunkSize;
+          const endIdx = Math.min(startIdx + chunkSize, node.objects.length);
+          const chunkObjects = node.objects.slice(startIdx, endIdx);
+          
+          if (chunkObjects.length > 0) {
+            const chunkKey = `${key}_part${i + 1}`;
+            const chunkLabel = chunksNeeded > 1 ? `${node.label} (${i + 1})` : node.label;
+            
+            nodesToSplit.push({
+              id: chunkKey,
+              label: chunkLabel,
+              type: node.type,
+              count: chunkObjects.length,
+              objects: chunkObjects,
+              color: node.color
+            });
+          }
+        }
+        // Remove original large node
+        nodeMap.delete(key);
+      }
+    }
+    
+    // Add split nodes back to map
+    nodesToSplit.forEach(node => {
+      nodeMap.set(node.id, node);
+    });
+  }
+
   // Convert to array and calculate positions
   const nodes = Array.from(nodeMap.values())
     .sort((a, b) => b.count - a.count)
     .slice(0, limit)
     .map((node, index) => {
-      // Calculate bubble size (5-50px radius based on count)
+      // Calculate bubble size - layer-specific sizing
       const maxCount = Math.max(...Array.from(nodeMap.values()).map(n => n.count));
-      const minSize = 15;
-      const maxSize = 50;
+      let minSize = 15;
+      let maxSize = 50;
+      
+      // Themen layer: Limit max size and better scaling
+      if (layer === 'themen') {
+        maxSize = 45; // Smaller max for better spacing
+        minSize = 12; // Smaller min for more granular sizes
+      }
+      
       const size = minSize + ((node.count / maxCount) * (maxSize - minSize));
       
-      // Generate positions in a circular layout for now
-      const angle = (index / nodeMap.size) * 2 * Math.PI;
-      const radius = 200 + (index % 3) * 100;
-      const x = 400 + radius * Math.cos(angle);
-      const y = 300 + radius * Math.sin(angle);
+      // Generate positions - improved for Themen layer
+      let x, y;
+      if (layer === 'themen') {
+        // Better spacing for Themen: improved distribution
+        const totalNodes = Math.min(nodeMap.size, limit);
+        const gridSize = Math.ceil(Math.sqrt(totalNodes));
+        const spacing = 140; // Minimum spacing between centers
+        
+        const row = Math.floor(index / gridSize);
+        const col = index % gridSize;
+        
+        // Center the grid
+        const gridWidth = (gridSize - 1) * spacing;
+        const gridHeight = (gridSize - 1) * spacing;
+        const startX = 400 - gridWidth / 2;
+        const startY = 300 - gridHeight / 2;
+        
+        x = startX + (col * spacing);
+        y = startY + (row * spacing);
+        
+        // Add small random offset to avoid perfect grid
+        x += (Math.random() - 0.5) * 30;
+        y += (Math.random() - 0.5) * 30;
+      } else {
+        // Original layout for other layers (working well)
+        const angle = (index / nodeMap.size) * 2 * Math.PI;
+        const radius = 200 + (index % 3) * 100;
+        x = 400 + radius * Math.cos(angle);
+        y = 300 + radius * Math.sin(angle);
+      }
       
       return {
         ...node,
